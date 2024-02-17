@@ -5,7 +5,7 @@ import {json} from '@codemirror/lang-json';
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {InterpreterIc10} from "ic10";
 import {DevEnv} from "ic10/dist/DevEnv";
-import {Err} from "../../ic10/dist/abstract/Err";
+import {Err} from "ic10/dist/abstract/Err";
 
 function App() {
     const [code, setCode] = React.useState("");
