@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import {Button, ButtonGroup, Col, Container, Row} from "react-bootstrap";
 import {json} from '@codemirror/lang-json';
@@ -18,13 +18,22 @@ function App() {
     const [code, setCode] = useState("");
     const [errors, setErrors] = useState("");
     const [env, setEnv] = useState("{}");
+    const [line, setLine] = useState(0);
 
     const clear = () => {
         setCode('')
         setErrors('')
         setEnv('{}')
+        setLine(0)
     }
 
+    useEffect(() => {
+        const editor = codeMirrorRef?.current?.editor;
+        if (editor) {
+            const currentLine = editor.querySelector(`.cm-content .cm-line:nth-child(${line + 1})`);
+            currentLine?.setAttribute('data-selected', 'true');
+        }
+    }, [line]);
 
     const onChangeCode = useCallback((val: React.SetStateAction<string>) => {
         setCode(val);
@@ -33,34 +42,51 @@ function App() {
         setEnv(val);
     }, []);
     let err: Err[] = []
+
+    const addError = (string: string) => {
+        setErrors(errors + string + "\n")
+    }
+    
     const run = async () => {
-        err = [];
-        setErrors(JSON.stringify(err, null, 2));
+        addError(JSON.stringify(err, null, 2));
         console.time("Run");
         console.debug("Run");
         const mem = new DevEnv()
         mem.data = JSON.parse(env);
         mem.on("error", (e) => {
-            err.push(e);
-            setErrors(JSON.stringify(err, null, 2));
+            addError(e.format());
         });
         mem.afterLineRun = async (line) => {
-            const editor = codeMirrorRef?.current?.editor;
-            await delay(50);
-            if (editor) {
-                const currentLine = editor.querySelector(`.cm-content .cm-line:nth-child(${line.lineIndex +1})`);
-                currentLine?.setAttribute('data-selected','true');
-            }
             await delay(200);
+            setLine(line.lineIndex);
             setEnv(JSON.stringify(mem.data, null, 2));
         };
         const ic = new InterpreterIc10(mem, code);
         await ic.run();
-
-
         console.debug("end");
         console.timeEnd("Run");
         setEnv(JSON.stringify(mem.data, null, 2));
+    }
+
+    const step = async () => {
+        const mem = new DevEnv()
+        mem.data = JSON.parse(env);
+        mem.line = line;
+        mem.on("error", (e) => {
+            addError(e.format());
+        })
+        mem.afterLineRun = async (line) => {
+            setLine(line.lineIndex + 1);
+            setEnv(JSON.stringify(mem.data, null, 2));
+        };
+        const ic = new InterpreterIc10(mem, code);
+        const answer = await ic.step()
+        if (answer == false) {
+            setLine(mem.line);
+        }
+        if (typeof answer == 'string') {
+            addError(answer)
+        }
     }
 
     return (
@@ -74,6 +100,7 @@ function App() {
                     <ButtonGroup>
                         <Button variant={'success'} onClick={run}>Run</Button>
                         <Button variant={'danger'} onClick={clear}>Clear</Button>
+                        <Button variant={'info'} onClick={step}>Step</Button>
                     </ButtonGroup>
                 </Col>
             </Row>

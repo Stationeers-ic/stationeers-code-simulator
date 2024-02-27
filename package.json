@@ -14,7 +14,7 @@
     "@uiw/codemirror-theme-monokai": "^4.21.21",
     "@uiw/react-codemirror": "^4.21.21",
     "bootstrap": "^5.3.2",
-    "ic10": "https://github.com/Stationeers-ic/ic10.git#v4",
+    "ic10": "git+https://github.com/Stationeers-ic/ic10.git#v4",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0"
