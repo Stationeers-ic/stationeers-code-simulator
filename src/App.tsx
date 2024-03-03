@@ -8,10 +8,16 @@ import {DevEnv} from "ic10/dist/DevEnv";
 import {Err} from "ic10/dist/abstract/Err";
 import {ReactCodeMirrorRef} from "@uiw/react-codemirror/src";
 import './App.css'
+import {ConfirmPopup, confirmPopup} from 'primereact/confirmpopup';
+import FeedBack from "./FeedBack.tsx";
 
 async function delay(number: number) {
     return new Promise(resolve => setTimeout(resolve, number));
 }
+
+let mem = new DevEnv()
+let ic = new InterpreterIc10(mem, '')
+
 
 function App() {
     const codeMirrorRef = useRef<ReactCodeMirrorRef>(null);
@@ -19,8 +25,13 @@ function App() {
     const [errors, setErrors] = useState("");
     const [env, setEnv] = useState("{}");
     const [line, setLine] = useState(0);
-
+    ic.setCode(code)
     const clear = () => {
+        setCode('')
+        reset()
+    }
+
+    const reset = () => {
         setCode('')
         setErrors('')
         setEnv('{}')
@@ -30,14 +41,20 @@ function App() {
     useEffect(() => {
         const editor = codeMirrorRef?.current?.editor;
         if (editor) {
-            const currentLine = editor.querySelector(`.cm-content .cm-line:nth-child(${line + 1})`);
+            const currentLine = editor.querySelector(`.cm-content .cm-line:nth-child(${line})`);
             currentLine?.setAttribute('data-selected', 'true');
         }
     }, [line]);
 
+    ic.setCode(code)
+    useEffect(() => {
+        ic.setCode(code)
+    }, [code]);
+
     const onChangeCode = useCallback((val: React.SetStateAction<string>) => {
         setCode(val);
     }, []);
+
     const onChangeEnv = useCallback((val: React.SetStateAction<string>) => {
         setEnv(val);
     }, []);
@@ -46,49 +63,52 @@ function App() {
     const addError = (string: string) => {
         setErrors(errors + string + "\n")
     }
-    
+    const stop = () => {
+        ic.stop()
+    }
+
+
     const run = async () => {
         addError(JSON.stringify(err, null, 2));
         console.time("Run");
-        console.debug("Run");
-        const mem = new DevEnv()
         mem.data = JSON.parse(env);
         mem.on("error", (e) => {
             addError(e.format());
         });
-        mem.afterLineRun = async (line) => {
+        mem.afterLineRun = async () => {
             await delay(200);
-            setLine(line.lineIndex);
+            setLine(mem.line);
             setEnv(JSON.stringify(mem.data, null, 2));
         };
-        const ic = new InterpreterIc10(mem, code);
         await ic.run();
-        console.debug("end");
         console.timeEnd("Run");
         setEnv(JSON.stringify(mem.data, null, 2));
     }
-
     const step = async () => {
-        const mem = new DevEnv()
         mem.data = JSON.parse(env);
         mem.line = line;
         mem.on("error", (e) => {
             addError(e.format());
         })
-        mem.afterLineRun = async (line) => {
-            setLine(line.lineIndex + 1);
+        mem.afterLineRun = async () => {
             setEnv(JSON.stringify(mem.data, null, 2));
         };
-        const ic = new InterpreterIc10(mem, code);
-        const answer = await ic.step()
-        if (answer == false) {
-            setLine(mem.line);
-        }
-        if (typeof answer == 'string') {
-            addError(answer)
-        }
-    }
 
+        while ((await ic.step()) === false) {
+
+        }
+        setLine(mem.line);
+    }
+    const confirm = (event: { currentTarget: any; }) => {
+        confirmPopup({
+            target: event.currentTarget,
+            message: 'Do you want to delete this record?',
+            icon: 'pi pi-info-circle',
+            defaultFocus: 'reject',
+            acceptClassName: 'p-button-danger',
+            accept: clear,
+        });
+    };
     return (
         <Container>
             <Row>
@@ -99,8 +119,12 @@ function App() {
                 <Col>
                     <ButtonGroup>
                         <Button variant={'success'} onClick={run}>Run</Button>
-                        <Button variant={'danger'} onClick={clear}>Clear</Button>
+                        <Button variant={'warning'} onClick={stop}>Stop</Button>
                         <Button variant={'info'} onClick={step}>Step</Button>
+                        <Button variant={'warning'} onClick={reset}>Reset</Button>
+
+                        <ConfirmPopup/>
+                        <Button variant={'danger'} onClick={confirm}>Clear</Button>
                     </ButtonGroup>
                 </Col>
             </Row>
@@ -110,7 +134,10 @@ function App() {
             </Row>
             <hr></hr>
             <Row>
-                <Col><CodeMirror editable={false} theme={monokai} value={errors} extensions={[json()]} height="200px"/></Col>
+                <Col>
+                    <FeedBack errors={errors} env={env} code={code} />
+                    <CodeMirror editable={false} theme={monokai} value={errors} extensions={[json()]} height="200px"/>
+                </Col>
             </Row>
         </Container>
     );
