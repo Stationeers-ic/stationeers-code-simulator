@@ -32,7 +32,6 @@ function App() {
     }
 
     const reset = () => {
-        setCode('')
         setErrors('')
         setEnv('{}')
         setLine(0)
