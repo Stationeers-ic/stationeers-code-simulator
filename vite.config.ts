@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from "vite"
+import react from "@vitejs/plugin-react-swc"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: 'https://Stationeers-ic.github.io/preview/',
-  plugins: [react()],
+	base: "https://Stationeers-ic.github.io/preview/",
+	plugins: [react()],
 })
