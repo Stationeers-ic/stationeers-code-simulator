@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, {useCallback, useEffect, useRef, useState} from "react"
 import CodeMirror from "@uiw/react-codemirror"
-import { Button, ButtonGroup, Col, Container, Row } from "react-bootstrap"
-import { json } from "@codemirror/lang-json"
-import { monokai } from "@uiw/codemirror-theme-monokai"
-import { InterpreterIc10 } from "ic10"
-import { DevEnv } from "ic10/dist/DevEnv"
-import { Err } from "ic10/dist/abstract/Err"
-import { ReactCodeMirrorRef } from "@uiw/react-codemirror/src"
+import {Button, ButtonGroup, Col, Container, Row} from "react-bootstrap"
+import {json} from "@codemirror/lang-json"
+import {monokai} from "@uiw/codemirror-theme-monokai"
+import {InterpreterIc10, DevEnv, Err} from "ic10"
+import {ic10} from "lang-ic"
+import {ReactCodeMirrorRef} from "@uiw/react-codemirror/src"
 import "./App.css"
-import { ConfirmPopup, confirmPopup } from "primereact/confirmpopup"
+import {ConfirmPopup, confirmPopup} from "primereact/confirmpopup"
 import FeedBack from "./FeedBack.tsx"
 
 async function delay(number: number) {
@@ -91,7 +90,8 @@ function App() {
 			setEnv(JSON.stringify(mem.data, null, 2))
 		}
 
-		while ((await ic.step()) === false) {}
+		while ((await ic.step()) === false) {
+		}
 		setLine(mem.line)
 	}
 	const confirm = (event: { currentTarget: any }) => {
@@ -130,7 +130,7 @@ function App() {
 							Reset
 						</Button>
 
-						<ConfirmPopup />
+						<ConfirmPopup/>
 						<Button variant={"danger"} onClick={confirm}>
 							Clear
 						</Button>
@@ -143,6 +143,8 @@ function App() {
 						ref={codeMirrorRef}
 						theme={monokai}
 						value={code}
+						lang={"ic10"}
+						extensions={[ic10()]}
 						height='500px'
 						onChange={onChangeCode}
 					/>
@@ -160,8 +162,8 @@ function App() {
 			<hr></hr>
 			<Row>
 				<Col>
-					<FeedBack errors={errors} env={env} code={code} />
-					<CodeMirror editable={false} theme={monokai} value={errors} extensions={[json()]} height='200px' />
+					<FeedBack errors={errors} env={env} code={code}/>
+					<CodeMirror editable={false} theme={monokai} value={errors} extensions={[json()]} height='200px'/>
 				</Col>
 			</Row>
 		</Container>
