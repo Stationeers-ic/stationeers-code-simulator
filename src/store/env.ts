@@ -1,6 +1,8 @@
 // store.js
-import { reactive } from 'vue'
-import {DevEnv} from "ic10";
+import {reactive} from 'vue'
+import Env from "../core/Env.ts";
 
-const env = new DevEnv()
+const env = new Env()
+// @ts-ignore
+window.env = env
 export const envStore = reactive(env)

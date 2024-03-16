@@ -4,10 +4,12 @@ import Errors from "./components/Errors.vue";
 import Control from "./components/Control.vue";
 import Register from "./components/Register.vue";
 import Stack from "./components/Stack.vue";
+import Raw from "./components/Raw.vue";
+import Devises from "./components/Devises.vue";
 </script>
 
 <template>
-	<div class="container">
+	<div class="app-container">
 		<div class="code">
 			<Errors></Errors>
 			<CodeMirror></CodeMirror>
@@ -15,12 +17,12 @@ import Stack from "./components/Stack.vue";
 		<div class="side">
 			<Control></Control>
 			<Register></Register>
-			<Stack></Stack>
 		</div>
 		<div class="bottom">
-			<div class="raw"></div>
-			<div class="devises"></div>
+			<Raw></Raw>
+			<Devises></Devises>
 		</div>
+		<Stack></Stack>
 	</div>
 </template>
 
