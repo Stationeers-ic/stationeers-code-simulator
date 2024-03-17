@@ -1,12 +1,33 @@
-import {DevEnv} from "ic10";
+import {DevEnv, Err} from "ic10";
 import Line from "ic10/dist/core/Line";
 import {reactive} from "vue";
+
+class HCF extends Err {
+	constructor(
+		message: string,
+		public level: "error" | "warn" | "info" | "debug" = "error",
+		public lineStart?: number,
+		public lineEnd?: number,
+		public charStart?: number,
+		public charEnd?: number,
+	) {
+		super(message, level, lineStart, lineEnd, charStart, charEnd)
+		this.name = "HCF"
+	}
+}
 
 class Env extends DevEnv {
 	constructor() {
 		super();
 		this.data = reactive({})
-		this.stack =  reactive([])
+		this.stack = reactive([])
+		this.reset()
+	}
+
+	reset() {
+		this.aliases = new Map<string, string | number>()
+		this.errors = []
+		this.lines = []
 		this.data['r0'] = 0
 		this.data['r1'] = 0
 		this.data['r2'] = 0
@@ -29,6 +50,7 @@ class Env extends DevEnv {
 			this.stack[i] = 0
 		}
 	}
+
 	reverseAlias(alias: string): string[] {
 		const out: string[] = []
 		this.aliases.forEach((value, key,) => {
@@ -40,11 +62,22 @@ class Env extends DevEnv {
 	}
 
 	async beforeLineRun(_line: Line): Promise<void> {
+
+	}
+
+	async afterLineRun(_line: Line): Promise<void> {
+		//@ts-ignore
+		this.emit('update')
 		return await new Promise<void>((resolve) => {
 			setTimeout(() => {
 				resolve()
 			}, 300)
 		})
+	}
+
+	hcf(): this {
+		this.throw(new HCF("HCF", "info", this.getPosition()))
+		return super.hcf();
 	}
 
 }

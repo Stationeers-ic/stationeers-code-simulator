@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Codemirror} from "vue-codemirror";
 import {monokai} from '@uiw/codemirror-theme-monokai';
-import {onMounted, onUnmounted, ref, watch} from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import ic10 from "../core/ic10.ts";
 
 const extensions = [monokai]
@@ -11,15 +11,13 @@ const test = ref<string>("")
 async function error() {
 	test.value = ic10.getEnv().getErrors().map(e => e.toString()).join("\n")
 }
-
-watch( ic10.getEnv().errors, error)
-
 onMounted(() => {
 	// @ts-ignore
-	ic10.getEnv().on('error', error)
+	ic10.getEnv().on('update', error)
 })
 onUnmounted(() => {
-	ic10.getEnv().off('error', error)
+	// @ts-ignore
+	ic10.getEnv().off('update', error)
 })
 </script>
 

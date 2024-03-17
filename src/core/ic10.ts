@@ -15,8 +15,17 @@ export class Ic10 extends InterpreterIc10 {
 		super(new Env, "");
 	}
 
+	setCode(code: string): this {
+		this.getEnv().lines = []
+		return super.setCode(code);
+	}
+
 	public reset() {
-		this.setEnv(new Env())
+		this.getEnv().reset()
+		this.getEnv().setPosition(0)
+		this.setCode(this.code)
+		// @ts-ignore
+		this.getEnv().emit('update')
 	}
 
 	public getEnv(): Env {
@@ -24,11 +33,11 @@ export class Ic10 extends InterpreterIc10 {
 	}
 
 	async run(codeLines?: number, dryRun?: number): Promise<string> {
-		this.env.setPosition(0)
-		this.setEnv(this.env)
+		this.reset()
 		return await super.run(codeLines, dryRun);
 	}
 }
+
 // @ts-ignore
 window.ic10 = Ic10.getInstance()
 export default Ic10.getInstance()

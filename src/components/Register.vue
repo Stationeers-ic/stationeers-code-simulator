@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts";
+import EnvInput from "../ui/EnvInput.vue";
 //@ts-ignore
 ic10.getEnv().on("after_alias", () => {
 	console.log("after_alias", ic10.getEnv().aliases);
@@ -10,14 +11,7 @@ ic10.getEnv().on("after_alias", () => {
 	<div class="register">
 		<h3>Registers</h3>
 		<div :class="$style.registerContent">
-			<InputGroup v-for="(_, index) in ic10.getEnv().data">
-				<InputGroupAddon>{{ index }}</InputGroupAddon>
-				<InputNumber v-model="ic10.getEnv().data[index]" width="100%" placeholder="Value"/>
-				<!-- FIXME -->
-				<InputGroupAddon v-if="ic10.getEnv().reverseAlias(index as string).length > 0">
-					{{ ic10.getEnv().reverseAlias(index as string).join(',') }}
-				</InputGroupAddon>
-			</InputGroup>
+			<EnvInput v-for="(_, index) in ic10.getEnv().data" :name="index" v-model="ic10.getEnv().data[index]"/>
 		</div>
 	</div>
 </template>

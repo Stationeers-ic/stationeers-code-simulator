@@ -28,6 +28,9 @@ watch(checked, (newVal, oldVal) => {
 const reset = () => {
 	ic10.reset()
 }
+const step = () => {
+	ic10.step()
+}
 </script>
 
 <template>
@@ -41,10 +44,9 @@ const reset = () => {
 				onIcon="pi pi-stop"
 				offIcon="pi pi-play"
 			/>
-			<Button label="Step"/>
+			<Button @click="step" label="Step"/>
 			<Button @click="reset" severity="warning" label="Reset"/>
 		</InputGroup>
-		{{ ic10.getEnv().line }}
 	</div>
 </template>
 

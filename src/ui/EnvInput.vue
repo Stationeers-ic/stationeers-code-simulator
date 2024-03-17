@@ -1,0 +1,40 @@
+<script setup lang="ts">
+import ic10 from "../core/ic10.ts";
+import {onMounted, onUnmounted, ref} from "vue";
+
+const props = defineProps(['name'])
+const model = defineModel()
+const aliases = ic10.getEnv().reverseAlias(props.name)
+const alias = ref(aliases.join(','))
+
+function update(){
+	debugger
+	const aliases = ic10.getEnv().reverseAlias(props.name)
+	alias.value = aliases.join(',')
+}
+
+onMounted(() => {
+	// @ts-ignore
+	ic10.getEnv().on('update', update)
+})
+onUnmounted(() => {
+	// @ts-ignore
+	ic10.getEnv().off('update', update)
+})
+</script>
+
+<template>
+	<InputGroup>
+		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
+		<InputNumber :class="{ [$style.defaultValue]:model == 0 }" v-model="model" width="100%" placeholder="Value"/>
+		<InputGroupAddon v-if="alias">{{ alias }}</InputGroupAddon>
+	</InputGroup>
+</template>
+
+<style module lang="scss">
+.defaultValue {
+	input {
+		color: #767676 !important;
+	}
+}
+</style>

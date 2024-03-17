@@ -1,7 +1,6 @@
 <script setup lang="ts">
-
-
 import ic10 from "../core/ic10.ts";
+import StackInput from "../ui/StackInput.vue";
 </script>
 
 <template>
@@ -9,10 +8,7 @@ import ic10 from "../core/ic10.ts";
 		<h3>Stack</h3>
 		<div :class="$style.stackContent">
 			<div :class="$style.stackItem" v-for="(_, index) in ic10.getEnv().stack">
-				<InputGroup>
-					<InputGroupAddon>{{ index }}</InputGroupAddon>
-					<InputNumber v-model="ic10.getEnv().stack[index]" width="100%" placeholder="Value"/>
-				</InputGroup>
+				<StackInput :name="index" v-model="ic10.getEnv().stack[index]"/>
 			</div>
 		</div>
 	</div>
@@ -31,14 +27,6 @@ import ic10 from "../core/ic10.ts";
 
 	.stackItem {
 		max-width: 85px;
-
-		* {
-			font-size: 12px;
-		}
-
-		input {
-			padding: 4px !important;
-		}
 	}
 }
 </style>

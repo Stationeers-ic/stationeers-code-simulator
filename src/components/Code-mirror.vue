@@ -4,7 +4,7 @@ import {Codemirror} from 'vue-codemirror'
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {ic10} from 'codemirror-lang-ic10';
 import interpritator from '../core/ic10.ts';
-import {onMounted, watch} from "vue";
+import {onMounted, onUnmounted, ref, watch} from "vue";
 
 const extensions = [monokai, ic10()]
 
@@ -15,6 +15,27 @@ onMounted(() => {
 watch(() => codeStore.code, (newVal) => {
 	localStorage.setItem('code', newVal)
 	interpritator.setCode(newVal)
+})
+const line = ref(0)
+onMounted(() => {
+	//@ts-ignore
+	interpritator.getEnv().on('update', (l) => {
+		line.value = interpritator.getEnv().line
+	})
+})
+onUnmounted(() => {
+	//@ts-ignore
+	interpritator.getEnv().off('update')
+})
+
+watch(line, (newVal) => {
+	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) =>{
+		if(i == newVal) {
+			e.style.backgroundColor = 'rgb(0 0 0 / 40%)'
+		} else {
+			e.style.backgroundColor = 'transparent'
+		}
+	})
 })
 
 </script>

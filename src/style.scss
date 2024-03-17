@@ -45,7 +45,7 @@
 		.side {
 			display: grid;
 			grid-template-columns: 1fr 1fr;
-			grid-template-rows: 1fr 800px;
+			grid-template-rows: 40px 715px;
 			gap: 5px 5px;
 			grid-auto-flow: row;
 			grid-template-areas:
@@ -94,4 +94,6 @@
 
 
 	}
+
+
 }
