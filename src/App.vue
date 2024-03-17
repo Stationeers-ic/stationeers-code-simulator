@@ -17,12 +17,12 @@ import Devises from "./components/Devises.vue";
 		<div class="side">
 			<Control></Control>
 			<Register></Register>
+			<Stack></Stack>
 		</div>
 		<div class="bottom">
 			<Raw></Raw>
 			<Devises></Devises>
 		</div>
-		<Stack></Stack>
 	</div>
 </template>
 

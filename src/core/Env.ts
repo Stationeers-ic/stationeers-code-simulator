@@ -1,13 +1,12 @@
 import {DevEnv} from "ic10";
+import Line from "ic10/dist/core/Line";
+import {reactive} from "vue";
 
 class Env extends DevEnv {
 	constructor() {
 		super();
-		this.reset()
-	}
-
-	reset() {
-		this.data = {}
+		this.data = reactive({})
+		this.stack =  reactive([])
 		this.data['r0'] = 0
 		this.data['r1'] = 0
 		this.data['r2'] = 0
@@ -26,12 +25,10 @@ class Env extends DevEnv {
 		this.data['r15'] = 0
 		this.data['r16'] = 0
 		this.data['r17'] = 0
-		this.stack = []
 		for (let i = 0; i < 512; i++) {
 			this.stack[i] = 0
 		}
 	}
-
 	reverseAlias(alias: string): string[] {
 		const out: string[] = []
 		this.aliases.forEach((value, key,) => {
@@ -41,6 +38,15 @@ class Env extends DevEnv {
 		})
 		return out;
 	}
+
+	async beforeLineRun(_line: Line): Promise<void> {
+		return await new Promise<void>((resolve) => {
+			setTimeout(() => {
+				resolve()
+			}, 300)
+		})
+	}
+
 }
 
 export default Env;

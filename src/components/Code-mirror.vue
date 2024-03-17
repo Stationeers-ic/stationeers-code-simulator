@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { codeStore } from '../store/code.js'
-import { Codemirror } from 'vue-codemirror'
-import { monokai } from '@uiw/codemirror-theme-monokai';
-import { ic10 } from 'codemirror-lang-ic10';
+import {codeStore} from '../store/code.js'
+import {Codemirror} from 'vue-codemirror'
+import {monokai} from '@uiw/codemirror-theme-monokai';
+import {ic10} from 'codemirror-lang-ic10';
+import interpritator from '../core/ic10.ts';
 import {onMounted, watch} from "vue";
-const extensions = [monokai,ic10()]
+
+const extensions = [monokai, ic10()]
 
 onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
@@ -12,6 +14,7 @@ onMounted(() => {
 
 watch(() => codeStore.code, (newVal) => {
 	localStorage.setItem('code', newVal)
+	interpritator.setCode(newVal)
 })
 
 </script>

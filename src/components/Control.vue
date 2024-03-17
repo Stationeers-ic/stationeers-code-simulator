@@ -1,10 +1,33 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {ref, watch} from 'vue'
 import ToggleButton from 'primevue/togglebutton'
 import InputGroup from 'primevue/inputgroup'
 import Button from 'primevue/button'
+import ic10 from "../core/ic10.ts";
+
 
 const checked = ref(false)
+
+watch(checked, (newVal, oldVal) => {
+	if (newVal) {
+		console.log("Run")
+		ic10.run().then(() => {
+			console.log("Run finished")
+			checked.value = false
+		}).catch(() => {
+			console.log("Run error")
+			checked.value = false
+		})
+	} else {
+		console.log("Run stopped")
+		ic10.stop()
+
+	}
+})
+
+const reset = () => {
+	ic10.reset()
+}
 </script>
 
 <template>
@@ -19,8 +42,9 @@ const checked = ref(false)
 				offIcon="pi pi-play"
 			/>
 			<Button label="Step"/>
-			<Button severity="warning" label="Reset"/>
+			<Button @click="reset" severity="warning" label="Reset"/>
 		</InputGroup>
+		{{ ic10.getEnv().line }}
 	</div>
 </template>
 
