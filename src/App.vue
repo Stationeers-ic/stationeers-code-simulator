@@ -14,11 +14,10 @@ import Devises from "./components/Devises.vue";
 			<Errors></Errors>
 			<CodeMirror></CodeMirror>
 		</div>
-		<div class="side">
-			<Control></Control>
-			<Register></Register>
-			<Stack></Stack>
-		</div>
+		<Control></Control>
+		<Register></Register>
+		<Stack></Stack>
+
 		<div class="bottom">
 			<Raw></Raw>
 			<Devises></Devises>

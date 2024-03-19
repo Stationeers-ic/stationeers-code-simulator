@@ -23,10 +23,11 @@ import StackInput from "../ui/StackInput.vue";
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: flex-start;
-
+	max-height: calc(100% - 61px);
+	overflow: auto;
 
 	.stackItem {
-		max-width: 85px;
+		max-width: 80px;
 	}
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts";
-import {onMounted, onUnmounted, ref} from "vue";
+import {onBeforeUnmount, onMounted, ref} from "vue";
 
 const props = defineProps(['name'])
 const model = defineModel()
@@ -8,7 +8,6 @@ const aliases = ic10.getEnv().reverseAlias(props.name)
 const alias = ref(aliases.join(','))
 
 function update(){
-	debugger
 	const aliases = ic10.getEnv().reverseAlias(props.name)
 	alias.value = aliases.join(',')
 }
@@ -17,7 +16,7 @@ onMounted(() => {
 	// @ts-ignore
 	ic10.getEnv().on('update', update)
 })
-onUnmounted(() => {
+onBeforeUnmount(() => {
 	// @ts-ignore
 	ic10.getEnv().off('update', update)
 })
