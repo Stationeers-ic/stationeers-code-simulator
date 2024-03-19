@@ -49,12 +49,15 @@ function add() {
 	devicePort.value.forEach((p) => {
 		ic10.getEnv().attachDevice(id, p)
 	})
+	devicePort.value = []
+	deviceHash.value = ''
+	deviceName.value = ''
 }
 
 </script>
 
 <template>
-	<Button severity="info" @click="visible = true">Add</Button>
+	<Button icon="pi pi-plus" severity="info" @click="visible = true" label="Add device" />
 
 	<Dialog v-model:visible="visible" modal header="Add Device" style="width: 50vw">
 		<span class="p-text-secondary block mb-5">Update your information.</span>

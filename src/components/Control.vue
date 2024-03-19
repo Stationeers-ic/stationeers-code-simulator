@@ -42,8 +42,8 @@ const step = () => {
 </script>
 
 <template>
-	<div class="control">
-		<InputGroup>
+	<div :class="[$style.control, 'control']">
+		<InputGroup style="width:auto">
 			<ToggleButton
 				v-model="checked"
 				style="width: 6em"
@@ -52,20 +52,25 @@ const step = () => {
 				onIcon="pi pi-stop"
 				offIcon="pi pi-play"
 			/>
-			<Button @click="step" label="Step"/>
-			<Button @click="reset" severity="warning" label="Reset"/>
-			<InputGroupAddon>
-				#
-			</InputGroupAddon>
-			<Button @click="convert" label="convert"/>
+			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
+			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
+
 			<AddDevice/>
-			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
 
-
+		<InputGroup style="width:auto">
+			<Button  icon="pi pi-hashtag" @click="convert" label="Convert"/>
+			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText"
+					   v-model="hashText" style="max-width: 200px"/>
+		</InputGroup>
 	</div>
 </template>
 
-<style scoped lang="scss">
-
+<style module lang="scss">
+.control {
+	display: flex;
+	justify-content: space-between;
+	align-items: stretch;
+	gap: 5px;
+}
 </style>

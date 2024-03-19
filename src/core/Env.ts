@@ -80,6 +80,35 @@ class Env extends DevEnv {
 		return super.hcf();
 	}
 
+	appendDevice(hash: number, name?: number): string {
+		const out = super.appendDevice(hash, name);
+		//@ts-ignore
+		this.emit('update')
+		return out;
+	}
+
+	removeDevice(id: string): this {
+		super.removeDevice(id);
+		//@ts-ignore
+		this.emit('update')
+		return this;
+	}
+
+	attachDevice(id: string, port: string): this {
+		super.attachDevice(id, port);
+		//@ts-ignore
+		this.emit('update')
+		return this;
+	}
+
+	detachDevice(id: string): this {
+		super.detachDevice(id);
+		//@ts-ignore
+		this.emit('update')
+		return this;
+	}
+
+
 }
 
 export default Env;
