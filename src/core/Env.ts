@@ -58,7 +58,7 @@ class Env extends DevEnv {
 
 	}
 
-	async afterLineRun(_line: Line): Promise<void> {
+	async afterLineRun(_line?: Line): Promise<void> {
 		//@ts-ignore
 		this.emit('update')
 		return await new Promise<void>((resolve) => {

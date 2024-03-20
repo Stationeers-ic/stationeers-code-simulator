@@ -1,5 +1,6 @@
 import {InterpreterIc10} from "ic10";
 import Env from "./Env.ts";
+import {reactive} from "vue";
 
 export class Ic10 extends InterpreterIc10 {
 	private static instance: Ic10;
@@ -12,7 +13,7 @@ export class Ic10 extends InterpreterIc10 {
 	}
 
 	private constructor() {
-		super(new Env, "");
+		super(reactive(new Env), "");
 	}
 
 	setCode(code: string): this {
@@ -23,7 +24,6 @@ export class Ic10 extends InterpreterIc10 {
 	public reset() {
 		// this.getEnv().reset()
 		this.getEnv().errors = []
-		this.getEnv().setPosition(0)
 		this.setCode(this.code)
 		// @ts-ignore
 		this.getEnv().emit('update')

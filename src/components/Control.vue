@@ -35,10 +35,15 @@ const convert = () => {
 }
 const reset = () => {
 	ic10.getEnv().reset()
+	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
-const step = () => {
-	ic10.step()
+const step = async () => {
+	const t =  await ic10.step()
+	if (t === false || t === 'EOF') {
+		//@ts-ignore
+		// ic10.getEnv().emit('update')
+	}
 }
 </script>
 

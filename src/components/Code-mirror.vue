@@ -5,9 +5,8 @@ import {Codemirror} from 'vue-codemirror'
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {ic10, snippets} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
-import {onBeforeUnmount, onMounted, ref, watch} from "vue";
+import {onBeforeUnmount, onMounted, watch} from "vue";
 
-const line = ref(0)
 const extensions = [monokai, ic10(), snippets]
 
 watch(() => codeStore.code, (newVal) => {
@@ -16,17 +15,13 @@ watch(() => codeStore.code, (newVal) => {
 })
 onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
-	//@ts-ignore
-	interpretator.getEnv().on('update', (l) => {
-		line.value = interpretator.getEnv().line
-	})
 })
 onBeforeUnmount(() => {
 	//@ts-ignore
 	interpretator.getEnv().off('update')
 })
 
-watch(line, (newVal) => {
+watch(()=>interpretator.getEnv().line, (newVal) => {
 	//@ts-ignore
 	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
 		if (i == newVal) {
