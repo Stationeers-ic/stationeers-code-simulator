@@ -15,11 +15,11 @@ onMounted(async () => {
 </script>
 
 <template>
-	<template v-for="(value, id) in props.device">
-		<div class="flex gap-1">
-			<span>{{ id }}:</span>
-			<span>{{ value }}</span>
-		</div>
+	<template v-for="(_value, id) in props.device">
+		<InputGroup>
+			<InputGroupAddon style="width:10em">{{ id }}</InputGroupAddon>
+			<InputNumber style="width:15em" v-model="props.device[id]"  placeholder="Value"/>
+		</InputGroup>
 	</template>
 </template>
 

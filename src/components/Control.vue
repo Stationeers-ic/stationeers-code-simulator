@@ -13,11 +13,11 @@ const hashText = ref("")
 watch(checked, (newVal) => {
 	if (newVal) {
 		console.log("Run")
-		ic10.run().then(() => {
-			console.log("Run finished")
+		ic10.run().then((e) => {
+			console.log("Run finished", e)
 			checked.value = false
-		}).catch(() => {
-			console.log("Run error")
+		}).catch((e) => {
+			console.error("Run error", e)
 			checked.value = false
 		})
 	} else {
@@ -34,6 +34,7 @@ const convert = () => {
 	}
 }
 const reset = () => {
+	ic10.getEnv().reset()
 	ic10.reset()
 }
 const step = () => {
@@ -59,7 +60,7 @@ const step = () => {
 		</InputGroup>
 
 		<InputGroup style="width:auto">
-			<Button  icon="pi pi-hashtag" @click="convert" label="Convert"/>
+			<Button icon="pi pi-hashtag" @click="convert" label="Convert"/>
 			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText"
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>

@@ -21,7 +21,7 @@ export class Ic10 extends InterpreterIc10 {
 	}
 
 	public reset() {
-		this.getEnv().reset()
+		// this.getEnv().reset()
 		this.getEnv().setPosition(0)
 		this.setCode(this.code)
 		// @ts-ignore

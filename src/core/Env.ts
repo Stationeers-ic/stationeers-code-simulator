@@ -21,33 +21,24 @@ class Env extends DevEnv {
 		super();
 		this.data = reactive({})
 		this.stack = reactive([])
+		this.devices = reactive(new Map())
 		this.reset()
 	}
-	public deviceNames: Map<string,string> = new Map<string,string>();
+
+	public deviceNames: Map<string, string> = new Map<string, string>();
 
 
 	reset() {
 		this.aliases = new Map<string, string | number>()
+		this.setDefaultAliases()
 		this.errors = []
 		this.lines = []
-		this.data['r0'] = 0
-		this.data['r1'] = 0
-		this.data['r2'] = 0
-		this.data['r3'] = 0
-		this.data['r4'] = 0
-		this.data['r5'] = 0
-		this.data['r6'] = 0
-		this.data['r7'] = 0
-		this.data['r8'] = 0
-		this.data['r9'] = 0
-		this.data['r10'] = 0
-		this.data['r11'] = 0
-		this.data['r12'] = 0
-		this.data['r13'] = 0
-		this.data['r14'] = 0
-		this.data['r15'] = 0
-		this.data['r16'] = 0
-		this.data['r17'] = 0
+		for (const dataKey in this.data) {
+			delete this.data[dataKey]
+		}
+		for (const key of ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'r13', 'r14', 'r15', 'r16', 'r17']) {
+			this.data[key] = 0
+		}
 		for (let i = 0; i < 512; i++) {
 			this.stack[i] = 0
 		}

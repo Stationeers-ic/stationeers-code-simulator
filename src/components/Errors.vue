@@ -14,10 +14,12 @@ async function error() {
 onMounted(() => {
 	// @ts-ignore
 	ic10.getEnv().on('update', error)
+	ic10.getEnv().on('error', error)
 })
 onBeforeUnmount(() => {
 	// @ts-ignore
 	ic10.getEnv().off('update', error)
+	ic10.getEnv().off('error', error)
 })
 </script>
 

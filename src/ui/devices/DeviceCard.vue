@@ -37,7 +37,9 @@ function remove() {
 <template>
 	<Card style="width: auto; overflow: hidden">
 		<template #header>
-			<img alt="user header" :src="image"/>
+			<div :class="$style.image">
+				<Image loading="lazy" alt="user header" :src="image"/>
+			</div>
 		</template>
 		<template #title>{{ deviceData?.PrefabName }}</template>
 		<template #subtitle>{{ name }}</template>
@@ -48,7 +50,7 @@ function remove() {
 				</template>
 			</div>
 			<Divider/>
-				<DeviceProps :device="props.device"/>
+			<DeviceProps :device="props.device"/>
 			<Divider/>
 		</template>
 		<template #footer>
@@ -65,5 +67,12 @@ function remove() {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
+}
+
+.image {
+	width: 100%;
+	height: 128px;
+	display: flex;
+	justify-content: center;
 }
 </style>
