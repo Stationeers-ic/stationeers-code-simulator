@@ -36,10 +36,13 @@ function remove() {
 				</template>
 			</div>
 			<Divider/>
-			<div v-for="(value, id) in props.device" class="flex gap-1">
-				<span>{{ id }}:</span>
-				<span>{{ value }}</span>
-			</div>
+				<template v-for="(value, id) in props.device">
+					<div class="flex gap-1">
+						<span>{{ id }}:</span>
+						<span>{{ value }}</span>
+					</div>
+				</template>
+			<Divider/>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
