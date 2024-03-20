@@ -13,6 +13,7 @@ const deviceHash = ref<string | number>('');
 const deviceName = ref<string>('');
 
 function portList() {
+	ports.value.push({name: 'DB', code: 'db'})
 	for (let i = 0; i < 6; i++) {
 		ports.value.push({name: `D${i}`, code: `d${i}`})
 	}
@@ -49,6 +50,11 @@ function add() {
 	devicePort.value.forEach((p) => {
 		ic10.getEnv().attachDevice(id, p)
 	})
+	if (name) {
+		ic10.getEnv().deviceNames.set(id, deviceName.value)
+		ic10.getEnv().deviceNames.set(deviceName.value, id);
+	}
+
 	devicePort.value = []
 	deviceHash.value = ''
 	deviceName.value = ''
@@ -57,7 +63,7 @@ function add() {
 </script>
 
 <template>
-	<Button icon="pi pi-plus" severity="info" @click="visible = true" label="Add device" />
+	<Button icon="pi pi-plus" severity="info" @click="visible = true" label="Add device"/>
 
 	<Dialog v-model:visible="visible" modal header="Add Device" style="width: 50vw">
 		<span class="p-text-secondary block mb-5">Update your information.</span>

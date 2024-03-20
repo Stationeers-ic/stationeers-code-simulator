@@ -23,6 +23,8 @@ class Env extends DevEnv {
 		this.stack = reactive([])
 		this.reset()
 	}
+	public deviceNames: Map<string,string> = new Map<string,string>();
+
 
 	reset() {
 		this.aliases = new Map<string, string | number>()
