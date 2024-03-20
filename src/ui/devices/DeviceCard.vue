@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import ic10 from "../core/ic10.ts";
-import {onMounted, ref} from "vue";
-import data, {Device, Devices} from "../core/Data.ts";
+import ic10 from "../../core/ic10.ts";
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
+import data, {Device, Devices} from "../../core/Data.ts";
+import DeviceProps from "./DeviceProps.vue";
 
 const props = defineProps(['id', 'device'])
 const image = ref('')
@@ -9,12 +10,23 @@ const name = ref('')
 const devicesData = ref<Devices>([])
 const deviceData = ref<Device | undefined>(undefined)
 
+
+const instance = getCurrentInstance();
 onMounted(async () => {
 	devicesData.value = await data.getDevices()
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
 	image.value = deviceData.value?.image || ''
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
+	//@ts-ignore
+	ic10.getEnv().on('update', () => {
+		instance?.proxy?.$forceUpdate();
+	})
 })
+
+onBeforeUnmount(() => {
+	//@ts-ignore
+	ic10.getEnv().off('update')
+});
 
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
@@ -36,12 +48,7 @@ function remove() {
 				</template>
 			</div>
 			<Divider/>
-				<template v-for="(value, id) in props.device">
-					<div class="flex gap-1">
-						<span>{{ id }}:</span>
-						<span>{{ value }}</span>
-					</div>
-				</template>
+				<DeviceProps :device="props.device"/>
 			<Divider/>
 		</template>
 		<template #footer>
