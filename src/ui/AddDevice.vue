@@ -1,37 +1,24 @@
 <script setup lang="ts">
 import Button from "primevue/button";
 import SelectDevice from "../ui/SelectDevice.vue";
-import {onBeforeUnmount, onMounted, ref} from "vue";
+import {ref} from "vue";
 import ic10 from "../core/ic10.ts";
-import interpretator from "../core/ic10.ts";
 import {str as Hash} from "crc-32";
 
-const ports = ref<{ name: string, code: string }[]>([]);
+const ports = [
+	{name: 'DB', code: 'db'},
+	{name: 'D0', code: 'd0'},
+	{name: 'D1', code: 'd1'},
+	{name: 'D2', code: 'd2'},
+	{name: 'D3', code: 'd3'},
+	{name: 'D4', code: 'd4'},
+	{name: 'D5', code: 'd5'},
+
+]
 const visible = ref(false);
 const devicePort = ref<string[]>([]);
 const deviceHash = ref<string | number>('');
 const deviceName = ref<string>('');
-
-function portList() {
-	ports.value.push({name: 'DB', code: 'db'})
-	for (let i = 0; i < 6; i++) {
-		ports.value.push({name: `D${i}`, code: `d${i}`})
-	}
-}
-
-onMounted(() => {
-	portList()
-	//@ts-ignore
-	interpretator.getEnv().on('update', (l) => {
-		portList()
-	})
-})
-
-onBeforeUnmount(() => {
-	//@ts-ignore
-	interpretator.getEnv().off('update')
-})
-
 
 function add() {
 	visible.value = false

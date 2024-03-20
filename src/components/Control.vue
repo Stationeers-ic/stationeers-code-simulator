@@ -14,7 +14,7 @@ watch(checked, (newVal) => {
 	if (newVal) {
 		console.log("Run")
 		ic10.run().then((e) => {
-			console.log("Run finished", e)
+			console.log("Run finished", e, ic10.getEnv().getPosition())
 			checked.value = false
 		}).catch((e) => {
 			console.error("Run error", e)

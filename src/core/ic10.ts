@@ -22,6 +22,7 @@ export class Ic10 extends InterpreterIc10 {
 
 	public reset() {
 		// this.getEnv().reset()
+		this.getEnv().errors = []
 		this.getEnv().setPosition(0)
 		this.setCode(this.code)
 		// @ts-ignore
@@ -36,6 +37,7 @@ export class Ic10 extends InterpreterIc10 {
 		this.reset()
 		return await super.run(codeLines, dryRun);
 	}
+
 }
 
 // @ts-ignore

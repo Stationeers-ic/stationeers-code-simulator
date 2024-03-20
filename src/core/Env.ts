@@ -101,7 +101,9 @@ class Env extends DevEnv {
 		return this;
 	}
 
-
+	getErrorCount(): number {
+		return this.errors.length
+	}
 }
 
 export default Env;

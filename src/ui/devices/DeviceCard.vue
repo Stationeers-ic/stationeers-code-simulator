@@ -3,6 +3,7 @@ import ic10 from "../../core/ic10.ts";
 import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
 import data, {Device, Devices} from "../../core/Data.ts";
 import DeviceProps from "./DeviceProps.vue";
+import DevicePorts from "./DevicePorts.vue";
 
 const props = defineProps(['id', 'device'])
 const image = ref('')
@@ -15,7 +16,7 @@ const instance = getCurrentInstance();
 onMounted(async () => {
 	devicesData.value = await data.getDevices()
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
-	image.value = deviceData.value?.image || ''
+	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
 	//@ts-ignore
 	ic10.getEnv().on('update', () => {
@@ -35,23 +36,23 @@ function remove() {
 </script>
 
 <template>
-	<Card style="width: auto; overflow: hidden">
+	<Card :class="$style.card" style="">
 		<template #header>
 			<div :class="$style.image">
 				<Image loading="lazy" alt="user header" :src="image"/>
 			</div>
 		</template>
-		<template #title>{{ deviceData?.PrefabName }}</template>
-		<template #subtitle>{{ name }}</template>
+		<template #title>
+			<span :class="$style.break">{{ deviceData?.PrefabName }}</span>
+		</template>
+		<template #subtitle v-if="name">
+			<span :class="$style.break">{{ name }}</span>
+			<Divider/>
+		</template>
 		<template #content>
-			<div :class="$style.ports">
-				<template v-for="port in ['db', 'd0','d1', 'd2', 'd3', 'd4', 'd5' ]">
-					<span v-if="ic10.getEnv().devicesAttached.get(port) === props.id">{{ port }}</span>
-				</template>
-			</div>
+			<DevicePorts :id="props.id"/>
 			<Divider/>
 			<DeviceProps :device="props.device"/>
-			<Divider/>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
@@ -63,10 +64,15 @@ function remove() {
 </template>
 
 <style module scoped lang="scss">
-.ports {
-	display: flex;
-	flex-direction: row;
-	gap: 5px;
+.card {
+	$count: 3;
+	width: auto;
+	overflow: hidden;
+	max-width: calc(100% / $count - (5px * ($count - 1)));
+}
+
+.break {
+	word-break: break-all;
 }
 
 .image {
