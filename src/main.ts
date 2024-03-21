@@ -114,11 +114,21 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
+import {createMemoryHistory, createRouter} from "vue-router";
 
 
+const routes = [
+	{path: '/', component: App},
+	{path: '/preview', component: App},
+]
+
+const router = createRouter({
+	history: createMemoryHistory(),
+	routes,
+})
 const app = createApp(App);
-
-app.use(PrimeVue, { ripple: true  });
+app.use(router);
+app.use(PrimeVue, {ripple: true});
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);
