@@ -40,6 +40,7 @@
 
 			.code-mirror {
 				grid-area: code-mirror;
+				max-height: calc(715px - 128px - 5px);
 			}
 		}
 
