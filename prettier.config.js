@@ -1,0 +1,31 @@
+/** @type {import("prettier").Config} */
+export default {
+	endOfLine: "lf",
+	tabWidth: 4,
+	useTabs: true,
+	semi: false,
+
+	singleQuote: false,
+	quoteProps: "as-needed",
+	jsxSingleQuote: true,
+
+	trailingComma: "all",
+	bracketSpacing: true,
+	arrowParens: "always",
+
+	overrides: [
+		{
+			files: "tsconfig.json",
+			options: {
+				parser: "jsonc",
+			},
+		},
+		{
+			files: "package.json",
+			options: {
+				tabWidth: 2,
+				useTabs: false,
+			},
+		},
+	],
+}
