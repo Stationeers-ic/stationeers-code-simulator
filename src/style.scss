@@ -1,0 +1,83 @@
+@layer my {
+
+
+	html, body {
+		padding: 0;
+		margin: 0
+	}
+
+	.app-container {
+		margin: auto;
+		max-width: 1080px;
+		min-height: 100vh;
+	}
+
+	.app-container {
+		display: grid;
+		grid-template-columns:7fr 2fr 3fr;
+		grid-template-rows: 40px 715px 1fr;
+		gap: 5px 5px;
+		grid-auto-flow: row;
+		grid-template-areas:
+   			"control control control"
+   			"code register stack"
+   			"bottom bottom bottom";
+
+		.code {
+			display: grid;
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr 128px;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+    "code-mirror"
+    "errors";
+			grid-area: code;
+
+			.errors {
+				grid-area: errors;
+			}
+
+			.code-mirror {
+				grid-area: code-mirror;
+			}
+		}
+
+		.register {
+			grid-area: register;
+		}
+
+		.control {
+			grid-area: control;
+		}
+
+		.stack {
+			grid-area: stack;
+
+		}
+
+		.bottom {
+			grid-area: bottom;
+
+			display: grid;
+			grid-template-columns: 1.5fr 0.5fr;
+			grid-template-rows: 1fr;
+			gap: 5px 5px;
+			grid-auto-flow: row;
+			grid-template-areas:
+				"devises raw";
+
+			.raw {
+				grid-area: raw;
+			}
+
+			.devises {
+				grid-area: devises;
+			}
+		}
+
+
+	}
+
+
+}
