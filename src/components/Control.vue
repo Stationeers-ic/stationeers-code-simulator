@@ -44,6 +44,10 @@ const step = async () => {
 		//@ts-ignore
 		// ic10.getEnv().emit('update')
 	}
+	if (t === 'ERR') {
+		//@ts-ignore
+		// ic10.getEnv().emit('update')
+	}
 }
 </script>
 

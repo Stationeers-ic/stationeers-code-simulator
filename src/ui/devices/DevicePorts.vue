@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
 	<div :class="$style.ports">
 		<template v-for="port in ['db', 'd0','d1', 'd2', 'd3', 'd4', 'd5' ]">
-			<span v-if="ic10.getEnv().devicesAttached.get(port) === props.id">{{ port }}</span>
+			<Badge severity="secondary" v-if="ic10.getEnv().devicesAttached.get(port) === props.id" :value="port"/>
 		</template>
 	</div>
 </template>
@@ -27,5 +27,6 @@ onMounted(async () => {
 	display: flex;
 	flex-direction: row;
 	gap: 5px;
+	margin-bottom: 5px;
 }
 </style>

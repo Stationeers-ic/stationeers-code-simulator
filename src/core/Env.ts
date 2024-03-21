@@ -104,6 +104,15 @@ class Env extends DevEnv {
 	getErrorCount(): number {
 		return this.errors.length
 	}
+
+	throw(err: Err): this {
+		err.lineStart = err.lineStart ?? this.getPosition()
+		this.errors.push(err)
+		this.emit(err.level, err)
+		//@ts-ignore
+		this.emit('update')
+		return this
+	}
 }
 
 export default Env;

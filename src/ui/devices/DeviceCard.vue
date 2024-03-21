@@ -32,7 +32,14 @@ onBeforeUnmount(() => {
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
 }
-
+const newKey = ref('')
+const newVal = ref(0)
+function add(){
+	const d = ic10.getEnv().devices.get(props.id)
+	if(d){
+		d[newKey.value] = newVal.value
+	}
+}
 </script>
 
 <template>
@@ -47,12 +54,16 @@ function remove() {
 		</template>
 		<template #subtitle v-if="name">
 			<span :class="$style.break">{{ name }}</span>
-			<Divider/>
 		</template>
 		<template #content>
 			<DevicePorts :id="props.id"/>
-			<Divider/>
 			<DeviceProps :device="props.device"/>
+			<Divider/>
+			<InputGroup>
+				<InputText v-model="newKey" placeholder="Key"/>
+				<InputNumber  v-model="newVal" placeholder="Value"/>
+				<Button @click="add" placeholder="Value" label="ok"/>
+			</InputGroup>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
