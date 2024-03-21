@@ -3,7 +3,7 @@ import ic10 from "../core/ic10.ts";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 
 const props = defineProps(['name'])
-const model = defineModel()
+const model = defineModel<number>()
 const aliases = ic10.getEnv().reverseAlias(props.name)
 const alias = ref(aliases.join(','))
 
