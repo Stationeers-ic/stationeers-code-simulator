@@ -13,11 +13,11 @@ function update(){
 }
 
 onMounted(() => {
-	// @ts-ignore
+
 	ic10.getEnv().on('update', update)
 })
 onBeforeUnmount(() => {
-	// @ts-ignore
+
 	ic10.getEnv().off('update', update)
 })
 </script>

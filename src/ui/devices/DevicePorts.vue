@@ -6,7 +6,7 @@ const props = defineProps(['id'])
 
 const instance = getCurrentInstance();
 onMounted(async () => {
-	//@ts-ignore
+
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})

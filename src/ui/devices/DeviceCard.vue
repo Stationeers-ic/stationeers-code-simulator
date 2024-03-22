@@ -18,14 +18,14 @@ onMounted(async () => {
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
 	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
-	//@ts-ignore
+
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})
 })
 
 onBeforeUnmount(() => {
-	//@ts-ignore
+
 	ic10.getEnv().off('update')
 });
 

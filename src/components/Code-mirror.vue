@@ -17,11 +17,11 @@ onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
 })
 onBeforeUnmount(() => {
-	//@ts-ignore
+
 	interpretator.getEnv().off('update')
 })
 
-watch(()=>interpretator.getEnv().line, (newVal) => {
+watch(() => interpretator.getEnv().line, (newVal) => {
 	//@ts-ignore
 	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
 		if (i == newVal) {

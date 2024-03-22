@@ -41,11 +41,11 @@ const reset = () => {
 const step = async () => {
 	const t =  await ic10.step()
 	if (t === false || t === 'EOF') {
-		//@ts-ignore
+
 		// ic10.getEnv().emit('update')
 	}
 	if (t === 'ERR') {
-		//@ts-ignore
+
 		// ic10.getEnv().emit('update')
 	}
 }

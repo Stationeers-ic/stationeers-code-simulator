@@ -16,7 +16,7 @@ class HCF extends Err {
 	}
 }
 
-class Env extends DevEnv {
+class Env extends DevEnv<{ update: () => void }> {
 	constructor() {
 		super();
 		this.data = reactive({})
@@ -59,7 +59,7 @@ class Env extends DevEnv {
 	}
 
 	async afterLineRun(_line?: Line): Promise<void> {
-		//@ts-ignore
+
 		this.emit('update')
 		return await new Promise<void>((resolve) => {
 			setTimeout(() => {
@@ -75,28 +75,28 @@ class Env extends DevEnv {
 
 	appendDevice(hash: number, name?: number): string {
 		const out = super.appendDevice(hash, name);
-		//@ts-ignore
+
 		this.emit('update')
 		return out;
 	}
 
 	removeDevice(id: string): this {
 		super.removeDevice(id);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
 
 	attachDevice(id: string, port: string): this {
 		super.attachDevice(id, port);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
 
 	detachDevice(id: string): this {
 		super.detachDevice(id);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
@@ -109,7 +109,6 @@ class Env extends DevEnv {
 		err.lineStart = err.lineStart ?? this.getPosition()
 		this.errors.push(err)
 		this.emit(err.level, err)
-		//@ts-ignore
 		this.emit('update')
 		return this
 	}

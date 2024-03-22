@@ -13,6 +13,7 @@ export class Ic10 extends InterpreterIc10 {
 	}
 
 	private constructor() {
+		//@ts-ignore
 		super(reactive(new Env), "");
 	}
 
@@ -25,7 +26,6 @@ export class Ic10 extends InterpreterIc10 {
 		// this.getEnv().reset()
 		this.getEnv().errors = []
 		this.setCode(this.code)
-		// @ts-ignore
 		this.getEnv().emit('update')
 	}
 
@@ -40,6 +40,10 @@ export class Ic10 extends InterpreterIc10 {
 
 }
 
-// @ts-ignore
+declare global {
+	interface Window {
+		ic10: Ic10
+	}
+}
 window.ic10 = Ic10.getInstance()
 export default Ic10.getInstance()
