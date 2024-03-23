@@ -1,6 +1,7 @@
 import {DevEnv, Err, hash} from "ic10";
 import Line from "ic10/dist/core/Line";
 import {reactive} from "vue";
+import {settingStore} from "../store";
 
 class HCF extends Err {
 	constructor(
@@ -65,10 +66,24 @@ class Env extends DevEnv<{ update: () => void }> {
 	async afterLineRun(_line?: Line): Promise<void> {
 
 		this.emit('update')
+
+
 		return await new Promise<void>((resolve) => {
+			let delay = 300;
+			switch (settingStore.delay) {
+				case "fast":
+					delay = 20;
+					break;
+				case "normal":
+					delay = 300;
+					break;
+				case "slow":
+					delay = 1000;
+					break;
+			}
 			setTimeout(() => {
 				resolve()
-			}, 300)
+			}, delay)
 		})
 	}
 

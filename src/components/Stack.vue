@@ -20,14 +20,15 @@ import StackInput from "../ui/StackInput.vue";
 	width: calc(100% - 5px);
 	margin-left: 5px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	max-height: calc(100% - 61px);
+	max-height: calc(32px * 2 + 20px);
 	overflow: auto;
 
 	.stackItem {
 		max-width: 80px;
+		height: 32px
 	}
 }
 </style>

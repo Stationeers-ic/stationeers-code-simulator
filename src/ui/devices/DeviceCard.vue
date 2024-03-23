@@ -32,11 +32,13 @@ onBeforeUnmount(() => {
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
 }
+
 const newKey = ref('')
 const newVal = ref(0)
-function add(){
+
+function add() {
 	const d = ic10.getEnv().devices.get(props.id)
-	if(d){
+	if (d) {
 		d[newKey.value] = newVal.value
 	}
 }
@@ -60,14 +62,14 @@ function add(){
 			<DeviceProps :device="props.device"/>
 			<Divider/>
 			<InputGroup>
-				<InputText v-model="newKey" placeholder="Key"/>
-				<InputNumber  v-model="newVal" placeholder="Value"/>
-				<Button @click="add" placeholder="Value" label="add"/>
+				<InputText style="width:7em" v-model="newKey" placeholder="Key"/>
+				<InputNumber style="width:15em" v-model="newVal" placeholder="Value"/>
+				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button label="remove" @click="remove" severity="danger" outlined class="w-full"/>
+				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full"/>
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>

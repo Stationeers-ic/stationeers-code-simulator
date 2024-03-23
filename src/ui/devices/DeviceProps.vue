@@ -12,6 +12,10 @@ onMounted(async () => {
 	})
 })
 
+function remove(id: string) {
+	delete props.device[id]
+}
+
 </script>
 
 <template>
@@ -24,6 +28,8 @@ onMounted(async () => {
 				v-model="props.device[id]"
 				placeholder="Value"
 			/>
+			<Button :disabled="id === 'PrefabHash'" @click="()=>remove(id)" style="width:2em" size="small"
+					severity="danger" icon="pi pi-minus-circle"/>
 		</InputGroup>
 	</template>
 </template>
