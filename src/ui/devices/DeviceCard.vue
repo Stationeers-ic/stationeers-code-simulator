@@ -62,7 +62,7 @@ function add(){
 			<InputGroup>
 				<InputText v-model="newKey" placeholder="Key"/>
 				<InputNumber  v-model="newVal" placeholder="Value"/>
-				<Button @click="add" placeholder="Value" label="ok"/>
+				<Button @click="add" placeholder="Value" label="add"/>
 			</InputGroup>
 		</template>
 		<template #footer>
@@ -75,6 +75,7 @@ function add(){
 </template>
 
 <style module scoped lang="scss">
+
 .card {
 	$count: 3;
 	width: auto;

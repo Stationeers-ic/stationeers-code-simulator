@@ -26,7 +26,11 @@ function add() {
 	let name: number | undefined = undefined
 
 	if (typeof deviceHash.value === "string") {
-		hash = Hash(deviceHash.value)
+		if (!isNaN(+deviceHash.value)) {
+			hash = +deviceHash.value
+		} else {
+			hash = Hash(deviceHash.value)
+		}
 	} else {
 		hash = deviceHash.value
 	}

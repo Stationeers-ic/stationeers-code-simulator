@@ -13,7 +13,7 @@
     "@uiw/codemirror-theme-monokai": "^4.21.24",
     "codemirror-lang-ic10": "^0.2.0",
     "delay": "^6.0.0",
-    "ic10": "git@github.com:Stationeers-ic/ic10.git#v4",
+    "ic10": "^4.0.1",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primevue": "^3.50.0",
