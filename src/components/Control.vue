@@ -6,6 +6,7 @@ import Button from 'primevue/button'
 import ic10 from "../core/ic10.ts";
 import {str as hash} from "crc-32";
 import {settingStore} from "../store";
+import AddDevice from "../ui/AddDevice.vue";
 
 const checked = ref(false)
 const hashText = ref("")
@@ -65,6 +66,7 @@ const speerOptions = ['slow', 'normal', 'high']
 			/>
 			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
+			<AddDevice/>
 		</InputGroup>
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic"/>
