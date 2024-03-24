@@ -4,6 +4,7 @@ import SelectDevice from "../ui/SelectDevice.vue";
 import {ref} from "vue";
 import ic10 from "../core/ic10.ts";
 import {str as Hash} from "crc-32";
+import {useToast} from "primevue/usetoast";
 
 const props = defineProps(['id'])
 const ports = [
@@ -20,7 +21,8 @@ const visible = ref(false);
 const devicePort = ref<string[]>([]);
 const deviceHash = ref<string | number>('');
 const deviceName = ref<string>('');
-
+const deviceId = ref<number | undefined>(undefined);
+const toast = useToast();
 function add() {
 	visible.value = false
 	let hash = 0
@@ -38,7 +40,7 @@ function add() {
 	if (deviceName.value.length > 0) {
 		name = Hash(deviceName.value)
 	}
-	const id = ic10.getEnv().appendDevice(hash, name)
+	const id = ic10.getEnv().appendDevice(hash, name, deviceId.value)
 	devicePort.value.forEach((p) => {
 		ic10.getEnv().attachDevice(id, p)
 	})
@@ -46,10 +48,14 @@ function add() {
 		ic10.getEnv().deviceNames.set(id, deviceName.value)
 		ic10.getEnv().deviceNames.set(deviceName.value, id);
 	}
+	if (ic10.getEnv().devices.has(id)) {
+		toast.add({ severity: 'success', summary: 'Device added', detail: `Device ${id} added`, life: 3000 });
+	}
 
 	devicePort.value = []
 	deviceHash.value = ''
 	deviceName.value = ''
+	deviceId.value = undefined
 }
 
 </script>
@@ -58,8 +64,11 @@ function add() {
 	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" label="Add device"/>
 
 	<Dialog v-model:visible="visible" modal header="Add Device" style="width: 50vw">
-		<span class="p-text-secondary block mb-5">Update your information.</span>
+		<span class="p-text-secondary block mb-5">
+			Add new device to environment
+		</span>
 		<div class="flex align-items-center gap-3 mb-3">
+
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
 					<SelectDevice id="deviceHash" v-model="deviceHash"/>
@@ -74,6 +83,8 @@ function add() {
 							loading="lazy"
 							src="https://aws.traineratwot.site/icx/wiki_images/main/ItemLabeller.png"
 							style="width: 18px"
+							alt="Labeller"
+							title="Labeller"
 						/>
 					</InputGroupAddon>
 					<FloatLabel>
@@ -104,6 +115,16 @@ function add() {
 
 				<small id="username-help">Select the port to which the device is connected or leave it empty</small>
 
+			</div>
+
+		</div>
+		<div class="flex align-items-center gap-3 mb-3">
+			<div class="flex flex-column gap-2">
+				<FloatLabel>
+					<InputNumber id="deviceHash" v-model="deviceId"/>
+					<label for="deviceHash">Device id</label>
+				</FloatLabel>
+				<small id="username-help">Enter device id or leave it empty.</small>
 			</div>
 		</div>
 		<div class="flex justify-content-end gap-2">

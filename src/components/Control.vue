@@ -106,7 +106,7 @@ const items = ref([
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
 	</div>
-	<SpeedDial :tooltipOptions="{ position: 'right' }" :model="items" direction="up" :class="$style.dial"/>
+	<SpeedDial :tooltipOptions="{ position: 'right',event:'hover' }" :model="items" direction="up" :class="$style.dial"/>
 </template>
 
 <style module lang="scss">

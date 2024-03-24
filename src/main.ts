@@ -115,7 +115,7 @@ import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
 import {createMemoryHistory, createRouter} from "vue-router";
-
+import "./core/Share.ts";
 
 const routes = [
 	{path: '/', component: App},
@@ -132,7 +132,6 @@ app.use(PrimeVue, {ripple: true});
 app.use(ConfirmationService);
 app.use(ToastService);
 app.use(DialogService);
-
 app.directive('tooltip', Tooltip);
 app.directive('badge', BadgeDirective);
 app.directive('ripple', Ripple);

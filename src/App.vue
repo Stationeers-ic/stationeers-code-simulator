@@ -9,6 +9,7 @@ import Devises from "./components/Devises.vue";
 </script>
 
 <template>
+	<Toast />
 	<div class="app-container">
 		<div class="code">
 			<Splitter style="height: 100%">

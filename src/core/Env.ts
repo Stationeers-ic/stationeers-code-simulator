@@ -92,8 +92,8 @@ class Env extends DevEnv<{ update: () => void }> {
 		return super.hcf();
 	}
 
-	appendDevice(hash: number, name?: number): string {
-		const out = super.appendDevice(hash, name);
+	appendDevice(hash: number, name?: number, id?: number): string {
+		const out = super.appendDevice(hash, name, id);
 
 		this.emit('update')
 		return out;
