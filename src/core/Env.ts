@@ -121,7 +121,7 @@ class Env extends DevEnv<{ update: () => void }> {
 	}
 
 	getErrorCount(): number {
-		return this.errors.length
+		return this.errors.filter((e)=>e.level == 'error').length
 	}
 
 	throw(err: Err): this {
