@@ -35,7 +35,7 @@ class Env extends DevEnv<{ update: () => void }> {
 
 	reset() {
 		this.aliases = new Map<string, string | number>()
-		this.setDefaultAliases()
+		this.setDefault()
 		this.errors = []
 		this.lines = []
 		for (const dataKey in this.data) {

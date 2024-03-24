@@ -51,6 +51,33 @@ const step = async () => {
 	}
 }
 const speerOptions = ['slow', 'normal', 'high']
+
+const items = ref([
+	{
+		label: 'Run/Stop',
+		icon: checked.value ? 'pi pi-stop' : 'pi pi-play',
+		command: () => {
+			checked.value = !checked.value
+		}
+	},
+	{
+		label: 'Step',
+		icon: 'pi pi-step-forward',
+		command: step
+	},
+	{
+		label: 'Reset',
+		icon: 'pi pi-refresh',
+		command: reset
+	},
+	{
+		label: 'Add device',
+		icon: 'pi pi-plus',
+		command: () => {
+			window.document.getElementById('AddDevice')?.click()
+		}
+	}
+])
 </script>
 
 <template>
@@ -66,7 +93,7 @@ const speerOptions = ['slow', 'normal', 'high']
 			/>
 			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
-			<AddDevice/>
+			<AddDevice id="AddDevice"/>
 		</InputGroup>
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic"/>
@@ -77,7 +104,7 @@ const speerOptions = ['slow', 'normal', 'high']
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
 	</div>
-
+	<SpeedDial :tooltipOptions="{ position: 'right' }" :model="items" direction="up" :class="$style.dial"/>
 </template>
 
 <style module lang="scss">
@@ -95,5 +122,15 @@ const speerOptions = ['slow', 'normal', 'high']
 	flex-wrap: nowrap;
 	flex-direction: row;
 	justify-content: center;
+}
+
+.dial {
+	position: fixed;
+	bottom: 15px;
+	left: 15px;
+
+	a {
+		text-decoration: none;
+	}
 }
 </style>

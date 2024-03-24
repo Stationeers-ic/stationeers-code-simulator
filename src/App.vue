@@ -13,10 +13,14 @@ import Devises from "./components/Devises.vue";
 		<div class="code">
 			<Splitter style="height: 100%">
 				<SplitterPanel :size="70" :min-size="10">
-					<div :class="$style.code">
-						<CodeMirror></CodeMirror>
-						<Errors></Errors>
-					</div>
+					<Splitter layout="vertical">
+						<SplitterPanel :size="90" :min-size="10">
+							<CodeMirror></CodeMirror>
+						</SplitterPanel>
+						<SplitterPanel :size="10" :min-size="10">
+							<Errors></Errors>
+						</SplitterPanel>
+					</Splitter>
 				</SplitterPanel>
 				<SplitterPanel :size="30" :min-size="10">
 					<Register></Register>
@@ -34,8 +38,7 @@ import Devises from "./components/Devises.vue";
 
 <style module lang="scss">
 .code {
-	max-height: 100vh;
-	height:100%;
+	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 1fr 128px;

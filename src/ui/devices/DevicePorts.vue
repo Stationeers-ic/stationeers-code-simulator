@@ -27,7 +27,7 @@ ports.value = [];
 <template>
 	<div :class="$style.ports">
 		<template v-for="port in ports">
-			<Badge severity="secondary" :value="port"/>
+			<Chip severity="secondary" :label="port"/>
 		</template>
 	</div>
 </template>

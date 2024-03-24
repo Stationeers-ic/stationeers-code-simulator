@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 
 .errors {
-	max-height: 30vh;
+	height: 100%;
 	grid-area: errors;
 }
 </style>

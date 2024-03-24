@@ -4,7 +4,7 @@ import data, {Devices} from "../core/Data.ts";
 
 const loading = ref(true);
 
-const devices = ref<{ name: string, code: number }[]>([]);
+const devices = ref<{ name: string, image: string | null, code: number }[]>([]);
 const model = defineModel()
 
 onMounted(async () => {
@@ -12,6 +12,7 @@ onMounted(async () => {
 		res.forEach((d) => {
 			devices.value.push({
 				name: d.PrefabName,
+				image: d.image,
 				code: d.PrefabHash
 			})
 		})
@@ -22,9 +23,22 @@ onMounted(async () => {
 </script>
 
 <template>
-	<Dropdown style="width: 100%;" editable filter v-model="model" :options="devices" :loading="loading" optionLabel="name" optionValue="code"
+	<Dropdown style="width: 100%;" editable filter v-model="model" :options="devices" :loading="loading"
+			  optionLabel="name" optionValue="code"
 			  placeholder="Select a device"
-			  class="w-full md:w-14rem"/>
+			  class="w-full md:w-14rem">
+		<template #option="slotProps">
+			<div class="flex align-items-center gap-1">
+				<img
+					loading="lazy"
+					:alt="slotProps.option.name"
+					:src="slotProps.option.image ? slotProps.option.image : 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'"
+					style="width: 18px"
+				/>
+				<div :title="slotProps.option.code">{{ slotProps.option.name }}</div>
+			</div>
+		</template>
+	</Dropdown>
 </template>
 
 <style scoped lang="scss">
