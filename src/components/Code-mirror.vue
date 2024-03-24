@@ -6,6 +6,7 @@ import {monokai} from '@uiw/codemirror-theme-monokai';
 import {ic10, ic10HoverTooltip, ic10Snippets} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
 import {onBeforeUnmount, onMounted, ref, watch} from "vue";
+import {EditorView} from "codemirror";
 
 const editor = ref<{
 	view: import("@codemirror/view").EditorView;
@@ -37,7 +38,7 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 	})
 })
 
-const extensions = [monokai, ic10(), ic10Snippets(), ic10HoverTooltip()]
+const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic10HoverTooltip()]
 
 function handleReady(_editor: {
 	view: import("@codemirror/view").EditorView;

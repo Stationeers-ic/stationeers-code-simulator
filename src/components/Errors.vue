@@ -6,7 +6,7 @@ import ic10 from "../core/ic10.ts";
 import {useToast} from "primevue/usetoast";
 import {Err} from "ic10";
 
-const extensions = [monokai]
+import {EditorView} from "codemirror"
 
 const test = ref<string>("")
 const toast = useToast();
@@ -24,6 +24,8 @@ onBeforeUnmount(() => {
 	ic10.getEnv().off('update')
 	ic10.getEnv().off('error')
 })
+
+const extensions = [monokai, EditorView.lineWrapping]
 </script>
 
 <template>
