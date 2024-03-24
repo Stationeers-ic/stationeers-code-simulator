@@ -2,12 +2,12 @@
 import ic10 from "../core/ic10.ts";
 import {onBeforeUnmount, onMounted, ref} from "vue";
 
-const props = defineProps(['name'])
+const props = defineProps(['name', 'readonly'])
 const model = defineModel<number>()
 const aliases = ic10.getEnv().reverseAlias(props.name)
 const alias = ref(aliases.join(','))
 
-function update(){
+function update() {
 	const aliases = ic10.getEnv().reverseAlias(props.name)
 	alias.value = aliases.join(',')
 }
@@ -25,7 +25,8 @@ onBeforeUnmount(() => {
 <template>
 	<InputGroup>
 		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
-		<InputNumber :class="{ [$style.defaultValue]:model == 0 }" v-model="model" width="100%" placeholder="Value"/>
+		<InputNumber v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly  />
+		<InputNumber v-else :class="{ [$style.defaultValue]:model == 0 }" v-model="model" width="100%" placeholder="Value"/>
 		<InputGroupAddon v-if="alias">{{ alias }}</InputGroupAddon>
 	</InputGroup>
 </template>

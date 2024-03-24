@@ -18,7 +18,6 @@ import StackInput from "../ui/StackInput.vue";
 .stackContent {
 	justify-content: flex-start;
 	width: calc(100% - 5px);
-	margin-left: 5px;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;

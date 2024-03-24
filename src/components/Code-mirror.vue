@@ -3,7 +3,7 @@ import {codeStore} from '../store'
 import {Codemirror} from 'vue-codemirror'
 // import {lineNumbers} from '@codemirror/gutter'
 import {monokai} from '@uiw/codemirror-theme-monokai';
-import {ic10, snippets} from 'codemirror-lang-ic10';
+import {ic10, ic10HoverTooltip, ic10Snippets} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
 import {onBeforeUnmount, onMounted, ref, watch} from "vue";
 
@@ -11,7 +11,7 @@ const editor = ref<{
 	view: import("@codemirror/view").EditorView;
 	state: import("@codemirror/state").EditorState;
 	container: HTMLDivElement;
-}|null>(null)
+} | null>(null)
 
 watch(() => codeStore.code, (newVal) => {
 	localStorage.setItem('code', newVal)
@@ -30,20 +30,20 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
 		if (i == newVal) {
 			e.style.backgroundColor = 'rgb(0 0 0 / 40%)';
-			e.scrollIntoView({block: "end", inline: "nearest"  });
+			e.scrollIntoView({block: "end", inline: "nearest"});
 		} else {
 			e.style.backgroundColor = 'transparent'
 		}
 	})
 })
 
-const extensions = [monokai, ic10(), snippets]
+const extensions = [monokai, ic10(), ic10Snippets(), ic10HoverTooltip()]
 
-function handleReady(_editor:{
+function handleReady(_editor: {
 	view: import("@codemirror/view").EditorView;
 	state: import("@codemirror/state").EditorState;
 	container: HTMLDivElement;
-} ) {
+}) {
 	editor.value = _editor
 }
 
@@ -67,7 +67,7 @@ function handleReady(_editor:{
 
 <style scoped lang="scss">
 .code-mirror {
-	max-height: 70vh;
+	height: 100%;
 	overflow: auto;
 	grid-area: code-mirror;
 }

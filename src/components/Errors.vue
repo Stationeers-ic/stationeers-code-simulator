@@ -3,23 +3,30 @@ import {Codemirror} from "vue-codemirror";
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {onBeforeUnmount, onMounted, ref} from "vue";
 import ic10 from "../core/ic10.ts";
+import {useToast} from "primevue/usetoast";
+import {Err} from "ic10";
 
 const extensions = [monokai]
 
 const test = ref<string>("")
-
+const toast = useToast();
 async function error() {
 	test.value = ic10.getEnv().getErrors().map(e => e.format(1)).join("\n")
 }
 onMounted(() => {
-
 	ic10.getEnv().on('update', error)
 	ic10.getEnv().on('error', error)
+	ic10.getEnv().on('error', (err:Err)=>{
+		toast.add({severity: 'error', summary: 'Error', detail: err.format(), life: 3000})
+	})
+	ic10.getEnv().on('warn', (err:Err)=>{
+		toast.add({severity: 'warn', summary: 'Warn', detail: err.format(), life: 3000})
+	})
 })
 onBeforeUnmount(() => {
-
-	ic10.getEnv().off('update', error)
-	ic10.getEnv().off('error', error)
+	ic10.getEnv().off('update')
+	ic10.getEnv().off('error')
+	ic10.getEnv().off('warn')
 })
 </script>
 
@@ -41,7 +48,7 @@ onBeforeUnmount(() => {
 <style scoped lang="scss">
 
 .errors {
-	max-height: 30vh;
+	height: 100%;
 	grid-area: errors;
 }
 </style>
