@@ -1,6 +1,7 @@
-import {DevEnv, Err} from "ic10";
+import {DevEnv, Err, hash} from "ic10";
 import Line from "ic10/dist/core/Line";
 import {reactive} from "vue";
+import {settingStore} from "../store";
 
 class HCF extends Err {
 	constructor(
@@ -16,12 +17,16 @@ class HCF extends Err {
 	}
 }
 
-class Env extends DevEnv {
+class Env extends DevEnv<{ update: () => void }> {
 	constructor() {
 		super();
 		this.data = reactive({})
 		this.stack = reactive([])
 		this.devices = reactive(new Map())
+		const id = this.appendDevice(-128473777, hash('Circuit Housing'))
+		this.attachDevice(id, 'db')
+		this.deviceNames.set(id, 'Circuit Housing')
+		this.deviceNames.set('Circuit Housing', id)
 		this.reset()
 	}
 
@@ -59,12 +64,26 @@ class Env extends DevEnv {
 	}
 
 	async afterLineRun(_line?: Line): Promise<void> {
-		//@ts-ignore
+
 		this.emit('update')
+
+
 		return await new Promise<void>((resolve) => {
+			let delay = 300;
+			switch (settingStore.delay) {
+				case "fast":
+					delay = 20;
+					break;
+				case "normal":
+					delay = 300;
+					break;
+				case "slow":
+					delay = 1000;
+					break;
+			}
 			setTimeout(() => {
 				resolve()
-			}, 300)
+			}, delay)
 		})
 	}
 
@@ -75,28 +94,28 @@ class Env extends DevEnv {
 
 	appendDevice(hash: number, name?: number): string {
 		const out = super.appendDevice(hash, name);
-		//@ts-ignore
+
 		this.emit('update')
 		return out;
 	}
 
 	removeDevice(id: string): this {
 		super.removeDevice(id);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
 
 	attachDevice(id: string, port: string): this {
 		super.attachDevice(id, port);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
 
 	detachDevice(id: string): this {
 		super.detachDevice(id);
-		//@ts-ignore
+
 		this.emit('update')
 		return this;
 	}
@@ -109,7 +128,6 @@ class Env extends DevEnv {
 		err.lineStart = err.lineStart ?? this.getPosition()
 		this.errors.push(err)
 		this.emit(err.level, err)
-		//@ts-ignore
 		this.emit('update')
 		return this
 	}

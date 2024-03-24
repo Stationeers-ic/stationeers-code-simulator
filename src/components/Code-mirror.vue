@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {codeStore} from '../store/code.js'
+import {codeStore} from '../store'
 import {Codemirror} from 'vue-codemirror'
 // import {lineNumbers} from '@codemirror/gutter'
 import {monokai} from '@uiw/codemirror-theme-monokai';
@@ -17,15 +17,16 @@ onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
 })
 onBeforeUnmount(() => {
-	//@ts-ignore
+
 	interpretator.getEnv().off('update')
 })
 
-watch(()=>interpretator.getEnv().line, (newVal) => {
+watch(() => interpretator.getEnv().line, (newVal) => {
 	//@ts-ignore
 	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
 		if (i == newVal) {
-			e.style.backgroundColor = 'rgb(0 0 0 / 40%)'
+			e.style.backgroundColor = 'rgb(0 0 0 / 40%)';
+			e.scrollIntoView({block: "end", inline: "nearest"  });
 		} else {
 			e.style.backgroundColor = 'transparent'
 		}
@@ -37,6 +38,7 @@ watch(()=>interpretator.getEnv().line, (newVal) => {
 <template>
 	<div class="code-mirror">
 		<Codemirror
+			ref=""
 			v-model="codeStore.code"
 			placeholder="Code goes here..."
 			:style="{ height: '100%' }"
@@ -49,5 +51,9 @@ watch(()=>interpretator.getEnv().line, (newVal) => {
 </template>
 
 <style scoped lang="scss">
-
+.code-mirror {
+	max-height: 70vh;
+	overflow: auto;
+	grid-area: code-mirror;
+}
 </style>

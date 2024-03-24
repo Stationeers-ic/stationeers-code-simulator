@@ -1,23 +1,33 @@
 <script setup lang="ts">
-import {getCurrentInstance, onMounted} from "vue";
+import {getCurrentInstance, onMounted, ref} from "vue";
 import ic10 from "../../core/ic10.ts";
 
 const props = defineProps(['id'])
+const ports = ref<string[]>([])
 
 const instance = getCurrentInstance();
 onMounted(async () => {
-	//@ts-ignore
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})
+
+})
+ports.value = [];
+['db', 'd0', 'd1', 'd2', 'd3', 'd4', 'd5'].forEach((port) => {
+	if (ic10.getEnv().devicesAttached.get(port) === props.id) {
+		ports.value.push(port)
+		ic10.getEnv().reverseAlias(port).forEach((p) => {
+			ports.value.push(p)
+		})
+	}
 })
 
 </script>
 
 <template>
 	<div :class="$style.ports">
-		<template v-for="port in ['db', 'd0','d1', 'd2', 'd3', 'd4', 'd5' ]">
-			<Badge severity="secondary" v-if="ic10.getEnv().devicesAttached.get(port) === props.id" :value="port"/>
+		<template v-for="port in ports">
+			<Badge severity="secondary" :value="port"/>
 		</template>
 	</div>
 </template>

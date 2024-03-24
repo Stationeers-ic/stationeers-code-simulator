@@ -18,25 +18,27 @@ onMounted(async () => {
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
 	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
-	//@ts-ignore
+
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})
 })
 
 onBeforeUnmount(() => {
-	//@ts-ignore
+
 	ic10.getEnv().off('update')
 });
 
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
 }
+
 const newKey = ref('')
 const newVal = ref(0)
-function add(){
+
+function add() {
 	const d = ic10.getEnv().devices.get(props.id)
-	if(d){
+	if (d) {
 		d[newKey.value] = newVal.value
 	}
 }
@@ -60,14 +62,14 @@ function add(){
 			<DeviceProps :device="props.device"/>
 			<Divider/>
 			<InputGroup>
-				<InputText v-model="newKey" placeholder="Key"/>
-				<InputNumber  v-model="newVal" placeholder="Value"/>
-				<Button @click="add" placeholder="Value" label="ok"/>
+				<InputText style="width:7em" v-model="newKey" placeholder="Key"/>
+				<InputNumber style="width:15em" v-model="newVal" placeholder="Value"/>
+				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button label="remove" @click="remove" severity="danger" outlined class="w-full"/>
+				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full"/>
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>
@@ -75,6 +77,7 @@ function add(){
 </template>
 
 <style module scoped lang="scss">
+
 .card {
 	$count: 3;
 	width: auto;

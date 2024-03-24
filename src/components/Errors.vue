@@ -12,12 +12,12 @@ async function error() {
 	test.value = ic10.getEnv().getErrors().map(e => e.format(1)).join("\n")
 }
 onMounted(() => {
-	// @ts-ignore
+
 	ic10.getEnv().on('update', error)
 	ic10.getEnv().on('error', error)
 })
 onBeforeUnmount(() => {
-	// @ts-ignore
+
 	ic10.getEnv().off('update', error)
 	ic10.getEnv().off('error', error)
 })
@@ -40,4 +40,8 @@ onBeforeUnmount(() => {
 
 <style scoped lang="scss">
 
+.errors {
+	max-height: 30vh;
+	grid-area: errors;
+}
 </style>
