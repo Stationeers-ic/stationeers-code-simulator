@@ -54,16 +54,11 @@ const speerOptions = ['slow', 'normal', 'high']
 
 const items = ref([
 	{
-		label: 'Run/Stop',
-		icon: checked.value ? 'pi pi-stop' : 'pi pi-play',
+		label: 'Add device',
+		icon: 'pi pi-plus',
 		command: () => {
-			checked.value = !checked.value
+			window.document.getElementById('AddDevice')?.click()
 		}
-	},
-	{
-		label: 'Step',
-		icon: 'pi pi-step-forward',
-		command: step
 	},
 	{
 		label: 'Reset',
@@ -71,10 +66,17 @@ const items = ref([
 		command: reset
 	},
 	{
-		label: 'Add device',
-		icon: 'pi pi-plus',
-		command: () => {
-			window.document.getElementById('AddDevice')?.click()
+		label: 'Step',
+		icon: 'pi pi-step-forward',
+		command: step
+	},
+	{
+		label: 'Run',
+		icon: checked.value ? 'pi pi-stop' : 'pi pi-play',
+		command: function () {
+			checked.value = !checked.value
+			this.icon = checked.value ? 'pi pi-stop' : 'pi pi-play'
+			this.label = checked.value ? 'Stop' : 'Run'
 		}
 	}
 ])
