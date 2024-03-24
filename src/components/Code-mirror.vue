@@ -31,7 +31,7 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
 		if (i == newVal) {
 			e.style.backgroundColor = 'rgb(0 0 0 / 40%)';
-			e.scrollIntoView({block: "end", inline: "nearest"});
+			// e.scrollIntoView({block: "end", inline: "nearest"});
 		} else {
 			e.style.backgroundColor = 'transparent'
 		}
