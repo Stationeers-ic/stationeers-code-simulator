@@ -19,14 +19,10 @@ onMounted(() => {
 	ic10.getEnv().on('error', (err:Err)=>{
 		toast.add({severity: 'error', summary: 'Error', detail: err.format(), life: 3000})
 	})
-	ic10.getEnv().on('warn', (err:Err)=>{
-		toast.add({severity: 'warn', summary: 'Warn', detail: err.format(), life: 3000})
-	})
 })
 onBeforeUnmount(() => {
 	ic10.getEnv().off('update')
 	ic10.getEnv().off('error')
-	ic10.getEnv().off('warn')
 })
 </script>
 
