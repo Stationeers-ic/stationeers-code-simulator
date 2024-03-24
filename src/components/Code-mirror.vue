@@ -5,9 +5,13 @@ import {Codemirror} from 'vue-codemirror'
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {ic10, snippets} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
-import {onBeforeUnmount, onMounted, watch} from "vue";
+import {onBeforeUnmount, onMounted, ref, watch} from "vue";
 
-const extensions = [monokai, ic10(), snippets]
+const editor = ref<{
+	view: import("@codemirror/view").EditorView;
+	state: import("@codemirror/state").EditorState;
+	container: HTMLDivElement;
+}|null>(null)
 
 watch(() => codeStore.code, (newVal) => {
 	localStorage.setItem('code', newVal)
@@ -15,9 +19,9 @@ watch(() => codeStore.code, (newVal) => {
 })
 onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
+
 })
 onBeforeUnmount(() => {
-
 	interpretator.getEnv().off('update')
 })
 
@@ -33,6 +37,16 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 	})
 })
 
+const extensions = [monokai, ic10(), snippets]
+
+function handleReady(_editor:{
+	view: import("@codemirror/view").EditorView;
+	state: import("@codemirror/state").EditorState;
+	container: HTMLDivElement;
+} ) {
+	editor.value = _editor
+}
+
 </script>
 
 <template>
@@ -46,6 +60,7 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 			:indent-with-tab="true"
 			:tab-size="2"
 			:extensions="extensions"
+			@ready="handleReady"
 		/>
 	</div>
 </template>
