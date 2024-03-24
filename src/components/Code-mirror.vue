@@ -27,8 +27,7 @@ onBeforeUnmount(() => {
 })
 
 watch(() => interpretator.getEnv().line, (newVal) => {
-	//@ts-ignore
-	window.document.querySelector('div[data-language="ic10"]').querySelectorAll('div').forEach((e, i) => {
+	window.document.querySelector<HTMLDivElement>('div[data-language="ic10"]')?.querySelectorAll<HTMLDivElement>('div.cm-line').forEach((e, i) => {
 		if (i == newVal) {
 			e.style.backgroundColor = 'rgb(0 0 0 / 40%)';
 			// e.scrollIntoView({block: "end", inline: "nearest"});
