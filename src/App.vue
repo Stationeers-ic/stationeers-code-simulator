@@ -25,7 +25,6 @@ onMounted(() => {
 				document.location.hash = lastDump.value
 			}catch (e:any) {
 				toast.add({severity: 'error', summary: 'Error', detail: e?.message, life: 3000})
-
 			}
 		}
 	})
@@ -40,7 +39,6 @@ watch(() => document.location.hash, () => {
 if (document.location.hash.slice(1).length > 0) {
 	load(document.location.hash.slice(1)).catch((e) => {
 		toast.add({severity: 'error', summary: 'Error', detail: e.message, life: 3000})
-		console
 	})
 }
 </script>

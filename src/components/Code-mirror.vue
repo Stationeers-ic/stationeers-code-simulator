@@ -15,7 +15,6 @@ const editor = ref<{
 } | null>(null)
 
 watch(() => codeStore.code, (newVal) => {
-	localStorage.setItem('code', newVal)
 	interpretator.setCode(newVal)
 })
 onMounted(() => {

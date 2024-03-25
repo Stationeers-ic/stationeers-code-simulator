@@ -37,6 +37,7 @@ export async function load(dump: any): Promise<true> {
 			console.debug(json)
 			const restored = dumpShema.parse(json);
 			ic10.setCode(restored.code)
+
 			ic10.getEnv().devices.clear()
 			for (const [key, value] of Object.entries(restored.devices)) {
 				ic10.getEnv().appendDevice(value.PrefabHash, value.Name, +key)
