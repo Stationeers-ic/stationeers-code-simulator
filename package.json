@@ -12,7 +12,7 @@
     "@uiw/codemirror-theme-monokai": "^4.21.24",
     "codemirror-lang-ic10": "^0.3.0",
     "delay": "^6.0.0",
-    "ic10": "^4.0.1",
+    "ic10": "^4.0.10",
     "is-hotkey": "^0.2.0",
     "pako": "^2.1.0",
     "primeflex": "^3.3.1",
