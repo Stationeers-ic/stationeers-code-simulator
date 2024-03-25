@@ -63,7 +63,7 @@ function add() {
 			<Divider/>
 			<InputGroup>
 				<InputText style="width:7em" v-model="newKey" placeholder="Key"/>
-				<InputNumber style="width:15em" v-model="newVal" placeholder="Value"/>
+				<InputNumber :useGrouping="false" style="width:15em" v-model="newVal" placeholder="Value"/>
 				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 		</template>

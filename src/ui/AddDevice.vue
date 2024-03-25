@@ -121,7 +121,7 @@ function add() {
 		<div class="flex align-items-center gap-3 mb-3">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
-					<InputNumber id="deviceHash" v-model="deviceId"/>
+					<InputNumber :useGrouping="false" id="deviceHash" v-model="deviceId"/>
 					<label for="deviceHash">Device id</label>
 				</FloatLabel>
 				<small id="username-help">Enter device id or leave it empty.</small>

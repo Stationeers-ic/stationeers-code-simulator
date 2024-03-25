@@ -24,6 +24,7 @@ function remove(id: string) {
 			<InputGroupAddon style="width:10em">{{ id }}</InputGroupAddon>
 			<InputNumber
 				:disabled="id === 'PrefabHash'"
+				:useGrouping="false"
 				style="width:15em"
 				v-model="props.device[id]"
 				placeholder="Value"
