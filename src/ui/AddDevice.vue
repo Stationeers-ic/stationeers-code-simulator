@@ -110,10 +110,10 @@ function add() {
 							</div>
 						</template>
 					</MultiSelect>
-					<label for="deviceName">Device Port</label>
+					<label for="deviceName">IC Pin</label>
 				</FloatLabel>
 
-				<small id="username-help">Select the port to which the device is connected or leave it empty</small>
+				<small id="username-help">Select the pin to which the device is assigned on the IC or leave empty</small>
 
 			</div>
 
