@@ -102,7 +102,6 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 
 	removeDevice(id: string): this {
 		super.removeDevice(id);
-
 		this.emit('update')
 		return this;
 	}
@@ -115,8 +114,12 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	}
 
 	detachDevice(id: string): this {
-		super.detachDevice(id);
-
+		this.devicesAttached.delete(id)
+		this.devicesAttached.forEach((value, key) => {
+			if (value == id) {
+				this.devicesAttached.delete(key)
+			}
+		})
 		this.emit('update')
 		return this;
 	}

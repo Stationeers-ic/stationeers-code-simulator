@@ -7,7 +7,6 @@ const devices = ref<Map<string, any>>(ic10.getEnv().getDevices())
 
 const instance = getCurrentInstance();
 onMounted(async () => {
-
 	ic10.getEnv().on('update', () => {
 		devices.value = ic10.getEnv().getDevices()
 		instance?.proxy?.$forceUpdate();
@@ -15,7 +14,6 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-
 	ic10.getEnv().off('update')
 })
 
