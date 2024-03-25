@@ -22,8 +22,9 @@ import StackInput from "../ui/StackInput.vue";
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	max-height: calc(32px * 2 + 20px);
-	overflow: auto;
+	max-height: calc(32px * 2 + 30px);
+	overflow-x: auto;
+	overflow-y: hidden;
 
 	.stackItem {
 		max-width: 80px;

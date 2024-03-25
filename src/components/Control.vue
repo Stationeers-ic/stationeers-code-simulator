@@ -118,9 +118,7 @@ const items = ref([
 						<InputGroup>
 							<InputText :value="data" readonly
 									   class="w-25rem"></InputText>
-							<InputGroupAddon @click="copy">
-								<i class="pi pi-copy"></i>
-							</InputGroupAddon>
+							<Button icon="pi pi-copy" @click="copy"/>
 						</InputGroup>
 					</div>
 				</div>
