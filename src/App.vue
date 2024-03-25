@@ -23,8 +23,9 @@ onMounted(() => {
 			try {
 				lastDump.value = dump()
 				document.location.hash = lastDump.value
-			} catch (e: any) {
+			}catch (e:any) {
 				toast.add({severity: 'error', summary: 'Error', detail: e?.message, life: 3000})
+
 			}
 		}
 	})
@@ -45,30 +46,30 @@ if (document.location.hash.slice(1).length > 0) {
 
 <template>
 	<Toast/>
-	<div class="app-container limit">
+	<div class="app-container">
+		<div class="code">
+			<Splitter style="height: 100%">
+				<SplitterPanel :size="70" :min-size="10">
+					<Splitter layout="vertical">
+						<SplitterPanel :size="90" :min-size="10">
+							<CodeMirror></CodeMirror>
+						</SplitterPanel>
+						<SplitterPanel :size="10" :min-size="10">
+							<Errors></Errors>
+						</SplitterPanel>
+					</Splitter>
+				</SplitterPanel>
+				<SplitterPanel :size="30" :min-size="10">
+					<Register></Register>
+				</SplitterPanel>
+			</Splitter>
+		</div>
 		<Control></Control>
-			<Stack></Stack>
-			<div class="code">
-				<Splitter style="height: 100%">
-					<SplitterPanel :size="70" :min-size="10">
-						<Splitter layout="vertical">
-							<SplitterPanel :size="90" :min-size="10">
-								<CodeMirror></CodeMirror>
-							</SplitterPanel>
-							<SplitterPanel :size="10" :min-size="10">
-								<Errors></Errors>
-							</SplitterPanel>
-						</Splitter>
-					</SplitterPanel>
-					<SplitterPanel :size="30" :min-size="10">
-						<Register></Register>
-					</SplitterPanel>
-				</Splitter>
-			</div>
-			<div class="bottom">
-				<Raw></Raw>
-				<Devises></Devises>
-			</div>
+		<Stack></Stack>
+		<div class="bottom">
+			<Raw></Raw>
+			<Devises></Devises>
+		</div>
 	</div>
 </template>
 

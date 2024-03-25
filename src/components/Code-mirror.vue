@@ -5,21 +5,16 @@ import {Codemirror} from 'vue-codemirror'
 import {monokai} from '@uiw/codemirror-theme-monokai';
 import {ic10, ic10HoverTooltip, ic10Snippets} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
-import {onBeforeUnmount, onMounted, ref, watch} from "vue";
+import {onBeforeUnmount, onMounted, watch} from "vue";
 import {EditorView} from "codemirror";
 
-const editor = ref<{
-	view: import("@codemirror/view").EditorView;
-	state: import("@codemirror/state").EditorState;
-	container: HTMLDivElement;
-} | null>(null)
 
 watch(() => codeStore.code, (newVal) => {
 	interpretator.setCode(newVal)
 })
 onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
-	interpretator.getEnv().on('update_code',()=>{
+	interpretator.getEnv().on('update_code', () => {
 		codeStore.code = interpretator.code
 	})
 })
@@ -37,16 +32,7 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 		}
 	})
 })
-
 const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic10HoverTooltip()]
-
-function handleReady(_editor: {
-	view: import("@codemirror/view").EditorView;
-	state: import("@codemirror/state").EditorState;
-	container: HTMLDivElement;
-}) {
-	editor.value = _editor
-}
 
 </script>
 
@@ -60,8 +46,8 @@ function handleReady(_editor: {
 			:autofocus="true"
 			:indent-with-tab="true"
 			:tab-size="2"
+			:lineNumberFormatter="(line:number) => line - 1"
 			:extensions="extensions"
-			@ready="handleReady"
 		/>
 	</div>
 </template>
