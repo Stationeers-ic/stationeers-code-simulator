@@ -121,13 +121,6 @@ import "./core/Share.ts";
 const routes = [
 	{
 		path: '/preview', component: App,
-		children: [
-			{
-				path: ':data',
-				name: 'withData',
-				component: App,
-			},
-		],
 	},
 ]
 

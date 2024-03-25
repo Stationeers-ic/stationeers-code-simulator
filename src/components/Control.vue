@@ -9,7 +9,6 @@ import {settingStore} from "../store";
 import AddDevice from "../ui/AddDevice.vue";
 import {dump} from "../core/Share.ts";
 import clipboard from "web-clipboard";
-import {useRouter} from "vue-router";
 
 const checked = ref(false)
 const hashText = ref("")
@@ -53,11 +52,10 @@ const step = async () => {
 		// ic10.getEnv().emit('update')
 	}
 }
-const router = useRouter()
 const op = ref();
 const data = ref('');
 const share = (event: any) => {
-	router.push({ name: 'withData', params: { data: dump()} })
+	document.location.hash = dump()
 	data.value = document.location.href
 	op.value.toggle(event);
 }
