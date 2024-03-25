@@ -7,6 +7,9 @@ import ic10 from "../core/ic10.ts";
 import {str as hash} from "crc-32";
 import {settingStore} from "../store";
 import AddDevice from "../ui/AddDevice.vue";
+import {dump} from "../core/Share.ts";
+import clipboard from "web-clipboard";
+import {useRouter} from "vue-router";
 
 const checked = ref(false)
 const hashText = ref("")
@@ -50,6 +53,19 @@ const step = async () => {
 		// ic10.getEnv().emit('update')
 	}
 }
+const router = useRouter()
+const op = ref();
+const data = ref('');
+const share = (event: any) => {
+	router.push({ name: 'withData', params: { data: dump()} })
+	data.value = document.location.href
+	op.value.toggle(event);
+}
+const copy = () => {
+	console.log('copy')
+	clipboard.write(data.value)
+}
+
 const speerOptions = ['slow', 'normal', 'high']
 
 const items = ref([
@@ -96,7 +112,23 @@ const items = ref([
 			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
 			<AddDevice id="AddDevice"/>
+			<Button icon="pi pi-share-alt" @click="share" severity="secondary"/>
+			<OverlayPanel ref="op">
+				<div class="flex flex-column gap-3 w-25rem">
+					<div>
+						<span class="font-medium text-900 block mb-2">Share</span>
+						<InputGroup>
+							<InputText :value="data" readonly
+									   class="w-25rem"></InputText>
+							<InputGroupAddon @click="copy">
+								<i class="pi pi-copy"></i>
+							</InputGroupAddon>
+						</InputGroup>
+					</div>
+				</div>
+			</OverlayPanel>
 		</InputGroup>
+
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic"/>
 		</div>

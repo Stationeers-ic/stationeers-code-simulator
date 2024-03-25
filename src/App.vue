@@ -6,10 +6,35 @@ import Register from "./components/Register.vue";
 import Stack from "./components/Stack.vue";
 import Raw from "./components/Raw.vue";
 import Devises from "./components/Devises.vue";
+import {onMounted, ref, watch} from "vue";
+import isHotkey from "is-hotkey";
+import {useRoute, useRouter} from 'vue-router'
+import {dump, load} from "./core/Share.ts";
+
+const router = useRouter()
+const route = useRoute()
+const isSaveHotkey = isHotkey('mod+s')
+const lastDump = ref('')
+
+onMounted(() => {
+	window.document.addEventListener('keydown', (e) => {
+		if (isSaveHotkey(e)) {
+			e.preventDefault()
+			console.log("save")
+			lastDump.value = dump()
+			router.push({ name: 'withData', params: { data: lastDump.value } })
+		}
+	})
+})
+watch(() => route.params, (newVal) => {
+	if (lastDump.value !== newVal.data) {
+		load(newVal.data)
+	}
+})
 </script>
 
 <template>
-	<Toast />
+	<Toast/>
 	<div class="app-container">
 		<div class="code">
 			<Splitter style="height: 100%">

@@ -19,7 +19,9 @@ export class Ic10 extends InterpreterIc10 {
 
 	setCode(code: string): this {
 		this.getEnv().lines = []
-		return super.setCode(code);
+		super.setCode(code);
+		this.getEnv().emit('update_code')
+		return this;
 	}
 
 	public reset() {

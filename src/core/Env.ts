@@ -17,7 +17,7 @@ class HCF extends Err {
 	}
 }
 
-class Env extends DevEnv<{ update: () => void }> {
+class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	constructor() {
 		super();
 		this.data = reactive({})
@@ -121,7 +121,7 @@ class Env extends DevEnv<{ update: () => void }> {
 	}
 
 	getErrorCount(): number {
-		return this.errors.filter((e)=>e.level == 'error').length
+		return this.errors.filter((e) => e.level == 'error').length
 	}
 
 	throw(err: Err): this {

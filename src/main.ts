@@ -114,16 +114,25 @@ import TreeSelect from 'primevue/treeselect';
 import TreeTable from 'primevue/treetable';
 import TriStateCheckbox from 'primevue/tristatecheckbox';
 import VirtualScroller from 'primevue/virtualscroller';
-import {createMemoryHistory, createRouter} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
 import "./core/Share.ts";
 
+
 const routes = [
-	{path: '/', component: App},
-	{path: '/preview', component: App},
+	{
+		path: '/preview', component: App,
+		children: [
+			{
+				path: ':data',
+				name: 'withData',
+				component: App,
+			},
+		],
+	},
 ]
 
 const router = createRouter({
-	history: createMemoryHistory(),
+	history: createWebHistory (),
 	routes,
 })
 const app = createApp(App);

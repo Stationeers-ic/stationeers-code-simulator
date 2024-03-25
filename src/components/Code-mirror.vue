@@ -20,7 +20,9 @@ watch(() => codeStore.code, (newVal) => {
 })
 onMounted(() => {
 	codeStore.code = localStorage.getItem('code') || ''
-
+	interpretator.getEnv().on('update_code',()=>{
+		codeStore.code = interpretator.code
+	})
 })
 onBeforeUnmount(() => {
 	interpretator.getEnv().off('update')
