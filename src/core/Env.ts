@@ -18,6 +18,7 @@ class HCF extends Err {
 }
 
 class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
+	public yieldMode: boolean = false;
 	constructor() {
 		super();
 		this.data = reactive({})
@@ -64,10 +65,10 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	}
 
 	async afterLineRun(_line?: Line): Promise<void> {
-
 		this.emit('update')
-
-
+		if (this.yieldMode) {
+			return
+		}
 		return await new Promise<void>((resolve) => {
 			let delay = 300;
 			switch (settingStore.delay) {

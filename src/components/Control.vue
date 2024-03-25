@@ -26,7 +26,6 @@ watch(checked, (newVal) => {
 	} else {
 		console.log("Run stopped")
 		ic10.stop()
-
 	}
 })
 const convert = () => {
@@ -37,11 +36,13 @@ const convert = () => {
 	}
 }
 const reset = () => {
+	ic10.getEnv().yieldMode = false
 	ic10.getEnv().reset()
 	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
 const step = async () => {
+	ic10.getEnv().yieldMode = false
 	const t = await ic10.step()
 	if (t === false || t === 'EOF') {
 
@@ -62,6 +63,14 @@ const share = (event: any) => {
 const copy = () => {
 	console.log('copy')
 	clipboard.write(data.value)
+}
+const goto = () => {
+	ic10.getEnv().yieldMode = true
+	ic10.getEnv().once('before_yield', () => {
+		ic10.getEnv().yieldMode = false
+		checked.value = false
+	})
+	checked.value = true
 }
 
 const speerOptions = ['slow', 'normal', 'high']
@@ -108,6 +117,7 @@ const items = ref([
 				offIcon="pi pi-play"
 			/>
 			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
+			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield"/>
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
 			<AddDevice id="AddDevice"/>
 			<Button icon="pi pi-share-alt" @click="share" severity="secondary"/>

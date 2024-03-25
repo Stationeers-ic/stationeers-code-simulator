@@ -17,7 +17,10 @@ onMounted(() => {
 	ic10.getEnv().on('update', error)
 	ic10.getEnv().on('error', error)
 	ic10.getEnv().on('error', (err:Err)=>{
-		toast.add({severity: 'error', summary: 'Error', detail: err.format(), life: 3000})
+		toast.add({severity: 'error', summary: 'Error', detail: err.format(1), life: 3000})
+	})
+	ic10.getEnv().on('info', (err:Err)=>{
+		toast.add({severity: 'info', summary: 'Error', detail: err.format(1), life: 3000})
 	})
 })
 onBeforeUnmount(() => {

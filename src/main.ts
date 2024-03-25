@@ -120,7 +120,7 @@ import "./core/Share.ts";
 
 const routes = [
 	{
-		path: '/', component: App,
+		path: '/scs', component: App,
 	},
 ]
 
