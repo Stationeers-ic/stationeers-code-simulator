@@ -13,7 +13,7 @@ const dumpShema = z.object({
 	devicesAttached: z.record(z.string().or(z.number()))
 }).passthrough()
 
-export function dump() {
+export function dump(): string {
 	const code = codeStore.code;
 	const dump = {
 		code,
@@ -27,28 +27,34 @@ export function dump() {
 	return window.btoa(String.fromCharCode.apply(null, compressed))
 }
 
-export function load(dump: any): void {
-	const compressed = new Uint8Array(window.atob(dump).split("").map(function (c) {
-		return c.charCodeAt(0);
-	}));
-	const json = JSON.parse(pako.inflate(compressed, {to: 'string'}))
-	console.debug(json)
-	const restored = dumpShema.parse(json);
-	ic10.setCode(restored.code)
-	ic10.getEnv().devices.clear()
-	for (const [key, value] of Object.entries(restored.devices)) {
-		ic10.getEnv().appendDevice(value.PrefabHash,value.Name, +key)
-	}
-	ic10.getEnv().devicesAttached.clear()
-	for (const [key, value] of Object.entries(restored.devicesAttached)) {
-		ic10.getEnv().devicesAttached.set(key, value.toString())
+export async function load(dump: any): Promise<true> {
+	return new Promise((resolve, reject) => {
+		try {
+			const compressed = new Uint8Array(window.atob(dump).split("").map(function (c) {
+				return c.charCodeAt(0);
+			}));
+			const json = JSON.parse(pako.inflate(compressed, {to: 'string'}))
+			console.debug(json)
+			const restored = dumpShema.parse(json);
+			ic10.setCode(restored.code)
+			ic10.getEnv().devices.clear()
+			for (const [key, value] of Object.entries(restored.devices)) {
+				ic10.getEnv().appendDevice(value.PrefabHash, value.Name, +key)
+			}
+			ic10.getEnv().devicesAttached.clear()
+			for (const [key, value] of Object.entries(restored.devicesAttached)) {
+				ic10.getEnv().devicesAttached.set(key, value.toString())
 
-	}
-	ic10.getEnv().deviceNames.clear()
-	for (const [key, value] of Object.entries(restored.deviceNames)) {
-		ic10.getEnv().deviceNames.set(key, value.toString())
-	}
-
+			}
+			ic10.getEnv().deviceNames.clear()
+			for (const [key, value] of Object.entries(restored.deviceNames)) {
+				ic10.getEnv().deviceNames.set(key, value.toString())
+			}
+			resolve(true)
+		} catch (e) {
+			reject(e)
+		}
+	})
 }
 
 declare global {

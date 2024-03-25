@@ -8,29 +8,41 @@ import Raw from "./components/Raw.vue";
 import Devises from "./components/Devises.vue";
 import {onMounted, ref, watch} from "vue";
 import isHotkey from "is-hotkey";
-import {useRoute, useRouter} from 'vue-router'
 import {dump, load} from "./core/Share.ts";
+import {useToast} from "primevue/usetoast";
 
-const router = useRouter()
-const route = useRoute()
 const isSaveHotkey = isHotkey('mod+s')
 const lastDump = ref('')
+const toast = useToast();
 
 onMounted(() => {
 	window.document.addEventListener('keydown', (e) => {
 		if (isSaveHotkey(e)) {
 			e.preventDefault()
 			console.log("save")
-			lastDump.value = dump()
-			router.push({ name: 'withData', params: { data: lastDump.value } })
+			try {
+				lastDump.value = dump()
+				document.location.hash = lastDump.value
+			}catch (e:any) {
+				toast.add({severity: 'error', summary: 'Error', detail: e?.message, life: 3000})
+
+			}
 		}
 	})
 })
-watch(() => route.params, (newVal) => {
-	if (lastDump.value !== newVal.data) {
-		load(newVal.data)
+watch(() => document.location.hash, () => {
+	if (lastDump.value !== document.location.hash) {
+		load(document.location.hash.slice(1)).catch((e) => {
+			toast.add({severity: 'error', summary: 'Error', detail: e.message, life: 3000})
+		})
 	}
 })
+if (document.location.hash.slice(1).length > 0) {
+	load(document.location.hash.slice(1)).catch((e) => {
+		toast.add({severity: 'error', summary: 'Error', detail: e.message, life: 3000})
+		console
+	})
+}
 </script>
 
 <template>
