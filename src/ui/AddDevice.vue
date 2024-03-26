@@ -25,7 +25,7 @@ const deviceId = ref<number | undefined>(undefined);
 const toast = useToast();
 function add() {
 	visible.value = false
-	let hash = 0
+	let hash: number
 	let name: number | undefined = undefined
 
 	if (typeof deviceHash.value === "string") {
