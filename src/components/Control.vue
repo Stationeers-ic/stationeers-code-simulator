@@ -75,34 +75,6 @@ const goto = () => {
 
 const speerOptions = ['slow', 'normal', 'high']
 
-const items = ref([
-	{
-		label: 'Add device',
-		icon: 'pi pi-plus',
-		command: () => {
-			window.document.getElementById('AddDevice')?.click()
-		}
-	},
-	{
-		label: 'Reset',
-		icon: 'pi pi-refresh',
-		command: reset
-	},
-	{
-		label: 'Step',
-		icon: 'pi pi-step-forward',
-		command: step
-	},
-	{
-		label: 'Run',
-		icon: checked.value ? 'pi pi-stop' : 'pi pi-play',
-		command: function () {
-			checked.value = !checked.value
-			this.icon = checked.value ? 'pi pi-stop' : 'pi pi-play'
-			this.label = checked.value ? 'Stop' : 'Run'
-		}
-	}
-])
 </script>
 
 <template>
@@ -144,8 +116,6 @@ const items = ref([
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
 	</div>
-	<SpeedDial :tooltipOptions="{ position: 'right',event:'hover' }" :model="items" direction="up"
-			   :class="$style.dial"/>
 </template>
 
 <style module lang="scss">
