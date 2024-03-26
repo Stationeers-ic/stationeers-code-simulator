@@ -52,17 +52,17 @@ function add() {
 			</div>
 		</template>
 		<template #title>
-			<span :class="$style.break">{{ deviceData?.PrefabName }}</span>
+			<div :class="$style.break">{{ deviceData?.PrefabName }}</div>
 		</template>
 		<template #subtitle v-if="name">
 			<span :class="$style.break">{{ name }}</span>
 		</template>
 		<template #content>
 			<DevicePorts :id="props.id"/>
-			<DeviceProps :device="props.device"/>
+			<DeviceProps :id="props.id " :device="props.device"/>
 			<Divider/>
 			<InputGroup>
-				<InputText style="width:7em" v-model="newKey" placeholder="Key"/>
+				<InputText style="width:8em" v-model="newKey" placeholder="Key"/>
 				<InputNumber :useGrouping="false" style="width:15em" v-model="newVal" placeholder="Value"/>
 				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
@@ -87,6 +87,9 @@ function add() {
 
 .break {
 	word-break: break-all;
+}
+.small{
+	color: var(--text-color-secondary);
 }
 
 .image {
