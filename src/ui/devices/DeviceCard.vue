@@ -61,10 +61,10 @@ function add() {
 			<DevicePorts :id="props.id"/>
 			<DeviceProps :id="props.id " :device="props.device"/>
 			<Divider/>
-			<InputGroup>
-				<InputText style="width:8em" v-model="newKey" placeholder="Key"/>
-				<InputNumber :useGrouping="false" style="width:15em" v-model="newVal" placeholder="Value"/>
-				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
+			<InputGroup class="prop">
+				<InputText class="key" v-model="newKey" placeholder="Key"/>
+				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value"/>
+				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 		</template>
 		<template #footer>
@@ -88,7 +88,8 @@ function add() {
 .break {
 	word-break: break-all;
 }
-.small{
+
+.small {
 	color: var(--text-color-secondary);
 }
 

@@ -2,7 +2,7 @@
 import {getCurrentInstance, onMounted} from "vue";
 import ic10 from "../../core/ic10.ts";
 
-const props = defineProps(['id','device']) as Readonly<{ id:string,device: Record<string, number> }>
+const props = defineProps(['id', 'device']) as Readonly<{ id: string, device: Record<string, number> }>
 
 const instance = getCurrentInstance();
 onMounted(async () => {
@@ -19,38 +19,38 @@ function remove(id: string) {
 </script>
 
 <template>
-	<InputGroup>
-		<InputGroupAddon style="width:10em">id</InputGroupAddon>
-		<InputNumber
+	<InputGroup class="prop">
+		<InputGroupAddon class="key">id</InputGroupAddon>
+		<InputText
+			class="val"
 			:disabled="true"
 			:useGrouping="false"
-			style="width:15em"
-			:model-value="props.id"
+			v-model="props.id"
 			placeholder="Value"
 		/>
-		<Button :disabled="true" style="width:2em" size="small"	severity="secondary"/>
+		<Button class="btn" :disabled="true" size="small" severity="secondary"/>
 	</InputGroup>
-	<InputGroup>
-		<InputGroupAddon style="width:10em">PrefabHash</InputGroupAddon>
+	<InputGroup class="prop">
+		<InputGroupAddon class="key">PrefabHash</InputGroupAddon>
 		<InputNumber
+			class="val"
 			:disabled="true"
 			:useGrouping="false"
-			style="width:15em"
-			:model-value="props.device.PrefabHash"
+			v-model="props.device.PrefabHash"
 			placeholder="Value"
 		/>
-		<Button :disabled="true" style="width:2em" size="small"	severity="secondary"/>
+		<Button class="btn" :disabled="true" size="small" severity="secondary"/>
 	</InputGroup>
 	<template v-for="(_value, id) in props.device">
-		<InputGroup v-if="id !== 'PrefabHash'">
-			<InputGroupAddon style="width:10em">{{ id }}</InputGroupAddon>
+		<InputGroup v-if="id !== 'PrefabHash'" class="prop">
+			<InputGroupAddon class="key">{{ id }}</InputGroupAddon>
 			<InputNumber
+				class="val"
 				:useGrouping="false"
-				style="width:15em"
 				v-model="props.device[id]"
 				placeholder="Value"
 			/>
-			<Button @click="()=>remove(id)" style="width:2em" size="small"
+			<Button class="btn" @click="()=>remove(id)" size="small"
 					severity="danger" icon="pi pi-minus-circle"/>
 		</InputGroup>
 	</template>

@@ -6,7 +6,7 @@
 		margin: 0
 	}
 
-	.app-container{
+	.app-container {
 		margin: auto;
 		min-height: 100vh;
 		max-width: 1200px;
@@ -67,4 +67,21 @@
 	padding: 0 10px;
 	white-space: pre-wrap;
 	max-width: 40vw
+}
+
+.prop {
+	width: 100%;
+
+	.key {
+		justify-content: flex-start !important;
+		width: 35% !important;
+	}
+
+	.val {
+		width: 55% !important;
+	}
+
+	.btn {
+		width: 10% !important;
+	}
 }
