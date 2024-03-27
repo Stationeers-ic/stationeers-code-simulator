@@ -11,7 +11,7 @@ const props = defineProps(['id', 'device', 'deviceData']) as Readonly<{
 
 <template>
 	<div class="slots">
-		<template v-for="(value, id) in props.deviceData?.slots || []">
+		<template v-for="(_value, _id) in props.deviceData?.slots || []">
 			<div class="slot"></div>
 		</template>
 	</div>
