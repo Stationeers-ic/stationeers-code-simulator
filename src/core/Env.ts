@@ -2,6 +2,7 @@ import {DevEnv, Err, hash} from "ic10";
 import Line from "ic10/dist/core/Line";
 import {reactive} from "vue";
 import {settingStore} from "../store";
+import {z} from "zod";
 
 class HCF extends Err {
 	constructor(
@@ -92,7 +93,15 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		this.throw(new HCF("HCF", "info", this.getPosition()))
 		return super.hcf();
 	}
-
+	getAlias(alias: string): string {
+		if (this.aliases.has(alias)) {
+			const val = this.aliases.get(alias)
+			if (z.string().safeParse(val).success) {
+				return val as string
+			}
+		}
+		return alias
+	}
 	appendDevice(hash: number, name?: number, id?: number): string {
 		const out = super.appendDevice(hash, name, id);
 
