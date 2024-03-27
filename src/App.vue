@@ -10,10 +10,12 @@ import {onMounted, ref, watch} from "vue";
 import isHotkey from "is-hotkey";
 import {dump, load} from "./core/Share.ts";
 import {useToast} from "primevue/usetoast";
+import Button from "primevue/button";
 
 const isSaveHotkey = isHotkey('mod+s')
 const lastDump = ref('')
 const toast = useToast();
+const op = ref();
 
 onMounted(() => {
 	window.document.addEventListener('keydown', (e) => {
@@ -23,7 +25,7 @@ onMounted(() => {
 			try {
 				lastDump.value = dump()
 				document.location.hash = lastDump.value
-			}catch (e:any) {
+			} catch (e: any) {
 				toast.add({severity: 'error', summary: 'Error', detail: e?.message, life: 3000})
 
 			}
@@ -41,6 +43,10 @@ if (document.location.hash.slice(1).length > 0) {
 	load(document.location.hash.slice(1)).catch((e) => {
 		toast.add({severity: 'error', summary: 'Error', detail: e.message, life: 3000})
 	})
+}
+
+const discord = (event: any) => {
+	op.value.toggle(event);
 }
 </script>
 
@@ -71,6 +77,11 @@ if (document.location.hash.slice(1).length > 0) {
 			<Devises></Devises>
 		</div>
 	</div>
+
+	<Button :class="$style.discord" @click="discord" icon="pi pi-discord" severity="info" size="large" raised rounded aria-label="Cancel"/>
+	<OverlayPanel ref="op">
+		<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+	</OverlayPanel>
 </template>
 
 <style module lang="scss">
@@ -85,5 +96,11 @@ if (document.location.hash.slice(1).length > 0) {
     "code-mirror"
     "errors";
 
+}
+
+.discord {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
 }
 </style>
