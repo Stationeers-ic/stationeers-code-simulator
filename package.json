@@ -19,6 +19,7 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.50.0",
     "sass": "^1.72.0",
+    "uuid": "^9.0.1",
     "vue": "^3.4.21",
     "vue-codemirror": "^6.1.1",
     "vue-router": "4",
@@ -28,6 +29,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/uuid": "^9.0.8",
     "@babel/runtime": "^7.24.0",
     "@types/is-hotkey": "^0.1.10",
     "@types/pako": "^2.0.3",

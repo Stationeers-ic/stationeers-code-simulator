@@ -18,7 +18,6 @@ onMounted(async () => {
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
 	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
-
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})
@@ -45,7 +44,7 @@ function add() {
 </script>
 
 <template>
-	<Card :class="$style.card" style="">
+	<Card :class="[$style.card, 'device-card']" style="">
 		<template #header>
 			<div :class="$style.image">
 				<Image loading="lazy" alt="user header" :src="image"/>
@@ -62,10 +61,22 @@ function add() {
 			<DeviceProps :id="props.id " :device="props.device"/>
 			<Divider/>
 			<InputGroup class="prop">
-				<InputText class="key" v-model="newKey" placeholder="Key"/>
+				<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics"
+						  option-label="name" option-value="name">
+					<template #option="slotProps">
+						<div class="flex align-items-center gap-1">
+							<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)"
+							   class="pi pi-file-edit"></i>
+							<i v-else class="pi pi-file" style="color: #fb923c"></i>
+							<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
+						</div>
+					</template>
+				</Dropdown>
 				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value"/>
 				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
+			<Divider/>
+<!--			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>-->
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
@@ -98,5 +109,13 @@ function add() {
 	height: 128px;
 	display: flex;
 	justify-content: center;
+}
+</style>
+
+<style>
+.device-card{
+	.p-card-body {
+		height: 100%;
+	}
 }
 </style>

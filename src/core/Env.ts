@@ -1,4 +1,4 @@
-import {DevEnv, Err, hash} from "ic10";
+import {DevEnv, Err, hash as Hash} from "ic10";
 import Line from "ic10/dist/core/Line";
 import {reactive} from "vue";
 import {settingStore} from "../store";
@@ -20,12 +20,13 @@ class HCF extends Err {
 
 class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	public yieldMode: boolean = false;
+
 	constructor() {
 		super();
 		this.data = reactive({})
 		this.stack = reactive([])
 		this.devices = reactive(new Map())
-		const id = this.appendDevice(-128473777, hash('Circuit Housing'))
+		const id = this.appendDevice(-128473777, Hash('Circuit Housing'))
 		this.attachDevice(id, 'db')
 		this.deviceNames.set(id, 'Circuit Housing')
 		this.deviceNames.set('Circuit Housing', id)
@@ -70,6 +71,11 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		if (this.yieldMode) {
 			return
 		}
+		const db = this.devicesAttached.get('db')
+		if (db) {
+			this.setDeviceProp(db, "LineNumber", this.getPosition())
+			this.setDeviceProp(db, "Error", this.getErrorCount() > 0 ? 1 : 0)
+		}
 		return await new Promise<void>((resolve) => {
 			let delay = 300;
 			switch (settingStore.delay) {
@@ -104,7 +110,6 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	}
 	appendDevice(hash: number, name?: number, id?: number): string {
 		const out = super.appendDevice(hash, name, id);
-
 		this.emit('update')
 		return out;
 	}
@@ -147,3 +152,4 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 }
 
 export default Env;
+
