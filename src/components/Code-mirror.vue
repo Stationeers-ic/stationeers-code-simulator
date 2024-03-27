@@ -3,7 +3,7 @@ import {codeStore} from '../store'
 import {Codemirror} from 'vue-codemirror'
 // import {lineNumbers} from '@codemirror/gutter'
 import {monokai} from '@uiw/codemirror-theme-monokai';
-import {ic10, ic10HoverTooltip, ic10Snippets} from 'codemirror-lang-ic10';
+import {ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers} from 'codemirror-lang-ic10';
 import interpretator from '../core/ic10.ts';
 import {onBeforeUnmount, onMounted, watch} from "vue";
 import {EditorView} from "codemirror";
@@ -32,7 +32,7 @@ watch(() => interpretator.getEnv().line, (newVal) => {
 		}
 	})
 })
-const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic10HoverTooltip()]
+const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic10HoverTooltip(), zeroLineNumbers]
 
 </script>
 
