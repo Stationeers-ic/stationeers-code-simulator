@@ -16,7 +16,6 @@ const props = defineProps(['id', 'device', 'deviceData']) as Readonly<{
 		</template>
 	</div>
 </template>
-
 <style scoped lang="scss">
 .slots {
 	display: flex;
