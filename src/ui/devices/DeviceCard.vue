@@ -76,7 +76,7 @@ function add() {
 				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 			<Divider/>
-<!--			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>-->
+			<!--			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>-->
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
@@ -113,7 +113,7 @@ function add() {
 </style>
 
 <style>
-.device-card{
+.device-card {
 	.p-card-body {
 		height: 100%;
 	}

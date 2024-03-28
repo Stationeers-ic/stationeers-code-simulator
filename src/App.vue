@@ -10,13 +10,12 @@ import {onMounted, ref, watch} from "vue";
 import isHotkey from "is-hotkey";
 import {dump, load} from "./core/Share.ts";
 import {useToast} from "primevue/usetoast";
-import Button from "primevue/button";
 import {MenuItem} from "primevue/menuitem";
+import ButtonFrame from "./ui/ButtonFrame.vue";
 
 const isSaveHotkey = isHotkey('mod+s')
 const lastDump = ref('')
 const toast = useToast();
-const op = ref();
 
 onMounted(() => {
 	window.document.addEventListener('keydown', (e) => {
@@ -46,33 +45,20 @@ if (document.location.hash.slice(1).length > 0) {
 	})
 }
 
-const discord = (event: any) => {
-	op.value.toggle(event);
-}
 
 const social = ref<MenuItem[]>([
 	{
 		label: 'Github',
 		icon: 'pi pi-github',
-		url: "https://github.com/Stationeers-ic/stationeers-code-simulator",
-		command(event) {
-			window.open(event.item.url, '_blank');
-		},
-	},
-	{
-		label: 'Discord',
-		icon: 'pi pi-discord',
-		url: "https://discord.gg/dCuYyxRg",
-		command(event) {
-			window.open(event.item.url, '_blank');
+		command() {
+			window.open("https://github.com/Stationeers-ic/stationeers-code-simulator", '_blank');
 		},
 	},
 	{
 		label: 'Plausible',
 		icon: "pi pi-plausible",
-		url: "https://thor.traineratwot.site/ic10.dev",
-		command(event) {
-			window.open(event.item.url, '_blank');
+		command() {
+			window.open("https://thor.traineratwot.site/ic10.dev", '_blank');
 		},
 	},
 ])
@@ -106,20 +92,29 @@ const social = ref<MenuItem[]>([
 		</div>
 	</div>
 
-	<SpeedDial :model="social" :radius="120" show-icon="pi pi-external-link"
-			   :tooltip-options="{event:'hover',position:'right'}" :transitionDelay="80" direction="up"
-			   :class="$style.social"/>
+	<!--	<SpeedDial :model="social" :radius="120" show-icon="pi pi-external-link"-->
+	<!--			   :tooltip-options="{event:'hover',position:'right'}" :transitionDelay="80" direction="up"-->
+	<!--			   :class="$style.social"/>-->
+	<div :class="$style.rightButtons">
+		<template v-for="(item) in social">
+			<ButtonFrame :label="item.label" :icon="item.icon" size="large" :click="item.command" severity="info"/>
+		</template>
+		<ButtonFrame icon="pi pi-discord" severity="info">
+			<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350"
+					height="500" allowtransparency="true" frameborder="0"
+					sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		</ButtonFrame>
 
-	<Button :class="$style.discord" @click="discord" icon="pi pi-discord" severity="info" size="large" raised rounded
-			aria-label="Cancel"/>
-	<OverlayPanel ref="op">
-		<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350"
-				height="500" allowtransparency="true" frameborder="0"
-				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
-	</OverlayPanel>
+		<ButtonFrame icon="pi pi-kofi" severity="info">
+			<iframe id='kofiframe' src='https://ko-fi.com/aidan647/?hidefeed=true&widget=true&embed=true&preview=true'
+					style='border:none;width:100%;padding:4px;background:#f9f9f9;' height='712' title='aidan647'>
+			</iframe>
+		</ButtonFrame>
+	</div>
 </template>
 
 <style module lang="scss">
+
 .code {
 	height: 100%;
 	display: grid;
@@ -133,10 +128,15 @@ const social = ref<MenuItem[]>([
 
 }
 
-.discord {
+.rightButtons {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	flex-wrap: nowrap;
+	align-items: center;
 }
 
 .social {

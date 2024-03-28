@@ -87,16 +87,36 @@
 }
 
 
-.pi.pi-plausible {
-	background-color: transparent;
-	background-image: url("/public/icons/plausible.png");
-	background-size: contain;
-	background-repeat: no-repeat;
-	width: 16px;
-	height: 16px;
-	opacity: 0.5;
+.pi {
+	&.pi-plausible {
+		$size: 24px;
+		background-color: transparent;
+		background-image: url("/public/icons/plausible.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: $size;
+		height: $size;
+		opacity: 0.5;
+		padding: 0 $size 0 0;
 
-	&:hover {
-		opacity: 1;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.pi-kofi {
+		$size: 30px;
+		background-color: transparent;
+		background-image: url("/public/icons/ko-fi.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		display: block;
+		width: $size;
+		height: $size;
+		padding: 0 $size 0 0;
+
+
 	}
 }
+
