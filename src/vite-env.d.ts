@@ -11,3 +11,5 @@ declare module "vuex" {
 	export * from "vuex/types/logger.d.ts";
 	export * from "vuex/types/vue.d.ts";
 }
+
+declare const __package__: {dependencies: Record<string, {version: string, overridden:boolean}>};

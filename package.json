@@ -9,6 +9,7 @@
     "preview": "bunx vite preview"
   },
   "dependencies": {
+    "@types/bun": "^1.0.11",
     "@uiw/codemirror-theme-monokai": "^4.21.24",
     "codemirror-lang-ic10": "^0.3.3",
     "delay": "^6.0.0",
