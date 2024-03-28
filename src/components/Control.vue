@@ -73,7 +73,7 @@ const goto = () => {
 	checked.value = true
 }
 
-const speerOptions = ['slow', 'normal', 'high']
+const speerOptions = ['slow', 'normal', 'fast']
 
 </script>
 
