@@ -85,3 +85,18 @@
 		width: 10% !important;
 	}
 }
+
+
+.pi.pi-plausible {
+	background-color: transparent;
+	background-image: url("/public/icons/plausible.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
+}

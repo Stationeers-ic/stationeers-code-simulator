@@ -11,6 +11,7 @@ import isHotkey from "is-hotkey";
 import {dump, load} from "./core/Share.ts";
 import {useToast} from "primevue/usetoast";
 import Button from "primevue/button";
+import {MenuItem} from "primevue/menuitem";
 
 const isSaveHotkey = isHotkey('mod+s')
 const lastDump = ref('')
@@ -48,6 +49,33 @@ if (document.location.hash.slice(1).length > 0) {
 const discord = (event: any) => {
 	op.value.toggle(event);
 }
+
+const social = ref<MenuItem[]>([
+	{
+		label: 'Github',
+		icon: 'pi pi-github',
+		url: "https://github.com/Stationeers-ic/stationeers-code-simulator",
+		command(event) {
+			window.open(event.item.url, '_blank');
+		},
+	},
+	{
+		label: 'Discord',
+		icon: 'pi pi-discord',
+		url: "https://discord.gg/dCuYyxRg",
+		command(event) {
+			window.open(event.item.url, '_blank');
+		},
+	},
+	{
+		label: 'Plausible',
+		icon: "pi pi-plausible",
+		url: "https://thor.traineratwot.site/ic10.dev",
+		command(event) {
+			window.open(event.item.url, '_blank');
+		},
+	},
+])
 </script>
 
 <template>
@@ -78,9 +106,16 @@ const discord = (event: any) => {
 		</div>
 	</div>
 
-	<Button :class="$style.discord" @click="discord" icon="pi pi-discord" severity="info" size="large" raised rounded aria-label="Cancel"/>
+	<SpeedDial :model="social" :radius="120" show-icon="pi pi-external-link"
+			   :tooltip-options="{event:'hover',position:'right'}" :transitionDelay="80" direction="up"
+			   :class="$style.social"/>
+
+	<Button :class="$style.discord" @click="discord" icon="pi pi-discord" severity="info" size="large" raised rounded
+			aria-label="Cancel"/>
 	<OverlayPanel ref="op">
-		<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+		<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350"
+				height="500" allowtransparency="true" frameborder="0"
+				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 	</OverlayPanel>
 </template>
 
@@ -102,5 +137,15 @@ const discord = (event: any) => {
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
+}
+
+.social {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+
+	a {
+		text-decoration: none;
+	}
 }
 </style>
