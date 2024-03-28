@@ -35,6 +35,11 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 
 	public deviceNames: Map<string, string> = new Map<string, string>();
 
+	prepare(){
+		this.lines.filter((l) => l?.fn === 'alias').forEach((l) => {
+			l?.run()
+		})
+	}
 
 	reset() {
 		this.aliases = new Map<string, string | number>()

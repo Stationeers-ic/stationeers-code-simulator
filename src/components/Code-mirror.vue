@@ -50,15 +50,18 @@ const opt: hoverOptions = {
 				let label: string | undefined = undefined
 				let deviceId: string | undefined = undefined
 				let prop: string | undefined = undefined
+				let unAlias: string | undefined = undefined
 				switch (l.fn) {
 					case 's':
 						label = l.args[0].toString()
-						deviceId = env.devicesAttached.get(label)
+						unAlias = env.getAlias(label)
+						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[1].toString()
 						break
 					case 'l':
 						label = l.args[1].toString()
-						deviceId = env.devicesAttached.get(label)
+						unAlias = env.getAlias(label)
+						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[2].toString()
 						break
 					case 'sd':

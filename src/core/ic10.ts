@@ -22,6 +22,7 @@ export class Ic10 extends InterpreterIc10 {
 		super.setCode(code);
 		localStorage.setItem('code', code)
 		this.getEnv().emit('update_code')
+		this.getEnv().prepare()
 		return this;
 	}
 
