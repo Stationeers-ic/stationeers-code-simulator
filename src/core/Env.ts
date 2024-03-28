@@ -35,7 +35,7 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 
 	public deviceNames: Map<string, string> = new Map<string, string>();
 
-	prepare(){
+	prepare() {
 		this.lines.filter((l) => l?.fn === 'alias').forEach((l) => {
 			l?.run()
 		})
@@ -104,6 +104,7 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		this.throw(new HCF("HCF", "info", this.getPosition()))
 		return super.hcf();
 	}
+
 	getAlias(alias: string): string {
 		if (this.aliases.has(alias)) {
 			const val = this.aliases.get(alias)
@@ -113,6 +114,7 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		}
 		return alias
 	}
+
 	appendDevice(hash: number, name?: number, id?: number): string {
 		const out = super.appendDevice(hash, name, id);
 		this.emit('update')
@@ -126,19 +128,37 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	}
 
 	attachDevice(id: string, port: string): this {
-		super.attachDevice(id, port);
+		if (this.devicesAttached.has(port)) {
+			const old = this.devicesAttached.get(port)
+			if (old) {
+				this.detachDevice(old, port)
+			} else {
+				this.devicesAttached.delete(port)
+			}
+		}
+		this.devicesAttached.set(port, id)
+		this.devicesAttached.set(id, port)
 
 		this.emit('update')
 		return this;
 	}
 
-	detachDevice(id: string): this {
+	detachDevice(id: string, port?: string): this {
 		this.devicesAttached.delete(id)
-		this.devicesAttached.forEach((value, key) => {
-			if (value == id) {
-				this.devicesAttached.delete(key)
-			}
-		})
+		if (port === undefined) {
+			this.devicesAttached.forEach((value, key) => {
+				if (value == id) {
+					this.devicesAttached.delete(key)
+				}
+			})
+		} else {
+			this.devicesAttached.forEach((value, key) => {
+				if (value == id && key == port) {
+					this.devicesAttached.delete(key)
+				}
+			})
+		}
+
 		this.emit('update')
 		return this;
 	}
