@@ -2,7 +2,7 @@
 import {onMounted, ref} from "vue";
 import data, {Item, Items} from "../../../core/Data.ts";
 
-const model = defineModel<Item>()
+const model = defineModel<Item | null>()
 const loading = ref(true)
 const items = ref<{ name: string, image: string | null, value: Item }[]>([])
 
