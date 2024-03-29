@@ -1,5 +1,4 @@
-import {DevEnv, Err, hash as Hash} from "ic10";
-import Line from "ic10/dist/core/Line";
+import {DevEnv, Err, hash as Hash, Line} from "ic10";
 import {reactive} from "vue";
 import {settingStore} from "../store";
 import {z} from "zod";
