@@ -4,6 +4,7 @@ import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
 import data, {Device, Devices} from "../../core/Data.ts";
 import DeviceProps from "./DeviceProps.vue";
 import DevicePorts from "./DevicePorts.vue";
+import DeviceSlots from "./Slots/DeviceSlots.vue";
 
 const props = defineProps(['id', 'device'])
 const image = ref('')
@@ -76,7 +77,7 @@ function add() {
 				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
 			<Divider/>
-			<!--			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>-->
+			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
@@ -88,12 +89,13 @@ function add() {
 </template>
 
 <style module scoped lang="scss">
-
 .card {
 	$count: 3;
+
 	width: auto;
 	overflow: hidden;
 	max-width: calc(100% / $count - (5px * ($count - 1)));
+	min-width: 250px
 }
 
 .break {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {Device} from "../../core/Data.ts";
+import {Device} from "../../../core/Data.ts";
+import Slot from "./Slot.vue";
 // import {ref} from "vue";
 
 const props = defineProps(['id', 'device', 'deviceData']) as Readonly<{
@@ -11,8 +12,8 @@ const props = defineProps(['id', 'device', 'deviceData']) as Readonly<{
 
 <template>
 	<div class="slots">
-		<template v-for="(_value,_id) in props.deviceData?.slots || []">
-			<div class="slot"></div>
+		<template v-for="(value,_id) in props.deviceData?.slots || []">
+			<Slot :deviceId="id" :data="value" />
 		</template>
 	</div>
 </template>
@@ -23,9 +24,4 @@ const props = defineProps(['id', 'device', 'deviceData']) as Readonly<{
 	flex-wrap: wrap;
 }
 
-.slot {
-	width: 50px;
-	height: 50px;
-	box-shadow: 1px 1px 3px 3px black;
-}
 </style>

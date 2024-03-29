@@ -6,13 +6,14 @@
 		margin: 0
 	}
 
-	body {
+	#app {
 		margin: auto;
 		min-height: 100vh;
 		max-width: 1200px;
 	}
 
 	.app-container {
+
 		display: grid;
 		grid-template-columns:7fr 2fr 3fr;
 		grid-template-rows: 40px auto auto 1fr;

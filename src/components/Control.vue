@@ -78,7 +78,7 @@ const speerOptions = ['slow', 'normal', 'fast']
 </script>
 
 <template>
-	<div :class="[$style.control, 'control']">
+	<header :class="[$style.control, 'control']">
 		<InputGroup style="width:auto">
 			<ToggleButton
 				v-model="checked"
@@ -115,11 +115,12 @@ const speerOptions = ['slow', 'normal', 'fast']
 			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText"
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
-	</div>
+	</header>
 </template>
 
 <style module lang="scss">
 .control {
+	z-index:999;
 	background-color: #121212;
 	top: 0;
 	position: sticky;
