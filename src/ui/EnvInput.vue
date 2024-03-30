@@ -25,8 +25,8 @@ onBeforeUnmount(() => {
 <template>
 	<InputGroup>
 		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
-		<InputNumber v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly  />
-		<InputNumber v-else :class="{ [$style.defaultValue]:model == 0 }" v-model="model" width="100%" placeholder="Value"/>
+		<InputNumber :useGrouping="false" v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly  />
+		<InputNumber :useGrouping="false" v-else :class="{ [$style.defaultValue]:model == 0 }" v-model="model" width="100%" placeholder="Value"/>
 		<InputGroupAddon v-if="alias">{{ alias }}</InputGroupAddon>
 	</InputGroup>
 </template>

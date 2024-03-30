@@ -6,13 +6,14 @@
 		margin: 0
 	}
 
-	.app-container {
+	#app {
 		margin: auto;
-		max-width: 1080px;
 		min-height: 100vh;
+		max-width: 1200px;
 	}
 
 	.app-container {
+
 		display: grid;
 		grid-template-columns:7fr 2fr 3fr;
 		grid-template-rows: 40px auto auto 1fr;
@@ -65,4 +66,58 @@
 
 *[data-ic10lang="tooltip"] {
 	padding: 0 10px;
+	white-space: pre-wrap;
+	max-width: 40vw
 }
+
+.prop {
+	width: 100%;
+
+	.key {
+		justify-content: flex-start !important;
+		width: 35% !important;
+	}
+
+	.val {
+		width: 55% !important;
+	}
+
+	.btn {
+		width: 10% !important;
+	}
+}
+
+
+.pi {
+	&.pi-plausible {
+		$size: 24px;
+		background-color: transparent;
+		background-image: url("/public/icons/plausible.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: $size;
+		height: $size;
+		opacity: 0.5;
+		padding: 0 $size 0 0;
+
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	&.pi-kofi {
+		$size: 30px;
+		background-color: transparent;
+		background-image: url("/public/icons/ko-fi.png");
+		background-size: contain;
+		background-repeat: no-repeat;
+		display: block;
+		width: $size;
+		height: $size;
+		padding: 0 $size 0 0;
+
+
+	}
+}
+

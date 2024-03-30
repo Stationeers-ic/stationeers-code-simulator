@@ -1,7 +1,7 @@
-import {DevEnv, Err, hash} from "ic10";
-import Line from "ic10/dist/core/Line";
+import {DevEnv, Err, hash as Hash, Line} from "ic10";
 import {reactive} from "vue";
 import {settingStore} from "../store";
+import {z} from "zod";
 
 class HCF extends Err {
 	constructor(
@@ -17,13 +17,15 @@ class HCF extends Err {
 	}
 }
 
-class Env extends DevEnv<{ update: () => void }> {
+class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
+	public yieldMode: boolean = false;
+
 	constructor() {
 		super();
 		this.data = reactive({})
 		this.stack = reactive([])
 		this.devices = reactive(new Map())
-		const id = this.appendDevice(-128473777, hash('Circuit Housing'))
+		const id = this.appendDevice(-128473777, Hash('Circuit Housing'))
 		this.attachDevice(id, 'db')
 		this.deviceNames.set(id, 'Circuit Housing')
 		this.deviceNames.set('Circuit Housing', id)
@@ -32,6 +34,11 @@ class Env extends DevEnv<{ update: () => void }> {
 
 	public deviceNames: Map<string, string> = new Map<string, string>();
 
+	prepare() {
+		this.lines.filter((l) => l?.fn === 'alias').forEach((l) => {
+			l?.run()
+		})
+	}
 
 	reset() {
 		this.aliases = new Map<string, string | number>()
@@ -64,10 +71,15 @@ class Env extends DevEnv<{ update: () => void }> {
 	}
 
 	async afterLineRun(_line?: Line): Promise<void> {
-
 		this.emit('update')
-
-
+		if (this.yieldMode) {
+			return
+		}
+		const db = this.devicesAttached.get('db')
+		if (db) {
+			this.setDeviceProp(db, "LineNumber", this.getPosition())
+			this.setDeviceProp(db, "Error", this.getErrorCount() > 0 ? 1 : 0)
+		}
 		return await new Promise<void>((resolve) => {
 			let delay = 300;
 			switch (settingStore.delay) {
@@ -92,36 +104,66 @@ class Env extends DevEnv<{ update: () => void }> {
 		return super.hcf();
 	}
 
+	getAlias(alias: string): string {
+		if (this.aliases.has(alias)) {
+			const val = this.aliases.get(alias)
+			if (z.string().safeParse(val).success) {
+				return val as string
+			}
+		}
+		return alias
+	}
+
 	appendDevice(hash: number, name?: number, id?: number): string {
 		const out = super.appendDevice(hash, name, id);
-
 		this.emit('update')
 		return out;
 	}
 
 	removeDevice(id: string): this {
 		super.removeDevice(id);
-
 		this.emit('update')
 		return this;
 	}
 
 	attachDevice(id: string, port: string): this {
-		super.attachDevice(id, port);
+		if (this.devicesAttached.has(port)) {
+			const old = this.devicesAttached.get(port)
+			if (old) {
+				this.detachDevice(old, port)
+			} else {
+				this.devicesAttached.delete(port)
+			}
+		}
+		this.devicesAttached.set(port, id)
+		this.devicesAttached.set(id, port)
 
 		this.emit('update')
 		return this;
 	}
 
-	detachDevice(id: string): this {
-		super.detachDevice(id);
+	detachDevice(id: string, port?: string): this {
+		this.devicesAttached.delete(id)
+		if (port === undefined) {
+			this.devicesAttached.forEach((value, key) => {
+				if (value == id) {
+					this.devicesAttached.delete(key)
+				}
+			})
+		} else {
+			this.devicesAttached.forEach((value, key) => {
+				if (value == id && key == port) {
+					this.devicesAttached.delete(key)
+				}
+			})
+		}
 
 		this.emit('update')
 		return this;
 	}
 
 	getErrorCount(): number {
-		return this.errors.length
+		return this.errors.filter((e) => e.level == 'error').length
 	}
 
 	throw(err: Err): this {
@@ -134,3 +176,4 @@ class Env extends DevEnv<{ update: () => void }> {
 }
 
 export default Env;
+

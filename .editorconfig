@@ -14,3 +14,7 @@ max_line_length = off
 [{package.json,package-lock.json}]
 indent_size = 2
 indent_style = space
+
+[.github/**/*.yml]
+indent_size = 2
+indent_style = space

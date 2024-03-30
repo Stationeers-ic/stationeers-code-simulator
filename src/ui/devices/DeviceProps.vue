@@ -2,7 +2,7 @@
 import {getCurrentInstance, onMounted} from "vue";
 import ic10 from "../../core/ic10.ts";
 
-const props = defineProps(['device']) as Readonly<{ device: Record<string, number> }>
+const props = defineProps(['id', 'device']) as Readonly<{ id: string, device: Record<string, number> }>
 
 const instance = getCurrentInstance();
 onMounted(async () => {
@@ -19,16 +19,38 @@ function remove(id: string) {
 </script>
 
 <template>
+	<InputGroup class="prop">
+		<InputGroupAddon class="key">id</InputGroupAddon>
+		<InputText
+			class="val"
+			:disabled="true"
+			:useGrouping="false"
+			v-model="props.id"
+			placeholder="Value"
+		/>
+		<Button class="btn" :disabled="true" size="small" severity="secondary"/>
+	</InputGroup>
+	<InputGroup class="prop">
+		<InputGroupAddon class="key">PrefabHash</InputGroupAddon>
+		<InputNumber
+			class="val"
+			:disabled="true"
+			:useGrouping="false"
+			v-model="props.device.PrefabHash"
+			placeholder="Value"
+		/>
+		<Button class="btn" :disabled="true" size="small" severity="secondary"/>
+	</InputGroup>
 	<template v-for="(_value, id) in props.device">
-		<InputGroup>
-			<InputGroupAddon style="width:10em">{{ id }}</InputGroupAddon>
+		<InputGroup v-if="id !== 'PrefabHash'" class="prop">
+			<InputGroupAddon class="key">{{ id }}</InputGroupAddon>
 			<InputNumber
-				:disabled="id === 'PrefabHash'"
-				style="width:15em"
+				class="val"
+				:useGrouping="false"
 				v-model="props.device[id]"
 				placeholder="Value"
 			/>
-			<Button :disabled="id === 'PrefabHash'" @click="()=>remove(id)" style="width:2em" size="small"
+			<Button class="btn" @click="()=>remove(id)" size="small"
 					severity="danger" icon="pi pi-minus-circle"/>
 		</InputGroup>
 	</template>

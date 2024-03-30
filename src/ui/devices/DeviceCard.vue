@@ -4,6 +4,7 @@ import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
 import data, {Device, Devices} from "../../core/Data.ts";
 import DeviceProps from "./DeviceProps.vue";
 import DevicePorts from "./DevicePorts.vue";
+import DeviceSlots from "./Slots/DeviceSlots.vue";
 
 const props = defineProps(['id', 'device'])
 const image = ref('')
@@ -18,7 +19,6 @@ onMounted(async () => {
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
 	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
 	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
-
 	ic10.getEnv().on('update', () => {
 		instance?.proxy?.$forceUpdate();
 	})
@@ -45,27 +45,39 @@ function add() {
 </script>
 
 <template>
-	<Card :class="$style.card" style="">
+	<Card :class="[$style.card, 'device-card']" style="">
 		<template #header>
 			<div :class="$style.image">
 				<Image loading="lazy" alt="user header" :src="image"/>
 			</div>
 		</template>
 		<template #title>
-			<span :class="$style.break">{{ deviceData?.PrefabName }}</span>
+			<div :class="$style.break">{{ deviceData?.PrefabName }}</div>
 		</template>
 		<template #subtitle v-if="name">
 			<span :class="$style.break">{{ name }}</span>
 		</template>
 		<template #content>
 			<DevicePorts :id="props.id"/>
-			<DeviceProps :device="props.device"/>
+			<DeviceProps :id="props.id " :device="props.device"/>
 			<Divider/>
-			<InputGroup>
-				<InputText style="width:7em" v-model="newKey" placeholder="Key"/>
-				<InputNumber style="width:15em" v-model="newVal" placeholder="Value"/>
-				<Button style="width:2em" @click="add" size="small" icon="pi pi-plus-circle"/>
+			<InputGroup class="prop">
+				<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics"
+						  option-label="name" option-value="name">
+					<template #option="slotProps">
+						<div class="flex align-items-center gap-1">
+							<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)"
+							   class="pi pi-file-edit"></i>
+							<i v-else class="pi pi-file" style="color: #fb923c"></i>
+							<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
+						</div>
+					</template>
+				</Dropdown>
+				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value"/>
+				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
 			</InputGroup>
+			<Divider/>
+			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
@@ -77,16 +89,21 @@ function add() {
 </template>
 
 <style module scoped lang="scss">
-
 .card {
 	$count: 3;
+
 	width: auto;
 	overflow: hidden;
 	max-width: calc(100% / $count - (5px * ($count - 1)));
+	min-width: 250px
 }
 
 .break {
 	word-break: break-all;
+}
+
+.small {
+	color: var(--text-color-secondary);
 }
 
 .image {
@@ -94,5 +111,13 @@ function add() {
 	height: 128px;
 	display: flex;
 	justify-content: center;
+}
+</style>
+
+<style>
+.device-card {
+	.p-card-body {
+		height: 100%;
+	}
 }
 </style>

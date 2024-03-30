@@ -136,3 +136,4 @@ out
 build/
 dist
 src/**/*.js
+vite.config.ts.timestamp*

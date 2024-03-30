@@ -3,7 +3,6 @@ import {onMounted, ref} from "vue";
 import data, {Devices} from "../core/Data.ts";
 
 const loading = ref(true);
-
 const devices = ref<{ name: string, image: string | null, code: number }[]>([]);
 const model = defineModel()
 

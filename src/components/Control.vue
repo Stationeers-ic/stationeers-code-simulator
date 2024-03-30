@@ -7,6 +7,8 @@ import ic10 from "../core/ic10.ts";
 import {str as hash} from "crc-32";
 import {settingStore} from "../store";
 import AddDevice from "../ui/AddDevice.vue";
+import {dump} from "../core/Share.ts";
+import clipboard from "web-clipboard";
 
 const checked = ref(false)
 const hashText = ref("")
@@ -24,7 +26,6 @@ watch(checked, (newVal) => {
 	} else {
 		console.log("Run stopped")
 		ic10.stop()
-
 	}
 })
 const convert = () => {
@@ -35,11 +36,13 @@ const convert = () => {
 	}
 }
 const reset = () => {
+	ic10.getEnv().yieldMode = false
 	ic10.getEnv().reset()
 	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
 const step = async () => {
+	ic10.getEnv().yieldMode = false
 	const t = await ic10.step()
 	if (t === false || t === 'EOF') {
 
@@ -50,40 +53,32 @@ const step = async () => {
 		// ic10.getEnv().emit('update')
 	}
 }
-const speerOptions = ['slow', 'normal', 'high']
+const op = ref();
+const data = ref('');
+const share = (event: any) => {
+	document.location.hash = dump()
+	data.value = document.location.href
+	op.value.toggle(event);
+}
+const copy = () => {
+	console.log('copy')
+	clipboard.write(data.value)
+}
+const goto = () => {
+	ic10.getEnv().yieldMode = true
+	ic10.getEnv().once('before_yield', () => {
+		ic10.getEnv().yieldMode = false
+		checked.value = false
+	})
+	checked.value = true
+}
 
-const items = ref([
-	{
-		label: 'Add device',
-		icon: 'pi pi-plus',
-		command: () => {
-			window.document.getElementById('AddDevice')?.click()
-		}
-	},
-	{
-		label: 'Reset',
-		icon: 'pi pi-refresh',
-		command: reset
-	},
-	{
-		label: 'Step',
-		icon: 'pi pi-step-forward',
-		command: step
-	},
-	{
-		label: 'Run',
-		icon: checked.value ? 'pi pi-stop' : 'pi pi-play',
-		command: function () {
-			checked.value = !checked.value
-			this.icon = checked.value ? 'pi pi-stop' : 'pi pi-play'
-			this.label = checked.value ? 'Stop' : 'Run'
-		}
-	}
-])
+const speerOptions = ['slow', 'normal', 'fast']
+
 </script>
 
 <template>
-	<div :class="[$style.control, 'control']">
+	<header :class="[$style.control, 'control']">
 		<InputGroup style="width:auto">
 			<ToggleButton
 				v-model="checked"
@@ -94,9 +89,24 @@ const items = ref([
 				offIcon="pi pi-play"
 			/>
 			<Button icon="pi pi-step-forward" @click="step" label="Step"/>
+			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield"/>
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset"/>
 			<AddDevice id="AddDevice"/>
+			<Button icon="pi pi-share-alt" @click="share" severity="secondary"/>
+			<OverlayPanel ref="op">
+				<div class="flex flex-column gap-3 w-25rem">
+					<div>
+						<span class="font-medium text-900 block mb-2">Share</span>
+						<InputGroup>
+							<InputText :value="data" readonly
+									   class="w-25rem"></InputText>
+							<Button icon="pi pi-copy" @click="copy"/>
+						</InputGroup>
+					</div>
+				</div>
+			</OverlayPanel>
 		</InputGroup>
+
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic"/>
 		</div>
@@ -105,12 +115,15 @@ const items = ref([
 			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText"
 					   v-model="hashText" style="max-width: 200px"/>
 		</InputGroup>
-	</div>
-	<SpeedDial :tooltipOptions="{ position: 'right',event:'hover' }" :model="items" direction="up" :class="$style.dial"/>
+	</header>
 </template>
 
 <style module lang="scss">
 .control {
+	z-index:999;
+	background-color: #121212;
+	top: 0;
+	position: sticky;
 	display: flex;
 	justify-content: space-between;
 	align-items: stretch;
