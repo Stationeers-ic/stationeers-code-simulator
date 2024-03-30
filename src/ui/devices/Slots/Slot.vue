@@ -15,8 +15,9 @@ const deviceName = ref("")
 onMounted(async () => {
 	image.value = (await data.getimages())?.["SlotType." + props.data.SlotType]
 	const slotIndex = props.data.SlotIndex.toString()
-	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`)
+	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`) // восстановление предмета
 	item.value = (await data.getItems()).find((e) => e.PrefabHash === itemHash) ?? null
+	itemCount.value = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`) // восстановление количества
 	deviceName.value =
 		ic10.getEnv().devicesAttached.get(props.deviceId) ??
 		ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ??

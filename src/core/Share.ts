@@ -51,7 +51,16 @@ export async function load(dump: any): Promise<true> {
 
 			ic10.getEnv().devices.clear()
 			for (const [key, value] of Object.entries(restored.devices)) {
-				ic10.getEnv().appendDevice(value.PrefabHash, value.Name, +key)
+				const id = ic10.getEnv().appendDevice(value.PrefabHash, value.Name, +key)
+
+				const slots = z.record(z.record(z.number())).safeParse(value?.Slots)
+				if (slots.success) {
+					for (const [index, slot] of Object.entries(slots.data)) {
+						for (const [name, val] of Object.entries(slot)) {
+							ic10.getEnv().setDeviceProp(id, `Slots.${index}.${name}`, val)
+						}
+					}
+				}
 			}
 			ic10.getEnv().devicesAttached.clear()
 			for (const [key, value] of Object.entries(restored.devicesAttached)) {

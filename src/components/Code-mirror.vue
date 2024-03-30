@@ -47,13 +47,13 @@ const opt: hoverOptions = {
 	callback: (word: string, text: string | null, line): string | null => {
 		const env = interpretator.getEnv()
 		let new_text = null
-		const unAlias = env.getAlias(word)
+		const unAlias = env.getAlias(word, true)
 		if (Device.safeParse(unAlias).success) {
 			new_text = env.isPortConnected(unAlias) ? "🟢 connected" : "🔴 disconnected"
 		} else if (Register.safeParse(unAlias).success) {
 			new_text = env.get(unAlias)
 		} else {
-			const l = env.getLine(line - 1)
+			const l = env.getLine(line - 1, true)
 			if (l) {
 				let label: string | undefined = undefined
 				let deviceId: string | undefined = undefined
@@ -62,13 +62,13 @@ const opt: hoverOptions = {
 				switch (l.fn) {
 					case "s":
 						label = l.args[0].toString()
-						unAlias = env.getAlias(label)
+						unAlias = env.getAlias(label, true)
 						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[1].toString()
 						break
 					case "l":
 						label = l.args[1].toString()
-						unAlias = env.getAlias(label)
+						unAlias = env.getAlias(label, true)
 						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[2].toString()
 						break

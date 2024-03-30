@@ -20,11 +20,11 @@ function updatePorts() {
 	;["db", "d0", "d1", "d2", "d3", "d4", "d5"].forEach((port) => {
 		if (ic10.getEnv().devicesAttached.get(port) === props.id) {
 			ports.value.push(port)
-			ic10.getEnv()
-				.reverseAlias(port)
-				.forEach((p) => {
-					ports.value.push(p)
-				})
+			ic10.getEnv().preAlias.forEach((value, key) => {
+				if (value === port) {
+					ports.value.push(key)
+				}
+			})
 		}
 	})
 }

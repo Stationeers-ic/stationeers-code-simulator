@@ -19,6 +19,7 @@ class HCF extends Err {
 
 class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 	public yieldMode: boolean = false
+	public preAlias: Map<string, string | number> = new Map<string, string>()
 
 	constructor() {
 		super()
@@ -29,17 +30,25 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		this.attachDevice(id, "db")
 		this.deviceNames.set(id, "Circuit Housing")
 		this.deviceNames.set("Circuit Housing", id)
+		this.setDeviceProp(id, "Slots.0.OccupantHash", -744098481)
+		this.setDeviceProp(id, "Slots.0.Occupied", 1)
+		this.setDeviceProp(id, "Slots.0.Quantity", 1)
 		this.reset()
 	}
 
 	public deviceNames: Map<string, string> = new Map<string, string>()
 
 	prepare() {
+		this.preAlias.clear()
 		this.lines
 			.filter((l) => l?.fn === "alias")
 			.forEach((l) => {
-				l?.run()
+				if (l?.args[0] && l?.args[1]) {
+					//@ts-ignore
+					this.preAlias.set(l?.args[0], l?.args[1])
+				}
 			})
+		this.emit("update")
 	}
 
 	reset() {
@@ -123,11 +132,16 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		return super.hcf()
 	}
 
-	getAlias(alias: string): string {
+	getAlias(alias: string, pre = false): string {
 		if (this.aliases.has(alias)) {
 			const val = this.aliases.get(alias)
 			if (z.string().safeParse(val).success) {
 				return val as string
+			}
+		}
+		if (pre) {
+			if (this.preAlias.has(alias)) {
+				return this.preAlias.get(alias) as string
 			}
 		}
 		return alias
