@@ -5,6 +5,7 @@ import { saveToBrowser } from "../core/Save.ts"
 
 const visible = defineModel()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
+const invalid = ref(false)
 const toast = useToast()
 onMounted(() => {
 	scripName.value = localStorage.getItem("currentScriptName") ?? ""
@@ -23,7 +24,15 @@ const saveAsFile = () => {
 const share = () => {
 	close()
 }
+watch(scripName, () => {
+	invalid.value = false
+})
+
 const save = () => {
+	if (!scripName.value) {
+		invalid.value = true
+		return
+	}
 	saveToBrowser(scripName.value)
 	toast.add({ severity: "success", summary: "Saved!", detail: "Saved to Browser", life: 3000 })
 	close()
@@ -39,7 +48,14 @@ const save = () => {
 	>
 		<div class="flex align-items-center gap-3 mb-3">
 			<label for="username" class="font-semibold w-6rem">Script Name</label>
-			<InputText id="username" v-model="scripName" class="flex-auto" autocomplete="off" />
+			<InputText
+				id="username"
+				v-model="scripName"
+				:invalid="invalid"
+				class="flex-auto"
+				autocomplete="off"
+				required
+			/>
 		</div>
 		<div class="flex justify-content-end gap-2">
 			<Button type="button" label="Cancel" severity="secondary" @click="close"></Button>

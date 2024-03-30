@@ -37,7 +37,7 @@ onMounted(async () => {
 			:loading="loading"
 			optionLabel="name"
 			optionValue="value"
-			placeholder="Select a device"
+			placeholder="Select a item"
 			class="w-full md:w-14rem"
 		>
 			<template #option="slotProps">

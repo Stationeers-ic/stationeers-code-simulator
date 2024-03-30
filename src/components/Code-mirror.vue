@@ -9,14 +9,8 @@ import { Device, Register } from "ic10/zodTypes"
 import { onBeforeUnmount, onMounted, watch } from "vue"
 import { EditorView } from "codemirror"
 
-watch(
-	() => codeStore.code,
-	(newVal) => {
-		interpretator.setCode(newVal)
-	},
-)
 onMounted(() => {
-	codeStore.code = localStorage.getItem("code") || ""
+	codeStore.code = interpretator.code
 	interpretator.getEnv().on("update_code", () => {
 		codeStore.code = interpretator.code
 	})

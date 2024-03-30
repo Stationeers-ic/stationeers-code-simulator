@@ -1,11 +1,57 @@
-import { dump } from "./Share.ts"
+import { dump, load } from "./Share.ts"
 import { z } from "zod"
 
-export function load() {}
+export async function startupLoad(): Promise<string | false> {
+	if (!(await loadFromUrl())) {
+		if (await loadFromBrowser()) {
+			return "from browser"
+		}
+		return false
+	}
+	return "from url"
+}
 
-export function saveToBrowser(name: string) {
+export async function loadFromString(string: string): Promise<boolean> {
+	await load(string)
+	return true
+}
+
+async function loadFromUrl(): Promise<boolean> {
+	if (document.location.hash.slice(1).length > 0) {
+		await loadFromString(document.location.hash.slice(1))
+		setTimeout(() => {
+			document.location.hash = ""
+		}, 500)
+		return true
+	}
+	return false
+}
+
+async function loadFromBrowser(): Promise<boolean> {
+	const name = window.localStorage.getItem("currentScriptName")
+	if (name) {
+		const data = window.localStorage.getItem(name)
+		if (data) {
+			return await load(data)
+		}
+	}
+	return false
+}
+
+export async function loadFromFile(): Promise<boolean> {
+	return true
+}
+
+export function saveToBrowser(name?: string) {
+	if (name == undefined) {
+		name = window.localStorage.getItem("currentScriptName") ?? undefined
+	}
+	if (name == undefined) {
+		throw new Error("Needed script name, use ctrl+shift+s for set")
+	}
 	const saveData = dump()
 	addSaveSlot(name)
+	console.log(name)
 	window.localStorage.setItem(name, saveData)
 }
 
@@ -14,10 +60,13 @@ export function removeFromBrowser(name: string) {
 	window.localStorage.removeItem(name)
 }
 
-function addSaveSlot(name: string) {
+function addSaveSlot(name: string, setCurrent = true) {
 	const ScriptNames = new Set(z.array(z.string()).parse(JSON.parse(localStorage.getItem("ScriptNames") ?? "[]")))
 	ScriptNames.add(name)
 	window.localStorage.setItem("ScriptNames", JSON.stringify(Array.from(ScriptNames)))
+	if (setCurrent) {
+		window.localStorage.setItem("currentScriptName", name)
+	}
 }
 
 function removeSaveSlot(name: string) {

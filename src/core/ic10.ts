@@ -20,7 +20,6 @@ export class Ic10 extends InterpreterIc10 {
 	setCode(code: string): this {
 		this.getEnv().lines = []
 		super.setCode(code)
-		localStorage.setItem("code", code)
 		this.getEnv().emit("update_code")
 		this.getEnv().prepare()
 		return this

@@ -8,7 +8,7 @@ import Raw from "./components/Raw.vue"
 import Devises from "./components/Devises.vue"
 import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import isHotkey from "is-hotkey"
-import { dump, load } from "./core/Share.ts"
+import { dump } from "./core/Share.ts"
 import { useToast } from "primevue/usetoast"
 import { MenuItem } from "primevue/menuitem"
 import ButtonFrame from "./ui/ButtonFrame.vue"
@@ -17,6 +17,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import clipboard from "web-clipboard"
 import delay from "delay"
 import SaveDialog from "./ui/SaveDialog.vue"
+import { saveToBrowser, startupLoad } from "./core/Save.ts"
 
 dayjs.extend(relativeTime)
 const isSaveHotkey = isHotkey("mod+s")
@@ -27,14 +28,13 @@ const saveDialogOpen = ref(false)
 const openDialogOpen = ref(false)
 const toast = useToast()
 
-const HotKeyHandler = async (e) => {
+const HotKeyHandler = async (e: any) => {
 	if (isSaveHotkey(e)) {
 		e.preventDefault()
 		await delay(200)
 		console.log("save")
 		try {
-			lastDump.value = dump()
-			await clipboard.write(lastDump.value)
+			saveToBrowser()
 			toast.add({ severity: "success", summary: "Saved!", detail: "Saved to clipboard", life: 3000 })
 		} catch (e: any) {
 			toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
@@ -60,37 +60,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	window.document.removeEventListener("keydown", HotKeyHandler)
 })
-watch(
-	() => document.location.hash,
-	() => {
-		if (lastDump.value !== document.location.hash) {
-			load(document.location.hash.slice(1))
-				.then(() => {
-					toast.add({ severity: "success", summary: "Loaded", detail: "load data from url", life: 500 })
-
-					setTimeout(() => {
-						document.location.hash = ""
-					}, 500)
-				})
-				.catch((e) => {
-					toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
-				})
+startupLoad()
+	.then((from) => {
+		if (from) {
+			toast.add({ severity: "success", summary: "Loaded", detail: `load data ${from}`, life: 3000 })
 		}
-	},
-)
-if (document.location.hash.slice(1).length > 0) {
-	load(document.location.hash.slice(1))
-		.then(() => {
-			toast.add({ severity: "success", summary: "Loaded", detail: "load data from url", life: 3000 })
-
-			setTimeout(() => {
-				document.location.hash = ""
-			}, 500)
-		})
-		.catch((e) => {
-			toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
-		})
-}
+	})
+	.catch((e) => {
+		toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
+	})
 
 const social = ref<MenuItem[]>([
 	{

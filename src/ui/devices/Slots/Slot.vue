@@ -81,7 +81,7 @@ watch(itemCount, sync)
 		<div class="flex flex-column gap-2">
 			<InputGroup>
 				<InputGroupAddon> Count</InputGroupAddon>
-				<InputNumber showButtons buttonLayout="horizontal" :min="1" :step="1" v-model="itemCount">
+				<InputNumber showButtons buttonLayout="horizontal" :min="0" :step="1" v-model="itemCount">
 					<template #incrementbuttonicon>
 						<span class="pi pi-plus" />
 					</template>
