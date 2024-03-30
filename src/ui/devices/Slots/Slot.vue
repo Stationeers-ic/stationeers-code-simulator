@@ -1,38 +1,41 @@
 <script setup lang="ts">
-import data, {Item, Slot} from "../../../core/Data.ts";
-import {z} from "zod";
-import {onMounted, ref, watch} from "vue";
-import ic10 from "../../../core/ic10.ts";
-import ItemSelect from "./ItemSelect.vue";
-import Button from "primevue/button";
+import data, {Item, Slot} from "../../../core/Data.ts"
+import {z} from "zod"
+import {onMounted, ref, watch} from "vue"
+import ic10 from "../../../core/ic10.ts"
+import ItemSelect from "./ItemSelect.vue"
+import Button from "primevue/button"
 
-const props = defineProps(['data', 'deviceId']) as Readonly<{ data: z.infer<typeof Slot>, deviceId: string }>
-const image = ref('')
+const props = defineProps(["data", "deviceId"]) as Readonly<{ data: z.infer<typeof Slot>; deviceId: string }>
+const image = ref("")
 const itemCount = ref(0)
 const item = ref<Item | null>(null)
-const deviceName = ref('')
+const deviceName = ref("")
 onMounted(async () => {
-	image.value = (await data.getimages())?.["SlotType." + props.data.SlotType];
-	const slotIndex = props.data.SlotIndex.toString();
+	image.value = (await data.getimages())?.["SlotType." + props.data.SlotType]
+	const slotIndex = props.data.SlotIndex.toString()
 	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`)
-	item.value = (await data.getItems()).find((e => e.PrefabHash === itemHash)) ?? null
-	deviceName.value = ic10.getEnv().devicesAttached.get(props.deviceId) ?? ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ?? await getPrefabName();
+	item.value = (await data.getItems()).find((e) => e.PrefabHash === itemHash) ?? null
+	deviceName.value =
+		ic10.getEnv().devicesAttached.get(props.deviceId) ??
+		ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ??
+		(await getPrefabName())
 })
 
 async function getPrefabName() {
 	const devicesData = await data.getDevices()
 	const PrefabHash = ic10.getEnv().devices.get(props.deviceId)?.PrefabHash
 	const deviceData = devicesData.find((d) => d.PrefabHash === PrefabHash) ?? null
-	return deviceData?.PrefabName?.toString() ?? ''
+	return deviceData?.PrefabName?.toString() ?? ""
 }
 
 const visible = ref(false)
 
 watch(item, async (newVal) => {
-	const slotIndex = props.data.SlotIndex.toString();
+	const slotIndex = props.data.SlotIndex.toString()
 	if (newVal) {
 		if (itemCount.value <= 0) {
-			itemCount.value = 1;
+			itemCount.value = 1
 		}
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, newVal.PrefabHash)
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Occupied`, 1)
@@ -45,42 +48,41 @@ watch(item, async (newVal) => {
 })
 
 watch(itemCount, async (newVal) => {
-	const slotIndex = props.data.SlotIndex.toString();
+	const slotIndex = props.data.SlotIndex.toString()
 	if (newVal) {
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, newVal)
 	} else {
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, 0)
 	}
 })
-
 </script>
 
 <template>
 	<div class="slot" @click="visible = true">
-		<img loading="lazy" class="item" v-if="item?.image" :src="item.image" :alt="item.PrefabName"/>
-		<img loading="lazy" class="back" v-else-if="image" :src="image" :alt="props.data.SlotType"/>
+		<img loading="lazy" class="item" v-if="item?.image" :src="item.image" :alt="item.PrefabName" />
+		<img loading="lazy" class="back" v-else-if="image" :src="image" :alt="props.data.SlotType" />
 		<span class="id">{{ props.data.SlotIndex }}</span>
 		<span class="count">{{ itemCount }}</span>
 	</div>
 
-	<Dialog v-model:visible="visible" modal :header="`Edit slot #${props.data.SlotIndex} in device '${deviceName}'`"
-			:style="{ width: '25rem' }">
+	<Dialog
+		v-model:visible="visible"
+		modal
+		:header="`Edit slot #${props.data.SlotIndex} in device '${deviceName}'`"
+		:style="{ width: '25rem' }"
+	>
 		<div class="flex flex-column gap-2">
 			<InputGroup>
-				<ItemSelect v-model="item"/>
-				<Button severity="danger" icon="pi pi-minus-circle" @click="item = null"/>
+				<ItemSelect v-model="item" />
+				<Button severity="danger" icon="pi pi-minus-circle" @click="item = null" />
 			</InputGroup>
 		</div>
 		<div class="flex flex-column gap-2">
 			<InputGroup>
-				<InputGroupAddon>
-					Count
-				</InputGroupAddon>
-				<InputNumber min="1" step="1" v-model="itemCount"/>
+				<InputGroupAddon> Count </InputGroupAddon>
+				<InputNumber min="1" step="1" v-model="itemCount" />
 			</InputGroup>
-
 		</div>
-
 
 		<div class="flex justify-content-end gap-2">
 			<Button type="button" label="Close" severity="secondary" @click="visible = false"></Button>
@@ -132,7 +134,6 @@ watch(itemCount, async (newVal) => {
 		position: absolute;
 		top: 2px;
 		left: 3px;
-
 	}
 }
 </style>

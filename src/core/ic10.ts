@@ -1,36 +1,36 @@
-import {InterpreterIc10} from "ic10";
-import Env from "./Env.ts";
-import {reactive} from "vue";
+import {InterpreterIc10} from "ic10"
+import Env from "./Env.ts"
+import {reactive} from "vue"
 
 export class Ic10 extends InterpreterIc10 {
-	private static instance: Ic10;
+	private static instance: Ic10
 
 	static getInstance() {
 		if (!this.instance) {
-			this.instance = new Ic10();
+			this.instance = new Ic10()
 		}
 		return this.instance
 	}
 
 	private constructor() {
 		//@ts-ignore
-		super(reactive(new Env), "");
+		super(reactive(new Env()), "")
 	}
 
 	setCode(code: string): this {
 		this.getEnv().lines = []
-		super.setCode(code);
-		localStorage.setItem('code', code)
-		this.getEnv().emit('update_code')
+		super.setCode(code)
+		localStorage.setItem("code", code)
+		this.getEnv().emit("update_code")
 		this.getEnv().prepare()
-		return this;
+		return this
 	}
 
 	public reset() {
 		// this.getEnv().reset()
 		this.getEnv().errors = []
 		this.setCode(this.code)
-		this.getEnv().emit('update')
+		this.getEnv().emit("update")
 	}
 
 	public getEnv(): Env {
@@ -39,9 +39,8 @@ export class Ic10 extends InterpreterIc10 {
 
 	async run(codeLines?: number, dryRun?: number): Promise<string> {
 		this.reset()
-		return await super.run(codeLines, dryRun);
+		return await super.run(codeLines, dryRun)
 	}
-
 }
 
 declare global {

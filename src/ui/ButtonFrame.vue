@@ -1,21 +1,20 @@
 <script setup lang="ts">
+import Button from "primevue/button"
+import {HintedString} from "primevue/ts-helpers"
+import {ref} from "vue"
 
-import Button from "primevue/button";
-import {HintedString} from "primevue/ts-helpers";
-import {ref} from "vue";
-
-const porps = defineProps(['class', 'icon', 'severity', 'click']) as Readonly<{
-	click: (event: any) => void,
-	class?: any,
-	icon?: string | undefined,
-	severity?: HintedString<'secondary' | 'success' | 'info' | 'warning' | 'help' | 'danger' | 'contrast'> | undefined;
+const porps = defineProps(["class", "icon", "severity", "click"]) as Readonly<{
+	click: (event: any) => void
+	class?: any
+	icon?: string | undefined
+	severity?: HintedString<"secondary" | "success" | "info" | "warning" | "help" | "danger" | "contrast"> | undefined
 }>
-const op = ref();
+const op = ref()
 let toggle = (event: any) => {
-	op.value.toggle(event);
+	op.value.toggle(event)
 }
 if (porps.click) {
-	toggle = porps.click;
+	toggle = porps.click
 }
 </script>
 
@@ -36,6 +35,4 @@ if (porps.click) {
 	</OverlayPanel>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>

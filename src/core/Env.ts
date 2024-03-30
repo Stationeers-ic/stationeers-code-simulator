@@ -1,7 +1,7 @@
-import {DevEnv, Err, hash as Hash, Line} from "ic10";
-import {reactive} from "vue";
-import {settingStore} from "../store";
-import {z} from "zod";
+import {DevEnv, Err, hash as Hash, Line} from "ic10"
+import {reactive} from "vue"
+import {settingStore} from "../store"
+import {z} from "zod"
 
 class HCF extends Err {
 	constructor(
@@ -17,27 +17,29 @@ class HCF extends Err {
 	}
 }
 
-class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
-	public yieldMode: boolean = false;
+class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
+	public yieldMode: boolean = false
 
 	constructor() {
-		super();
+		super()
 		this.data = reactive({})
 		this.stack = reactive([])
 		this.devices = reactive(new Map())
-		const id = this.appendDevice(-128473777, Hash('Circuit Housing'))
-		this.attachDevice(id, 'db')
-		this.deviceNames.set(id, 'Circuit Housing')
-		this.deviceNames.set('Circuit Housing', id)
+		const id = this.appendDevice(-128473777, Hash("Circuit Housing"))
+		this.attachDevice(id, "db")
+		this.deviceNames.set(id, "Circuit Housing")
+		this.deviceNames.set("Circuit Housing", id)
 		this.reset()
 	}
 
-	public deviceNames: Map<string, string> = new Map<string, string>();
+	public deviceNames: Map<string, string> = new Map<string, string>()
 
 	prepare() {
-		this.lines.filter((l) => l?.fn === 'alias').forEach((l) => {
-			l?.run()
-		})
+		this.lines
+			.filter((l) => l?.fn === "alias")
+			.forEach((l) => {
+				l?.run()
+			})
 	}
 
 	reset() {
@@ -48,7 +50,26 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		for (const dataKey in this.data) {
 			delete this.data[dataKey]
 		}
-		for (const key of ['r0', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'r13', 'r14', 'r15', 'r16', 'r17']) {
+		for (const key of [
+			"r0",
+			"r1",
+			"r2",
+			"r3",
+			"r4",
+			"r5",
+			"r6",
+			"r7",
+			"r8",
+			"r9",
+			"r10",
+			"r11",
+			"r12",
+			"r13",
+			"r14",
+			"r15",
+			"r16",
+			"r17",
+		]) {
 			this.data[key] = 0
 		}
 		for (let i = 0; i < 512; i++) {
@@ -58,40 +79,38 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 
 	reverseAlias(alias: string): string[] {
 		const out: string[] = []
-		this.aliases.forEach((value, key,) => {
+		this.aliases.forEach((value, key) => {
 			if (value == alias) {
 				out.push(key)
 			}
 		})
-		return out;
+		return out
 	}
 
-	async beforeLineRun(_line: Line): Promise<void> {
-
-	}
+	async beforeLineRun(_line: Line): Promise<void> {}
 
 	async afterLineRun(_line?: Line): Promise<void> {
-		this.emit('update')
+		this.emit("update")
 		if (this.yieldMode) {
 			return
 		}
-		const db = this.devicesAttached.get('db')
+		const db = this.devicesAttached.get("db")
 		if (db) {
 			this.setDeviceProp(db, "LineNumber", this.getPosition())
 			this.setDeviceProp(db, "Error", this.getErrorCount() > 0 ? 1 : 0)
 		}
 		return await new Promise<void>((resolve) => {
-			let delay = 300;
+			let delay = 300
 			switch (settingStore.delay) {
 				case "fast":
-					delay = 20;
-					break;
+					delay = 20
+					break
 				case "normal":
-					delay = 300;
-					break;
+					delay = 300
+					break
 				case "slow":
-					delay = 1000;
-					break;
+					delay = 1000
+					break
 			}
 			setTimeout(() => {
 				resolve()
@@ -101,7 +120,7 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 
 	hcf(): this {
 		this.throw(new HCF("HCF", "info", this.getPosition()))
-		return super.hcf();
+		return super.hcf()
 	}
 
 	getAlias(alias: string): string {
@@ -115,15 +134,15 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 	}
 
 	appendDevice(hash: number, name?: number, id?: number): string {
-		const out = super.appendDevice(hash, name, id);
-		this.emit('update')
-		return out;
+		const out = super.appendDevice(hash, name, id)
+		this.emit("update")
+		return out
 	}
 
 	removeDevice(id: string): this {
-		super.removeDevice(id);
-		this.emit('update')
-		return this;
+		super.removeDevice(id)
+		this.emit("update")
+		return this
 	}
 
 	attachDevice(id: string, port: string): this {
@@ -138,8 +157,8 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 		this.devicesAttached.set(port, id)
 		this.devicesAttached.set(id, port)
 
-		this.emit('update')
-		return this;
+		this.emit("update")
+		return this
 	}
 
 	detachDevice(id: string, port?: string): this {
@@ -158,22 +177,21 @@ class Env extends DevEnv<{ update: () => void, update_code: () => void }> {
 			})
 		}
 
-		this.emit('update')
-		return this;
+		this.emit("update")
+		return this
 	}
 
 	getErrorCount(): number {
-		return this.errors.filter((e) => e.level == 'error').length
+		return this.errors.filter((e) => e.level == "error").length
 	}
 
 	throw(err: Err): this {
 		err.lineStart = err.lineStart ?? this.getPosition()
 		this.errors.push(err)
 		this.emit(err.level, err)
-		this.emit('update')
+		this.emit("update")
 		return this
 	}
 }
 
-export default Env;
-
+export default Env

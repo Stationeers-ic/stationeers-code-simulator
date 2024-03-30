@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ic10 from "../core/ic10.ts";
-import StackInput from "../ui/StackInput.vue";
+import ic10 from "../core/ic10.ts"
+import StackInput from "../ui/StackInput.vue"
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import StackInput from "../ui/StackInput.vue";
 		<h3>Stack</h3>
 		<div :class="$style.stackContent">
 			<div :class="$style.stackItem" v-for="(_, index) in ic10.getEnv().stack">
-				<StackInput :name="index" v-model="ic10.getEnv().stack[index]"/>
+				<StackInput :name="index" v-model="ic10.getEnv().stack[index]" />
 			</div>
 		</div>
 	</div>
@@ -28,7 +28,7 @@ import StackInput from "../ui/StackInput.vue";
 
 	.stackItem {
 		max-width: 80px;
-		height: 32px
+		height: 32px;
 	}
 }
 </style>
