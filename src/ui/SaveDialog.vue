@@ -2,6 +2,8 @@
 import { onMounted, ref, watch } from "vue"
 import { useToast } from "primevue/usetoast"
 import { saveToBrowser } from "../core/Save.ts"
+import clipboard from "web-clipboard"
+import { dump } from "../core/Share.ts"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
@@ -19,9 +21,15 @@ const close = () => {
 	visible.value = false
 }
 const saveAsFile = () => {
+	toast.add({ severity: "warn", summary: "Download", detail: "Coming soon" })
+
 	close()
 }
 const share = () => {
+	const url = new URL(document.location.href)
+	url.hash = dump()
+	clipboard.write(url.toString())
+	toast.add({ severity: "success", summary: "Share", detail: "Copied to clipboard" })
 	close()
 }
 watch(scripName, () => {

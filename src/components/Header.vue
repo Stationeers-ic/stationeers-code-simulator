@@ -20,7 +20,7 @@ routes.forEach((item) => {
 			/>
 		</template>
 		<template #item="{ item, props }">
-			<RouterLink v-ripple v-bind="props.action" :active-class="$style.active" :to="item.url">
+			<RouterLink v-ripple v-bind="props.action" :active-class="$style.active" v-if="item.url" :to="item.url">
 				<i :class="item.icon" class="mr-1" />
 				<span>{{ item.label }}</span>
 			</RouterLink>
