@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const visible = defineModel()
+const visible = defineModel<boolean>()
 </script>
 
 <template>

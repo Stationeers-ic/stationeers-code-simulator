@@ -47,7 +47,7 @@ const opt: hoverOptions = {
 		} else if (Register.safeParse(unAlias).success) {
 			new_text = env.get(unAlias)
 		} else {
-			const l = env.getLine(line - 1, true)
+			const l = env.getLine(line - 1)
 			if (l) {
 				let label: string | undefined = undefined
 				let deviceId: string | undefined = undefined

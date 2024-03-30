@@ -114,21 +114,20 @@ import TreeSelect from "primevue/treeselect"
 import TreeTable from "primevue/treetable"
 import TriStateCheckbox from "primevue/tristatecheckbox"
 import VirtualScroller from "primevue/virtualscroller"
-import { createRouter, createWebHistory } from "vue-router"
 import "./core/Share.ts"
+import router from "./router.ts"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+dayjs.extend(relativeTime)
+declare global {
+	interface Window {
+		dayjs: typeof dayjs
+	}
+}
+window.dayjs = dayjs
 
-const routes = [
-	{
-		path: "/scs",
-		component: App,
-	},
-]
-
-const router = createRouter({
-	history: createWebHistory(),
-	routes,
-})
 const app = createApp(App)
+
 app.use(router)
 app.use(PrimeVue, { ripple: true })
 app.use(ConfirmationService)
@@ -140,7 +139,9 @@ app.directive("ripple", Ripple)
 app.directive("styleclass", StyleClass)
 app.directive("focustrap", FocusTrap)
 app.directive("animateonscroll", AnimateOnScroll)
+//my components
 
+//Prime components
 app.component("Accordion", Accordion)
 app.component("AccordionTab", AccordionTab)
 app.component("AutoComplete", AutoComplete)

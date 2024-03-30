@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from "vue"
 import { useToast } from "primevue/usetoast"
 import { saveToBrowser } from "../core/Save.ts"
 
-const visible = defineModel()
+const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
 const invalid = ref(false)
 const toast = useToast()
