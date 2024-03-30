@@ -18,6 +18,7 @@ import clipboard from "web-clipboard"
 import delay from "delay"
 import SaveDialog from "./ui/SaveDialog.vue"
 import { saveToBrowser, startupLoad } from "./core/Save.ts"
+import Settingbar from "./components/Settingbar.vue"
 
 dayjs.extend(relativeTime)
 const isSaveHotkey = isHotkey("mod+s")
@@ -97,6 +98,7 @@ setInterval(() => {
 
 <template>
 	<Toast />
+	<Settingbar />
 	<SaveDialog v-model="saveDialogOpen"></SaveDialog>
 	<div class="app-container">
 		<div class="code">
