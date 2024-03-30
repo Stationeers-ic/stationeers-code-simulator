@@ -9,6 +9,7 @@ import { settingStore } from "../store"
 import AddDevice from "../ui/AddDevice.vue"
 import { dump } from "../core/Share.ts"
 import clipboard from "web-clipboard"
+import { emit } from "../core/Events.ts"
 
 const checked = ref(false)
 const hashText = ref("")
@@ -45,7 +46,7 @@ const reset = () => {
 }
 
 const saveDialogOpen = () => {
-	window.document.dispatchEvent(new Event("saveDialogOpen"))
+	emit("saveDialogOpen")
 }
 const step = async () => {
 	ic10.getEnv().yieldMode = false

@@ -14,6 +14,7 @@ import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
 import { saveToBrowser, startupLoad } from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
+import { off, on } from "../core/Events.ts"
 
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
@@ -50,11 +51,11 @@ const HotKeyHandler = async (e: any) => {
 
 onMounted(() => {
 	window.document.addEventListener("keydown", HotKeyHandler)
-	window.document.addEventListener("saveDialogOpen", tt)
+	on("saveDialogOpen", tt)
 })
 onBeforeUnmount(() => {
 	window.document.removeEventListener("keydown", HotKeyHandler)
-	window.document.removeEventListener("saveDialogOpen", tt)
+	off("saveDialogOpen", tt)
 })
 startupLoad()
 	.then((from) => {

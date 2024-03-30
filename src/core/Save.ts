@@ -1,5 +1,6 @@
 import { dump, load } from "./Share.ts"
 import { z } from "zod"
+import { emit } from "./Events.ts"
 
 export async function startupLoad(): Promise<string | false> {
 	if (!(await loadFromUrl())) {
@@ -53,14 +54,16 @@ export function saveToBrowser(name?: string) {
 	addSaveSlot(name)
 	console.log(name)
 	window.localStorage.setItem(name, saveData)
+	emit("saveUpdate")
 }
 
 export function removeFromBrowser(name: string) {
 	removeSaveSlot(name)
 	window.localStorage.removeItem(name)
+	emit("saveUpdate")
 }
 
-function getScriptNames() {
+export function getScriptNames() {
 	return new Set(z.array(z.string()).parse(JSON.parse(localStorage.getItem("ScriptNames") ?? "[]")))
 }
 
@@ -83,9 +86,14 @@ function removeSaveSlot(name: string) {
 	setScriptNames(ScriptNames)
 }
 
-export function setActiveSaveSlot(name: string) {
+export async function setActiveSaveSlot(name: string) {
 	const ScriptNames = getScriptNames()
 	if (ScriptNames.has(name)) {
 		window.localStorage.setItem("currentScriptName", name)
+		await load(window.localStorage.getItem(name))
 	}
+}
+
+export function getActiveSaveSlot(): string | null {
+	return window.localStorage.getItem("currentScriptName")
 }

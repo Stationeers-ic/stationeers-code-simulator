@@ -1,12 +1,63 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from "vue"
+import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
+import { off, on } from "../core/Events.ts"
+
 const visible = defineModel<boolean>()
+const saves = ref<Array<{ name: string }>>([])
+const active = ref<string | null>(null)
+const update = () => {
+	saves.value = Array.from(getScriptNames()).map((name) => {
+		return { name: name }
+	})
+	active.value = getActiveSaveSlot()
+}
+
+onMounted(() => {
+	update()
+	on("saveUpdate", update)
+})
+onBeforeUnmount(() => {
+	off("saveUpdate", update)
+})
+
+const setActive = async () => {
+	if (active.value) {
+		await setActiveSaveSlot(active.value)
+	}
+}
+
+const remove = (event: any, name: string) => {
+	event.preventDefault()
+	removeFromBrowser(name)
+}
 </script>
 
 <template>
 	<div class="settingButton" @click="visible = true" />
 	<div class="card flex justify-content-center">
-		<Sidebar v-model:visible="visible" header="Sidebar">
-			<p></p>
+		<Sidebar v-model:visible="visible" header="">
+			<p>Saves</p>
+			<Listbox
+				v-model="active"
+				:options="saves"
+				@change="setActive"
+				filter
+				optionLabel="name"
+				optionValue="name"
+				class="w-full md:w-14rem"
+			>
+				<template #option="slotProps">
+					<div class="saveItem">
+						<div>{{ slotProps.option.name }}</div>
+						<Button
+							icon="pi pi-minus-circle"
+							severity="danger"
+							@click="remove($event, slotProps.option.name)"
+						/>
+					</div>
+				</template>
+			</Listbox>
 		</Sidebar>
 	</div>
 </template>
@@ -36,6 +87,13 @@ const visible = defineModel<boolean>()
 		background: #6ee7b7;
 		color: #020617;
 		border-color: #6ee7b7;
+	}
+}
+.saveItem {
+	display: flex;
+	justify-content: space-between;
+	.pi-minus-circle {
+		color: #f87171;
 	}
 }
 </style>
