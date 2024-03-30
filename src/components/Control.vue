@@ -7,7 +7,6 @@ import ic10 from "../core/ic10.ts"
 import { str as hash } from "crc-32"
 import { settingStore } from "../store"
 import AddDevice from "../ui/AddDevice.vue"
-import { dump } from "../core/Share.ts"
 import clipboard from "web-clipboard"
 import { emit } from "../core/Events.ts"
 
@@ -60,11 +59,6 @@ const step = async () => {
 }
 const op = ref()
 const data = ref("")
-const share = (event: any) => {
-	document.location.hash = dump()
-	data.value = document.location.href
-	op.value.toggle(event)
-}
 const copy = () => {
 	console.log("copy")
 	clipboard.write(data.value)
