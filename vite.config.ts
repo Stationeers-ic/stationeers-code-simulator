@@ -1,6 +1,6 @@
-import {defineConfig} from "vite"
+import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
-import {spawnSync} from "child_process"
+import { spawnSync } from "child_process"
 
 // this is a lot more work than it could be
 const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {

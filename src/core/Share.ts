@@ -1,7 +1,7 @@
-import {codeStore} from "../store"
+import { codeStore } from "../store"
 import ic10 from "./ic10.ts"
 import pako from "pako"
-import {z} from "zod"
+import { z } from "zod"
 
 const dumpShema = z
 	.object({

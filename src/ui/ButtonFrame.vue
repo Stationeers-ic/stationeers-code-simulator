@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Button from "primevue/button"
-import {HintedString} from "primevue/ts-helpers"
-import {ref} from "vue"
+import { HintedString } from "primevue/ts-helpers"
+import { ref } from "vue"
 
 const porps = defineProps(["class", "icon", "severity", "click"]) as Readonly<{
 	click: (event: any) => void

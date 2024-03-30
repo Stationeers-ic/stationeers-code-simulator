@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
 import EnvInput from "../ui/EnvInput.vue"
-import {Register} from "ic10/zodTypes"
-import {z} from "zod"
+import { Register } from "ic10/zodTypes"
+import { z } from "zod"
 
 ic10.getEnv().on("after_alias", () => {
 	console.log("after_alias", ic10.getEnv().aliases)

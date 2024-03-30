@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {codeStore} from "../store"
-import {Codemirror} from "vue-codemirror"
+import { codeStore } from "../store"
+import { Codemirror } from "vue-codemirror"
 // import {lineNumbers} from '@codemirror/gutter'
-import {monokai} from "@uiw/codemirror-theme-monokai"
-import {hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers} from "codemirror-lang-ic10"
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers } from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
-import {Device, Register} from "ic10/zodTypes"
-import {onBeforeUnmount, onMounted, watch} from "vue"
-import {EditorView} from "codemirror"
+import { Device, Register } from "ic10/zodTypes"
+import { onBeforeUnmount, onMounted, watch } from "vue"
+import { EditorView } from "codemirror"
 
 watch(
 	() => codeStore.code,

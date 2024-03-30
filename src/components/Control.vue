@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {ref, watch} from "vue"
+import { ref, watch } from "vue"
 import ToggleButton from "primevue/togglebutton"
 import InputGroup from "primevue/inputgroup"
 import Button from "primevue/button"
 import ic10 from "../core/ic10.ts"
-import {str as hash} from "crc-32"
-import {settingStore} from "../store"
+import { str as hash } from "crc-32"
+import { settingStore } from "../store"
 import AddDevice from "../ui/AddDevice.vue"
-import {dump} from "../core/Share.ts"
+import { dump } from "../core/Share.ts"
 import clipboard from "web-clipboard"
 
 const checked = ref(false)

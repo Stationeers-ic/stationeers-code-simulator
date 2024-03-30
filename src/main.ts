@@ -4,7 +4,7 @@ import "primevue/resources/primevue.min.css" /* Deprecated */
 import "primeicons/primeicons.css"
 import "./style.scss"
 
-import {createApp} from "vue"
+import { createApp } from "vue"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
 import AutoComplete from "primevue/autocomplete"
@@ -114,7 +114,7 @@ import TreeSelect from "primevue/treeselect"
 import TreeTable from "primevue/treetable"
 import TriStateCheckbox from "primevue/tristatecheckbox"
 import VirtualScroller from "primevue/virtualscroller"
-import {createRouter, createWebHistory} from "vue-router"
+import { createRouter, createWebHistory } from "vue-router"
 import "./core/Share.ts"
 
 const routes = [

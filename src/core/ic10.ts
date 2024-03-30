@@ -1,6 +1,6 @@
-import {InterpreterIc10} from "ic10"
+import { InterpreterIc10 } from "ic10"
 import Env from "./Env.ts"
-import {reactive} from "vue"
+import { reactive } from "vue"
 
 export class Ic10 extends InterpreterIc10 {
 	private static instance: Ic10
