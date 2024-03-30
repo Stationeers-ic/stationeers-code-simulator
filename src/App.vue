@@ -12,7 +12,10 @@ import {dump, load} from "./core/Share.ts";
 import {useToast} from "primevue/usetoast";
 import {MenuItem} from "primevue/menuitem";
 import ButtonFrame from "./ui/ButtonFrame.vue";
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
+dayjs.extend(relativeTime)
 const isSaveHotkey = isHotkey('mod+s')
 const lastDump = ref('')
 const toast = useToast();
@@ -61,8 +64,9 @@ const social = ref<MenuItem[]>([
 		},
 	},
 ])
-const ic10 = __package__.dependencies.ic10.version
-const codemirrorLangIc10 = __package__.dependencies['codemirror-lang-ic10'].version
+const ic10 = __package__.dependencies?.ic10?.version
+const codemirrorLangIc10 = __package__.dependencies?.['codemirror-lang-ic10']?.version
+const buildTime = dayjs(__buildTime__).fromNow()
 </script>
 
 <template>
@@ -121,15 +125,32 @@ const codemirrorLangIc10 = __package__.dependencies['codemirror-lang-ic10'].vers
 			</div>
 			<!--			<span>|</span>-->
 		</div>
+		<div :class="$style.build">
+			Build: {{ buildTime }}
+		</div>
 	</footer>
 </template>
-
+<style scoped>
+footer{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+</style>
 <style module lang="scss">
+
 .footer {
+	width: 50%;
 	opacity: 0.5;
-	a{
-		color:unset
+
+	a {
+		color: unset
 	}
+}
+.build{
+	width: auto;
+	opacity: 0.5;
 }
 
 .code {

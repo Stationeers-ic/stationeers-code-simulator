@@ -13,3 +13,4 @@ declare module "vuex" {
 }
 
 declare const __package__: {dependencies: Record<string, {version: string, overridden:boolean}>};
+declare const __buildTime__: number;

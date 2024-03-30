@@ -16,5 +16,6 @@ export default defineConfig({
 	},
 	define: {
 		"__package__": stdout,
+		"__buildTime__": Date.now(),
 	},
 })

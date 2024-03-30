@@ -7,26 +7,40 @@ import ItemSelect from "./ItemSelect.vue";
 import Button from "primevue/button";
 
 const props = defineProps(['data', 'deviceId']) as Readonly<{ data: z.infer<typeof Slot>, deviceId: string }>
-console.log(props)
 const image = ref('')
 const itemCount = ref(0)
 const item = ref<Item | null>(null)
+const deviceName = ref('')
 onMounted(async () => {
 	image.value = (await data.getimages())?.["SlotType." + props.data.SlotType];
 	const slotIndex = props.data.SlotIndex.toString();
 	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`)
 	item.value = (await data.getItems()).find((e => e.PrefabHash === itemHash)) ?? null
+	deviceName.value = ic10.getEnv().devicesAttached.get(props.deviceId) ?? ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ?? await getPrefabName();
 })
+
+async function getPrefabName() {
+	const devicesData = await data.getDevices()
+	const PrefabHash = ic10.getEnv().devices.get(props.deviceId)?.PrefabHash
+	const deviceData = devicesData.find((d) => d.PrefabHash === PrefabHash) ?? null
+	return deviceData?.PrefabName?.toString() ?? ''
+}
+
 const visible = ref(false)
 
 watch(item, async (newVal) => {
 	const slotIndex = props.data.SlotIndex.toString();
 	if (newVal) {
+		if (itemCount.value <= 0) {
+			itemCount.value = 1;
+		}
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, newVal.PrefabHash)
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Occupied`, 1)
+		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, itemCount.value)
 	} else {
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, 0)
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Occupied`, 0)
+		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, 0)
 	}
 })
 
@@ -48,7 +62,9 @@ watch(itemCount, async (newVal) => {
 		<span class="id">{{ props.data.SlotIndex }}</span>
 		<span class="count">{{ itemCount }}</span>
 	</div>
-	<Dialog v-model:visible="visible" modal :header="`Edit slot ${props.data.SlotIndex}` " :style="{ width: '25rem' }">
+
+	<Dialog v-model:visible="visible" modal :header="`Edit slot #${props.data.SlotIndex} in device '${deviceName}'`"
+			:style="{ width: '25rem' }">
 		<div class="flex flex-column gap-2">
 			<InputGroup>
 				<ItemSelect v-model="item"/>
@@ -56,7 +72,13 @@ watch(itemCount, async (newVal) => {
 			</InputGroup>
 		</div>
 		<div class="flex flex-column gap-2">
-			<InputNumber v-model="itemCount"/>
+			<InputGroup>
+				<InputGroupAddon>
+					Count
+				</InputGroupAddon>
+				<InputNumber min="1" step="1" v-model="itemCount"/>
+			</InputGroup>
+
 		</div>
 
 
