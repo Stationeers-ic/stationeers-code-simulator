@@ -1,9 +1,8 @@
 @layer my {
-
-
-	html, body {
+	html,
+	body {
 		padding: 0;
-		margin: 0
+		margin: 0;
 	}
 
 	#app {
@@ -13,17 +12,16 @@
 	}
 
 	.app-container {
-
 		display: grid;
-		grid-template-columns:7fr 2fr 3fr;
+		grid-template-columns: 7fr 2fr 3fr;
 		grid-template-rows: 40px auto auto 1fr;
 		gap: 5px 5px;
 		grid-auto-flow: row;
 		grid-template-areas:
-   			"control control control"
-   			"stack stack stack"
-   			"code code code"
-   			"bottom bottom bottom";
+			"control control control"
+			"stack stack stack"
+			"code code code"
+			"bottom bottom bottom";
 
 		.code {
 			grid-area: code;
@@ -35,7 +33,6 @@
 
 		.stack {
 			grid-area: stack;
-
 		}
 
 		.bottom {
@@ -46,8 +43,7 @@
 			grid-template-rows: 1fr;
 			gap: 5px 5px;
 			grid-auto-flow: row;
-			grid-template-areas:
-				"devises";
+			grid-template-areas: "devises";
 
 			.raw {
 				grid-area: raw;
@@ -57,17 +53,13 @@
 				grid-area: devises;
 			}
 		}
-
-
 	}
-
-
 }
 
 *[data-ic10lang="tooltip"] {
 	padding: 0 10px;
 	white-space: pre-wrap;
-	max-width: 40vw
+	max-width: 40vw;
 }
 
 .prop {
@@ -87,7 +79,6 @@
 	}
 }
 
-
 .pi {
 	&.pi-plausible {
 		$size: 24px;
@@ -99,7 +90,6 @@
 		height: $size;
 		opacity: 0.5;
 		padding: 0 $size 0 0;
-
 
 		&:hover {
 			opacity: 1;
@@ -116,8 +106,16 @@
 		width: $size;
 		height: $size;
 		padding: 0 $size 0 0;
-
-
+	}
+	&.pi-steam{
+		$size: 30px;
+		background-color: transparent;
+		background-image: url("https://store.steampowered.com/favicon.ico");
+		background-size: contain;
+		background-repeat: no-repeat;
+		display: block;
+		width: $size;
+		height: $size;
+		padding: 0 $size 0 0;
 	}
 }
-

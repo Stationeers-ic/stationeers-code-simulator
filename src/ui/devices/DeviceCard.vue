@@ -1,39 +1,37 @@
 <script setup lang="ts">
-import ic10 from "../../core/ic10.ts";
-import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue";
-import data, {Device, Devices} from "../../core/Data.ts";
-import DeviceProps from "./DeviceProps.vue";
-import DevicePorts from "./DevicePorts.vue";
-import DeviceSlots from "./Slots/DeviceSlots.vue";
+import ic10 from "../../core/ic10.ts"
+import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
+import data, { Device, Devices } from "../../core/Data.ts"
+import DeviceProps from "./DeviceProps.vue"
+import DevicePorts from "./DevicePorts.vue"
+import DeviceSlots from "./Slots/DeviceSlots.vue"
 
-const props = defineProps(['id', 'device'])
-const image = ref('')
-const name = ref('')
+const props = defineProps(["id", "device"])
+const image = ref("")
+const name = ref("")
 const devicesData = ref<Devices>([])
 const deviceData = ref<Device | undefined>(undefined)
 
-
-const instance = getCurrentInstance();
+const instance = getCurrentInstance()
 onMounted(async () => {
 	devicesData.value = await data.getDevices()
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
-	image.value = deviceData.value?.image || 'https://placehold.co/128?text=Unknown'
-	name.value = ic10.getEnv().deviceNames.get(props.id) || ''
-	ic10.getEnv().on('update', () => {
-		instance?.proxy?.$forceUpdate();
+	image.value = deviceData.value?.image || "https://placehold.co/128?text=Unknown"
+	name.value = ic10.getEnv().deviceNames.get(props.id) || ""
+	ic10.getEnv().on("update", () => {
+		instance?.proxy?.$forceUpdate()
 	})
 })
 
 onBeforeUnmount(() => {
-
-	ic10.getEnv().off('update')
-});
+	ic10.getEnv().off("update")
+})
 
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
 }
 
-const newKey = ref('')
+const newKey = ref("")
 const newVal = ref(0)
 
 function add() {
@@ -48,7 +46,7 @@ function add() {
 	<Card :class="[$style.card, 'device-card']" style="">
 		<template #header>
 			<div :class="$style.image">
-				<Image loading="lazy" alt="user header" :src="image"/>
+				<Image loading="lazy" alt="user header" :src="image" />
 			</div>
 		</template>
 		<template #title>
@@ -58,30 +56,41 @@ function add() {
 			<span :class="$style.break">{{ name }}</span>
 		</template>
 		<template #content>
-			<DevicePorts :id="props.id"/>
-			<DeviceProps :id="props.id " :device="props.device"/>
-			<Divider/>
+			<DevicePorts :id="props.id" />
+			<DeviceProps :id="props.id" :device="props.device" />
+			<Divider />
 			<InputGroup class="prop">
-				<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics"
-						  option-label="name" option-value="name">
+				<Dropdown
+					editable
+					filter
+					class="key"
+					v-model="newKey"
+					placeholder="Key"
+					:options="deviceData?.logics"
+					option-label="name"
+					option-value="name"
+				>
 					<template #option="slotProps">
 						<div class="flex align-items-center gap-1">
-							<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)"
-							   class="pi pi-file-edit"></i>
+							<i
+								v-if="slotProps.option.permissions.includes('Write')"
+								style="color: var(--primary-color)"
+								class="pi pi-file-edit"
+							></i>
 							<i v-else class="pi pi-file" style="color: #fb923c"></i>
 							<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
 						</div>
 					</template>
 				</Dropdown>
-				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value"/>
-				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
+				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
+				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle" />
 			</InputGroup>
-			<Divider/>
-			<DeviceSlots :id="props.id " :device="props.device" :deviceData="deviceData"></DeviceSlots>
+			<Divider />
+			<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"></DeviceSlots>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full"/>
+				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full" />
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>
@@ -95,7 +104,7 @@ function add() {
 	width: auto;
 	overflow: hidden;
 	max-width: calc(100% / $count - (5px * ($count - 1)));
-	min-width: 250px
+	min-width: 250px;
 }
 
 .break {

@@ -1,10 +1,10 @@
 // store.js
-import {reactive} from 'vue'
+import { reactive } from "vue"
 
 export const codeStore = reactive({
-	code: ''
+	code: "",
 })
 
 export const settingStore = reactive({
-	delay: 'normal'
+	delay: "normal",
 })

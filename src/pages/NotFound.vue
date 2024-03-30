@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div class="raw"></div>
+	<h1>404</h1>
 </template>
 
 <style scoped lang="scss"></style>

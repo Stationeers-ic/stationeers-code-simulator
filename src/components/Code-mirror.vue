@@ -1,47 +1,49 @@
 <script setup lang="ts">
-import {codeStore} from '../store'
-import {Codemirror} from 'vue-codemirror'
+import { codeStore } from "../store"
+import { Codemirror } from "vue-codemirror"
 // import {lineNumbers} from '@codemirror/gutter'
-import {monokai} from '@uiw/codemirror-theme-monokai';
-import {hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers} from 'codemirror-lang-ic10';
-import interpretator from '../core/ic10.ts';
-import {Device, Register} from 'ic10/zodTypes';
-import {onBeforeUnmount, onMounted, watch} from "vue";
-import {EditorView} from "codemirror";
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers } from "codemirror-lang-ic10"
+import interpretator from "../core/ic10.ts"
+import { Device, Register } from "ic10/zodTypes"
+import { onBeforeUnmount, onMounted, watch } from "vue"
+import { EditorView } from "codemirror"
 
-
-watch(() => codeStore.code, (newVal) => {
-	interpretator.setCode(newVal)
-})
 onMounted(() => {
-	codeStore.code = localStorage.getItem('code') || ''
-	interpretator.getEnv().on('update_code', () => {
+	codeStore.code = interpretator.code
+	interpretator.getEnv().on("update_code", () => {
 		codeStore.code = interpretator.code
 	})
 })
 onBeforeUnmount(() => {
-	interpretator.getEnv().off('update')
+	interpretator.getEnv().off("update")
 })
 
-watch(() => interpretator.getEnv().line, (newVal) => {
-	window.document.querySelector<HTMLDivElement>('div[data-language="ic10"]')?.querySelectorAll<HTMLDivElement>('div.cm-line').forEach((e, i) => {
-		if (i === newVal) {
-			e.style.backgroundColor = 'rgb(0 0 0 / 40%)';
-			// e.scrollIntoView({block: "end", inline: "nearest"});
-		} else {
-			e.style.backgroundColor = 'transparent'
-		}
-	})
-})
+watch(
+	() => interpretator.getEnv().line,
+	(newVal) => {
+		window.document
+			.querySelector<HTMLDivElement>('div[data-language="ic10"]')
+			?.querySelectorAll<HTMLDivElement>("div.cm-line")
+			.forEach((e, i) => {
+				if (i === newVal) {
+					e.style.backgroundColor = "rgb(0 0 0 / 40%)"
+					// e.scrollIntoView({block: "end", inline: "nearest"});
+				} else {
+					e.style.backgroundColor = "transparent"
+				}
+			})
+	},
+)
 
 const opt: hoverOptions = {
 	startLine: 0,
 	callback: (word: string, text: string | null, line): string | null => {
 		const env = interpretator.getEnv()
 		let new_text = null
-		const unAlias = env.getAlias(word)
+		const unAlias = env.getAlias(word, true)
 		if (Device.safeParse(unAlias).success) {
-			new_text = env.isPortConnected(unAlias) ? '🟢 connected' : '🔴 disconnected'
+			new_text = env.isPortConnected(unAlias) ? "🟢 connected" : "🔴 disconnected"
 		} else if (Register.safeParse(unAlias).success) {
 			new_text = env.get(unAlias)
 		} else {
@@ -52,31 +54,31 @@ const opt: hoverOptions = {
 				let prop: string | undefined = undefined
 				let unAlias: string | undefined = undefined
 				switch (l.fn) {
-					case 's':
+					case "s":
 						label = l.args[0].toString()
-						unAlias = env.getAlias(label)
+						unAlias = env.getAlias(label, true)
 						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[1].toString()
 						break
-					case 'l':
+					case "l":
 						label = l.args[1].toString()
-						unAlias = env.getAlias(label)
+						unAlias = env.getAlias(label, true)
 						deviceId = env.devicesAttached.get(unAlias)
 						prop = l.args[2].toString()
 						break
-					case 'sd':
+					case "sd":
 						label = l.args[0].toString()
 						deviceId = label
 						prop = l.args[1].toString()
 						break
-					case 'ld':
+					case "ld":
 						label = l.args[1].toString()
 						deviceId = label
 						prop = l.args[2].toString()
 						break
 				}
 				if (deviceId && prop) {
-					new_text = `${label}[${prop}] = `+ env.getDeviceProp(deviceId, prop)
+					new_text = `${label}[${prop}] = ` + env.getDeviceProp(deviceId, prop)
 				}
 			}
 		}
@@ -84,7 +86,7 @@ const opt: hoverOptions = {
 			if (!text) {
 				return new_text.toString()
 			} else {
-				return text + '\n' + new_text.toString()
+				return text + "\n" + new_text.toString()
 			}
 		}
 		return text
@@ -92,7 +94,6 @@ const opt: hoverOptions = {
 }
 
 const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic10HoverTooltip(opt), zeroLineNumbers]
-
 </script>
 
 <template>
@@ -105,7 +106,7 @@ const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic
 			:autofocus="true"
 			:indent-with-tab="true"
 			:tab-size="2"
-			:lineNumberFormatter="(line:number) => line - 1"
+			:lineNumberFormatter="(line: number) => line - 1"
 			:extensions="extensions"
 		/>
 	</div>

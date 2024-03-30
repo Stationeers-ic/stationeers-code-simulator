@@ -1,37 +1,51 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import data, {Devices} from "../core/Data.ts";
+import { onMounted, ref } from "vue"
+import data, { Devices } from "../core/Data.ts"
 
-const loading = ref(true);
-const devices = ref<{ name: string, image: string | null, code: number }[]>([]);
+const loading = ref(true)
+const devices = ref<{ name: string; image: string | null; code: number }[]>([])
 const model = defineModel()
 
 onMounted(async () => {
-	data.getDevices().then((res: Devices) => {
-		res.forEach((d) => {
-			devices.value.push({
-				name: d.PrefabName,
-				image: d.image,
-				code: d.PrefabHash
+	data.getDevices()
+		.then((res: Devices) => {
+			res.forEach((d) => {
+				devices.value.push({
+					name: d.PrefabName,
+					image: d.image,
+					code: d.PrefabHash,
+				})
 			})
 		})
-	}).then(() => {
-		loading.value = false
-	})
+		.then(() => {
+			loading.value = false
+		})
 })
 </script>
 
 <template>
-	<Dropdown style="width: 100%;" editable filter v-model="model" :options="devices" :loading="loading"
-			  optionLabel="name" optionValue="code"
-			  placeholder="Select a device"
-			  class="w-full md:w-14rem">
+	<Dropdown
+		style="width: 100%"
+		editable
+		filter
+		v-model="model"
+		:options="devices"
+		:loading="loading"
+		optionLabel="name"
+		optionValue="code"
+		placeholder="Select a device"
+		class="w-full md:w-14rem"
+	>
 		<template #option="slotProps">
 			<div class="flex align-items-center gap-1">
 				<img
 					loading="lazy"
 					:alt="slotProps.option.name"
-					:src="slotProps.option.image ? slotProps.option.image : 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'"
+					:src="
+						slotProps.option.image
+							? slotProps.option.image
+							: 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'
+					"
 					style="width: 18px"
 				/>
 				<div :title="slotProps.option.code">{{ slotProps.option.name }}</div>
@@ -40,6 +54,4 @@ onMounted(async () => {
 	</Dropdown>
 </template>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
