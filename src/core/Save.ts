@@ -60,17 +60,32 @@ export function removeFromBrowser(name: string) {
 	window.localStorage.removeItem(name)
 }
 
+function getScriptNames() {
+	return new Set(z.array(z.string()).parse(JSON.parse(localStorage.getItem("ScriptNames") ?? "[]")))
+}
+
+function setScriptNames(data: Set<string>) {
+	window.localStorage.setItem("ScriptNames", JSON.stringify(Array.from(data)))
+}
+
 function addSaveSlot(name: string, setCurrent = true) {
-	const ScriptNames = new Set(z.array(z.string()).parse(JSON.parse(localStorage.getItem("ScriptNames") ?? "[]")))
+	const ScriptNames = getScriptNames()
 	ScriptNames.add(name)
-	window.localStorage.setItem("ScriptNames", JSON.stringify(Array.from(ScriptNames)))
+	setScriptNames(ScriptNames)
 	if (setCurrent) {
 		window.localStorage.setItem("currentScriptName", name)
 	}
 }
 
 function removeSaveSlot(name: string) {
-	const ScriptNames = new Set(z.array(z.string()).parse(JSON.parse(localStorage.getItem("ScriptNames") ?? "[]")))
+	const ScriptNames = getScriptNames()
 	ScriptNames.delete(name)
-	window.localStorage.setItem("ScriptNames", JSON.stringify(Array.from(ScriptNames)))
+	setScriptNames(ScriptNames)
+}
+
+export function setActiveSaveSlot(name: string) {
+	const ScriptNames = getScriptNames()
+	if (ScriptNames.has(name)) {
+		window.localStorage.setItem("currentScriptName", name)
+	}
 }

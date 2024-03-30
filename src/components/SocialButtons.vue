@@ -3,6 +3,7 @@ import ButtonFrame from "../ui/ButtonFrame.vue"
 
 import { ref } from "vue"
 import { MenuItem } from "primevue/menuitem"
+
 const social = ref<MenuItem[]>([
 	{
 		label: "Github",
@@ -16,6 +17,13 @@ const social = ref<MenuItem[]>([
 		icon: "pi pi-plausible",
 		command() {
 			window.open("https://thor.traineratwot.site/ic10.dev", "_blank")
+		},
+	},
+	{
+		label: "Steam",
+		icon: "pi pi-steam",
+		command() {
+			window.open("https://store.steampowered.com/app/544550/Stationeers/", "_blank")
 		},
 	},
 ])

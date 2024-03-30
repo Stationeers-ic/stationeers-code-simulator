@@ -3,10 +3,11 @@ import Button from "primevue/button"
 import { HintedString } from "primevue/ts-helpers"
 import { ref } from "vue"
 
-const porps = defineProps(["class", "icon", "severity", "click"]) as Readonly<{
+const porps = defineProps(["class", "icon", "severity", "click", "label"]) as Readonly<{
 	click: (event: any) => void
 	class?: any
 	icon?: string | undefined
+	label?: string | undefined
 	severity?: HintedString<"secondary" | "success" | "info" | "warning" | "help" | "danger" | "contrast"> | undefined
 }>
 const op = ref()
@@ -24,10 +25,10 @@ if (porps.click) {
 		:class="porps.class"
 		:icon="porps.icon"
 		:severity="porps.severity"
+		v-tooltip.left="porps.label"
 		size="large"
 		raised
 		rounded
-		aria-label="Cancel"
 	/>
 
 	<OverlayPanel ref="op">

@@ -15,11 +15,13 @@ routes.forEach((item) => {
 <template>
 	<Menubar :model="items">
 		<template #start>
-			<Image />
+			<Avatar
+				image="https://avatars.githubusercontent.com/u/134876386?s=400&u=fa5a08bffb00083e047a4576c24baaa4f36bd58f&v=4"
+			/>
 		</template>
 		<template #item="{ item, props }">
-			<RouterLink v-ripple v-bind="props.action" :to="item.url">
-				<i :class="item.icon" />
+			<RouterLink v-ripple v-bind="props.action" :active-class="$style.active" :to="item.url">
+				<i :class="item.icon" class="mr-1" />
 				<span>{{ item.label }}</span>
 			</RouterLink>
 		</template>
@@ -27,4 +29,10 @@ routes.forEach((item) => {
 	</Menubar>
 </template>
 
-<style scoped lang="scss"></style>
+<style module lang="scss">
+.active {
+	span {
+		font-weight: bold;
+	}
+}
+</style>

@@ -43,6 +43,10 @@ const reset = () => {
 	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
+
+const saveDialogOpen = () => {
+	window.document.dispatchEvent(new Event("saveDialogOpen"))
+}
 const step = async () => {
 	ic10.getEnv().yieldMode = false
 	const t = await ic10.step()
@@ -91,7 +95,7 @@ const speerOptions = ["slow", "normal", "fast"]
 			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
 			<AddDevice id="AddDevice" />
-			<Button icon="pi pi-share-alt" @click="share" severity="secondary" />
+			<Button icon="pi pi-save" @click="saveDialogOpen" severity="secondary" />
 			<OverlayPanel ref="op">
 				<div class="flex flex-column gap-3 w-25rem">
 					<div>

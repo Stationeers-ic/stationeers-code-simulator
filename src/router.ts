@@ -1,7 +1,6 @@
 import { createMemoryHistory, createRouter, RouteRecordRaw } from "vue-router"
 
 import Ic10 from "./pages/Ic10.vue"
-import NotFound from "./pages/NotFound.vue"
 
 type MyRouteRecordRaw = {
 	icon?: string

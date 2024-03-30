@@ -107,4 +107,15 @@
 		height: $size;
 		padding: 0 $size 0 0;
 	}
+	&.pi-steam{
+		$size: 30px;
+		background-color: transparent;
+		background-image: url("https://store.steampowered.com/favicon.ico");
+		background-size: contain;
+		background-repeat: no-repeat;
+		display: block;
+		width: $size;
+		height: $size;
+		padding: 0 $size 0 0;
+	}
 }

@@ -9,8 +9,6 @@ import Devises from "../components/Devises.vue"
 import { onBeforeUnmount, onMounted, ref } from "vue"
 import isHotkey from "is-hotkey"
 import { useToast } from "primevue/usetoast"
-import { MenuItem } from "primevue/menuitem"
-import ButtonFrame from "../ui/ButtonFrame.vue"
 
 import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
@@ -23,7 +21,7 @@ const isOpenHotkey = isHotkey("mod+o")
 const saveDialogOpen = ref(false)
 const openDialogOpen = ref(false)
 const toast = useToast()
-
+const tt = () => (saveDialogOpen.value = true)
 const HotKeyHandler = async (e: any) => {
 	if (isSaveHotkey(e)) {
 		e.preventDefault()
@@ -52,9 +50,11 @@ const HotKeyHandler = async (e: any) => {
 
 onMounted(() => {
 	window.document.addEventListener("keydown", HotKeyHandler)
+	window.document.addEventListener("saveDialogOpen", tt)
 })
 onBeforeUnmount(() => {
 	window.document.removeEventListener("keydown", HotKeyHandler)
+	window.document.removeEventListener("saveDialogOpen", tt)
 })
 startupLoad()
 	.then((from) => {
