@@ -9,6 +9,7 @@ import Button from "primevue/button"
 const props = defineProps(["data", "deviceId"]) as Readonly<{ data: z.infer<typeof Slot>; deviceId: string }>
 const image = ref("")
 const itemCount = ref(0)
+const Quantity = ref(0)
 const item = ref<Item | null>(null)
 const deviceName = ref("")
 onMounted(async () => {
@@ -31,30 +32,30 @@ async function getPrefabName() {
 
 const visible = ref(false)
 
-watch(item, async (newVal) => {
+const sync = async () => {
 	const slotIndex = props.data.SlotIndex.toString()
-	if (newVal) {
-		if (itemCount.value <= 0) {
-			itemCount.value = 1
+	if (item.value) {
+		Quantity.value = itemCount.value
+		if (Quantity.value) {
+			ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, Quantity.value)
+		} else {
+			ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, 0)
 		}
-		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, newVal.PrefabHash)
+		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, item.value.PrefabHash)
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Occupied`, 1)
-		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, itemCount.value)
 	} else {
+		Quantity.value = 0
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`, 0)
 		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Occupied`, 0)
-		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, 0)
 	}
-})
-
-watch(itemCount, async (newVal) => {
-	const slotIndex = props.data.SlotIndex.toString()
-	if (newVal) {
-		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, newVal)
-	} else {
-		ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, 0)
-	}
-})
+	ic10.getEnv().setDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`, Quantity.value)
+}
+const clear = () => {
+	itemCount.value = 0
+	item.value = null
+}
+watch(item, sync)
+watch(itemCount, sync)
 </script>
 
 <template>
@@ -62,25 +63,31 @@ watch(itemCount, async (newVal) => {
 		<img loading="lazy" class="item" v-if="item?.image" :src="item.image" :alt="item.PrefabName" />
 		<img loading="lazy" class="back" v-else-if="image" :src="image" :alt="props.data.SlotType" />
 		<span class="id">{{ props.data.SlotIndex }}</span>
-		<span class="count">{{ itemCount }}</span>
+		<span class="count">{{ Quantity }}</span>
 	</div>
 
 	<Dialog
 		v-model:visible="visible"
-		modal
 		:header="`Edit slot #${props.data.SlotIndex} in device '${deviceName}'`"
 		:style="{ width: '25rem' }"
 	>
 		<div class="flex flex-column gap-2">
 			<InputGroup>
 				<ItemSelect v-model="item" />
-				<Button severity="danger" icon="pi pi-minus-circle" @click="item = null" />
+				<Button severity="danger" icon="pi pi-minus-circle" @click="clear" />
 			</InputGroup>
 		</div>
 		<div class="flex flex-column gap-2">
 			<InputGroup>
-				<InputGroupAddon> Count </InputGroupAddon>
-				<InputNumber min="1" step="1" v-model="itemCount" />
+				<InputGroupAddon> Count</InputGroupAddon>
+				<InputNumber showButtons buttonLayout="horizontal" :min="1" :step="1" v-model="itemCount">
+					<template #incrementbuttonicon>
+						<span class="pi pi-plus" />
+					</template>
+					<template #decrementbuttonicon>
+						<span class="pi pi-minus" />
+					</template>
+				</InputNumber>
 			</InputGroup>
 		</div>
 

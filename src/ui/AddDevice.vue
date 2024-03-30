@@ -54,7 +54,7 @@ function add() {
 <template>
 	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" label="Add device" />
 
-	<Dialog v-model:visible="visible" modal header="Add Device" style="width: 50vw">
+	<Dialog v-model:visible="visible" header="Add Device" style="width: 50vw">
 		<span class="p-text-secondary block mb-5"> Add new device to environment </span>
 		<div class="flex align-items-center gap-3 mb-3">
 			<div class="flex flex-column gap-2">

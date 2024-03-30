@@ -6,7 +6,7 @@ import Register from "./components/Register.vue"
 import Stack from "./components/Stack.vue"
 import Raw from "./components/Raw.vue"
 import Devises from "./components/Devises.vue"
-import { onMounted, ref, watch } from "vue"
+import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import isHotkey from "is-hotkey"
 import { dump, load } from "./core/Share.ts"
 import { useToast } from "primevue/usetoast"
@@ -14,40 +14,82 @@ import { MenuItem } from "primevue/menuitem"
 import ButtonFrame from "./ui/ButtonFrame.vue"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import clipboard from "web-clipboard"
+import delay from "delay"
+import SaveDialog from "./ui/SaveDialog.vue"
 
 dayjs.extend(relativeTime)
 const isSaveHotkey = isHotkey("mod+s")
+const isSaveAsHotkey = isHotkey("mod+shift+s")
+const isOpenHotkey = isHotkey("mod+o")
 const lastDump = ref("")
+const saveDialogOpen = ref(false)
+const openDialogOpen = ref(false)
 const toast = useToast()
 
-onMounted(() => {
-	window.document.addEventListener("keydown", (e) => {
-		if (isSaveHotkey(e)) {
-			e.preventDefault()
-			console.log("save")
-			try {
-				lastDump.value = dump()
-				document.location.hash = lastDump.value
-			} catch (e: any) {
-				toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
-			}
+const HotKeyHandler = async (e) => {
+	if (isSaveHotkey(e)) {
+		e.preventDefault()
+		await delay(200)
+		console.log("save")
+		try {
+			lastDump.value = dump()
+			await clipboard.write(lastDump.value)
+			toast.add({ severity: "success", summary: "Saved!", detail: "Saved to clipboard", life: 3000 })
+		} catch (e: any) {
+			toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
 		}
-	})
+	}
+	if (isSaveAsHotkey(e)) {
+		e.preventDefault()
+		await delay(200)
+		console.log("save as")
+		saveDialogOpen.value = true
+	}
+	if (isOpenHotkey(e)) {
+		e.preventDefault()
+		await delay(200)
+		console.log("open")
+		openDialogOpen.value = true
+	}
+}
+
+onMounted(() => {
+	window.document.addEventListener("keydown", HotKeyHandler)
+})
+onBeforeUnmount(() => {
+	window.document.removeEventListener("keydown", HotKeyHandler)
 })
 watch(
 	() => document.location.hash,
 	() => {
 		if (lastDump.value !== document.location.hash) {
-			load(document.location.hash.slice(1)).catch((e) => {
-				toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
-			})
+			load(document.location.hash.slice(1))
+				.then(() => {
+					toast.add({ severity: "success", summary: "Loaded", detail: "load data from url", life: 500 })
+
+					setTimeout(() => {
+						document.location.hash = ""
+					}, 500)
+				})
+				.catch((e) => {
+					toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
+				})
 		}
 	},
 )
 if (document.location.hash.slice(1).length > 0) {
-	load(document.location.hash.slice(1)).catch((e) => {
-		toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
-	})
+	load(document.location.hash.slice(1))
+		.then(() => {
+			toast.add({ severity: "success", summary: "Loaded", detail: "load data from url", life: 3000 })
+
+			setTimeout(() => {
+				document.location.hash = ""
+			}, 500)
+		})
+		.catch((e) => {
+			toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
+		})
 }
 
 const social = ref<MenuItem[]>([
@@ -66,13 +108,18 @@ const social = ref<MenuItem[]>([
 		},
 	},
 ])
+const buildTime = ref("")
 const ic10 = __package__.dependencies?.ic10?.version
 const codemirrorLangIc10 = __package__.dependencies?.["codemirror-lang-ic10"]?.version
-const buildTime = dayjs(__buildTime__).fromNow()
+buildTime.value = dayjs(__buildTime__).fromNow()
+setInterval(() => {
+	buildTime.value = dayjs(__buildTime__).fromNow()
+}, 60 * 1000)
 </script>
 
 <template>
 	<Toast />
+	<SaveDialog v-model="saveDialogOpen"></SaveDialog>
 	<div class="app-container">
 		<div class="code">
 			<Splitter style="height: 100%">
@@ -159,6 +206,7 @@ footer {
 		color: unset;
 	}
 }
+
 .build {
 	width: auto;
 	opacity: 0.5;
