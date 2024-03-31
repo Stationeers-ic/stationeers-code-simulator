@@ -18,14 +18,17 @@ export async function loadFromString(string: string): Promise<boolean> {
 	return true
 }
 
-export async function loadFromFile(content: string): Promise<string> {
+export async function loadFromFile(content: string, name?: string): Promise<string> {
 	const lines = content.split("\n")
 	const str = lines.findLast((line) => line.startsWith("##!"))
+	const trimContent = lines.filter((line) => !line.startsWith("##!")).join("\n")
 	if (str) {
 		const url = new URL(str.replace("##!", ""))
-		return await load(url.hash.slice(1), lines.filter((line) => !line.startsWith("##!")).join("\n"))
+		return await load(url.hash.slice(1), trimContent)
+	} else {
+		ic10.setCode(trimContent)
 	}
-	return getDefaultScriptName()
+	return name ?? getDefaultScriptName()
 }
 
 async function loadFromUrl(): Promise<boolean> {
@@ -59,13 +62,17 @@ async function loadFromBrowser() {
 export async function saveToFile(): Promise<boolean> {
 	const code = ic10.getCode()
 	const shareString = getShareLink()
-	const name = getActiveSaveSlot() + ".ic10"
+	const name = getActiveSaveSlot()?.replace(".ic10", "") + ".ic10"
 	const file = code + "\n##! Changes in code does not reflect in link below !!\n##!" + shareString
 	downloadFile(file, name)
 	return true
 }
 
-export function saveToBrowser(name?: string) {
+export function saveExist(name: string) {
+	return getScriptNames().has(name)
+}
+
+export function saveToBrowser(name?: string, isNew = false) {
 	if (name == undefined) {
 		name = window.localStorage.getItem("currentScriptName") ?? undefined
 	}
@@ -73,11 +80,18 @@ export function saveToBrowser(name?: string) {
 		throw new Error("Needed script name, use ctrl+shift+s for set")
 	}
 	const saveData = dump()
-	addSaveSlot(name)
-	console.log(name)
-	window.localStorage.setItem(name, saveData)
+	let newName = name
+	if (isNew) {
+		let i = 1
+		while (saveExist(newName)) {
+			newName = `${name} (${i})`
+			i++
+		}
+	}
+	addSaveSlot(newName)
+	window.localStorage.setItem(newName, saveData)
 	emit("saveUpdate")
-	return name
+	return newName
 }
 
 export function removeFromBrowser(name: string) {
@@ -114,11 +128,12 @@ export async function setActiveSaveSlot(name: string) {
 	if (ScriptNames.has(name)) {
 		window.localStorage.setItem("currentScriptName", name)
 		await load(window.localStorage.getItem(name))
+		emit("saveUpdate")
 	}
 }
 
-export function getActiveSaveSlot(): string | null {
-	return window.localStorage.getItem("currentScriptName")
+export function getActiveSaveSlot(): string {
+	return window.localStorage.getItem("currentScriptName") ?? getDefaultScriptName()
 }
 
 export function getDefaultScriptName(): string {

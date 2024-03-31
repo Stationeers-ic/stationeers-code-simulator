@@ -9,6 +9,7 @@ const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
 const invalid = ref(false)
 const fileContent = ref("")
+const fileName = ref("")
 const dumpContent = ref("")
 const toast = useToast()
 const close = () => {
@@ -29,8 +30,8 @@ const loadHandle = async () => {
 					await load(value)
 					break
 				case "file":
-					const newName = await loadFromFile(value)
-					saveToBrowser(newName)
+					const newName = await loadFromFile(value, fileName.value)
+					saveToBrowser(newName, true)
 					break
 				default:
 					throw new Error("Что это за хуйня?")
@@ -63,7 +64,7 @@ const loadHandle = async () => {
 		</div>
 		<Divider>Or</Divider>
 		<div class="flex align-items-center gap-3 mb-3">
-			<IcUpload v-model="fileContent" />
+			<IcUpload v-model="fileContent" v-model:filename="fileName" />
 		</div>
 		<div class="flex justify-content-end gap-2">
 			<Button type="button" label="Cancel" severity="secondary" @click="close" />

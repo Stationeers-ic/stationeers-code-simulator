@@ -1,19 +1,23 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue"
+import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { useToast } from "primevue/usetoast"
-import { getShareLink, saveToBrowser, saveToFile } from "../core/Save.ts"
+import { getActiveSaveSlot, getShareLink, saveToBrowser, saveToFile } from "../core/Save.ts"
 import clipboard from "web-clipboard"
+import { off, on } from "../core/Events.ts"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
 const invalid = ref(false)
 const toast = useToast()
+const update = () => {
+	scripName.value = getActiveSaveSlot()
+}
 onMounted(() => {
-	scripName.value = localStorage.getItem("currentScriptName") ?? ""
+	update()
+	on("saveUpdate", update)
 })
-
-watch(scripName, () => {
-	window.localStorage.setItem("currentScriptName", scripName.value)
+onBeforeUnmount(() => {
+	off("saveUpdate", update)
 })
 
 const close = () => {

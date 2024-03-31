@@ -2,10 +2,12 @@
 import { FileUploadBeforeSendEvent } from "primevue/fileupload"
 
 const content = defineModel()
+const filename = defineModel("filename")
 const uploadHandler = async (event: FileUploadBeforeSendEvent) => {
 	console.log(event)
 
 	const file = event.formData.get("loadFile") as File
+	filename.value = file.name
 	content.value = await readFileContent(file)
 }
 
