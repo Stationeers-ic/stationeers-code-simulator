@@ -1,13 +1,24 @@
 <script setup lang="ts">
-import { useToast } from "primevue/usetoast"
-import { FileUploadBeforeUploadEvent } from "primevue/fileupload"
+import { FileUploadBeforeSendEvent } from "primevue/fileupload"
 
-const toast = useToast()
-
-const onAdvancedUpload = (event: FileUploadBeforeUploadEvent) => {
+const content = defineModel()
+const uploadHandler = async (event: FileUploadBeforeSendEvent) => {
 	console.log(event)
-	toast.add({ severity: "info", summary: "Success", detail: "File Uploaded", life: 3000 })
-	return false
+
+	const file = event.formData.get("loadFile") as File
+	content.value = await readFileContent(file)
+}
+
+function readFileContent(file: File): Promise<string> {
+	return new Promise((resolve, reject) => {
+		const reader = new FileReader()
+
+		reader.onload = (event) => resolve(event?.target?.result as string)
+
+		reader.onerror = (error) => reject(error)
+
+		reader.readAsText(file)
+	})
 }
 
 const formatSize = (bytes: number) => {
@@ -27,33 +38,40 @@ const formatSize = (bytes: number) => {
 </script>
 
 <template>
-	<FileUpload name="loadFile" :customUpload="true" @beforeUpload="onAdvancedUpload" :auto="true" chooseLabel="Browse">
-		<template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
-			<div v-if="files.length > 0">
-				<div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="upload-file">
-					<span class="font-semibold">{{ file.name }}</span>
-					<div>{{ formatSize(file.size) }}</div>
-					<Button icon="pi pi-times" @click="() => removeFileCallback(index)" outlined rounded severity="danger" />
+	<div class="FileUpload">
+		<FileUpload name="loadFile" :fileLimit="1" :showUploadButton="false" :showCancelButton="false" @beforeSend="uploadHandler" :auto="true" chooseLabel="Browse">
+			<template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
+				<div v-if="files.length > 0">
+					<div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="upload-file">
+						<span class="font-semibold">{{ file.name }}</span>
+						<div>{{ formatSize(file.size) }}</div>
+						<Button icon="pi pi-times" @click="() => removeFileCallback(index)" outlined rounded severity="danger" />
+					</div>
 				</div>
-			</div>
-			<div v-if="uploadedFiles.length > 0">
-				<div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="upload-file">
-					<span class="font-semibold">{{ file.name }}</span>
-					<div>{{ formatSize(file.size) }}</div>
-					<Button icon="pi pi-times" @click="() => removeUploadedFileCallback(index)" outlined rounded severity="danger" />
+				<div v-if="uploadedFiles.length > 0">
+					<div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="upload-file">
+						<Button icon="pi pi-times" @click="() => removeUploadedFileCallback(index)" outlined rounded severity="danger" />
+						<span class="font-semibold">{{ file.name }}</span>
+						<div>{{ formatSize(file.size) }}</div>
+					</div>
 				</div>
-			</div>
-		</template>
-		<template #empty>
-			<p>Drag and drop file to here to upload.</p>
-		</template>
-	</FileUpload>
+			</template>
+			<template #empty>
+				<p>Drag and drop file to here to upload.</p>
+			</template>
+		</FileUpload>
+	</div>
 </template>
-
+<style></style>
 <style scoped lang="scss">
+.FileUpload {
+	width: 100%;
+}
+
 .upload-file {
 	display: flex;
-	justify-content: space-between;
+	gap: 50px;
+	//justify-content: space-between;
 	align-items: center;
 	align-content: center;
 	flex-wrap: nowrap;

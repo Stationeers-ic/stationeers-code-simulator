@@ -30,7 +30,7 @@ onBeforeUnmount(() => {
 	max-width: 100%;
 	flex-wrap: wrap;
 	flex-direction: row;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-content: flex-start;
 	align-items: stretch;
 	gap: 5px;

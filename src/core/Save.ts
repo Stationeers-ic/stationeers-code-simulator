@@ -29,6 +29,12 @@ async function loadFromUrl(): Promise<boolean> {
 	return false
 }
 
+export function getShareLink() {
+	const url = new URL(document.location.href)
+	url.hash = dump()
+	return url.toString()
+}
+
 async function loadFromBrowser(): Promise<boolean> {
 	const name = window.localStorage.getItem("currentScriptName")
 	if (name) {
@@ -47,9 +53,9 @@ export async function loadFromFile(): Promise<boolean> {
 
 export async function saveToFile(): Promise<boolean> {
 	const code = ic10.getCode()
-	const shareString = dump()
+	const shareString = getShareLink()
 	const name = getActiveSaveSlot() + ".ic"
-	const file = code + "\n\n#-#" + shareString
+	const file = code + "\n##! Changes in code does not reflect in link below !!\n##!" + shareString
 	downloadFile(file, name)
 	return true
 }

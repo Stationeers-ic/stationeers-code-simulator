@@ -87,10 +87,9 @@ function add() {
 <style module scoped lang="scss">
 .card {
 	$count: 3;
-
 	width: auto;
 	overflow: hidden;
-	max-width: calc(100% / $count - (5px * ($count - 1)));
+	max-width: calc(100% / $count - (2px * ($count - 1)));
 	min-width: 250px;
 }
 

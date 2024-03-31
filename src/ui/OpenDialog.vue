@@ -6,9 +6,16 @@ import IcUpload from "./IcUpload.vue"
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
 const invalid = ref(false)
+const fileContent = ref("")
+const dumpContent = ref("")
 const toast = useToast()
 const close = () => {
 	visible.value = false
+}
+
+const load = () => {
+	toast.add({})
+	close()
 }
 </script>
 
@@ -19,11 +26,14 @@ const close = () => {
 			<InputText id="username" v-model="scripName" :invalid="invalid" class="flex-auto" autocomplete="off" />
 		</div>
 		<div class="flex align-items-center gap-3 mb-3">
-			<IcUpload />
+			<InputText v-model="dumpContent" />
+		</div>
+		<div class="flex align-items-center gap-3 mb-3">
+			<IcUpload v-model="fileContent" />
 		</div>
 		<div class="flex justify-content-end gap-2">
 			<Button type="button" label="Cancel" severity="secondary" @click="close" />
-			<Button type="button" label="Load" severity="primary" @click="close" />
+			<Button type="button" label="Load" severity="primary" @click="load" />
 		</div>
 	</Dialog>
 </template>
