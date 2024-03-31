@@ -15,9 +15,7 @@ routes.forEach((item) => {
 <template>
 	<Menubar :model="items">
 		<template #start>
-			<Avatar
-				image="https://avatars.githubusercontent.com/u/134876386?s=400&u=fa5a08bffb00083e047a4576c24baaa4f36bd58f&v=4"
-			/>
+			<Avatar image="https://avatars.githubusercontent.com/u/134876386?s=400&u=fa5a08bffb00083e047a4576c24baaa4f36bd58f&v=4" />
 		</template>
 		<template #item="{ item, props }">
 			<RouterLink v-ripple v-bind="props.action" :active-class="$style.active" v-if="item.url" :to="item.url">

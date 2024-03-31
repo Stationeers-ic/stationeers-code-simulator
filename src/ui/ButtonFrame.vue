@@ -20,16 +20,7 @@ if (porps.click) {
 </script>
 
 <template>
-	<Button
-		@click="toggle"
-		:class="porps.class"
-		:icon="porps.icon"
-		:severity="porps.severity"
-		v-tooltip.left="porps.label"
-		size="large"
-		raised
-		rounded
-	/>
+	<Button @click="toggle" :class="porps.class" :icon="porps.icon" :severity="porps.severity" v-tooltip.left="porps.label" size="large" raised rounded />
 
 	<OverlayPanel ref="op">
 		<slot></slot>

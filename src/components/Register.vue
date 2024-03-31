@@ -20,12 +20,7 @@ ic10.getEnv().on("after_alias", () => {
 		<h3>Constant and Labels</h3>
 		<div :class="$style.registerContent">
 			<template v-for="[index, value] in ic10.getEnv().aliases.entries()">
-				<EnvInput
-					:readonly="true"
-					:name="index"
-					:model-value="value"
-					v-if="z.number().or(z.nan()).safeParse(value).success"
-				/>
+				<EnvInput :readonly="true" :name="index" :model-value="value" v-if="z.number().or(z.nan()).safeParse(value).success" />
 			</template>
 		</div>
 	</div>

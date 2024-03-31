@@ -37,16 +37,7 @@ const extensions = [monokai, EditorView.lineWrapping]
 
 <template>
 	<div class="errors">
-		<Codemirror
-			placeholder="Errors ..."
-			disabled
-			:style="{ height: '100%' }"
-			:autofocus="true"
-			:indent-with-tab="true"
-			:tab-size="2"
-			:extensions="extensions"
-			v-model="test"
-		/>
+		<Codemirror placeholder="Errors ..." disabled :style="{ height: '100%' }" :autofocus="true" :indent-with-tab="true" :tab-size="2" :extensions="extensions" v-model="test" />
 	</div>
 </template>
 

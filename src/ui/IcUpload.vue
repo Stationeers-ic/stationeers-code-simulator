@@ -28,35 +28,19 @@ const formatSize = (bytes: number) => {
 
 <template>
 	<FileUpload name="loadFile" :customUpload="true" @beforeUpload="onAdvancedUpload" :auto="true" chooseLabel="Browse">
-		<template #content="{ files, uploadedFiles, _removeUploadedFileCallback, removeFileCallback }">
+		<template #content="{ files, uploadedFiles, removeUploadedFileCallback, removeFileCallback }">
 			<div v-if="files.length > 0">
 				<div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="upload-file">
 					<span class="font-semibold">{{ file.name }}</span>
 					<div>{{ formatSize(file.size) }}</div>
-					<Button
-						icon="pi pi-times"
-						@click="() => removeFileCallback(index)"
-						outlined
-						rounded
-						severity="danger"
-					/>
+					<Button icon="pi pi-times" @click="() => removeFileCallback(index)" outlined rounded severity="danger" />
 				</div>
 			</div>
 			<div v-if="uploadedFiles.length > 0">
-				<div
-					v-for="(file, index) of uploadedFiles"
-					:key="file.name + file.type + file.size"
-					class="upload-file"
-				>
+				<div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="upload-file">
 					<span class="font-semibold">{{ file.name }}</span>
 					<div>{{ formatSize(file.size) }}</div>
-					<Button
-						icon="pi pi-times"
-						@click="() => removeFileCallback(index)"
-						outlined
-						rounded
-						severity="danger"
-					/>
+					<Button icon="pi pi-times" @click="() => removeUploadedFileCallback(index)" outlined rounded severity="danger" />
 				</div>
 			</div>
 		</template>

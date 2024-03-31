@@ -98,17 +98,7 @@ const extensions = [monokai, EditorView.lineWrapping, ic10(), ic10Snippets(), ic
 
 <template>
 	<div class="code-mirror">
-		<Codemirror
-			ref=""
-			v-model="codeStore.code"
-			placeholder="Code goes here..."
-			:style="{ height: '100%' }"
-			:autofocus="true"
-			:indent-with-tab="true"
-			:tab-size="2"
-			:lineNumberFormatter="(line: number) => line - 1"
-			:extensions="extensions"
-		/>
+		<Codemirror ref="" v-model="codeStore.code" placeholder="Code goes here..." :style="{ height: '100%' }" :autofocus="true" :indent-with-tab="true" :tab-size="2" :lineNumberFormatter="(line: number) => line - 1" :extensions="extensions" />
 	</div>
 </template>
 

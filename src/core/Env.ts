@@ -59,26 +59,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		for (const dataKey in this.data) {
 			delete this.data[dataKey]
 		}
-		for (const key of [
-			"r0",
-			"r1",
-			"r2",
-			"r3",
-			"r4",
-			"r5",
-			"r6",
-			"r7",
-			"r8",
-			"r9",
-			"r10",
-			"r11",
-			"r12",
-			"r13",
-			"r14",
-			"r15",
-			"r16",
-			"r17",
-		]) {
+		for (const key of ["r0", "r1", "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17"]) {
 			this.data[key] = 0
 		}
 		for (let i = 0; i < 512; i++) {

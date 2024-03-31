@@ -68,11 +68,7 @@ export class Data {
 
 	async getDevices(): Promise<Devices> {
 		if (Data.devices === undefined) {
-			const response = await (
-				await fetch(
-					"https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/devices.en.json",
-				)
-			).json()
+			const response = await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/devices.en.json")).json()
 			Data.devices = response.data
 			Data.images = response.images
 		}
@@ -81,11 +77,7 @@ export class Data {
 
 	async getimages(): Promise<Images> {
 		if (Data.images === undefined) {
-			const response = await (
-				await fetch(
-					"https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/devices.en.json",
-				)
-			).json()
+			const response = await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/devices.en.json")).json()
 			Data.devices = response.data
 			Data.images = response.images
 		}
@@ -94,13 +86,7 @@ export class Data {
 
 	async getItems(): Promise<Items> {
 		if (Data.items === undefined) {
-			Data.items = (
-				await (
-					await fetch(
-						"https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/items.en.json",
-					)
-				).json()
-			).data
+			Data.items = (await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/items.en.json")).json()).data
 		}
 		return Items.parse(Data.items)
 	}

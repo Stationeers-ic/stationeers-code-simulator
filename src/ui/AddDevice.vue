@@ -67,13 +67,7 @@ function add() {
 			<div class="flex flex-column gap-2">
 				<InputGroup style="width: auto">
 					<InputGroupAddon>
-						<img
-							loading="lazy"
-							src="https://aws.traineratwot.site/icx/wiki_images/main/ItemLabeller.png"
-							style="width: 18px"
-							alt="Labeller"
-							title="Labeller"
-						/>
+						<img loading="lazy" src="https://aws.traineratwot.site/icx/wiki_images/main/ItemLabeller.png" style="width: 18px" alt="Labeller" title="Labeller" />
 					</InputGroupAddon>
 					<FloatLabel>
 						<InputText id="deviceName" v-model="deviceName" />
@@ -85,9 +79,7 @@ function add() {
 
 			<div class="flex flex-column gap-2">
 				<SelectPorts v-model="devicePort" />
-				<small id="username-help"
-					>Select the pin to which the device is assigned on the IC or leave empty</small
-				>
+				<small id="username-help">Select the pin to which the device is assigned on the IC or leave empty</small>
 			</div>
 		</div>
 		<div class="flex align-items-center gap-3 mb-3">

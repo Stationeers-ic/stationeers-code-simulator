@@ -35,25 +35,10 @@ const social = ref<MenuItem[]>([
 			<ButtonFrame :label="item.label" :icon="item.icon" size="large" :click="item.command" severity="info" />
 		</template>
 		<ButtonFrame icon="pi pi-discord" severity="info">
-			<iframe
-				loading="lazy"
-				src="https://discord.com/widget?id=848153816263295006&theme=dark"
-				width="350"
-				height="500"
-				allowtransparency="true"
-				frameborder="0"
-				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-			></iframe>
+			<iframe loading="lazy" src="https://discord.com/widget?id=848153816263295006&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
 		</ButtonFrame>
 		<ButtonFrame icon="pi pi-kofi" severity="info">
-			<iframe
-				id="kofiframe"
-				src="https://ko-fi.com/aidan647/?hidefeed=true&widget=true&embed=true&preview=true"
-				style="border: none; width: 100%; padding: 4px; background: #f9f9f9"
-				height="712"
-				title="aidan647"
-			>
-			</iframe>
+			<iframe id="kofiframe" src="https://ko-fi.com/aidan647/?hidefeed=true&widget=true&embed=true&preview=true" style="border: none; width: 100%; padding: 4px; background: #f9f9f9" height="712" title="aidan647"> </iframe>
 		</ButtonFrame>
 	</div>
 </template>

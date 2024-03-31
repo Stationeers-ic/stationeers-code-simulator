@@ -37,25 +37,11 @@ const remove = (event: any, name: string) => {
 	<div class="settingButton" @click="visible = true" />
 	<div class="card flex justify-content-center">
 		<Sidebar v-model:visible="visible" header="Saves">
-			<Listbox
-				v-model="active"
-				:options="saves"
-				@change="setActive"
-				filter
-				optionLabel="name"
-				optionValue="name"
-				empty-message="No saves"
-				empty-filter-message="Saves not found"
-				filter-placeholder="Search save"
-			>
+			<Listbox v-model="active" :options="saves" @change="setActive" filter optionLabel="name" optionValue="name" empty-message="No saves" empty-filter-message="Saves not found" filter-placeholder="Search save">
 				<template #option="slotProps">
 					<div class="saveItem">
 						<div>{{ slotProps.option.name }}</div>
-						<Button
-							icon="pi pi-minus-circle"
-							severity="danger"
-							@click="remove($event, slotProps.option.name)"
-						/>
+						<Button icon="pi pi-minus-circle" severity="danger" @click="remove($event, slotProps.option.name)" />
 					</div>
 				</template>
 			</Listbox>

@@ -2,7 +2,6 @@
 export default {
 	endOfLine: "lf",
 	tabWidth: 4,
-	printWidth: 360,
 	useTabs: true,
 	semi: false,
 

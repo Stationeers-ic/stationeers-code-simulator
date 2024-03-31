@@ -15,22 +15,11 @@ const ports = [
 
 <template>
 	<FloatLabel>
-		<MultiSelect
-			v-model="model"
-			:options="ports"
-			optionLabel="name"
-			placeholder="No connected"
-			display="chip"
-			optionValue="code"
-		>
+		<MultiSelect v-model="model" :options="ports" optionLabel="name" placeholder="No connected" display="chip" optionValue="code">
 			<template #option="slotProps">
 				<div class="flex align-items-center">
 					<div style="padding-right: 5px">
-						<i
-							class="pi pi-circle-fill"
-							style="font-size: 0.6em"
-							v-if="ic10.getEnv().devicesAttached.has(slotProps.option.code)"
-						></i>
+						<i class="pi pi-circle-fill" style="font-size: 0.6em" v-if="ic10.getEnv().devicesAttached.has(slotProps.option.code)"></i>
 						<i class="pi pi-circle" style="font-size: 0.6em" v-else></i>
 					</div>
 					<div>{{ slotProps.option.name }}</div>

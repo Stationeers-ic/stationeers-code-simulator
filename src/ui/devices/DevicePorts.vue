@@ -51,12 +51,7 @@ function attach() {
 	</Dialog>
 	<div :class="$style.ports">
 		<template v-for="port in ports">
-			<Chip
-				v-if="['db', 'd0', 'd1', 'd2', 'd3', 'd4', 'd5'].includes(port)"
-				:label="port"
-				removable
-				@remove="() => detach(port)"
-			/>
+			<Chip v-if="['db', 'd0', 'd1', 'd2', 'd3', 'd4', 'd5'].includes(port)" :label="port" removable @remove="() => detach(port)" />
 			<Chip v-else :label="port" />
 		</template>
 		<Button icon="pi pi-plus" rounded @click="visible = true" />

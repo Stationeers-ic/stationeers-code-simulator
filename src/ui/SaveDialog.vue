@@ -48,22 +48,10 @@ const save = () => {
 </script>
 
 <template>
-	<Dialog
-		v-model:visible="visible"
-		header="Save script and environment"
-		:style="{ width: '50rem' }"
-		:breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
-	>
+	<Dialog v-model:visible="visible" header="Save script and environment" :style="{ width: '50rem' }" :breakpoints="{ '1199px': '75vw', '575px': '90vw' }">
 		<div class="flex align-items-center gap-3 mb-3">
 			<label for="username" class="font-semibold">Script Name <sup style="color: red">*</sup></label>
-			<InputText
-				id="username"
-				v-model="scripName"
-				:invalid="invalid"
-				class="flex-auto"
-				autocomplete="off"
-				required
-			/>
+			<InputText id="username" v-model="scripName" :invalid="invalid" class="flex-auto" autocomplete="off" required />
 		</div>
 		<div class="flex justify-content-end gap-2">
 			<Button type="button" label="Cancel" severity="secondary" @click="close"></Button>

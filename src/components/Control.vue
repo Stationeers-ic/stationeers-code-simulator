@@ -78,14 +78,7 @@ const speerOptions = ["slow", "normal", "fast"]
 <template>
 	<header :class="[$style.control, 'control']">
 		<InputGroup style="width: auto">
-			<ToggleButton
-				v-model="checked"
-				style="width: 6em"
-				onLabel="Stop"
-				offLabel="Run "
-				onIcon="pi pi-stop"
-				offIcon="pi pi-play"
-			/>
+			<ToggleButton v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
 			<Button icon="pi pi-step-forward" @click="step" label="Step" />
 			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
@@ -109,13 +102,7 @@ const speerOptions = ["slow", "normal", "fast"]
 		</div>
 		<InputGroup style="width: auto; height: 40px">
 			<Button icon="pi pi-hashtag" @click="convert" label="Convert" />
-			<InputText
-				placeholder="String to Hash"
-				@focus="($event.target as any).select()"
-				id="hashText"
-				v-model="hashText"
-				style="max-width: 200px"
-			/>
+			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
 		</InputGroup>
 	</header>
 </template>
