@@ -26,6 +26,11 @@ const loadHandle = async () => {
 			switch (name) {
 				case "string":
 					await load(value)
+					break
+				case "file":
+					throw new Error("Comming soon")
+				default:
+					throw new Error("Что это за хуйня?")
 			}
 			toast.add({ severity: "success", summary: "Loaded", detail: `loaded from ${name}`, life: 3000 })
 		} else {
