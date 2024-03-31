@@ -28,7 +28,7 @@ const loadHandle = async () => {
 					await load(value)
 					break
 				case "file":
-					throw new Error("Comming soon")
+					throw new Error("Coming soon")
 				default:
 					throw new Error("Что это за хуйня?")
 			}

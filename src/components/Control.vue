@@ -110,7 +110,7 @@ const speerOptions = ["slow", "normal", "fast"]
 <style module lang="scss">
 .control {
 	z-index: 999;
-	background-color: #121212;
+	background-color: var(--surface-ground);
 	top: 0;
 	position: sticky;
 	flex-wrap: wrap;

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { MenuItem } from "primevue/menuitem"
 import { routes } from "../router.ts"
+import { onMounted } from "vue"
 
 const items: MenuItem[] = []
 routes.forEach((item) => {
@@ -9,6 +10,29 @@ routes.forEach((item) => {
 		icon: item.icon,
 		url: item.path,
 	})
+})
+
+const is1April = () => {
+	// if (import.meta.env.DEV) {
+	// 	return true
+	// }
+	return window.dayjs().date() === 1 && window.dayjs().month() === 3
+}
+
+const toggle1April = () => {
+	const a = window.document.querySelectorAll(".joker")
+	a.forEach((a) => a.classList.remove("joker"))
+	const b = window.document.querySelectorAll(".pulse")
+	b.forEach((a) => a.classList.remove("pulse"))
+}
+
+onMounted(() => {
+	if (is1April()) {
+		setTimeout(() => {
+			const a = window.document.querySelectorAll<HTMLDivElement>(".code-mirror")
+			a.forEach((a) => a.classList.add("joker"))
+		}, 300)
+	}
 })
 </script>
 
@@ -23,7 +47,9 @@ routes.forEach((item) => {
 				<span>{{ item.label }}</span>
 			</RouterLink>
 		</template>
-		<template #end></template>
+		<template #end>
+			<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
+		</template>
 	</Menubar>
 </template>
 
