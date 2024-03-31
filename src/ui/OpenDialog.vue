@@ -3,6 +3,7 @@ import { ref } from "vue"
 import { useToast } from "primevue/usetoast"
 import IcUpload from "./IcUpload.vue"
 import { load } from "../core/Share.ts"
+import { loadFromFile, saveToBrowser } from "../core/Save.ts"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
@@ -28,7 +29,9 @@ const loadHandle = async () => {
 					await load(value)
 					break
 				case "file":
-					throw new Error("Coming soon")
+					const newName = await loadFromFile(value)
+					saveToBrowser(newName)
+					break
 				default:
 					throw new Error("Что это за хуйня?")
 			}

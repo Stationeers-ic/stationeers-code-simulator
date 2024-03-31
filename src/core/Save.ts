@@ -18,6 +18,16 @@ export async function loadFromString(string: string): Promise<boolean> {
 	return true
 }
 
+export async function loadFromFile(content: string): Promise<string> {
+	const lines = content.split("\n")
+	const str = lines.findLast((line) => line.startsWith("##!"))
+	if (str) {
+		const url = new URL(str.replace("##!", ""))
+		return await load(url.hash.slice(1), lines.filter((line) => !line.startsWith("##!")).join("\n"))
+	}
+	return getDefaultScriptName()
+}
+
 async function loadFromUrl(): Promise<boolean> {
 	if (document.location.hash.slice(1).length > 0) {
 		await loadFromString(document.location.hash.slice(1))
@@ -35,7 +45,7 @@ export function getShareLink() {
 	return url.toString()
 }
 
-async function loadFromBrowser(): Promise<boolean> {
+async function loadFromBrowser() {
 	const name = window.localStorage.getItem("currentScriptName")
 	if (name) {
 		const data = window.localStorage.getItem(name)
@@ -44,11 +54,6 @@ async function loadFromBrowser(): Promise<boolean> {
 		}
 	}
 	return false
-}
-
-export async function loadFromFile(): Promise<boolean> {
-	// dump
-	return true
 }
 
 export async function saveToFile(): Promise<boolean> {
@@ -114,4 +119,8 @@ export async function setActiveSaveSlot(name: string) {
 
 export function getActiveSaveSlot(): string | null {
 	return window.localStorage.getItem("currentScriptName")
+}
+
+export function getDefaultScriptName(): string {
+	return "default_script_name"
 }

@@ -1,6 +1,7 @@
 import ic10 from "./ic10.ts"
 import pako from "pako"
 import { z } from "zod"
+import { getActiveSaveSlot, getDefaultScriptName } from "./Save.ts"
 
 const dumpShema = z
 	.object({
@@ -18,9 +19,10 @@ const dumpShema = z
 	})
 	.passthrough()
 
-export function dump(overwriteCode?: string): string {
-	const code = overwriteCode ?? ic10.getCode()
+export function dump(): string {
+	const code = ic10.getCode()
 	const dump = {
+		ScriptName: getActiveSaveSlot() || getDefaultScriptName(),
 		code,
 		devices: Object.fromEntries(ic10.getEnv().devices.entries()),
 		deviceNames: Object.fromEntries(ic10.getEnv().deviceNames.entries()),
@@ -32,7 +34,7 @@ export function dump(overwriteCode?: string): string {
 	return window.btoa(String.fromCharCode.apply(null, compressed))
 }
 
-export async function load(dump: any): Promise<true> {
+export async function load(dump: any, code?: string): Promise<string> {
 	return new Promise((resolve, reject) => {
 		try {
 			const compressed = new Uint8Array(
@@ -46,7 +48,7 @@ export async function load(dump: any): Promise<true> {
 			const json = JSON.parse(pako.inflate(compressed, { to: "string" }))
 			console.debug(json)
 			const restored = dumpShema.parse(json)
-			ic10.setCode(restored.code)
+			ic10.setCode(code ?? restored.code)
 
 			ic10.getEnv().devices.clear()
 			for (const [key, value] of Object.entries(restored.devices)) {
@@ -69,7 +71,7 @@ export async function load(dump: any): Promise<true> {
 			for (const [key, value] of Object.entries(restored.deviceNames)) {
 				ic10.getEnv().deviceNames.set(key, value.toString())
 			}
-			resolve(true)
+			resolve(json.ScriptName ?? getDefaultScriptName())
 		} catch (e) {
 			reject(e)
 		}

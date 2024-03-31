@@ -25,7 +25,11 @@ export class Ic10 extends InterpreterIc10 {
 		return this
 	}
 	getCode() {
-		return this.code.trimEnd()
+		return this.code
+			.trimEnd()
+			.split("\n")
+			.map((l) => l.trimEnd())
+			.join("\n")
 	}
 
 	public reset() {

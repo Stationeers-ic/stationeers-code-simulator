@@ -118,6 +118,10 @@ const speerOptions = ["slow", "normal", "fast"]
 	justify-content: space-between;
 	align-items: stretch;
 	gap: 5px;
+
+	* {
+		max-height: 40px;
+	}
 }
 
 .slider {

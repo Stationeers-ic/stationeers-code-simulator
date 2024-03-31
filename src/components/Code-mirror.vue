@@ -20,6 +20,11 @@ onBeforeUnmount(() => {
 })
 
 watch(
+	() => codeStore.code,
+	(newVal) => interpretator.setCode(newVal),
+)
+
+watch(
 	() => interpretator.getEnv().line,
 	(newVal) => {
 		window.document
