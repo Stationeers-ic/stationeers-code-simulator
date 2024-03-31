@@ -107,7 +107,7 @@ const speerOptions = ["slow", "normal", "fast"]
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic" />
 		</div>
-		<InputGroup style="width: auto">
+		<InputGroup style="width: auto; height: 40px">
 			<Button icon="pi pi-hashtag" @click="convert" label="Convert" />
 			<InputText
 				placeholder="String to Hash"
@@ -126,6 +126,7 @@ const speerOptions = ["slow", "normal", "fast"]
 	background-color: #121212;
 	top: 0;
 	position: sticky;
+	flex-wrap: wrap;
 	display: flex;
 	justify-content: space-between;
 	align-items: stretch;

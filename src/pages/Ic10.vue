@@ -72,7 +72,7 @@ startupLoad()
 	<Toast />
 	<SettingBar />
 	<SaveDialog v-model="saveDialogOpen"></SaveDialog>
-	<div class="app-container">
+	<div class="ic10-container">
 		<div class="code">
 			<Splitter style="height: 100%">
 				<SplitterPanel :size="70" :min-size="10">

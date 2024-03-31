@@ -8,13 +8,13 @@
 	#app {
 		margin: auto;
 		min-height: 100vh;
-		max-width: 1200px;
+		max-width: min(1200px, calc(100vw - 40px));
 	}
 
-	.app-container {
+	.ic10-container {
 		display: grid;
 		grid-template-columns: 7fr 2fr 3fr;
-		grid-template-rows: 40px auto auto 1fr;
+		grid-template-rows: min(40px,min-content) auto auto 1fr;
 		gap: 5px 5px;
 		grid-auto-flow: row;
 		grid-template-areas:
