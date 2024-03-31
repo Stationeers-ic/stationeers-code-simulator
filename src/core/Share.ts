@@ -18,8 +18,8 @@ const dumpShema = z
 	})
 	.passthrough()
 
-export function dump(): string {
-	const code = ic10.getCode()
+export function dump(overwriteCode?: string): string {
+	const code = overwriteCode ?? ic10.getCode()
 	const dump = {
 		code,
 		devices: Object.fromEntries(ic10.getEnv().devices.entries()),

@@ -55,7 +55,7 @@ const save = () => {
 		:breakpoints="{ '1199px': '75vw', '575px': '90vw' }"
 	>
 		<div class="flex align-items-center gap-3 mb-3">
-			<label for="username" class="font-semibold w-6rem">Script Name</label>
+			<label for="username" class="font-semibold">Script Name <sup style="color: red">*</sup></label>
 			<InputText
 				id="username"
 				v-model="scripName"

@@ -15,6 +15,7 @@ import SaveDialog from "../ui/SaveDialog.vue"
 import { saveToBrowser, startupLoad } from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
 import { off, on } from "../core/Events.ts"
+import OpenDialog from "../ui/OpenDialog.vue"
 
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
@@ -71,7 +72,8 @@ startupLoad()
 <template>
 	<Toast />
 	<SettingBar />
-	<SaveDialog v-model="saveDialogOpen"></SaveDialog>
+	<SaveDialog v-model="saveDialogOpen" />
+	<OpenDialog v-model="openDialogOpen" />
 	<div class="ic10-container">
 		<div class="code">
 			<Splitter style="height: 100%">
