@@ -54,7 +54,7 @@ export async function loadFromFile(): Promise<boolean> {
 export async function saveToFile(): Promise<boolean> {
 	const code = ic10.getCode()
 	const shareString = getShareLink()
-	const name = getActiveSaveSlot() + ".ic"
+	const name = getActiveSaveSlot() + ".ic10"
 	const file = code + "\n##! Changes in code does not reflect in link below !!\n##!" + shareString
 	downloadFile(file, name)
 	return true
