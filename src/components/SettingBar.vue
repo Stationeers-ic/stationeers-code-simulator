@@ -36,8 +36,7 @@ const remove = (event: any, name: string) => {
 <template>
 	<div class="settingButton" @click="visible = true" />
 	<div class="card flex justify-content-center">
-		<Sidebar v-model:visible="visible" header="">
-			<p>Saves</p>
+		<Sidebar v-model:visible="visible" header="Saves">
 			<Listbox
 				v-model="active"
 				:options="saves"
@@ -45,7 +44,9 @@ const remove = (event: any, name: string) => {
 				filter
 				optionLabel="name"
 				optionValue="name"
-				class="w-full md:w-14rem"
+				empty-message="No saves"
+				empty-filter-message="Saves not found"
+				filter-placeholder="Search save"
 			>
 				<template #option="slotProps">
 					<div class="saveItem">

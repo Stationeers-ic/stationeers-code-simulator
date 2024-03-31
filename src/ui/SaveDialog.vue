@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue"
 import { useToast } from "primevue/usetoast"
-import { saveToBrowser } from "../core/Save.ts"
+import { saveToBrowser, saveToFile } from "../core/Save.ts"
 import clipboard from "web-clipboard"
 import { dump } from "../core/Share.ts"
 
@@ -20,16 +20,16 @@ watch(scripName, () => {
 const close = () => {
 	visible.value = false
 }
-const saveAsFile = () => {
-	toast.add({ severity: "warn", summary: "Download", detail: "Coming soon" })
-
+const saveAsFile = async () => {
+	await saveToFile()
+	toast.add({ severity: "success", summary: "Download", detail: "File saved", life: 3000 })
 	close()
 }
 const share = () => {
 	const url = new URL(document.location.href)
 	url.hash = dump()
 	clipboard.write(url.toString())
-	toast.add({ severity: "success", summary: "Share", detail: "Copied to clipboard" })
+	toast.add({ severity: "success", summary: "Share", detail: "Copied to clipboard", life: 3000 })
 	close()
 }
 watch(scripName, () => {

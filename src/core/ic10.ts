@@ -24,6 +24,9 @@ export class Ic10 extends InterpreterIc10 {
 		this.getEnv().prepare()
 		return this
 	}
+	getCode() {
+		return this.code.trimEnd()
+	}
 
 	public reset() {
 		// this.getEnv().reset()

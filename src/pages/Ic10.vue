@@ -29,8 +29,8 @@ const HotKeyHandler = async (e: any) => {
 		await delay(200)
 		console.log("save")
 		try {
-			saveToBrowser()
-			toast.add({ severity: "success", summary: "Saved!", detail: "Saved to clipboard", life: 3000 })
+			const name = saveToBrowser()
+			toast.add({ severity: "success", summary: "Saved!", detail: `Saved to "${name}"`, life: 3000 })
 		} catch (e: any) {
 			toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
 		}

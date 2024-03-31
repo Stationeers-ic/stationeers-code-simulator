@@ -1,6 +1,7 @@
-import { dump, load } from "./Share.ts"
+import { downloadFile, dump, load } from "./Share.ts"
 import { z } from "zod"
 import { emit } from "./Events.ts"
+import ic10 from "./ic10.ts"
 
 export async function startupLoad(): Promise<string | false> {
 	if (!(await loadFromUrl())) {
@@ -43,6 +44,15 @@ export async function loadFromFile(): Promise<boolean> {
 	return true
 }
 
+export async function saveToFile(): Promise<boolean> {
+	const code = ic10.getCode()
+	const shareString = dump()
+	const name = getActiveSaveSlot() + ".ic"
+	const file = code + "\n\n#-#" + shareString
+	downloadFile(file, name)
+	return true
+}
+
 export function saveToBrowser(name?: string) {
 	if (name == undefined) {
 		name = window.localStorage.getItem("currentScriptName") ?? undefined
@@ -55,6 +65,7 @@ export function saveToBrowser(name?: string) {
 	console.log(name)
 	window.localStorage.setItem(name, saveData)
 	emit("saveUpdate")
+	return name
 }
 
 export function removeFromBrowser(name: string) {

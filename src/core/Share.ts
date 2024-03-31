@@ -1,4 +1,3 @@
-import { codeStore } from "../store"
 import ic10 from "./ic10.ts"
 import pako from "pako"
 import { z } from "zod"
@@ -20,7 +19,7 @@ const dumpShema = z
 	.passthrough()
 
 export function dump(): string {
-	const code = codeStore.code
+	const code = ic10.getCode()
 	const dump = {
 		code,
 		devices: Object.fromEntries(ic10.getEnv().devices.entries()),
@@ -77,13 +76,30 @@ export async function load(dump: any): Promise<true> {
 	})
 }
 
+export function downloadFile(text: string, filename: string): void {
+	// Удаление запрещенных символов из имени файла
+	const safeFilename = filename.replace(/[\/\\:*?"<>|]/g, "")
+
+	const blob = new Blob([text], { type: "text/plain" })
+	const url = URL.createObjectURL(blob)
+
+	const link = document.createElement("a")
+	link.href = url
+	link.download = safeFilename
+	link.click()
+
+	URL.revokeObjectURL(url)
+}
+
 declare global {
 	interface Window {
 		dump: typeof dump
 		load: typeof load
+		downloadFile: typeof downloadFile
 	}
 }
 window.dump = dump
 window.load = load
+window.downloadFile = downloadFile
 
-export default { dump, load }
+export default { dump, load, downloadFile }
