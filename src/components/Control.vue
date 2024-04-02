@@ -12,6 +12,8 @@ import { emit } from "../core/Events.ts"
 
 const checked = ref(false)
 const hashText = ref("")
+const op = ref()
+const data = ref("")
 
 watch(checked, (newVal) => {
 	if (newVal) {
@@ -43,7 +45,6 @@ const reset = () => {
 	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
-
 const saveDialogOpen = () => {
 	emit("saveDialogOpen")
 }
@@ -57,8 +58,6 @@ const step = async () => {
 		// ic10.getEnv().emit('update')
 	}
 }
-const op = ref()
-const data = ref("")
 const copy = () => {
 	console.log("copy")
 	clipboard.write(data.value)
@@ -71,7 +70,6 @@ const goto = () => {
 	})
 	checked.value = true
 }
-
 const speerOptions = ["slow", "normal", "fast"]
 </script>
 
@@ -96,7 +94,6 @@ const speerOptions = ["slow", "normal", "fast"]
 				</div>
 			</OverlayPanel>
 		</InputGroup>
-
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic" />
 		</div>
