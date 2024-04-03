@@ -83,6 +83,7 @@ const FileMenu = ref<MenuItem[]>([
 			emit("save")
 			op.value.hide()
 		},
+		shortcut: "⌘+S",
 	},
 	{
 		label: "Save as ",
@@ -91,6 +92,7 @@ const FileMenu = ref<MenuItem[]>([
 			emit("saveDialogOpen")
 			op.value.hide()
 		},
+		shortcut: "⌘+SHIFT+S",
 	},
 	{
 		label: "Open",
@@ -99,6 +101,7 @@ const FileMenu = ref<MenuItem[]>([
 			emit("openDialogOpen")
 			op.value.hide()
 		},
+		shortcut: "⌘+O",
 	},
 	{
 		label: "Load",
@@ -127,7 +130,17 @@ const FileMenu = ref<MenuItem[]>([
 		<InputGroup style="width: auto">
 			<Button icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
-				<TieredMenu :model="FileMenu" />
+				<TieredMenu :model="FileMenu">
+					<template #item="{ item, props, hasSubmenu }">
+						<a v-ripple class="flex align-items-center" v-bind="props.action">
+							<span :class="item.icon" />
+							<span class="ml-2">{{ item.label }}</span>
+							<Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
+							<span v-if="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
+							<i v-if="hasSubmenu" class="pi pi-angle-right ml-auto"></i>
+						</a>
+					</template>
+				</TieredMenu>
 			</OverlayPanel>
 			<ToggleButton v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
 			<Button icon="pi pi-step-forward" @click="step" label="Step" />
