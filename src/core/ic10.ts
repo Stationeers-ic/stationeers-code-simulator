@@ -38,12 +38,12 @@ export class Ic10 extends InterpreterIc10 {
 		this.setCode(this.code)
 		this.getEnv().emit("update")
 	}
-
+	// @ts-ignore TODO
 	public getEnv(): Env {
 		return this.env as Env
 	}
 
-	async run(codeLines?: number, dryRun?: number): Promise<string> {
+	async run(codeLines?: number, dryRun?: number): Promise<"ERR" | "safeGuard" | "STOP" | "EOF"> {
 		this.reset()
 		return await super.run(codeLines, dryRun)
 	}
