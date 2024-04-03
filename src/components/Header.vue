@@ -2,6 +2,11 @@
 import { MenuItem } from "primevue/menuitem"
 import { routes } from "../router.ts"
 import { onMounted } from "vue"
+import { useConfirm } from "primevue/useconfirm"
+import { useToast } from "primevue/usetoast"
+
+const confirm = useConfirm()
+const toast = useToast()
 
 const items: MenuItem[] = []
 routes.forEach((item) => {
@@ -18,14 +23,12 @@ const is1April = () => {
 	// }
 	return window.dayjs().date() === 1 && window.dayjs().month() === 3
 }
-
 const toggle1April = () => {
 	const a = window.document.querySelectorAll(".joker")
 	a.forEach((a) => a.classList.remove("joker"))
 	const b = window.document.querySelectorAll(".pulse")
 	b.forEach((a) => a.classList.remove("pulse"))
 }
-
 onMounted(() => {
 	if (is1April()) {
 		setTimeout(() => {
@@ -34,6 +37,26 @@ onMounted(() => {
 		}, 300)
 	}
 })
+
+const confirmReset = (event: any) => {
+	confirm.require({
+		target: event.currentTarget,
+		message: "Are you sure you want to clear All app data?",
+		icon: "pi pi-exclamation-triangle",
+		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
+		acceptClass: "p-button-danger p-button-sm",
+		rejectLabel: "Cancel",
+		acceptLabel: "Reset",
+		accept: () => {
+			window.localStorage.clear()
+			toast.add({ severity: "info", summary: "Confirmed", detail: "You have accepted", life: 3000 })
+			window.location.reload()
+		},
+		reject: () => {
+			toast.add({ severity: "error", summary: "Rejected", detail: "You have rejected", life: 3000 })
+		},
+	})
+}
 </script>
 
 <template>
@@ -49,6 +72,7 @@ onMounted(() => {
 		</template>
 		<template #end>
 			<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
+			<Button severity="danger" icon="pi pi-trash" v-tooltip.down="'Reset all data'" @click="confirmReset" />
 		</template>
 	</Menubar>
 </template>

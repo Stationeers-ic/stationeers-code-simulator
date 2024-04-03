@@ -12,7 +12,7 @@ import { useToast } from "primevue/usetoast"
 
 import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
-import { saveToBrowser, startupLoad } from "../core/Save.ts"
+import { saveToBrowser } from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
 import { off, on } from "../core/Events.ts"
 import OpenDialog from "../ui/OpenDialog.vue"
@@ -66,19 +66,9 @@ onBeforeUnmount(() => {
 	off("openDialogOpen", showOpenDialog)
 	off("save", save)
 })
-startupLoad()
-	.then((from) => {
-		if (from) {
-			toast.add({ severity: "success", summary: "Loaded", detail: `load data ${from}`, life: 3000 })
-		}
-	})
-	.catch((e) => {
-		toast.add({ severity: "error", summary: "Error", detail: e.message, life: 3000 })
-	})
 </script>
 
 <template>
-	<Toast />
 	<SettingBar />
 	<SaveDialog v-model="saveDialogOpen" />
 	<OpenDialog v-model="openDialogOpen" />

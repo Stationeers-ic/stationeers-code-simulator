@@ -31,7 +31,6 @@ export function dump(): string {
 		deviceNames: Object.fromEntries(ic10.getEnv().deviceNames.entries()),
 		devicesAttached: Object.fromEntries(ic10.getEnv().devicesAttached.entries()),
 	}
-	console.debug(dump)
 	const compressed = pako.deflate(JSON.stringify(dump), { level: 9 })
 	//@ts-ignore
 	return window.btoa(String.fromCharCode.apply(null, compressed))
@@ -51,7 +50,14 @@ export async function load(dump: any, code?: string): Promise<string> {
 			const json = JSON.parse(pako.inflate(compressed, { to: "string" }))
 			console.debug(json)
 			const restored = dumpShema.parse(json)
-			ic10.setCode(code ?? codeStore.code ?? restored.code)
+			console.log("restored")
+			if (code) {
+				ic10.setCode(code)
+			} else if (codeStore.code && codeStore.code.length > 0) {
+				ic10.setCode(codeStore.code)
+			} else {
+				ic10.setCode(restored.code)
+			}
 			if (restored.icx) {
 				codeStore.icx = restored.icx
 			}

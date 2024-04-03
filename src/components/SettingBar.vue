@@ -2,7 +2,9 @@
 import { onBeforeUnmount, onMounted, ref } from "vue"
 import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
 import { off, on } from "../core/Events.ts"
+import { useConfirm } from "primevue/useconfirm"
 
+const confirm = useConfirm()
 const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
 const active = ref<string | null>(null)
@@ -31,7 +33,18 @@ const setActive = async () => {
 
 const remove = (event: any, name: string) => {
 	event.preventDefault()
-	removeFromBrowser(name)
+	confirm.require({
+		target: event.currentTarget,
+		message: "Are you sure you want to clear All app data?",
+		icon: "pi pi-exclamation-triangle",
+		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
+		acceptClass: "p-button-danger p-button-sm",
+		rejectLabel: "Cancel",
+		acceptLabel: "Delete",
+		accept: () => {
+			removeFromBrowser(name)
+		},
+	})
 }
 </script>
 

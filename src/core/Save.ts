@@ -4,7 +4,6 @@ import { emit } from "./Events.ts"
 import ic10 from "./ic10.ts"
 
 export async function startupLoad(): Promise<string | false> {
-	debugger
 	if (await loadFromUrl()) {
 		return "from url"
 	} else if (await loadFromBrowser()) {
@@ -45,7 +44,6 @@ async function loadFromUrl(): Promise<boolean> {
 }
 
 export function getShareLink() {
-	debugger
 	const url = new URL(document.location.href)
 	url.hash = dump()
 	return url.toString()
@@ -62,7 +60,7 @@ async function loadFromBrowser() {
 	return false
 }
 async function loadFromTmp() {
-	const data = window.localStorage.getItem("tmpSave")
+	const data = window.localStorage.getItem("tempSave")
 	if (data) {
 		return await load(data)
 	}
@@ -107,6 +105,10 @@ export function saveToBrowser(name?: string, isNew = false) {
 export function removeFromBrowser(name: string) {
 	removeSaveSlot(name)
 	window.localStorage.removeItem(name)
+	const ScriptNames = getScriptNames()
+	ScriptNames.delete(name)
+	setScriptNames(ScriptNames)
+	window.localStorage.removeItem("currentScriptName")
 	emit("saveUpdate")
 }
 
@@ -152,5 +154,12 @@ export function getDefaultScriptName(): string {
 
 export function tmpSave() {
 	const saveData = dump()
-	localStorage.setItem("tmpSave", saveData)
+	localStorage.setItem("tempSave", saveData)
 }
+declare global {
+	interface Window {
+		tmpSave: typeof tmpSave
+	}
+}
+
+window.tmpSave = tmpSave
