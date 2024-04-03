@@ -23,14 +23,16 @@ onBeforeUnmount(() => {
 <template>
 	<InputGroup>
 		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
-		<InputText :useGrouping="false" type="number" v-if="props.readonly === true" v-model="model" width="100%" placeholder="Value" readonly />
-		<InputText :useGrouping="false" type="number" v-else :class="{ [$style.defaultValue]: Number(model) === 0 }" v-model="model" width="100%" placeholder="Value" />
+		<InputNumber :useGrouping="false" v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly />
+		<InputNumber :useGrouping="false" v-else :class="{ [$style.defaultValue]: model == 0 }" v-model="model" width="100%" placeholder="Value" />
 		<InputGroupAddon v-if="alias">{{ alias }}</InputGroupAddon>
 	</InputGroup>
 </template>
 
 <style module lang="scss">
 .defaultValue {
-	color: var(--text-color-secondary) !important;
+	input {
+		color: var(--text-color-secondary) !important;
+	}
 }
 </style>
