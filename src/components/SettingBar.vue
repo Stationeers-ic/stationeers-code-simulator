@@ -12,13 +12,15 @@ const update = () => {
 	})
 	active.value = getActiveSaveSlot()
 }
-
+const open = () => (visible.value = true)
 onMounted(() => {
 	update()
 	on("saveUpdate", update)
+	on("openSetting", open)
 })
 onBeforeUnmount(() => {
 	off("saveUpdate", update)
+	off("openSetting", open)
 })
 
 const setActive = async () => {

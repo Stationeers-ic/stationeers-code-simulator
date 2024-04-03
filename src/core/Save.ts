@@ -43,6 +43,7 @@ async function loadFromUrl(): Promise<boolean> {
 }
 
 export function getShareLink() {
+	debugger
 	const url = new URL(document.location.href)
 	url.hash = dump()
 	return url.toString()

@@ -23,18 +23,22 @@ const isOpenHotkey = isHotkey("mod+o")
 const saveDialogOpen = ref(false)
 const openDialogOpen = ref(false)
 const toast = useToast()
-const tt = () => (saveDialogOpen.value = true)
+const showSaveDialog = () => (saveDialogOpen.value = true)
+const showOpenDialog = () => (openDialogOpen.value = true)
+const save = async () => {
+	await delay(200)
+	console.log("save")
+	try {
+		const name = saveToBrowser()
+		toast.add({ severity: "success", summary: "Saved!", detail: `Saved to "${name}"`, life: 3000 })
+	} catch (e: any) {
+		toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
+	}
+}
 const HotKeyHandler = async (e: any) => {
 	if (isSaveHotkey(e)) {
 		e.preventDefault()
-		await delay(200)
-		console.log("save")
-		try {
-			const name = saveToBrowser()
-			toast.add({ severity: "success", summary: "Saved!", detail: `Saved to "${name}"`, life: 3000 })
-		} catch (e: any) {
-			toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
-		}
+		await save()
 	}
 	if (isSaveAsHotkey(e)) {
 		e.preventDefault()
@@ -52,11 +56,15 @@ const HotKeyHandler = async (e: any) => {
 
 onMounted(() => {
 	window.document.addEventListener("keydown", HotKeyHandler)
-	on("saveDialogOpen", tt)
+	on("saveDialogOpen", showSaveDialog)
+	on("openDialogOpen", showOpenDialog)
+	on("save", save)
 })
 onBeforeUnmount(() => {
 	window.document.removeEventListener("keydown", HotKeyHandler)
-	off("saveDialogOpen", tt)
+	off("saveDialogOpen", showSaveDialog)
+	off("openDialogOpen", showOpenDialog)
+	off("save", save)
 })
 startupLoad()
 	.then((from) => {

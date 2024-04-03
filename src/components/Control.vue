@@ -9,11 +9,14 @@ import { settingStore } from "../store"
 import AddDevice from "../ui/AddDevice.vue"
 import clipboard from "web-clipboard"
 import { emit } from "../core/Events.ts"
+import { MenuItem } from "primevue/menuitem"
+import { getShareLink } from "../core/Save.ts"
+import { useToast } from "primevue/usetoast"
 
 const checked = ref(false)
 const hashText = ref("")
 const op = ref()
-const data = ref("")
+const toast = useToast()
 
 watch(checked, (newVal) => {
 	if (newVal) {
@@ -45,9 +48,6 @@ const reset = () => {
 	ic10.getEnv().setPosition(0)
 	ic10.reset()
 }
-const saveDialogOpen = () => {
-	emit("saveDialogOpen")
-}
 const step = async () => {
 	ic10.getEnv().yieldMode = false
 	const t = await ic10.step()
@@ -59,8 +59,8 @@ const step = async () => {
 	}
 }
 const copy = () => {
-	console.log("copy")
-	clipboard.write(data.value)
+	clipboard.write(getShareLink())
+	toast.add({ severity: "success", summary: "Share", detail: "Copied to clipboard", life: 3000 })
 }
 const goto = () => {
 	ic10.getEnv().yieldMode = true
@@ -71,28 +71,69 @@ const goto = () => {
 	checked.value = true
 }
 const speerOptions = ["slow", "normal", "fast"]
+
+const toggle = (event: any) => {
+	op.value.toggle(event)
+}
+const FileMenu = ref<MenuItem[]>([
+	{
+		label: "Save",
+		icon: "pi pi-save",
+		command: () => {
+			emit("save")
+			op.value.hide()
+		},
+	},
+	{
+		label: "Save as ",
+		icon: "pi pi-file-export",
+		command: () => {
+			emit("saveDialogOpen")
+			op.value.hide()
+		},
+	},
+	{
+		label: "Open",
+		icon: "pi pi-file",
+		command: () => {
+			emit("openDialogOpen")
+			op.value.hide()
+		},
+	},
+	{
+		label: "Load",
+		icon: "pi pi-list",
+		command: () => {
+			emit("openSetting")
+			op.value.hide()
+		},
+	},
+	{
+		separator: true,
+	},
+	{
+		label: "Share",
+		icon: "pi pi-share-alt",
+		command: () => {
+			copy()
+			op.value.hide()
+		},
+	},
+])
 </script>
 
 <template>
 	<header :class="[$style.control, 'control']">
 		<InputGroup style="width: auto">
+			<Button icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
+			<OverlayPanel ref="op">
+				<TieredMenu :model="FileMenu" />
+			</OverlayPanel>
 			<ToggleButton v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
 			<Button icon="pi pi-step-forward" @click="step" label="Step" />
 			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
 			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
 			<AddDevice id="AddDevice" />
-			<Button icon="pi pi-save" @click="saveDialogOpen" severity="secondary" />
-			<OverlayPanel ref="op">
-				<div class="flex flex-column gap-3 w-25rem">
-					<div>
-						<span class="font-medium text-900 block mb-2">Share</span>
-						<InputGroup>
-							<InputText :value="data" readonly class="w-25rem"></InputText>
-							<Button icon="pi pi-copy" @click="copy" />
-						</InputGroup>
-					</div>
-				</div>
-			</OverlayPanel>
 		</InputGroup>
 		<div :class="$style.slider">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic" />
