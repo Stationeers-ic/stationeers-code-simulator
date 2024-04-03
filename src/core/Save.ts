@@ -4,13 +4,15 @@ import { emit } from "./Events.ts"
 import ic10 from "./ic10.ts"
 
 export async function startupLoad(): Promise<string | false> {
-	if (!(await loadFromUrl())) {
-		if (await loadFromBrowser()) {
-			return "from browser"
-		}
-		return false
+	debugger
+	if (await loadFromUrl()) {
+		return "from url"
+	} else if (await loadFromBrowser()) {
+		return "from browser"
+	} else if (await loadFromTmp()) {
+		return "from temp"
 	}
-	return "from url"
+	return false
 }
 
 export async function loadFromString(string: string): Promise<boolean> {
@@ -56,6 +58,13 @@ async function loadFromBrowser() {
 		if (data) {
 			return await load(data)
 		}
+	}
+	return false
+}
+async function loadFromTmp() {
+	const data = window.localStorage.getItem("tmpSave")
+	if (data) {
+		return await load(data)
 	}
 	return false
 }
@@ -139,4 +148,9 @@ export function getActiveSaveSlot(): string {
 
 export function getDefaultScriptName(): string {
 	return "default_script_name"
+}
+
+export function tmpSave() {
+	const saveData = dump()
+	localStorage.setItem("tmpSave", saveData)
 }

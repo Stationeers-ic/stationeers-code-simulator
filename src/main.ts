@@ -120,6 +120,10 @@ import "./core/Share.ts"
 import router from "./router.ts"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import VueCodemirror from "vue-codemirror"
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { zeroLineNumbers } from "codemirror-lang-ic10"
+import { EditorView } from "codemirror"
 
 dayjs.extend(relativeTime)
 declare global {
@@ -136,6 +140,16 @@ app.use(PrimeVue, { ripple: true })
 app.use(ConfirmationService)
 app.use(ToastService)
 app.use(DialogService)
+app.use(VueCodemirror, {
+	// optional default global options
+	autofocus: true,
+	disabled: false,
+	indentWithTab: true,
+	tabSize: 2,
+	placeholder: "Code goes here...",
+	extensions: [monokai, EditorView.lineWrapping, zeroLineNumbers],
+	// ...
+})
 app.directive("tooltip", Tooltip)
 app.directive("badge", BadgeDirective)
 app.directive("ripple", Ripple)

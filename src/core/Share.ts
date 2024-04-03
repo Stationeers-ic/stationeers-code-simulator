@@ -2,10 +2,12 @@ import ic10 from "./ic10.ts"
 import pako from "pako"
 import { z } from "zod"
 import { getActiveSaveSlot, getDefaultScriptName } from "./Save.ts"
+import { codeStore } from "../store"
 
 const dumpShema = z
 	.object({
 		code: z.string(),
+		icx: z.string().optional(),
 		devices: z.record(
 			z
 				.object({
@@ -24,6 +26,7 @@ export function dump(): string {
 	const dump = {
 		ScriptName: getActiveSaveSlot() || getDefaultScriptName(),
 		code,
+		icx: codeStore.icx,
 		devices: Object.fromEntries(ic10.getEnv().devices.entries()),
 		deviceNames: Object.fromEntries(ic10.getEnv().deviceNames.entries()),
 		devicesAttached: Object.fromEntries(ic10.getEnv().devicesAttached.entries()),
@@ -48,8 +51,10 @@ export async function load(dump: any, code?: string): Promise<string> {
 			const json = JSON.parse(pako.inflate(compressed, { to: "string" }))
 			console.debug(json)
 			const restored = dumpShema.parse(json)
-			ic10.setCode(code ?? restored.code)
-
+			ic10.setCode(code ?? codeStore.code ?? restored.code)
+			if (restored.icx) {
+				codeStore.icx = restored.icx
+			}
 			ic10.getEnv().devices.clear()
 			for (const [key, value] of Object.entries(restored.devices)) {
 				const id = ic10.getEnv().appendDevice(value.PrefabHash, value.Name, +key)
