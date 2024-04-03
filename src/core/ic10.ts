@@ -22,6 +22,7 @@ export class Ic10 extends InterpreterIc10 {
 		super.setCode(code)
 		this.getEnv().emit("update_code")
 		this.getEnv().prepare()
+		this.parseCode()
 		return this
 	}
 	getCode() {
@@ -39,11 +40,12 @@ export class Ic10 extends InterpreterIc10 {
 		this.getEnv().emit("update")
 	}
 
-	public getEnv(): Env {
+	//@ts-ignore TODO
+	public getEnv() {
 		return this.env as Env
 	}
 
-	async run(codeLines?: number, dryRun?: number): Promise<string> {
+	async run(codeLines?: number, dryRun?: number) {
 		this.reset()
 		return await super.run(codeLines, dryRun)
 	}

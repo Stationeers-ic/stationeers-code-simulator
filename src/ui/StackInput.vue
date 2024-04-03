@@ -6,16 +6,14 @@ const model = defineModel<number>()
 <template>
 	<InputGroup :class="$style.StackInput">
 		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
-		<InputNumber :useGrouping="false" :class="{ [$style.defaultValue]: model == 0 }" v-model="model" width="100%" placeholder="Value" />
+		<InputText :useGrouping="false" type="number"  :class="{ [$style.defaultValue]: model == 0 }" v-model="model" width="100%" placeholder="Value" />
 	</InputGroup>
 </template>
 
 <style module lang="scss">
 .StackInput {
 	.defaultValue {
-		input {
-			color: #767676 !important;
-		}
+		color: var(--text-color-secondary) !important;
 	}
 
 	* {

@@ -11,10 +11,10 @@
   "dependencies": {
     "@types/bun": "^1.0.11",
     "@uiw/codemirror-theme-monokai": "^4.21.24",
-    "codemirror-lang-ic10": "^0.3.3",
+    "codemirror-lang-ic10": "^0.3.5",
     "dayjs": "^1.11.10",
     "delay": "^6.0.0",
-    "ic10": "^4.1.7",
+    "ic10": "^4.1.11",
     "icx-compiler": "^2.1.6",
     "is-hotkey": "^0.2.0",
     "pako": "^2.1.0",
