@@ -21,9 +21,11 @@ onMounted(() => {
 			})
 	}, 500)
 	ic10.getEnv().on("update", tmpSave)
+	ic10.getEnv().on("update_code", tmpSave)
 })
 onBeforeUnmount(() => {
 	ic10.getEnv().off("update", tmpSave)
+	ic10.getEnv().off("update_code", tmpSave)
 })
 </script>
 
