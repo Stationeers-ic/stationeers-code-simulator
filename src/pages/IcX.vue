@@ -2,7 +2,7 @@
 import { Codemirror } from "vue-codemirror"
 import { onMounted, watch } from "vue"
 import { icX } from "icx-compiler/index"
-import CodeMirror from "../components/Code-mirror.vue"
+import CodeMirror from "../components/CodeMirror.vue"
 import { codeStore } from "../store"
 
 onMounted(update)

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import CodeMirror from "../components/Code-mirror.vue"
+import CodeMirror from "../components/CodeMirror.vue"
 import Errors from "../components/Errors.vue"
 import Control from "../components/Control.vue"
 import Register from "../components/Register.vue"
 import Stack from "../components/Stack.vue"
-import Raw from "../components/Raw.vue"
 import Devises from "../components/Devises.vue"
 import { onBeforeUnmount, onMounted, ref } from "vue"
 import isHotkey from "is-hotkey"
