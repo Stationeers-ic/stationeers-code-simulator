@@ -135,7 +135,7 @@ function startTour() {
 		<InputGroup style="width: auto">
 			<Button id="tour-File" icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
-				<TieredMenu :model="FileMenu" id="FileMenu" >
+				<TieredMenu :model="FileMenu" id="FileMenu">
 					<template #item="{ item, props, hasSubmenu }">
 						<a v-ripple class="flex align-items-center" v-bind="props.action">
 							<span :class="item.icon" />

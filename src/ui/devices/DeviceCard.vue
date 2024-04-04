@@ -80,7 +80,7 @@ function add() {
 			</div>
 			<Divider />
 			<div class="device-slots">
-				<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
+				<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData" />
 			</div>
 		</template>
 		<template #footer>

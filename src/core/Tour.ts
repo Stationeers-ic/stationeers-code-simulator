@@ -12,13 +12,16 @@ const controls: DriveStep[] = [
 		element: "#tour-reset",
 		popover: { title: "Controls", description: "Clear registers and current line position. It`s like remove ic10 chip from housing and put again", side: "bottom", align: "center" },
 	},
-
 ]
 
 const saveSystem: DriveStep[] = [
 	{
-		element: "#tour-File", popover: {
-			title: "Save system", description: "This button open sub menu. You can save and share the code and environment", side: "bottom", align: "start",
+		element: "#tour-File",
+		popover: {
+			title: "Save system",
+			description: "This button open sub menu. You can save and share the code and environment",
+			side: "bottom",
+			align: "start",
 			onNextClick: async () => {
 				document.querySelector<HTMLButtonElement>("#tour-File")?.click()
 				await delay(100)
@@ -34,8 +37,13 @@ const saveSystem: DriveStep[] = [
 	},
 	{ element: "#FileMenu_3", popover: { title: "Save system", description: "Opens a sidebar where you can manage your saves", side: "left", align: "center" } },
 	{
-		element: "#FileMenu_5", popover: {
-			title: "Save system", description: "Copy in clipboard share link", side: "left", align: "center", onNextClick: async () => {
+		element: "#FileMenu_5",
+		popover: {
+			title: "Save system",
+			description: "Copy in clipboard share link",
+			side: "left",
+			align: "center",
+			onNextClick: async () => {
 				document.querySelector<HTMLButtonElement>("#tour-File")?.click()
 				await delay(100)
 				driverObj.moveNext()
@@ -93,8 +101,8 @@ const body: DriveStep[] = [
 
 const device: DriveStep[] = [
 	{ element: "#tour-devises > div > div", popover: { title: "Constants", description: "Device card", side: "top", align: "center" } },
-	{ element: "#tour-devises div[data-pc-section=\"title\"]", popover: { title: "Constants", description: "Device PrefabName", side: "left", align: "center" } },
-	{ element: "#tour-devises div[data-pc-section=\"subtitle\"]", popover: { title: "Constants", description: "Device Name from <b>Labeller</b>", side: "left", align: "center" } },
+	{ element: '#tour-devises div[data-pc-section="title"]', popover: { title: "Constants", description: "Device PrefabName", side: "left", align: "center" } },
+	{ element: '#tour-devises div[data-pc-section="subtitle"]', popover: { title: "Constants", description: "Device Name from <b>Labeller</b>", side: "left", align: "center" } },
 	{ element: "#tour-devises .device-ports", popover: { title: "Constants", description: "List ports and aliases", side: "left", align: "center" } },
 	{ element: "#tour-devises .device-props", popover: { title: "Constants", description: "List exists device props", side: "left", align: "center" } },
 	{ element: "#tour-devises .device-new-prop", popover: { title: "Constants", description: "You can add new prop", side: "left", align: "center" } },
@@ -105,13 +113,7 @@ const device: DriveStep[] = [
 const driverObj = driver({
 	showProgress: true,
 	smoothScroll: true,
-	steps: [
-		...controls,
-		...saveSystem,
-		...AddDevice,
-		...body,
-		...device,
-	],
+	steps: [...controls, ...saveSystem, ...AddDevice, ...body, ...device],
 
 	onDestroyStarted: () => {
 		if (!driverObj.hasNextStep() || confirm("Are you sure?")) {
