@@ -99,7 +99,16 @@ const extensions = [ic10(), ic10Snippets(), ic10HoverTooltip(opt)]
 </script>
 
 <template>
-	<Codemirror ref="" v-model="codeStore.code" :style="{ height: '100%' }" :autofocus="true" :indent-with-tab="true" :tab-size="2" :lineNumberFormatter="(line: number) => line - 1" :extensions="extensions" />
+	<Codemirror
+		ref=""
+		v-model="codeStore.code"
+		:style="{ height: '100%' }"
+		:autofocus="true"
+		:indent-with-tab="true"
+		:tab-size="2"
+		:lineNumberFormatter="(line: number) => line - 1"
+		:extensions="extensions"
+	/>
 </template>
 
 <style scoped lang="scss">

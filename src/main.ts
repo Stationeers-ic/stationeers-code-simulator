@@ -124,6 +124,7 @@ import VueCodemirror from "vue-codemirror"
 import { monokai } from "@uiw/codemirror-theme-monokai"
 import { zeroLineNumbers } from "codemirror-lang-ic10"
 import { EditorView } from "codemirror"
+import "driver.js/dist/driver.css"
 
 dayjs.extend(relativeTime)
 declare global {

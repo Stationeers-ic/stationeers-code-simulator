@@ -15,7 +15,7 @@ const ports = [
 
 <template>
 	<FloatLabel>
-		<MultiSelect v-model="model" :options="ports" optionLabel="name" placeholder="No connected" display="chip" optionValue="code">
+		<MultiSelect id="devicePin" v-model="model" :options="ports" optionLabel="name" placeholder="No connected" display="chip" optionValue="code">
 			<template #option="slotProps">
 				<div class="flex align-items-center">
 					<div style="padding-right: 5px">

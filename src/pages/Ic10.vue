@@ -73,7 +73,7 @@ onBeforeUnmount(() => {
 	<SaveDialog v-model="saveDialogOpen" />
 	<OpenDialog v-model="openDialogOpen" />
 	<div class="ic10-container">
-		<div class="code">
+		<div class="code" id="tour-code-ic10">
 			<Splitter style="height: 100%">
 				<SplitterPanel :size="70" :min-size="10">
 					<Splitter layout="vertical">
@@ -92,8 +92,7 @@ onBeforeUnmount(() => {
 		</div>
 		<Control></Control>
 		<Stack></Stack>
-		<div class="bottom">
-			<Raw></Raw>
+		<div class="bottom" id="tour-devises">
 			<Devises></Devises>
 		</div>
 	</div>

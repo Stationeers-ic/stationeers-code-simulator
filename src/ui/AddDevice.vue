@@ -85,15 +85,15 @@ function add() {
 		<div class="flex align-items-center gap-3 mb-3">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
-					<InputNumber :useGrouping="false" id="deviceHash" v-model="deviceId" />
+					<InputNumber :useGrouping="false" id="deviceId" v-model="deviceId" />
 					<label for="deviceHash">Device id</label>
 				</FloatLabel>
 				<small id="username-help">Enter device id or leave it empty.</small>
 			</div>
 		</div>
 		<div class="flex justify-content-end gap-2">
-			<Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
-			<Button type="button" label="Add" @click="add"></Button>
+			<Button id="tourAddDeviceCancel" type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
+			<Button id="tourAddDeviceAdd" type="button" label="Add" @click="add"></Button>
 		</div>
 	</Dialog>
 </template>

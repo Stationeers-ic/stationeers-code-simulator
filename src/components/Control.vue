@@ -12,6 +12,7 @@ import { emit } from "../core/Events.ts"
 import { MenuItem } from "primevue/menuitem"
 import { getShareLink } from "../core/Save.ts"
 import { useToast } from "primevue/usetoast"
+import { start } from "../core/Tour.ts"
 
 const checked = ref(false)
 const hashText = ref("")
@@ -123,14 +124,18 @@ const FileMenu = ref<MenuItem[]>([
 		},
 	},
 ])
+
+function startTour() {
+	start()
+}
 </script>
 
 <template>
-	<header :class="[$style.control, 'control']">
+	<header :class="[$style.control, 'control']" id="tour-headers">
 		<InputGroup style="width: auto">
-			<Button icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
+			<Button id="tour-File" icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
-				<TieredMenu :model="FileMenu">
+				<TieredMenu :model="FileMenu" id="FileMenu" >
 					<template #item="{ item, props, hasSubmenu }">
 						<a v-ripple class="flex align-items-center" v-bind="props.action">
 							<span :class="item.icon" />
@@ -142,19 +147,22 @@ const FileMenu = ref<MenuItem[]>([
 					</template>
 				</TieredMenu>
 			</OverlayPanel>
-			<ToggleButton v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
-			<Button icon="pi pi-step-forward" @click="step" label="Step" />
-			<Button icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
-			<Button icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
+			<ToggleButton id="tour-run" v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
+			<Button id="tour-step" icon="pi pi-step-forward" @click="step" label="Step" />
+			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
+			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
 			<AddDevice id="AddDevice" />
+			<Button id="tour-help" icon="pi pi-question-circle" severity="secondary" @click="startTour" />
 		</InputGroup>
-		<div :class="$style.slider">
+		<div :class="$style.slider" id="speedControl">
 			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic" />
 		</div>
-		<InputGroup style="width: auto; height: 40px">
-			<Button icon="pi pi-hashtag" @click="convert" label="Convert" />
-			<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
-		</InputGroup>
+		<div id="hashConverter">
+			<InputGroup style="width: auto; height: 40px">
+				<Button icon="pi pi-hashtag" @click="convert" label="Convert" />
+				<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
+			</InputGroup>
+		</div>
 	</header>
 </template>
 
