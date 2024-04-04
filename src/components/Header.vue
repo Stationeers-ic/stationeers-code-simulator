@@ -72,7 +72,7 @@ const confirmReset = (event: any) => {
 		</template>
 		<template #end>
 			<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
-			<Button severity="danger" icon="pi pi-trash" v-tooltip.down="'Reset all data'" @click="confirmReset" />
+			<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="'Reset all data'" @click="confirmReset" />
 		</template>
 	</Menubar>
 </template>

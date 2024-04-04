@@ -113,7 +113,17 @@ const device: DriveStep[] = [
 const driverObj = driver({
 	showProgress: true,
 	smoothScroll: true,
-	steps: [...controls, ...saveSystem, ...AddDevice, ...body, ...device],
+	steps: [
+		...controls,
+		...saveSystem,
+		...AddDevice,
+		...body,
+		...device,
+		{
+			element: "#ResetAll",
+			popover: { title: "Constants", description: "You can remove All App data ", side: "bottom", align: "center" },
+		},
+	],
 
 	onDestroyStarted: () => {
 		if (!driverObj.hasNextStep() || confirm("Are you sure?")) {
