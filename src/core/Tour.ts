@@ -85,26 +85,31 @@ const body: DriveStep[] = [
 	{ element: "#tour-code-ic10 .cm-editor", popover: { title: "Code", description: "Write on ic10 here", side: "top", align: "start" } },
 	{
 		element: "#tour-code-ic10 .register >  div:nth-child(2)",
-		popover: { title: "Register", description: "Here you can see and change registers in memory", side: "top", align: "start" },
+		popover: { title: "Register", description: "Here you can see and change registers in memory", side: "right", align: "start" },
 	},
-	{ element: "#tour-code-ic10 .register >  div:nth-child(4)", popover: { title: "Constants", description: "Here you can see constants and labels", side: "top", align: "start" } },
+	{ element: "#tour-code-ic10 .register >  div:nth-child(4)", popover: { title: "Constants", description: "Here you can see constants and labels", side: "right", align: "start" } },
+	{ element: "#tour-code-ic10 .errors ", popover: { title: "Constants", description: "Error log", side: "top", align: "start" } },
 ]
 
 const device: DriveStep[] = [
 	{ element: "#tour-devises > div > div", popover: { title: "Constants", description: "Device card", side: "top", align: "center" } },
-	{ element: "#tour-devises div[data-pc-section=\"title\"]", popover: { title: "Constants", description: "Device PrefabName", side: "top", align: "center" } },
-	{ element: "#tour-devises div[data-pc-section=\"subtitle\"]", popover: { title: "Constants", description: "Device Name from <b>Labeller</b>", side: "top", align: "center" } },
-	{ element: "#tour-devises .device-ports", popover: { title: "Constants", description: "List ports and aliases", side: "top", align: "center" } },
+	{ element: "#tour-devises div[data-pc-section=\"title\"]", popover: { title: "Constants", description: "Device PrefabName", side: "left", align: "center" } },
+	{ element: "#tour-devises div[data-pc-section=\"subtitle\"]", popover: { title: "Constants", description: "Device Name from <b>Labeller</b>", side: "left", align: "center" } },
+	{ element: "#tour-devises .device-ports", popover: { title: "Constants", description: "List ports and aliases", side: "left", align: "center" } },
+	{ element: "#tour-devises .device-props", popover: { title: "Constants", description: "List exists device props", side: "left", align: "center" } },
+	{ element: "#tour-devises .device-new-prop", popover: { title: "Constants", description: "You can add new prop", side: "left", align: "center" } },
+	{ element: "#tour-devises .device-slots", popover: { title: "Constants", description: "You can manage slots in device", side: "left", align: "center" } },
+	{ element: "#tour-devises .device-remove", popover: { title: "Constants", description: "You can remove device from environment", side: "left", align: "center" } },
 ]
 
 const driverObj = driver({
 	showProgress: true,
 	smoothScroll: true,
 	steps: [
-		// ...controls,
-		// ...saveSystem,
-		// ...AddDevice,
-		// ...body,
+		...controls,
+		...saveSystem,
+		...AddDevice,
+		...body,
 		...device,
 	],
 

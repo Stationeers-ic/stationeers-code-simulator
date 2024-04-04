@@ -56,28 +56,36 @@ function add() {
 			<span :class="$style.break">{{ name }}</span>
 		</template>
 		<template #content>
-			<DevicePorts :id="props.id" />
-			<DeviceProps :id="props.id" :device="props.device" />
+			<div class="device-ports">
+				<DevicePorts :id="props.id" />
+			</div>
+			<div class="device-props">
+				<DeviceProps :id="props.id" :device="props.device" />
+			</div>
 			<Divider />
-			<InputGroup class="prop">
-				<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics" option-label="name" option-value="name">
-					<template #option="slotProps">
-						<div class="flex align-items-center gap-1">
-							<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)" class="pi pi-file-edit"></i>
-							<i v-else class="pi pi-file" style="color: #fb923c"></i>
-							<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
-						</div>
-					</template>
-				</Dropdown>
-				<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
-				<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle" />
-			</InputGroup>
+			<div class="device-new-prop">
+				<InputGroup class="prop">
+					<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics" option-label="name" option-value="name">
+						<template #option="slotProps">
+							<div class="flex align-items-center gap-1">
+								<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)" class="pi pi-file-edit"></i>
+								<i v-else class="pi pi-file" style="color: #fb923c"></i>
+								<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
+							</div>
+						</template>
+					</Dropdown>
+					<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
+					<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle" />
+				</InputGroup>
+			</div>
 			<Divider />
-			<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"></DeviceSlots>
+			<div class="device-slots">
+				<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
+			</div>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full" />
+				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>
