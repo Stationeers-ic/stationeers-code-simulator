@@ -1,13 +1,26 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue"
+import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
 import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
+import { useI18n } from "vue-i18n"
 
+const i18n = useI18n()
+export type languages = {
+	name: string,
+	code: string,
+}
 const confirm = useConfirm()
 const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
 const active = ref<string | null>(null)
+const lang = ref<languages | undefined>()
+const languages = ref([
+	{ name: "English", code: "en", flag: "us" },
+	{ name: "Russian", code: "ru", flag: "ru" },
+])
+
+
 const update = () => {
 	saves.value = Array.from(getScriptNames()).map((name) => {
 		return { name: name }
@@ -16,6 +29,9 @@ const update = () => {
 }
 const open = () => (visible.value = true)
 onMounted(() => {
+	lang.value = languages.value.find((i) => {
+		return i.code === i18n.locale.value
+	})
 	update()
 	on("saveUpdate", update)
 	on("openSetting", open)
@@ -24,7 +40,12 @@ onBeforeUnmount(() => {
 	off("saveUpdate", update)
 	off("openSetting", open)
 })
-
+watch(lang, (newVal) => {
+	if (newVal) {
+		i18n.locale.value = newVal.code
+		window.localStorage.setItem("language", newVal.code)
+	}
+})
 const setActive = async () => {
 	if (active.value) {
 		await setActiveSaveSlot(active.value)
@@ -51,7 +72,26 @@ const remove = (event: any, name: string) => {
 <template>
 	<div class="settingButton" @click="visible = true" />
 	<div class="card flex justify-content-center">
+
 		<Sidebar v-model:visible="visible" header="Saves">
+			<Dropdown v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
+				<template #value="slotProps">
+					<div v-if="slotProps.value" class="flex align-items-center">
+						<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+							 :class="`mr-2 flag flag-${slotProps.value.flag}`" style="width: 18px" />
+						<div>{{ slotProps.value.name }}</div>
+					</div>
+					<span v-else>{{ slotProps.placeholder }}</span>
+				</template>
+				<template #option="slotProps">
+					<div class="flex align-items-center">
+						<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+							 :class="`mr-2 flag flag-${slotProps.option.flag}`" style="width: 18px" />
+						<div>{{ slotProps.option.name }}</div>
+					</div>
+				</template>
+			</Dropdown>
+			<Divider />
 			<Listbox
 				v-model="active"
 				:options="saves"
@@ -70,6 +110,8 @@ const remove = (event: any, name: string) => {
 					</div>
 				</template>
 			</Listbox>
+
+
 		</Sidebar>
 	</div>
 </template>
@@ -101,9 +143,11 @@ const remove = (event: any, name: string) => {
 		border-color: #6ee7b7;
 	}
 }
+
 .saveItem {
 	display: flex;
 	justify-content: space-between;
+
 	.pi-minus-circle {
 		color: #f87171;
 	}

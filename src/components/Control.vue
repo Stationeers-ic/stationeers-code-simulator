@@ -13,7 +13,9 @@ import { MenuItem } from "primevue/menuitem"
 import { getShareLink } from "../core/Save.ts"
 import { useToast } from "primevue/usetoast"
 import { start } from "../core/Tour.ts"
+import { useI18n } from "vue-i18n"
 
+const { t } = useI18n()
 const checked = ref(false)
 const hashText = ref("")
 const op = ref()
@@ -71,41 +73,44 @@ const goto = () => {
 	})
 	checked.value = true
 }
-const speerOptions = ["slow", "normal", "fast"]
+const speerOptions = [t("control.slow"), t("control.normal"), t("control.fast")]
 
 const toggle = (event: any) => {
 	op.value.toggle(event)
 }
 const FileMenu = ref<MenuItem[]>([
 	{
-		label: "Save",
+		label: t("control.save"),
 		icon: "pi pi-save",
 		command: () => {
 			emit("save")
 			op.value.hide()
 		},
 		shortcut: "⌘+S",
+		title: "Ctrl+S",
 	},
 	{
-		label: "Save as ",
+		label: t("control.saveAs"),
 		icon: "pi pi-file-export",
 		command: () => {
 			emit("saveDialogOpen")
 			op.value.hide()
 		},
-		shortcut: "⌘+SHIFT+S",
+		shortcut: "⌘+⇧+S",
+		title: "Ctrl+Shift+S",
 	},
 	{
-		label: "Open",
+		label: t("control.open"),
 		icon: "pi pi-file",
 		command: () => {
 			emit("openDialogOpen")
 			op.value.hide()
 		},
 		shortcut: "⌘+O",
+		title: "Ctrl+O",
 	},
 	{
-		label: "Load",
+		label: t("control.load"),
 		icon: "pi pi-list",
 		command: () => {
 			emit("openSetting")
@@ -116,7 +121,7 @@ const FileMenu = ref<MenuItem[]>([
 		separator: true,
 	},
 	{
-		label: "Share",
+		label: t("control.share"),
 		icon: "pi pi-share-alt",
 		command: () => {
 			copy()
@@ -133,11 +138,11 @@ function startTour() {
 <template>
 	<header :class="[$style.control, 'control']" id="tour-headers">
 		<InputGroup style="width: auto">
-			<Button id="tour-File" icon="pi pi-save" label="File" @click="toggle" severity="secondary" />
+			<Button id="tour-File" icon="pi pi-save" :label="$t('control.file')" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
 				<TieredMenu :model="FileMenu" id="FileMenu">
 					<template #item="{ item, props, hasSubmenu }">
-						<a v-ripple class="flex align-items-center" v-bind="props.action">
+						<a v-ripple class="flex align-items-center" v-bind="props.action" :title="item?.title ?? ''">
 							<span :class="item.icon" />
 							<span class="ml-2">{{ item.label }}</span>
 							<Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
@@ -147,10 +152,13 @@ function startTour() {
 					</template>
 				</TieredMenu>
 			</OverlayPanel>
-			<ToggleButton id="tour-run" v-model="checked" style="width: 6em" onLabel="Stop" offLabel="Run " onIcon="pi pi-stop" offIcon="pi pi-play" />
-			<Button id="tour-step" icon="pi pi-step-forward" @click="step" label="Step" />
-			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" label="To Yield" />
-			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" label="Reset" />
+			<ToggleButton id="tour-run" v-model="checked"
+						  :style="{width: `${Math.max($t('control.stop').length,$t('control.run').length) +1}em`}"
+						  :onLabel="$t('control.stop')" :offLabel="$t('control.run')" onIcon="pi pi-stop"
+						  offIcon="pi pi-play" />
+			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')" />
+			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')" />
+			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')" />
 			<AddDevice id="AddDevice" />
 			<Button id="tour-help" icon="pi pi-question-circle" severity="secondary" @click="startTour" />
 		</InputGroup>
@@ -159,8 +167,11 @@ function startTour() {
 		</div>
 		<div id="hashConverter">
 			<InputGroup style="width: auto; height: 40px">
-				<Button icon="pi pi-hashtag" @click="convert" label="Convert" />
-				<InputText placeholder="String to Hash" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
+				<Button icon="pi pi-hashtag" @click="convert" :label="$t('control.convert')" />
+				<InputText
+					:placeholder="$t('control.stringToHash')"
+					@focus="($event.target as any).select()"
+					id="hashText" v-model="hashText" style="max-width: 200px" />
 			</InputGroup>
 		</div>
 	</header>

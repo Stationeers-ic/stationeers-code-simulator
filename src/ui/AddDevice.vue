@@ -52,7 +52,7 @@ function add() {
 </script>
 
 <template>
-	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" label="Add device" />
+	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" :label="$t('control.addDevice')" />
 
 	<Dialog v-model:visible="visible" header="Add Device" style="width: 50vw">
 		<span class="p-text-secondary block mb-5"> Add new device to environment </span>

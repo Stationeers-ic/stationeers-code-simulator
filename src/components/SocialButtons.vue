@@ -5,6 +5,7 @@ import { ref } from "vue"
 import { MenuItem } from "primevue/menuitem"
 
 const social = ref<MenuItem[]>([
+
 	{
 		label: "Github",
 		icon: "pi pi-github",
@@ -26,14 +27,34 @@ const social = ref<MenuItem[]>([
 			window.open("https://store.steampowered.com/app/544550/Stationeers/", "_blank")
 		},
 	},
+	{
+		label: "Vk Donat",
+		icon: "pi pi-vk",
+		command() {
+			window.open("https://vk.com/app6471849_-204595079?ref=snippet_im", "_blank")
+		},
+	},
 ])
 </script>
 
 <template>
 	<div :class="$style.rightButtons">
+
 		<template v-for="item in social">
 			<ButtonFrame :label="item.label" :icon="item.icon" size="large" :click="item.command" severity="info" />
 		</template>
+
+
+		<ButtonFrame icon="pi pi-kofi" severity="info">
+			<iframe
+				id="kofiframe"
+				src="https://ko-fi.com/aidan647/?hidefeed=true&widget=true&embed=true&preview=true"
+				style="border: none; width: 100%; padding: 4px; background: #f9f9f9"
+				height="712"
+				title="aidan647"
+			>
+			</iframe>
+		</ButtonFrame>
 		<ButtonFrame icon="pi pi-discord" severity="info">
 			<iframe
 				loading="lazy"
@@ -44,16 +65,6 @@ const social = ref<MenuItem[]>([
 				frameborder="0"
 				sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
 			></iframe>
-		</ButtonFrame>
-		<ButtonFrame icon="pi pi-kofi" severity="info">
-			<iframe
-				id="kofiframe"
-				src="https://ko-fi.com/aidan647/?hidefeed=true&widget=true&embed=true&preview=true"
-				style="border: none; width: 100%; padding: 4px; background: #f9f9f9"
-				height="712"
-				title="aidan647"
-			>
-			</iframe>
 		</ButtonFrame>
 	</div>
 </template>
