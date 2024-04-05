@@ -4,7 +4,9 @@ import { routes } from "../router.ts"
 import { onMounted } from "vue"
 import { useConfirm } from "primevue/useconfirm"
 import { useToast } from "primevue/usetoast"
+import { useI18n } from "vue-i18n"
 
+const { t } = useI18n()
 const confirm = useConfirm()
 const toast = useToast()
 
@@ -41,12 +43,12 @@ onMounted(() => {
 const confirmReset = (event: any) => {
 	confirm.require({
 		target: event.currentTarget,
-		message: "Are you sure you want to clear All app data?",
+		message: t("control.confirmAllDelete"),
 		icon: "pi pi-exclamation-triangle",
 		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
 		acceptClass: "p-button-danger p-button-sm",
-		rejectLabel: "Cancel",
-		acceptLabel: "Reset",
+		rejectLabel: t("cancel"),
+		acceptLabel: t("delete"),
 		accept: () => {
 			window.localStorage.clear()
 			toast.add({ severity: "info", summary: "Confirmed", detail: "You have accepted", life: 3000 })

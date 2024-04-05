@@ -5,6 +5,7 @@ import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
 import { useI18n } from "vue-i18n"
 
+const {t} = useI18n()
 const i18n = useI18n()
 export type languages = {
 	name: string,
@@ -56,12 +57,12 @@ const remove = (event: any, name: string) => {
 	event.preventDefault()
 	confirm.require({
 		target: event.currentTarget,
-		message: "Are you sure you want to clear All app data?",
+		message: t('settings.confirmDelete'),
 		icon: "pi pi-exclamation-triangle",
 		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
 		acceptClass: "p-button-danger p-button-sm",
-		rejectLabel: "Cancel",
-		acceptLabel: "Delete",
+		rejectLabel: t("cancel"),
+		acceptLabel: t("delete"),
 		accept: () => {
 			removeFromBrowser(name)
 		},
@@ -72,46 +73,48 @@ const remove = (event: any, name: string) => {
 <template>
 	<div class="settingButton" @click="visible = true" />
 	<div class="card flex justify-content-center">
-
-		<Sidebar v-model:visible="visible" header="Saves">
-			<Dropdown v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
-				<template #value="slotProps">
-					<div v-if="slotProps.value" class="flex align-items-center">
-						<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-							 :class="`mr-2 flag flag-${slotProps.value.flag}`" style="width: 18px" />
-						<div>{{ slotProps.value.name }}</div>
-					</div>
-					<span v-else>{{ slotProps.placeholder }}</span>
-				</template>
-				<template #option="slotProps">
-					<div class="flex align-items-center">
-						<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-							 :class="`mr-2 flag flag-${slotProps.option.flag}`" style="width: 18px" />
-						<div>{{ slotProps.option.name }}</div>
-					</div>
-				</template>
-			</Dropdown>
-			<Divider />
-			<Listbox
-				v-model="active"
-				:options="saves"
-				@change="setActive"
-				filter
-				optionLabel="name"
-				optionValue="name"
-				empty-message="No saves"
-				empty-filter-message="Saves not found"
-				filter-placeholder="Search save"
-			>
-				<template #option="slotProps">
-					<div class="saveItem">
-						<div>{{ slotProps.option.name }}</div>
-						<Button icon="pi pi-minus-circle" severity="danger" @click="remove($event, slotProps.option.name)" />
-					</div>
-				</template>
-			</Listbox>
-
-
+		<Sidebar v-model:visible="visible" header=" ">
+			<div>
+				<Divider>{{ $t("settings.languages") }}</Divider>
+				<Dropdown style="width:100% !important" v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
+					<template #value="slotProps">
+						<div v-if="slotProps.value" class="flex align-items-center">
+							<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+								 :class="`mr-2 flag flag-${slotProps.value.flag}`" style="width: 18px" />
+							<div>{{ slotProps.value.name }}</div>
+						</div>
+						<span v-else>{{ slotProps.placeholder }}</span>
+					</template>
+					<template #option="slotProps">
+						<div class="flex align-items-center">
+							<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+								 :class="`mr-2 flag flag-${slotProps.option.flag}`" style="width: 18px" />
+							<div>{{ slotProps.option.name }}</div>
+						</div>
+					</template>
+				</Dropdown>
+			</div>
+			<div>
+				<Divider>{{ $t("settings.saves") }}</Divider>
+				<Listbox
+					v-model="active"
+					:options="saves"
+					@change="setActive"
+					filter
+					optionLabel="name"
+					optionValue="name"
+					:empty-message="$t('settings.noSaves')"
+					:empty-filter-message="$t('settings.savesNotFound')"
+					:filter-placeholder="$t('settings.searchSave')"
+				>
+					<template #option="slotProps">
+						<div class="saveItem">
+							<div>{{ slotProps.option.name }}</div>
+							<Button icon="pi pi-minus-circle" severity="danger" @click="remove($event, slotProps.option.name)" />
+						</div>
+					</template>
+				</Listbox>
+			</div>
 		</Sidebar>
 	</div>
 </template>

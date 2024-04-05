@@ -59,6 +59,7 @@ async function loadFromBrowser() {
 	}
 	return false
 }
+
 async function loadFromTmp() {
 	const data = window.localStorage.getItem("tempSave")
 	if (data) {
@@ -156,6 +157,7 @@ export function tmpSave() {
 	const saveData = dump()
 	localStorage.setItem("tempSave", saveData)
 }
+
 declare global {
 	interface Window {
 		tmpSave: typeof tmpSave

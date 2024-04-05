@@ -10,6 +10,7 @@ import { EditorView } from "codemirror"
 
 const test = ref<string>("")
 const toast = useToast()
+
 async function error() {
 	test.value = ic10
 		.getEnv()
@@ -17,6 +18,7 @@ async function error() {
 		.map((e) => e.format())
 		.join("\n")
 }
+
 onMounted(() => {
 	ic10.getEnv().on("update", error)
 	ic10.getEnv().on("error", error)
@@ -37,7 +39,15 @@ const extensions = [monokai, EditorView.lineWrapping]
 
 <template>
 	<div class="errors">
-		<Codemirror placeholder="Errors ..." disabled :style="{ height: '100%' }" :autofocus="true" :indent-with-tab="true" :tab-size="2" :extensions="extensions" v-model="test" />
+		<Codemirror
+			disabled
+			:placeholder="$t('errors')+' ...'"
+			:style="{ height: '100%' }"
+			:autofocus="true"
+			:indent-with-tab="true"
+			:tab-size="2"
+			:extensions="extensions"
+			v-model="test" />
 	</div>
 </template>
 

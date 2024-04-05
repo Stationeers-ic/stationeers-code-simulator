@@ -16,6 +16,7 @@ import { start } from "../core/Tour.ts"
 import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
+const i18n = useI18n()
 const checked = ref(false)
 const hashText = ref("")
 const op = ref()
@@ -73,11 +74,11 @@ const goto = () => {
 	})
 	checked.value = true
 }
-const speerOptions = [t("control.slow"), t("control.normal"), t("control.fast")]
 
 const toggle = (event: any) => {
 	op.value.toggle(event)
 }
+const speerOptions = ref([t("control.slow"), t("control.normal"), t("control.fast")])
 const FileMenu = ref<MenuItem[]>([
 	{
 		label: t("control.save"),
@@ -129,6 +130,61 @@ const FileMenu = ref<MenuItem[]>([
 		},
 	},
 ])
+watch(i18n.locale, () => {
+	speerOptions.value = [t("control.slow"), t("control.normal"), t("control.fast")]
+	FileMenu.value = [
+		{
+			label: t("control.save"),
+			icon: "pi pi-save",
+			command: () => {
+				emit("save")
+				op.value.hide()
+			},
+			shortcut: "⌘+S",
+			title: "Ctrl+S",
+		},
+		{
+			label: t("control.saveAs"),
+			icon: "pi pi-file-export",
+			command: () => {
+				emit("saveDialogOpen")
+				op.value.hide()
+			},
+			shortcut: "⌘+⇧+S",
+			title: "Ctrl+Shift+S",
+		},
+		{
+			label: t("control.open"),
+			icon: "pi pi-file",
+			command: () => {
+				emit("openDialogOpen")
+				op.value.hide()
+			},
+			shortcut: "⌘+O",
+			title: "Ctrl+O",
+		},
+		{
+			label: t("control.load"),
+			icon: "pi pi-list",
+			command: () => {
+				emit("openSetting")
+				op.value.hide()
+			},
+		},
+		{
+			separator: true,
+		},
+		{
+			label: t("control.share"),
+			icon: "pi pi-share-alt",
+			command: () => {
+				copy()
+				op.value.hide()
+			},
+		},
+	]
+})
+
 
 function startTour() {
 	start()

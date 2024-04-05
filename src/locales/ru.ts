@@ -1,5 +1,5 @@
 export default {
-	ICON:"flag flag-RU",
+	ICON: "flag flag-RU",
 	control: {
 		file: "Файл",
 		run: "Запуск",
@@ -10,15 +10,15 @@ export default {
 		addDevice: "Добавить устройство",
 		convert: "Конвертировать",
 		stringToHash: "Строку в хеш",
-		errors: "Ошибки ...",
 		slow: "Медленно",
 		normal: "Нормально",
 		fast: "Быстро",
 		save: "Сохранить",
-		saveAs: "Сохранить как",
+		saveAs: "Сохранить как ",
 		open: "Открыть",
 		load: "Загрузить",
 		share: "Поделиться",
+		confirmAllDelete: "Вы уверены, что хотите удалить все данные приложения?",
 	},
 	stack: {
 		stack: "Стек",
@@ -29,4 +29,32 @@ export default {
 	constantAndLabels: {
 		constantAndLabels: "Константы и Метки",
 	},
+	settings: {
+		languages: "Язык",
+		saves: "Сохранения",
+		noSaves: "Нет сохранений",
+		savesNotFound: "Сохранения не найдены",
+		searchSave: "Поиск сохранений",
+		confirmDelete: "Вы уверены, что хотите удалить сохранение?",
+	},
+	addDevice: {
+		header: "Добавить устройство",
+		description: "Добавить новое устройство в среду",
+
+		deviceHash: "Хэш устройства",
+		deviceName: "Имя устройства",
+		devicePin: "IC контакт",
+		deviceId: "Идентификатор устройства",
+
+		deviceHashHelp: "Введите или выберите PrefabHash или PrefabName вашего устройства.",
+		deviceNameHelp: "Введите имя устройства, как если бы вы это сделали с помощью Labeller.",
+		devicePortHelp: "Выберите пин, которому назначено устройство на микросхеме, или оставьте пустым",
+		deviceIdHelp: "Введите идентификатор устройства или оставьте его пустым.",
+
+	},
+	add: "Добавить",
+	cancel: "Отмена",
+	delete: "Удалить",
+	code: "Здесь находится код",
+	errors: "Ошибки",
 }

@@ -54,15 +54,15 @@ function add() {
 <template>
 	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" :label="$t('control.addDevice')" />
 
-	<Dialog v-model:visible="visible" header="Add Device" style="width: 50vw">
-		<span class="p-text-secondary block mb-5"> Add new device to environment </span>
+	<Dialog v-model:visible="visible" :header="$t('addDevice.header')" style="width: 50vw">
+		<span class="p-text-secondary block mb-5"> {{ $t('addDevice.description') }}</span>
 		<div class="flex align-items-center gap-3 mb-3">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
 					<SelectDevice id="deviceHash" v-model="deviceHash" />
-					<label for="deviceHash">Device hash</label>
+					<label for="deviceHash">{{ $t('addDevice.deviceHash') }}</label>
 				</FloatLabel>
-				<small id="username-help">Enter or select your device PrefabHash or PrefabName.</small>
+				<small id="deviceHash-help">{{ $t('addDevice.deviceHashHelp') }}</small>
 			</div>
 			<div class="flex flex-column gap-2">
 				<InputGroup style="width: auto">
@@ -71,29 +71,28 @@ function add() {
 					</InputGroupAddon>
 					<FloatLabel>
 						<InputText id="deviceName" v-model="deviceName" />
-						<label for="deviceName">Device Name</label>
+						<label for="deviceName">{{ $t('addDevice.deviceName') }}</label>
 					</FloatLabel>
 				</InputGroup>
-				<small id="username-help">Enter the device name as you would do with <i>Labeller</i></small>
+				<small id="deviceName-help">{{ $t('addDevice.deviceNameHelp') }}</small>
 			</div>
-
 			<div class="flex flex-column gap-2">
 				<SelectPorts v-model="devicePort" />
-				<small id="username-help">Select the pin to which the device is assigned on the IC or leave empty</small>
+				<small id="devicePort-help">{{ $t('addDevice.devicePortHelp') }}</small>
 			</div>
 		</div>
-		<div class="flex align-items-center gap-3 mb-3">
+		<div class="flex align-items-center gap-3 mt-5">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
 					<InputNumber :useGrouping="false" id="deviceId" v-model="deviceId" />
-					<label for="deviceHash">Device id</label>
+					<label for="deviceId">{{ $t('addDevice.deviceId') }}</label>
 				</FloatLabel>
-				<small id="username-help">Enter device id or leave it empty.</small>
+				<small id="deviceId-help">{{ $t('addDevice.deviceIdHelp') }}</small>
 			</div>
 		</div>
 		<div class="flex justify-content-end gap-2">
-			<Button id="tourAddDeviceCancel" type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
-			<Button id="tourAddDeviceAdd" type="button" label="Add" @click="add"></Button>
+			<Button id="tourAddDeviceCancel" type="button" :label="$t('cancel')" severity="secondary" @click="visible = false"></Button>
+			<Button id="tourAddDeviceAdd" type="button" :label="$t('add')" @click="add"></Button>
 		</div>
 	</Dialog>
 </template>

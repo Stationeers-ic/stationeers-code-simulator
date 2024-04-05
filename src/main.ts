@@ -129,24 +129,26 @@ import locales from "./locales"
 import { createI18n } from "vue-i18n"
 import en from "./locales/en.ts"
 
-declare global {
-	interface Window {
-		dayjs: typeof dayjs
-		userLang: string
-	}
-}
-
-dayjs.extend(relativeTime)
-window.dayjs = dayjs
 window.userLang = localStorage.getItem("language") ?? navigator.language
-
 const app = createApp(App)
 const i18n = createI18n<[typeof en], "en" | "ru">({
-	legacy:false,
+	legacy: false,
 	locale: window.userLang, // set locale
 	fallbackLocale: "en", // set fallback locale
 	messages: locales, // set locale messages
 })
+
+dayjs.extend(relativeTime)
+window.dayjs = dayjs
+window.i18n = i18n.global
+declare global {
+	interface Window {
+		dayjs: typeof dayjs
+		i18n: typeof i18n.global
+		userLang: string
+	}
+}
+
 app.use(i18n)
 app.use(router)
 app.use(PrimeVue, { ripple: true })
@@ -159,7 +161,6 @@ app.use(VueCodemirror, {
 	disabled: false,
 	indentWithTab: true,
 	tabSize: 2,
-	placeholder: "Code goes here...",
 	extensions: [monokai, EditorView.lineWrapping, zeroLineNumbers],
 	// ...
 })
