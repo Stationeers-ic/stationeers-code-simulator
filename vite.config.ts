@@ -11,6 +11,23 @@ const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {
 export default defineConfig({
 	base: "/",
 	plugins: [vue()],
+	build: {
+		rollupOptions: {
+			output: {
+				manualChunks(id) {
+					if (id.includes('node_modules')) {
+						if (id.includes('ic10')) {
+							return 'ic10'
+						}
+						const pkgName = (id.match(/node_modules\/([^/]+)/) ?? [])[1];
+						if (pkgName) return `vendor-${pkgName}`;
+
+						return 'vendor'
+					}
+				}
+			}
+		}
+	},
 	resolve: {
 		preserveSymlinks: true,
 	},

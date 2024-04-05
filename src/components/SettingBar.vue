@@ -3,7 +3,8 @@ import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
 import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
-import { useI18n } from "vue-i18n"
+import { useI18n, I18n } from 'vue-i18n';
+import { setLocale } from "../i18n"
 
 const {t} = useI18n()
 const i18n = useI18n()
@@ -43,7 +44,8 @@ onBeforeUnmount(() => {
 })
 watch(lang, (newVal) => {
 	if (newVal) {
-		i18n.locale.value = newVal.code
+		setLocale(window.i18n as I18n, newVal.code)
+		// i18n.locale.value = newVal.code
 		window.localStorage.setItem("language", newVal.code)
 	}
 })
