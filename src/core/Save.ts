@@ -5,11 +5,11 @@ import ic10 from "./ic10.ts"
 
 export async function startupLoad(): Promise<string | false> {
 	if (await loadFromUrl()) {
-		return "from url"
+		return "url"
 	} else if (await loadFromBrowser()) {
-		return "from browser"
+		return "browser"
 	} else if (await loadFromTmp()) {
-		return "from temp"
+		return "temp"
 	}
 	return false
 }

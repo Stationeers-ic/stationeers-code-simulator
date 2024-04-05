@@ -85,7 +85,7 @@ function add() {
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button label="Remove" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
+				<Button :label="$t('remove')" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>

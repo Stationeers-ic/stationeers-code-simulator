@@ -6,6 +6,9 @@ import { startupLoad, tmpSave } from "./core/Save.ts"
 import { useToast } from "primevue/usetoast"
 import { onBeforeUnmount, onMounted } from "vue"
 import ic10 from "./core/ic10.ts"
+import { useI18n } from "vue-i18n"
+
+const { t} = useI18n()
 
 const toast = useToast()
 onMounted(() => {
@@ -13,7 +16,7 @@ onMounted(() => {
 		startupLoad()
 			.then((from) => {
 				if (from) {
-					toast.add({ severity: "success", summary: "Loaded", detail: `load data ${from}`, life: 3000 })
+					toast.add({ severity: "success", summary: t("loadSave.success.summary"), detail: t(`loadSave.success.detail`, { store: t(from) }), life: 3000 })
 				}
 			})
 			.catch((e) => {

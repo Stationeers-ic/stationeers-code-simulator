@@ -4,11 +4,13 @@ import { useToast } from "primevue/usetoast"
 import { getActiveSaveSlot, getShareLink, saveToBrowser, saveToFile } from "../core/Save.ts"
 import clipboard from "web-clipboard"
 import { off, on } from "../core/Events.ts"
+import { useI18n } from "vue-i18n"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")
 const invalid = ref(false)
 const toast = useToast()
+const { t } = useI18n()
 const update = () => {
 	scripName.value = getActiveSaveSlot()
 }
@@ -43,7 +45,7 @@ const save = () => {
 		return
 	}
 	saveToBrowser(scripName.value)
-	toast.add({ severity: "success", summary: "Saved!", detail: "Saved to Browser", life: 3000 })
+	toast.add({ severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", { store: 'browser' }), life: 3000 })
 	close()
 }
 </script>

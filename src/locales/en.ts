@@ -1,5 +1,9 @@
 export default {
 	ICON: "flag flag-ES",
+	headers:{
+		ResetAllData:"Reset all data",
+		confirmAllDelete:"Are you sure you want to clear All app data?",
+	},
 	control: {
 		file: "File",
 		run: "Run",
@@ -10,7 +14,6 @@ export default {
 		addDevice: "Add device",
 		convert: "Convert",
 		stringToHash: "String to Hash",
-		errors: "Errors ...",
 		slow: "Slow",
 		normal: "Normal",
 		fast: "Fast",
@@ -19,7 +22,6 @@ export default {
 		open: "Open",
 		load: "Load",
 		share: "Share",
-		confirmAllDelete:"Are you sure you want to clear All app data?",
 	},
 	stack: {
 		stack: "Stack",
@@ -53,9 +55,43 @@ export default {
 		deviceIdHelp:"Enter device id or leave it empty.",
 
 	},
-	add:"add",
+	confirmReset:{
+		info:{
+			summary:"Confirmed",
+			detail:"You have accepted"
+		},
+		error:{
+			summary:"Rejected",
+			detail:"You have rejected"
+		}
+	},
+	toastSave:{
+		success:{
+			summary:"Saved !",
+			detail:"Saved in {name}"
+		},
+		error:{
+			summary:"Error",
+			detail:"Error:  {errMsg}"
+		}
+	},
+	loadSave:{
+		success:{
+			summary:"Loaded !",
+			detail:"Loaded from '{store}'"
+		},
+		error:{
+			summary:"Error",
+			detail:"Error:  {errMsg}"
+		}
+	},
+	add:"Add",
 	cancel:"Cancel",
+	remove:"Remove",
 	delete:"Delete",
 	code:"Code goes here",
-	errors:"Errors"
+	errors:"Errors",
+	url:"Url",
+	browser:"Browser",
+	temp:"Temp",
 }

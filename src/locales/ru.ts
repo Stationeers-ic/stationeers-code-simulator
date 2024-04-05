@@ -1,5 +1,9 @@
 export default {
 	ICON: "flag flag-RU",
+	headers: {
+		ResetAllData: "Сбросить все данные",
+		confirmAllDelete: "Вы уверены, что хотите удалить все данные приложения?",
+	},
 	control: {
 		file: "Файл",
 		run: "Запуск",
@@ -18,7 +22,6 @@ export default {
 		open: "Открыть",
 		load: "Загрузить",
 		share: "Поделиться",
-		confirmAllDelete: "Вы уверены, что хотите удалить все данные приложения?",
 	},
 	stack: {
 		stack: "Стек",
@@ -52,9 +55,43 @@ export default {
 		deviceIdHelp: "Введите идентификатор устройства или оставьте его пустым.",
 
 	},
+	confirmReset:{
+		info:{
+			summary:"Принято",
+			detail:"Вы приняли"
+		},
+		error:{
+			summary:"Отклонено",
+			detail:"Вы отклонили"
+		}
+	},
+	toastSave:{
+		success:{
+			summary:"Сохранено !",
+			detail:"Сохранено в {name}"
+		},
+		error:{
+			summary:"Ошибка",
+			detail:"Ошибка:  {errMsg}"
+		}
+	},
+	loadSave:{
+		success:{
+			summary:"Загружено !",
+			detail:"Загружено из '{store}'"
+		},
+		error:{
+			summary:"Ошибка",
+			detail:"Ошибка:  {errMsg}"
+		}
+	},
 	add: "Добавить",
 	cancel: "Отмена",
 	delete: "Удалить",
 	code: "Здесь находится код",
 	errors: "Ошибки",
+	remove: "Удалить",
+	url:"Url",
+	browser:"Браузер",
+	temp:"Temp",
 }

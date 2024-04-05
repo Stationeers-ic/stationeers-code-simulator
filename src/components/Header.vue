@@ -43,7 +43,7 @@ onMounted(() => {
 const confirmReset = (event: any) => {
 	confirm.require({
 		target: event.currentTarget,
-		message: t("control.confirmAllDelete"),
+		message: t("headers.confirmAllDelete"),
 		icon: "pi pi-exclamation-triangle",
 		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
 		acceptClass: "p-button-danger p-button-sm",
@@ -51,11 +51,11 @@ const confirmReset = (event: any) => {
 		acceptLabel: t("delete"),
 		accept: () => {
 			window.localStorage.clear()
-			toast.add({ severity: "info", summary: "Confirmed", detail: "You have accepted", life: 3000 })
+			toast.add({ severity: "info", summary: t('confirmReset.info.summary'), detail: t('confirmReset.info.detail'), life: 3000 })
 			window.location.reload()
 		},
 		reject: () => {
-			toast.add({ severity: "error", summary: "Rejected", detail: "You have rejected", life: 3000 })
+			toast.add({ severity: "error", summary: t('confirmReset.error.summary'), detail: t('confirmReset.error.detail'), life: 3000 })
 		},
 	})
 }
@@ -74,7 +74,7 @@ const confirmReset = (event: any) => {
 		</template>
 		<template #end>
 			<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
-			<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="'Reset all data'" @click="confirmReset" />
+			<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset" />
 		</template>
 	</Menubar>
 </template>
