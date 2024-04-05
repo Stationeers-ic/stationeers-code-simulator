@@ -125,29 +125,30 @@ import { monokai } from "@uiw/codemirror-theme-monokai"
 import { zeroLineNumbers } from "codemirror-lang-ic10"
 import { EditorView } from "codemirror"
 import "driver.js/dist/driver.css"
-import locales from "./locales"
-import { createI18n } from "vue-i18n"
 import en from "./locales/en.ts"
+import { loadLocaleMessages, setLocale, setupI18n, SUPPORT_LOCALES } from "./i18n.ts"
+import type { I18n } from "vue-i18n"
 
 window.userLang = localStorage.getItem("language") ?? navigator.language
 const app = createApp(App)
-const i18n = createI18n<[typeof en], "en" | "ru">({
+const i18n = setupI18n<[typeof en], (typeof SUPPORT_LOCALES)[number]>({
 	legacy: false,
 	locale: window.userLang, // set locale
 	fallbackLocale: "en", // set fallback locale
-	messages: locales, // set locale messages
 })
+i18n.global.setLocaleMessage("en", en)
 
 dayjs.extend(relativeTime)
 window.dayjs = dayjs
-window.i18n = i18n.global
+window.i18n = i18n
 declare global {
 	interface Window {
 		dayjs: typeof dayjs
-		i18n: typeof i18n.global
+		i18n: typeof i18n
 		userLang: string
 	}
 }
+if (window.userLang !== "en") setLocale(i18n as I18n, window.userLang)
 
 app.use(i18n)
 app.use(router)
