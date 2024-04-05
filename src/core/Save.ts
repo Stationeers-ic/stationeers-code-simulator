@@ -6,10 +6,10 @@ import ic10 from "./ic10.ts"
 export async function startupLoad(): Promise<string | false> {
 	if (await loadFromUrl()) {
 		return "url"
-	} else if (await loadFromBrowser()) {
-		return "browser"
 	} else if (await loadFromTmp()) {
 		return "temp"
+	} else if (await loadFromBrowser()) {
+		return "browser"
 	}
 	return false
 }
