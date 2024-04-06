@@ -125,8 +125,8 @@ import { monokai } from "@uiw/codemirror-theme-monokai"
 import { zeroLineNumbers } from "codemirror-lang-ic10"
 import { EditorView } from "codemirror"
 import "driver.js/dist/driver.css"
-import en from "./locales/en.ts"
-import { loadLocaleMessages, setLocale, setupI18n, SUPPORT_LOCALES } from "./i18n.ts"
+import en from "./locales/en/index.json"
+import { setLocale, setupI18n, SUPPORT_LOCALES } from "./i18n.ts"
 import type { I18n } from "vue-i18n"
 
 window.userLang = localStorage.getItem("language") ?? navigator.language

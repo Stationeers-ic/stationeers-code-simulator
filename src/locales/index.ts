@@ -1,5 +1,5 @@
-import en from "./en.ts"
-import ru from "./ru.ts"
+import en from "./en/index.json"
+import ru from "./ru/index.json"
 
 
 export default {

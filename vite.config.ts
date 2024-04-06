@@ -16,6 +16,9 @@ export default defineConfig({
 			output: {
 				manualChunks(id) {
 					if (id.includes('node_modules')) {
+						if (id.includes('codemirror-lang-ic10')) {
+							return 'codemirror-lang-ic10'
+						}
 						if (id.includes('ic10')) {
 							return 'ic10'
 						}
