@@ -78,7 +78,11 @@ const goto = () => {
 const toggle = (event: any) => {
 	op.value.toggle(event)
 }
-const speerOptions = ref([t("control.slow"), t("control.normal"), t("control.fast")])
+const speerOptions = ref([
+	{ key: "slow", name: t("control.slow") },
+	{ key: "normal", name: t("control.normal") },
+	{ key: "fast", name: t("control.fast") },
+])
 const FileMenu = ref<MenuItem[]>([
 	{
 		label: t("control.save"),
@@ -131,7 +135,11 @@ const FileMenu = ref<MenuItem[]>([
 	},
 ])
 watch(i18n.locale, () => {
-	speerOptions.value = [t("control.slow"), t("control.normal"), t("control.fast")]
+	speerOptions.value = [
+		{ key: "slow", name: t("control.slow") },
+		{ key: "normal", name: t("control.normal") },
+		{ key: "fast", name: t("control.fast") },
+	]
 	FileMenu.value = [
 		{
 			label: t("control.save"),
@@ -193,7 +201,7 @@ function startTour() {
 
 <template>
 	<header :class="[$style.control, 'control']" id="tour-headers">
-		<InputGroup style="width: auto">
+		<InputGroup :class="$style.panel" >
 			<Button id="tour-File" icon="pi pi-save" :label="$t('control.file')" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
 				<TieredMenu :model="FileMenu" id="FileMenu">
@@ -212,15 +220,13 @@ function startTour() {
 						  :style="{width: `${Math.max($t('control.stop').length,$t('control.run').length) +1}em`}"
 						  :onLabel="$t('control.stop')" :offLabel="$t('control.run')" onIcon="pi pi-stop"
 						  offIcon="pi pi-play" />
+			<Dropdown id="speedControl" v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
 			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')" />
 			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')" />
 			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')" />
 			<AddDevice id="AddDevice" />
 			<Button id="tour-help" icon="pi pi-question-circle" severity="secondary" @click="startTour" />
 		</InputGroup>
-		<div :class="$style.slider" id="speedControl">
-			<SelectButton v-model="settingStore.delay" :options="speerOptions" aria-labelledby="basic" />
-		</div>
 		<div id="hashConverter">
 			<InputGroup style="width: auto; height: 40px">
 				<Button icon="pi pi-hashtag" @click="convert" :label="$t('control.convert')" />
@@ -235,6 +241,13 @@ function startTour() {
 
 <style module lang="scss">
 .control {
+	.panel{
+		width: auto;
+		* {
+			border: 0 !important;
+		}
+	}
+
 	z-index: 999;
 	background-color: var(--surface-ground);
 	top: 0;

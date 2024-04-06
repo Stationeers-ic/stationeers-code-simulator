@@ -16,7 +16,7 @@ onMounted(() => {
 		startupLoad()
 			.then((from) => {
 				if (from) {
-					toast.add({ severity: "success", summary: t("loadSave.success.summary"), detail: t(`loadSave.success.detail`, { store: t(from) }), life: 3000 })
+					toast.add({ severity: "success", summary: t("toastLoad.success.summary"), detail: t(`toastLoad.success.detail`, { store: t(from) }), life: 3000 })
 				}
 			})
 			.catch((e) => {

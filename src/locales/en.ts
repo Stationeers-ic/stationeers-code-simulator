@@ -68,14 +68,14 @@ export default {
 	toastSave:{
 		success:{
 			summary:"Saved !",
-			detail:"Saved in {name}"
+			detail:"Saved to '{name}'"
 		},
 		error:{
 			summary:"Error",
 			detail:"Error:  {errMsg}"
 		}
 	},
-	loadSave:{
+	toastLoad:{
 		success:{
 			summary:"Loaded !",
 			detail:"Loaded from '{store}'"
