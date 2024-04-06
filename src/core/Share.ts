@@ -32,7 +32,7 @@ export function dump(): string {
 		devicesAttached: Object.fromEntries(ic10.getEnv().devicesAttached.entries()),
 	}
 	const compressed = pako.deflate(JSON.stringify(dump), { level: 9 })
-	//@ts-ignore
+	//@ts-ignore TODO
 	return window.btoa(String.fromCharCode.apply(null, compressed))
 }
 

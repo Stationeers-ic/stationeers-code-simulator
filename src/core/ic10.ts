@@ -1,8 +1,8 @@
 import { InterpreterIc10 } from "ic10"
 import Env from "./Env.ts"
-import { reactive } from "vue"
+import { reactive, UnwrapNestedRefs } from "vue"
 
-export class Ic10 extends InterpreterIc10 {
+export class Ic10  extends InterpreterIc10<UnwrapNestedRefs<Env>> {
 	private static instance: Ic10
 
 	static getInstance() {
@@ -13,8 +13,8 @@ export class Ic10 extends InterpreterIc10 {
 	}
 
 	private constructor() {
-		//@ts-ignore
-		super(reactive(new Env()), "")
+		const env = reactive(new Env())
+		super(env, "")
 	}
 
 	setCode(code: string): this {
@@ -40,9 +40,8 @@ export class Ic10 extends InterpreterIc10 {
 		this.getEnv().emit("update")
 	}
 
-	//@ts-ignore TODO
 	public getEnv() {
-		return this.env as Env
+		return this.env
 	}
 
 	async run(codeLines?: number, dryRun?: number) {
