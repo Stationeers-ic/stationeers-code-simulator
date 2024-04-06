@@ -2,14 +2,7 @@ import { driver, DriveStep } from "driver.js"
 import delay from "delay"
 
 const controls: DriveStep[] = [
-	{
-		element: "#tour-headers",
-		popover: { title: "Tutorial", description: "Welcome to the Stationeers Code Simulator tutorial.<br />Let's go through the controls step by step.", side: "bottom", align: "center" },
-	},
-	{
-		element: "#hashConverter",
-		popover: { title: "Converter", description: "Generate a Hash using the CRC32 function from a name, as used in Stationeers.", side: "bottom", align: "center" },
-	},
+
 	{ element: "#tour-run", popover: { title: "IC Simulation", description: "Start/Pause the IC code simulation at a low pace.", side: "bottom", align: "center" } },
 	{ element: "#speedControl", popover: { title: "Speed control", description: "Adjust the simulation speed here.", side: "bottom", align: "center" } },
 	{ element: "#tour-step", popover: { title: "Manual controls", description: "Execute one step of the code manually.", side: "bottom", align: "center" } },
@@ -26,6 +19,7 @@ const controls: DriveStep[] = [
 			align: "center",
 		},
 	},
+
 ]
 const saveSystem: DriveStep[] = [
 	{
@@ -208,9 +202,17 @@ const driverObj = driver({
 	showProgress: true,
 	smoothScroll: true,
 	steps: [
-		...controls,
+		{
+			element: "#tour-headers",
+			popover: { title: "Tutorial", description: "Welcome to the Stationeers Code Simulator tutorial.<br />Let's go through the controls step by step.", side: "bottom", align: "center" },
+		},
 		...saveSystem,
+		...controls,
 		...AddDevice,
+		{
+			element: "#hashConverter",
+			popover: { title: "Converter", description: "Generate a Hash using the CRC32 function from a name, as used in Stationeers.", side: "bottom", align: "center" },
+		},
 		...body,
 		...device,
 		{
