@@ -220,7 +220,7 @@ function startTour() {
 						  :style="{width: `${Math.max($t('control.stop').length,$t('control.run').length) +1}em`}"
 						  :onLabel="$t('control.stop')" :offLabel="$t('control.run')" onIcon="pi pi-stop"
 						  offIcon="pi pi-play" />
-			<Dropdown id="speedControl" v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
+			<Dropdown id="speedControl"  v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
 			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')" />
 			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')" />
 			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')" />

@@ -1,7 +1,7 @@
 import { nextTick } from "vue"
 import { createI18n, I18n, I18nOptions } from "vue-i18n"
 
-export const SUPPORT_LOCALES = ["en", "ru"] as const
+export const SUPPORT_LOCALES = ["en", "ru", 'fr', 'fi'] as const
 
 export const supportedLanguage = (locale: unknown): locale is (typeof SUPPORT_LOCALES)[number] => {
 	//@ts-ignore
