@@ -131,6 +131,19 @@
 			height: $size;
 			padding: 0 $size 0 0;
 		}
+
+		&.pi-weblate {
+			$size: 30px;
+			filter: brightness(0);
+			background-color: transparent;
+			background-image: url("https://translate.traineratwot.site/favicon.ico");
+			background-size: contain;
+			background-repeat: no-repeat;
+			display: block;
+			width: $size;
+			height: $size;
+			padding: 0 $size 0 0;
+		}
 	}
 
 	@keyframes pulse-animation {
