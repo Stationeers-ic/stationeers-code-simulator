@@ -7,16 +7,16 @@ function init() {
 	const controls: DriveStep[] = [
 		{ element: "#tour-run", popover: { title: t("tutorial.iCSimulation.title"), description: t("tutorial.iCSimulation.description"), side: "bottom", align: "center" } },
 		{ element: "#speedControl", popover: { title: t("tutorial.speedControl.title"), description: t("tutorial.speedControl.description"), side: "bottom", align: "center" } },
-		{ element: "#tour-step", popover: { title: t("tutorial.manualControls.title"), description: t("tutorial.manualControls.description"), side: "bottom", align: "center" } },
+		{ element: "#tour-step", popover: { title: t("tutorial.step.title"), description: t("tutorial.step.description"), side: "bottom", align: "center" } },
 		{
 			element: "#tour-goto",
-			popover: { title: t("tutorial.manualControls.title"), description: t("tutorial.manualControls.description"), side: "bottom", align: "center" },
+			popover: { title: t("tutorial.goto.title"), description: t("tutorial.goto.description"), side: "bottom", align: "center" },
 		},
 		{
 			element: "#tour-reset",
 			popover: {
-				title: t("tutorial.manualControls.title"),
-				description: t("tutorial.manualControls.description"),
+				title: t("tutorial.reset.title"),
+				description: t("tutorial.reset.description"),
 				side: "bottom",
 				align: "center",
 			},
