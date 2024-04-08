@@ -1,94 +1,208 @@
 {
-  "ICON": "flag flag-ES",
-  "headers": {
-    "ResetAllData": "Reset all data",
-    "confirmAllDelete": "Are you sure you want to clear All app data?"
-  },
-  "control": {
-    "file": "File",
-    "run": "Run",
-    "stop": "Stop",
-    "step": "Step",
-    "toYield": "To Yield",
-    "reset": "Reset",
-    "addDevice": "Add device",
-    "convert": "Convert",
-    "stringToHash": "String to Hash",
-    "slow": "Slow",
-    "normal": "Normal",
-    "fast": "Fast",
-    "save": "Save",
-    "saveAs": "Save as ",
-    "open": "Open",
-    "load": "Load",
-    "share": "Share"
-  },
-  "stack": {
-    "stack": "Stack"
-  },
-  "registers": {
-    "registers": "Registers"
-  },
-  "constantAndLabels": {
-    "constantAndLabels": "Constant and Labels"
-  },
-  "settings": {
-    "languages": "Languages",
-    "saves": "Saves",
-    "noSaves": "No saves",
-    "savesNotFound": "Saves not found",
-    "searchSave": "Search save",
-    "confirmDelete": "Are you sure you want to clear save?"
-  },
-  "addDevice": {
-    "header": "Add Device",
-    "description": "Add new device to environment",
-    "deviceHash": "Device hash",
-    "deviceName": "Device Name",
-    "devicePin": "IC Pin",
-    "deviceId": "Device id",
-    "deviceHashHelp": "Enter or select your device PrefabHash or PrefabName.",
-    "deviceNameHelp": "Enter the device name as you would do with Labeller",
-    "devicePortHelp": "Select the pin to which the device is assigned on the IC or leave empty",
-    "deviceIdHelp": "Enter device id or leave it empty."
-  },
-  "confirmReset": {
-    "info": {
-      "summary": "Confirmed",
-      "detail": "You have accepted"
-    },
-    "error": {
-      "summary": "Rejected",
-      "detail": "You have rejected"
-    }
-  },
-  "toastSave": {
-    "success": {
-      "summary": "Saved !",
-      "detail": "Saved to {name}"
-    },
-    "error": {
-      "summary": "Error",
-      "detail": "Error:  {errMsg}"
-    }
-  },
-  "toastLoad": {
-    "success": {
-      "summary": "Loaded !",
-      "detail": "Loaded from {store}"
-    },
-    "error": {
-      "summary": "Error",
-      "detail": "Error:  {errMsg}"
-    }
-  },
-  "add": "Add",
-  "cancel": "Cancel",
-  "remove": "Remove",
-  "delete": "Delete",
-  "code": "Code goes here",
-  "errors": "Errors",
-  "url": "Url",
-  "browser": "Browser",
-  "temp": "Temp"
+	"ICON": "flag flag-ES",
+	"headers": {
+		"ResetAllData": "Reset all data",
+		"confirmAllDelete": "Are you sure you want to clear All app data?"
+	},
+	"control": {
+		"file": "File",
+		"run": "Run",
+		"stop": "Stop",
+		"step": "Step",
+		"toYield": "To Yield",
+		"reset": "Reset",
+		"addDevice": "Add device",
+		"convert": "Convert",
+		"stringToHash": "String to Hash",
+		"slow": "Slow",
+		"normal": "Normal",
+		"fast": "Fast",
+		"save": "Save",
+		"saveAs": "Save as ",
+		"open": "Open",
+		"load": "Load",
+		"share": "Share"
+	},
+	"stack": {
+		"stack": "Stack"
+	},
+	"registers": {
+		"registers": "Registers"
+	},
+	"constantAndLabels": {
+		"constantAndLabels": "Constant and Labels"
+	},
+	"settings": {
+		"languages": "Languages",
+		"saves": "Saves",
+		"noSaves": "No saves",
+		"savesNotFound": "Saves not found",
+		"searchSave": "Search save",
+		"confirmDelete": "Are you sure you want to clear save?"
+	},
+	"addDevice": {
+		"header": "Add Device",
+		"description": "Add new device to environment",
+		"deviceHash": "Device hash",
+		"deviceName": "Device Name",
+		"devicePin": "IC Pin",
+		"deviceId": "Device id",
+		"deviceHashHelp": "Enter or select your device PrefabHash or PrefabName.",
+		"deviceNameHelp": "Enter the device name as you would do with Labeller",
+		"devicePortHelp": "Select the pin to which the device is assigned on the IC or leave empty",
+		"deviceIdHelp": "Enter device id or leave it empty."
+	},
+	"confirmReset": {
+		"info": {
+			"summary": "Confirmed",
+			"detail": "You have accepted"
+		},
+		"error": {
+			"summary": "Rejected",
+			"detail": "You have rejected"
+		}
+	},
+	"toastSave": {
+		"success": {
+			"summary": "Saved !",
+			"detail": "Saved to {name}"
+		},
+		"error": {
+			"summary": "Error",
+			"detail": "Error:  {errMsg}"
+		}
+	},
+	"toastLoad": {
+		"success": {
+			"summary": "Loaded !",
+			"detail": "Loaded from {store}"
+		},
+		"error": {
+			"summary": "Error",
+			"detail": "Error:  {errMsg}"
+		}
+	},
+	"add": "Add",
+	"cancel": "Cancel",
+	"remove": "Remove",
+	"delete": "Delete",
+	"code": "Code goes here",
+	"errors": "Errors",
+	"url": "Url",
+	"browser": "Browser",
+	"temp": "Temp",
+	"tutorial": {
+		"tutorial": {
+			"title": "Tutorial",
+			"description": "Welcome to the Stationeers Code Simulator tutorial.<br />Let's go through the controls step by step."
+		},
+		"fileMenu": {
+			"title": "File menu",
+			"description": "Save, export, or load an IC code and its associated devices from this menu."
+		},
+		"save": {
+			"title": "Save",
+			"description": "Save the current code in the browser memory.<br />For a new code, use the next button (Save As)."
+		},
+		"saveAs": {
+			"title": "Save as",
+			"description": "Save a new code in the browser memory and assign it a name.<br />Additionally, this button provides the option to export your code and devices to your local machine or generate a shareable link."
+		},
+		"open": {
+			"title": "Open",
+			"description": "Open an IC code from a file, restore a previously exported code, or open it from a shared link."
+		},
+		"load": {
+			"title": "Load",
+			"description": "List and access all saved codes in the browser memory."
+		},
+		"share": {
+			"title": "Share",
+			"description": "Generate and copy a link to share your IC code and simulation environment settings."
+		},
+		"iCSimulation": {
+			"title": "IC Simulation",
+			"description": "Here you can add devices to your simulation environment.<br />Let's see it in details."
+		},
+		"speedControl": {
+			"title": "Speed control",
+			"description": "Adjust the simulation speed here."
+		},
+		"manualControls": {
+			"title": "Manual controls",
+			"description": "Clear all registers and reset the execution to the first line, simulating removing and placing back the IC chip."
+		},
+		"addDevice": {
+			"title": "Add device",
+			"description": "Once the device is configured, click here to add it into your simulation environment."
+		},
+		"labeler": {
+			"title": "Labeler",
+			"description": "Similar to the game, assign a distinct name to each device.<br />This enables the simulation of batch named commands."
+		},
+		"pinD0-D5": {
+			"title": "Pin d0-d5",
+			"description": "Or simply determine the pin to which the device will connect."
+		},
+		"deviceID": {
+			"title": "Device ID",
+			"description": "Optionally, specify a ReferenceID for use with <b>ld</b>, <b>sd</b>, <b>putd</b>, or <b>getd</b> instructions.<br />You can locate this ID in-game using a Configuration card on your tablet."
+		},
+		"converter": {
+			"title": "Converter",
+			"description": "Generate a Hash using the CRC32 function from a name, as used in Stationeers."
+		},
+		"codeEditor": {
+			"title": "Code editor",
+			"description": "Here, you can either write your IC code or copy-paste existing code."
+		},
+		"registersView": {
+			"title": "Registers view",
+			"description": "Monitor and manually adjust all registers during the simulation."
+		},
+		"constantsView": {
+			"title": "Constants view",
+			"description": "Access a list of default constants defined by the IC10, along with labels (line number) or constants specified within your code."
+		},
+		"errorLog": {
+			"title": "Error log",
+			"description": "Any code execution errors will be recorded here."
+		},
+		"simulationEnvironment": {
+			"title": "Simulation environment",
+			"description": "Each device added to the environment is represented by a card, providing a visual overview of your setup."
+		},
+		"devicePrefabName": {
+			"title": "Device PrefabName",
+			"description": "This is the device type as defined by the Stationpedia."
+		},
+		"deviceName": {
+			"title": "Device Name",
+			"description": "Review the custom name assigned to the device using the <b>Labeler</b>."
+		},
+		"pinsAndAliases": {
+			"title": "Pins and aliases",
+			"description": "Check all pins and aliases associated with the device in your code."
+		},
+		"deviceProperties": {
+			"title": "Device properties",
+			"description": "Access properties generated from the configured device, including its Reference ID, Prefab name, and Labelled name."
+		},
+		"deviceVariables": {
+			"title": "Device Variables",
+			"description": "Monitor and edit variables and their values set by the code, with the option to manually add new variables from a list."
+		},
+		"slots": {
+			"title": "Slots",
+			"description": "Each slot of the device is displayed, allowing you to edit slot variables by clicking on them."
+		},
+		"remove": {
+			"title": "Remove",
+			"description": "Use this option to remove a device from the simulation environment."
+		},
+		"delete": {
+			"title": "Delete",
+			"description": "Click here to reset everything and start with a fresh simulation.<br />Be aware that this action will also <b>erase all your saved codes</b>!"
+		}
+	}
 }
