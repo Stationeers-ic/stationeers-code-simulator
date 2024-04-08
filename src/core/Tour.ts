@@ -2,7 +2,7 @@ import { driver, DriveStep } from "driver.js"
 import delay from "delay"
 import * as fs from "fs"
 
-const t = window.i18n.global.t
+// const t = window.i18n.global.t
 const controls: DriveStep[] = [
 
 	{ element: "#tour-run", popover: { title: "IC Simulation", description: "Start/Pause the IC code simulation at a low pace.", side: "bottom", align: "center" } },
@@ -252,10 +252,10 @@ const file = fs.readFileSync("/home/kirill/PhpstormProjects/preview/src/core/Tou
 steps.forEach((item) => {
 	const key = camelize(item.popover?.title ?? "")
 	if (item.popover?.title) {
-		file.replaceAll("\"" + item.popover?.title + "\"", `t("tutorial.${key}.title")`)
+		file.replaceAll(item.popover?.title, `t("tutorial.${key}.title")`)
 	}
 	if (item.popover?.description) {
-		file.replaceAll("\"" + item.popover?.description + "\"", `t("tutorial.${key}.description")`)
+		file.replaceAll(item.popover?.description, `t("tutorial.${key}.description")`)
 	}
 })
 fs.writeFileSync("/home/kirill/PhpstormProjects/preview/src/core/Tour.ts", file)
