@@ -20,9 +20,9 @@ export class Ic10  extends InterpreterIc10<UnwrapNestedRefs<Env>> {
 	setCode(code: string): this {
 		this.getEnv().lines = []
 		super.setCode(code)
-		this.getEnv().emit("update_code")
 		this.parseCode()
 		this.getEnv().prepare()
+		this.getEnv().emit("update_code")
 		return this
 	}
 	getCode() {
