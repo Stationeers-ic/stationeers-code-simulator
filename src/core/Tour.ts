@@ -1,6 +1,8 @@
 import { driver, DriveStep } from "driver.js"
 import delay from "delay"
+import * as fs from "fs"
 
+const t = window.i18n.global.t
 const controls: DriveStep[] = [
 
 	{ element: "#tour-run", popover: { title: "IC Simulation", description: "Start/Pause the IC code simulation at a low pace.", side: "bottom", align: "center" } },
@@ -160,11 +162,11 @@ const device: DriveStep[] = [
 		},
 	},
 	{
-		element: '#tour-devises div[data-pc-section="title"]',
+		element: "#tour-devises div[data-pc-section=\"title\"]",
 		popover: { title: "Device PrefabName", description: "This is the device type as defined by the Stationpedia.", side: "left", align: "center" },
 	},
 	{
-		element: '#tour-devises div[data-pc-section="subtitle"]',
+		element: "#tour-devises div[data-pc-section=\"subtitle\"]",
 		popover: { title: "Device Name", description: "Review the custom name assigned to the device using the <b>Labeler</b>.", side: "left", align: "center" },
 	},
 	{
@@ -198,34 +200,36 @@ const device: DriveStep[] = [
 		popover: { title: "Remove", description: "Use this option to remove a device from the simulation environment.", side: "left", align: "center" },
 	},
 ]
+
+const steps: DriveStep[] = [
+	{
+		element: "#tour-headers",
+		popover: { title: "Tutorial", description: "Welcome to the Stationeers Code Simulator tutorial.<br />Let's go through the controls step by step.", side: "bottom", align: "center" },
+	},
+	...saveSystem,
+	...controls,
+	...AddDevice,
+	{
+		element: "#hashConverter",
+		popover: { title: "Converter", description: "Generate a Hash using the CRC32 function from a name, as used in Stationeers.", side: "bottom", align: "center" },
+	},
+	...body,
+	...device,
+	{
+		element: "#ResetAll",
+		popover: {
+			title: "Delete",
+			description: "Click here to reset everything and start with a fresh simulation.<br />Be aware that this action will also <b>erase all your saved codes</b>!",
+			side: "bottom",
+			align: "center",
+		},
+	},
+]
+
 const driverObj = driver({
 	showProgress: true,
 	smoothScroll: true,
-	steps: [
-		{
-			element: "#tour-headers",
-			popover: { title: "Tutorial", description: "Welcome to the Stationeers Code Simulator tutorial.<br />Let's go through the controls step by step.", side: "bottom", align: "center" },
-		},
-		...saveSystem,
-		...controls,
-		...AddDevice,
-		{
-			element: "#hashConverter",
-			popover: { title: "Converter", description: "Generate a Hash using the CRC32 function from a name, as used in Stationeers.", side: "bottom", align: "center" },
-		},
-		...body,
-		...device,
-		{
-			element: "#ResetAll",
-			popover: {
-				title: "Delete",
-				description: "Click here to reset everything and start with a fresh simulation.<br />Be aware that this action will also <b>erase all your saved codes</b>!",
-				side: "bottom",
-				align: "center",
-			},
-		},
-	],
-
+	steps,
 	onDestroyStarted: () => {
 		if (!driverObj.hasNextStep() || confirm("Are you sure you want to end the tutorial?")) {
 			driverObj.destroy()
@@ -236,3 +240,22 @@ const driverObj = driver({
 export function start() {
 	driverObj.drive()
 }
+
+function camelize(str: string) {
+	return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+		return index === 0 ? word.toLowerCase() : word.toUpperCase()
+	}).replace(/\s+/g, "")
+}
+
+const file = fs.readFileSync("/home/kirill/PhpstormProjects/preview/src/core/Tour.ts").toString("utf-8")
+
+steps.forEach((item) => {
+	const key = camelize(item.popover?.title ?? "")
+	if (item.popover?.title) {
+		file.replaceAll("\"" + item.popover?.title + "\"", `t("tutorial.${key}.title")`)
+	}
+	if (item.popover?.description) {
+		file.replaceAll("\"" + item.popover?.description + "\"", `t("tutorial.${key}.description")`)
+	}
+})
+fs.writeFileSync("/home/kirill/PhpstormProjects/preview/src/core/Tour.ts", file)
