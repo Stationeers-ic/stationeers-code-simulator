@@ -5,7 +5,7 @@ import StackInput from "../ui/StackInput.vue"
 
 <template>
 	<div class="stack">
-		<h3>{{ $t('stack.stack') }}</h3>
+		<h3>{{ $t("stack.stack") }}</h3>
 		<div :class="$style.stackContent">
 			<div :class="$style.stackItem" v-for="(_, index) in ic10.getEnv().stack">
 				<StackInput :name="index" v-model="ic10.getEnv().stack[index]" />

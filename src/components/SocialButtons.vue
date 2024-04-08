@@ -5,7 +5,6 @@ import { ref } from "vue"
 import { MenuItem } from "primevue/menuitem"
 
 const social = ref<MenuItem[]>([
-
 	{
 		label: "Github",
 		icon: "pi pi-github",
@@ -39,11 +38,9 @@ const social = ref<MenuItem[]>([
 
 <template>
 	<div :class="$style.rightButtons">
-
 		<template v-for="item in social">
 			<ButtonFrame :label="item.label" :icon="item.icon" size="large" :click="item.command" severity="info" />
 		</template>
-
 
 		<ButtonFrame icon="pi pi-kofi" severity="info">
 			<iframe

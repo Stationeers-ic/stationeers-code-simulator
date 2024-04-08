@@ -18,33 +18,33 @@ export default defineConfig({
 		rollupOptions: {
 			output: {
 				manualChunks(id) {
-					if (id.includes('node_modules')) {
-						if (id.includes('codemirror-lang-ic10')) {
-							return 'codemirror-lang-ic10'
+					if (id.includes("node_modules")) {
+						if (id.includes("codemirror-lang-ic10")) {
+							return "codemirror-lang-ic10"
 						}
-						if (id.includes('ic10')) {
-							return 'ic10'
+						if (id.includes("ic10")) {
+							return "ic10"
 						}
-						const pkgName = (id.match(/node_modules\/([^/]+)/) ?? [])[1];
-						if (pkgName) return `vendor-${pkgName}`;
+						const pkgName = (id.match(/node_modules\/([^/]+)/) ?? [])[1]
+						if (pkgName) return `vendor-${pkgName}`
 
-						return 'vendor'
+						return "vendor"
 					}
-				}
-			}
-		}
+				},
+			},
+		},
 	},
 	resolve: {
 		preserveSymlinks: true,
 	},
 	define: {
-		__languages__: fs.readdirSync(path.join(__dirname,'src/locales')),
-		__LanguageSelector__: lang.map((l)=>{
+		__languages__: fs.readdirSync(path.join(__dirname, "src/locales")),
+		__LanguageSelector__: lang.map((l) => {
 			return {
-				name:l.name,
-				code:l.code,
-				flag:l.ICON,
-				translated_percent:l.translated_percent,
+				name: l.name,
+				code: l.code,
+				flag: l.ICON ?? "",
+				translated_percent: l.translated_percent,
 			}
 		}),
 		__package__: stdout,

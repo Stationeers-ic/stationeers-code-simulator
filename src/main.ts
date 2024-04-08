@@ -126,12 +126,12 @@ import { zeroLineNumbers } from "codemirror-lang-ic10"
 import { EditorView } from "codemirror"
 import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
-import { setLocale, setupI18n, SUPPORT_LOCALES } from "./i18n.ts"
+import { setLocale, setupI18n } from "./i18n.ts"
 import type { I18n } from "vue-i18n"
 
 window.userLang = localStorage.getItem("language") ?? navigator.language
 const app = createApp(App)
-const i18n = setupI18n<[typeof en], (typeof SUPPORT_LOCALES)[number]>({
+const i18n = setupI18n<[typeof en], (typeof __languages__)[number]>({
 	legacy: false,
 	locale: window.userLang, // set locale
 	fallbackLocale: "en", // set fallback locale

@@ -51,11 +51,11 @@ const confirmReset = (event: any) => {
 		acceptLabel: t("delete"),
 		accept: () => {
 			window.localStorage.clear()
-			toast.add({ severity: "info", summary: t('confirmReset.info.summary'), detail: t('confirmReset.info.detail'), life: 3000 })
+			toast.add({ severity: "info", summary: t("confirmReset.info.summary"), detail: t("confirmReset.info.detail"), life: 3000 })
 			window.location.reload()
 		},
 		reject: () => {
-			toast.add({ severity: "error", summary: t('confirmReset.error.summary'), detail: t('confirmReset.error.detail'), life: 3000 })
+			toast.add({ severity: "error", summary: t("confirmReset.error.summary"), detail: t("confirmReset.error.detail"), life: 3000 })
 		},
 	})
 }

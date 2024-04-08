@@ -26,7 +26,7 @@ const ports = [
 				</div>
 			</template>
 		</MultiSelect>
-		<label for="deviceName">{{ $t('addDevice.devicePin') }}</label>
+		<label for="deviceName">{{ $t("addDevice.devicePin") }}</label>
 	</FloatLabel>
 </template>
 

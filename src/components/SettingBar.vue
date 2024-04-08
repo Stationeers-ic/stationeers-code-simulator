@@ -6,11 +6,11 @@ import { useConfirm } from "primevue/useconfirm"
 import { I18n, useI18n } from "vue-i18n"
 import { setLocale } from "../i18n"
 
-const {t} = useI18n()
+const { t } = useI18n()
 const i18n = useI18n()
 export type languages = {
-	name: string,
-	code: string,
+	name: string
+	code: string
 }
 const confirm = useConfirm()
 const visible = defineModel<boolean>()
@@ -18,7 +18,6 @@ const saves = ref<Array<{ name: string }>>([])
 const active = ref<string | null>(null)
 const lang = ref<languages | undefined>()
 const languages = ref(__LanguageSelector__)
-
 
 const update = () => {
 	saves.value = Array.from(getScriptNames()).map((name) => {
@@ -56,7 +55,7 @@ const remove = (event: any, name: string) => {
 	event.preventDefault()
 	confirm.require({
 		target: event.currentTarget,
-		message: t('settings.confirmDelete'),
+		message: t("settings.confirmDelete"),
 		icon: "pi pi-exclamation-triangle",
 		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
 		acceptClass: "p-button-danger p-button-sm",
@@ -75,19 +74,27 @@ const remove = (event: any, name: string) => {
 		<Sidebar v-model:visible="visible" header=" ">
 			<div>
 				<Divider>{{ $t("settings.languages") }}</Divider>
-				<Dropdown style="width:100% !important" v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
+				<Dropdown style="width: 100% !important" v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
 					<template #value="slotProps">
 						<div v-if="slotProps.value" class="flex align-items-center">
-							<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								 :class="`mr-2 ${slotProps.value.flag}`" style="width: 18px" />
+							<img
+								:alt="slotProps.value.label"
+								src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+								:class="`mr-2 ${slotProps.value.flag}`"
+								style="width: 18px"
+							/>
 							<div>{{ slotProps.value.name }}</div>
 						</div>
 						<span v-else>{{ slotProps.placeholder }}</span>
 					</template>
 					<template #option="slotProps">
 						<div class="flex align-items-center">
-							<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								 :class="`mr-2 ${slotProps.option.flag}`" style="width: 18px" />
+							<img
+								:alt="slotProps.option.label"
+								src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
+								:class="`mr-2 ${slotProps.option.flag}`"
+								style="width: 18px"
+							/>
 							<div>{{ slotProps.option.name }}</div>
 						</div>
 					</template>

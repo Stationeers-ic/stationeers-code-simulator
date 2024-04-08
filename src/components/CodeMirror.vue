@@ -25,7 +25,7 @@ watch(
 	() => interpretator.getEnv().line,
 	(newVal) => {
 		window.document
-			.querySelector<HTMLDivElement>("div[data-language=\"ic10\"]")
+			.querySelector<HTMLDivElement>('div[data-language="ic10"]')
 			?.querySelectorAll<HTMLDivElement>("div.cm-line")
 			.forEach((e, i) => {
 				if (i === newVal) {
@@ -105,7 +105,7 @@ const extensions = [ic10(), ic10Snippets(), ic10HoverTooltip(opt)]
 		:style="{ height: '100%' }"
 		:autofocus="true"
 		:indent-with-tab="true"
-		:placeholder="$t('code')+' ...'"
+		:placeholder="$t('code') + ' ...'"
 		:tab-size="2"
 		:lineNumberFormatter="(line: number) => line - 1"
 		:extensions="extensions"

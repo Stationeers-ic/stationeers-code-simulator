@@ -45,7 +45,7 @@ const save = () => {
 		return
 	}
 	saveToBrowser(scripName.value)
-	toast.add({ severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", { store: 'browser' }), life: 3000 })
+	toast.add({ severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", { store: "browser" }), life: 3000 })
 	close()
 }
 </script>

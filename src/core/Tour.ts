@@ -5,7 +5,6 @@ let driverObj: ReturnType<typeof driver>
 function init() {
 	const t = window.i18n.global.t
 	const controls: DriveStep[] = [
-
 		{ element: "#tour-run", popover: { title: t("tutorial.iCSimulation.title"), description: t("tutorial.iCSimulation.description"), side: "bottom", align: "center" } },
 		{ element: "#speedControl", popover: { title: t("tutorial.speedControl.title"), description: t("tutorial.speedControl.description"), side: "bottom", align: "center" } },
 		{ element: "#tour-step", popover: { title: t("tutorial.manualControls.title"), description: t("tutorial.manualControls.description"), side: "bottom", align: "center" } },
@@ -22,7 +21,6 @@ function init() {
 				align: "center",
 			},
 		},
-
 	]
 	const saveSystem: DriveStep[] = [
 		{
@@ -47,8 +45,7 @@ function init() {
 			element: "#FileMenu_1",
 			popover: {
 				title: t("tutorial.saveAs.title"),
-				description:
-					t("tutorial.saveAs.description"),
+				description: t("tutorial.saveAs.description"),
 				side: "left",
 				align: "center",
 			},
@@ -111,8 +108,7 @@ function init() {
 			element: "#deviceId",
 			popover: {
 				title: t("tutorial.deviceID.title"),
-				description:
-					t("tutorial.deviceID.description"),
+				description: t("tutorial.deviceID.description"),
 				side: "bottom",
 				align: "center",
 			},
@@ -163,11 +159,11 @@ function init() {
 			},
 		},
 		{
-			element: "#tour-devises div[data-pc-section=\"title\"]",
+			element: '#tour-devises div[data-pc-section="title"]',
 			popover: { title: t("tutorial.devicePrefabName.title"), description: t("tutorial.devicePrefabName.description"), side: "left", align: "center" },
 		},
 		{
-			element: "#tour-devises div[data-pc-section=\"subtitle\"]",
+			element: '#tour-devises div[data-pc-section="subtitle"]',
 			popover: { title: t("tutorial.deviceName.title"), description: t("tutorial.deviceName.description"), side: "left", align: "center" },
 		},
 		{
@@ -225,7 +221,7 @@ function init() {
 			},
 		},
 	]
-	return driverObj = driver({
+	return (driverObj = driver({
 		showProgress: true,
 		smoothScroll: true,
 		steps,
@@ -234,7 +230,7 @@ function init() {
 				driverObj.destroy()
 			}
 		},
-	})
+	}))
 }
 export function start() {
 	init().drive()

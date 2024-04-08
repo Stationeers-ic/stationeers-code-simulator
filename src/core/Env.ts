@@ -44,7 +44,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 			.filter((l) => l?.fn === "alias")
 			.forEach((l) => {
 				if (l?.args[0] && l?.args[1]) {
-					this.preAlias.set((l?.args[0])?.toString(), l?.args[1])
+					this.preAlias.set(l?.args[0]?.toString(), l?.args[1])
 				}
 			})
 		this.emit("update")

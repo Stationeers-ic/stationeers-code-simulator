@@ -12,7 +12,6 @@ declare module "vuex" {
 	export * from "vuex/types/vue.d.ts"
 }
 
-
 declare const __package__: { dependencies: Record<string, { version: string; overridden: boolean }> }
 declare const __buildTime__: number
 declare const __languages__: string[]

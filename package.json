@@ -7,8 +7,7 @@
     "dev": "bunx vite --host=0.0.0.0",
     "build": "vue-tsc && bunx vite build",
     "preview": "bunx vite preview",
-    "download:lang": "bun ./tools/langUpdate.ts",
-    "postinstall": "bun download:lang"
+    "download:lang": "bun ./tools/langUpdate.ts"
   },
   "dependencies": {
     "@uiw/codemirror-theme-monokai": "^4.21.24",

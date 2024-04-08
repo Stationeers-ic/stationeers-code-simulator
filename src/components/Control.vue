@@ -193,7 +193,6 @@ watch(i18n.locale, () => {
 	]
 })
 
-
 function startTour() {
 	start()
 }
@@ -201,7 +200,7 @@ function startTour() {
 
 <template>
 	<header :class="[$style.control, 'control']" id="tour-headers">
-		<InputGroup :class="$style.panel" >
+		<InputGroup :class="$style.panel">
 			<Button id="tour-File" icon="pi pi-save" :label="$t('control.file')" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
 				<TieredMenu :model="FileMenu" id="FileMenu">
@@ -216,11 +215,16 @@ function startTour() {
 					</template>
 				</TieredMenu>
 			</OverlayPanel>
-			<ToggleButton id="tour-run" v-model="checked"
-						  :style="{width: `${Math.max($t('control.stop').length,$t('control.run').length) +1}em`}"
-						  :onLabel="$t('control.stop')" :offLabel="$t('control.run')" onIcon="pi pi-stop"
-						  offIcon="pi pi-play" />
-			<Dropdown id="speedControl"  v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
+			<ToggleButton
+				id="tour-run"
+				v-model="checked"
+				:style="{ width: `${Math.max($t('control.stop').length, $t('control.run').length) + 1}em` }"
+				:onLabel="$t('control.stop')"
+				:offLabel="$t('control.run')"
+				onIcon="pi pi-stop"
+				offIcon="pi pi-play"
+			/>
+			<Dropdown id="speedControl" v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
 			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')" />
 			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')" />
 			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')" />
@@ -230,10 +234,7 @@ function startTour() {
 		<div id="hashConverter">
 			<InputGroup style="width: auto; height: 40px">
 				<Button icon="pi pi-hashtag" @click="convert" :label="$t('control.convert')" />
-				<InputText
-					:placeholder="$t('control.stringToHash')"
-					@focus="($event.target as any).select()"
-					id="hashText" v-model="hashText" style="max-width: 200px" />
+				<InputText :placeholder="$t('control.stringToHash')" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
 			</InputGroup>
 		</div>
 	</header>
@@ -241,7 +242,7 @@ function startTour() {
 
 <style module lang="scss">
 .control {
-	.panel{
+	.panel {
 		width: auto;
 		* {
 			border: 0 !important;
