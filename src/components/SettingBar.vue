@@ -3,15 +3,11 @@ import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
 import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
-import { I18n, useI18n } from "vue-i18n"
+import { useI18n } from "vue-i18n"
 import { setLocale } from "../i18n"
 
 const { t } = useI18n()
 const i18n = useI18n()
-export type languages = {
-	name: string
-	code: string
-}
 const confirm = useConfirm()
 const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
@@ -40,7 +36,7 @@ onBeforeUnmount(() => {
 })
 watch(lang, (newVal) => {
 	if (newVal) {
-		setLocale(window.i18n as I18n, newVal.code)
+		setLocale(window.i18n, newVal.code)
 		// i18n.locale.value = newVal.code
 		window.localStorage.setItem("language", newVal.code)
 	}
@@ -96,6 +92,7 @@ const remove = (event: any, name: string) => {
 								style="width: 18px"
 							/>
 							<div>{{ slotProps.option.name }}</div>
+							<span class="lang" v-if=" slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
 						</div>
 					</template>
 				</Dropdown>
@@ -126,6 +123,11 @@ const remove = (event: any, name: string) => {
 </template>
 
 <style scoped lang="scss">
+.lang{
+	right: 0;
+	position: absolute;
+	color: var(--text-color-secondary) !important;
+}
 .settingButton {
 	position: fixed;
 	width: 10px;

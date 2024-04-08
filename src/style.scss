@@ -12,6 +12,12 @@
 		max-width: min(1240px, calc(100vw - 40px));
 	}
 
+	#speedControl {
+		.p-inputtext {
+			margin-top: 3px !important;
+		}
+	}
+
 	.ic10-container {
 		display: grid;
 		grid-template-columns: 7fr 2fr 3fr;
@@ -54,108 +60,104 @@
 			}
 		}
 	}
-}
 
-*[data-ic10lang="tooltip"] {
-	padding: 0 10px;
-	white-space: pre-wrap;
-	max-width: 40vw;
-}
 
-.prop {
-	width: 100%;
+	.prop {
+		width: 100%;
 
-	.key {
-		justify-content: flex-start !important;
-		width: 35% !important;
-	}
+		.key {
+			justify-content: flex-start !important;
+			width: 35% !important;
+		}
 
-	.val {
-		width: 55% !important;
-	}
+		.val {
+			width: 55% !important;
+		}
 
-	.btn {
-		width: 10% !important;
-	}
-}
-
-.pi {
-	&.pi-plausible {
-		$size: 24px;
-		background-color: transparent;
-		background-image: url("/public/icons/plausible.png");
-		background-size: contain;
-		background-repeat: no-repeat;
-		width: $size;
-		height: $size;
-		opacity: 0.5;
-		padding: 0 $size 0 0;
-
-		&:hover {
-			opacity: 1;
+		.btn {
+			width: 10% !important;
 		}
 	}
 
-	&.pi-kofi {
-		$size: 30px;
-		background-color: transparent;
-		background-image: url("/public/icons/ko-fi.png");
-		background-size: contain;
-		background-repeat: no-repeat;
-		display: block;
-		width: $size;
-		height: $size;
-		padding: 0 $size 0 0;
+	.pi {
+		&.pi-plausible {
+			$size: 24px;
+			background-color: transparent;
+			background-image: url("/public/icons/plausible.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			width: $size;
+			height: $size;
+			opacity: 0.5;
+			padding: 0 $size 0 0;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		&.pi-kofi {
+			$size: 30px;
+			background-color: transparent;
+			background-image: url("/public/icons/ko-fi.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			display: block;
+			width: $size;
+			height: $size;
+			padding: 0 $size 0 0;
+		}
+
+		&.pi-steam {
+			$size: 30px;
+			background-color: transparent;
+			background-image: url("https://store.steampowered.com/favicon.ico");
+			background-size: contain;
+			background-repeat: no-repeat;
+			display: block;
+			width: $size;
+			height: $size;
+			padding: 0 $size 0 0;
+		}
+
+		&.pi-vk {
+			$size: 30px;
+			background-color: transparent;
+			background-image: url("/public/icons/vk.svg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			display: block;
+			width: $size;
+			height: $size;
+			padding: 0 $size 0 0;
+		}
 	}
 
-	&.pi-steam {
-		$size: 30px;
-		background-color: transparent;
-		background-image: url("https://store.steampowered.com/favicon.ico");
-		background-size: contain;
-		background-repeat: no-repeat;
-		display: block;
-		width: $size;
-		height: $size;
-		padding: 0 $size 0 0;
+	@keyframes pulse-animation {
+		0% {
+			box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+		}
+		100% {
+			box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+		}
 	}
 
-	&.pi-vk {
-		$size: 30px;
-		background-color: transparent;
-		background-image: url("/public/icons/vk.svg");
-		background-size: contain;
-		background-repeat: no-repeat;
-		display: block;
-		width: $size;
-		height: $size;
-		padding: 0 $size 0 0;
+	.joker {
+		transform: rotateY(180deg);
+	}
+
+	.pulse {
+		animation: pulse-animation 2s infinite;
+	}
+
+	.p-menubar .p-menuitem {
+		margin: 0 !important;
+	}
+
+	*[data-ic10lang="tooltip"] {
+		padding: 0 10px;
+		white-space: pre-wrap;
+		max-width: 40vw;
 	}
 }
 
-@keyframes pulse-animation {
-	0% {
-		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-	}
-	100% {
-		box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
-	}
-}
-
-.joker {
-	transform: rotateY(180deg);
-}
-
-.pulse {
-	animation: pulse-animation 2s infinite;
-}
-
-.p-menubar .p-menuitem {
-	margin: 0 !important;
-}
-
-#speedControl {
-	.p-inputtext {
-		margin-top: 3px !important;
-	}
-}
