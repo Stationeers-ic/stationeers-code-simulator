@@ -5,6 +5,16 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ['main']
+    paths:
+      - '!LICENSE'
+      - '!README.md'
+      - '!.gitattributes'
+      - '!.gitignore'
+      - '!.prettierignore'
+      - '!.editorconfig'
+      - '!.vscode'
+      - '!.idea'
+      - '!*.log'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:

@@ -137,5 +137,6 @@ build/
 dist
 src/**/*.js
 vite.config.ts.timestamp*
+.vite/
 # /src/locales/
 /src/core/test.ts

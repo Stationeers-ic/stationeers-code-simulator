@@ -6,12 +6,6 @@ Stationeering provides a simulation of the IC10 chip inside Stationeers. IDE wit
 
 # Translation
 
-[Community](https://translate.traineratwot.site/projects/ic10/locales/)
+[Community](https://translate.traineratwot.site/engage/ic10/)
 
-🇺🇲 ![](https://translate.traineratwot.site/widget/ic10/locales/en/svg-badge.svg?native=1)
-
-🇷🇺 ![](https://translate.traineratwot.site/widget/ic10/locales/ru/svg-badge.svg?native=1)
-
-🇫🇷 ![](https://translate.traineratwot.site/widget/ic10/locales/fr/svg-badge.svg?native=1)
-
-🇫🇮 ![](https://translate.traineratwot.site/widget/ic10/locales/fi/svg-badge.svg?native=1)
+[![](http://translate.traineratwot.site/widget/ic10/locales/en/multi-auto.svg)](http://translate.traineratwot.site/engage/ic10/)
