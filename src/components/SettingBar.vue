@@ -3,7 +3,7 @@ import { onBeforeUnmount, onMounted, ref, watch } from "vue"
 import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
 import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
-import { useI18n, I18n } from 'vue-i18n';
+import { I18n, useI18n } from "vue-i18n"
 import { setLocale } from "../i18n"
 
 const {t} = useI18n()
@@ -17,10 +17,7 @@ const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
 const active = ref<string | null>(null)
 const lang = ref<languages | undefined>()
-const languages = ref([
-	{ name: "English", code: "en", flag: "us" },
-	{ name: "Russian", code: "ru", flag: "ru" },
-])
+const languages = ref(__LanguageSelector__)
 
 
 const update = () => {
@@ -82,7 +79,7 @@ const remove = (event: any, name: string) => {
 					<template #value="slotProps">
 						<div v-if="slotProps.value" class="flex align-items-center">
 							<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								 :class="`mr-2 flag flag-${slotProps.value.flag}`" style="width: 18px" />
+								 :class="`mr-2 ${slotProps.value.flag}`" style="width: 18px" />
 							<div>{{ slotProps.value.name }}</div>
 						</div>
 						<span v-else>{{ slotProps.placeholder }}</span>
@@ -90,7 +87,7 @@ const remove = (event: any, name: string) => {
 					<template #option="slotProps">
 						<div class="flex align-items-center">
 							<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								 :class="`mr-2 flag flag-${slotProps.option.flag}`" style="width: 18px" />
+								 :class="`mr-2 ${slotProps.option.flag}`" style="width: 18px" />
 							<div>{{ slotProps.option.name }}</div>
 						</div>
 					</template>

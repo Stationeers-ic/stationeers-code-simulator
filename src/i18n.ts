@@ -1,11 +1,10 @@
 import { nextTick } from "vue"
 import { createI18n, I18n, I18nOptions } from "vue-i18n"
 
-export const SUPPORT_LOCALES = ["en", "ru", 'fr', 'fi'] as const
 
-export const supportedLanguage = (locale: unknown): locale is (typeof SUPPORT_LOCALES)[number] => {
+export const supportedLanguage = (locale: unknown): locale is (typeof __languages__)[number] => {
 	//@ts-ignore
-	return SUPPORT_LOCALES.includes(locale)
+	return __languages__.includes(locale)
 }
 export const setupI18n: typeof createI18n = (options: I18nOptions = { locale: "en" }) => {
 	const i18n = createI18n(options)
@@ -37,7 +36,7 @@ export async function loadLocaleMessages(i18n: I18n, locale?: string) {
 
 	return nextTick()
 }
-const loadedLocales: (typeof SUPPORT_LOCALES)[number][] = ["en"]
+const loadedLocales: (typeof __languages__)[number][] = ["en"]
 
 export async function setLocale(i18n: I18n, locale?: string) {
 	if (!supportedLanguage(locale)) {

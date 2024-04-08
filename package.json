@@ -7,11 +7,10 @@
     "dev": "bunx vite --host=0.0.0.0",
     "build": "vue-tsc && bunx vite build",
     "preview": "bunx vite preview",
-    "download:lang":"bun ./tools/langUpdate.ts",
+    "download:lang": "bun ./tools/langUpdate.ts",
     "postinstall": "bun download:lang"
   },
   "dependencies": {
-    "@types/bun": "^1.0.11",
     "@uiw/codemirror-theme-monokai": "^4.21.24",
     "codemirror-lang-ic10": "^0.3.5",
     "dayjs": "^1.11.10",
@@ -36,6 +35,9 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/bun": "^1.0.11",
+    "axios": "^1.6.8",
     "@types/uuid": "^9.0.8",
     "@babel/runtime": "^7.24.0",
     "@types/is-hotkey": "^0.1.10",

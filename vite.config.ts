@@ -1,6 +1,9 @@
 import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import { spawnSync } from "child_process"
+import * as fs from "fs"
+import * as path from "path"
+import lang from "./src/languages.json"
 
 // this is a lot more work than it could be
 const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {
@@ -35,6 +38,15 @@ export default defineConfig({
 		preserveSymlinks: true,
 	},
 	define: {
+		__languages__: fs.readdirSync(path.join(__dirname,'src/locales')),
+		__LanguageSelector__: lang.map((l)=>{
+			return {
+				name:l.name,
+				code:l.code,
+				flag:l.ICON,
+				translated_percent:l.translated_percent,
+			}
+		}),
 		__package__: stdout,
 		__buildTime__: Date.now(),
 	},
