@@ -1,12 +1,9 @@
 import { driver, DriveStep } from "driver.js"
 import delay from "delay"
 
-const t = (t: string): string => {
-	return window.i18n.global.t(t)
-}
 let driverObj: ReturnType<typeof driver>
-
 function init() {
+	const t = window.i18n.global.t
 	const controls: DriveStep[] = [
 
 		{ element: "#tour-run", popover: { title: t("tutorial.iCSimulation.title"), description: t("tutorial.iCSimulation.description"), side: "bottom", align: "center" } },
@@ -228,7 +225,7 @@ function init() {
 			},
 		},
 	]
-	driverObj = driver({
+	return driverObj = driver({
 		showProgress: true,
 		smoothScroll: true,
 		steps,
@@ -239,12 +236,6 @@ function init() {
 		},
 	})
 }
-
 export function start() {
-	if (driverObj == undefined) {
-		init()
-	}
-	if (driverObj !== undefined) {
-		driverObj.drive()
-	}
+	init().drive()
 }
