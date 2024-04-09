@@ -134,6 +134,18 @@
 		"devicePrefabName": {
 			"title": "Laiten PrefabName",
 			"description": "Tämä on Stationpedian määrittämä laitetyyppi."
+		},
+		"step": {
+			"description": "Suorita yksi koodin vaihe manuaalisesti.",
+			"title": "@:control.step"
+		},
+		"goto": {
+			"description": "Suorita kaikki ohjeet nykyiseltä riviltä seuraavaan <b>yield</b>-käskyyn.",
+			"title": "@:control.toYield"
+		},
+		"reset": {
+			"description": "Tyhjennä kaikki rekisterit ja palauta suoritus ensimmäiselle riville simuloiden IC-sirun poistamista ja sijoittamista.",
+			"title": "@:control.reset"
 		}
 	},
 	"headers": {

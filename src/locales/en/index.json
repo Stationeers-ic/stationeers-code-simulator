@@ -203,6 +203,18 @@
 		"delete": {
 			"title": "@:delete",
 			"description": "Click here to reset everything and start with a fresh simulation.<br />Be aware that this action will also <b>erase all your saved codes</b>!"
+		},
+		"step": {
+			"title": "@:control.step",
+			"description": "Execute one step of the code manually."
+		},
+		"goto": {
+			"title": "@:control.toYield",
+			"description": "Execute all instructions from the current line to the next <b>yield</b> instruction."
+		},
+		"reset": {
+			"title": "@:control.reset",
+			"description": "Clear all registers and reset the execution to the first line, simulating removing and placing back the IC chip."
 		}
 	},
 	"labeller": "Labeller"
