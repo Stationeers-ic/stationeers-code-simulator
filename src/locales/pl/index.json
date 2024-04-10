@@ -1,0 +1,171 @@
+{
+	"headers": {
+		"confirmAllDelete": "Czy jesteś pewien, że chcesz wyczyścić Wszystkie dane aplikacji?",
+		"ResetAllData": "Zresetuj wszystkie dane"
+	},
+	"control": {
+		"file": "Plik",
+		"run": "Wykonaj",
+		"stop": "Zatrzymaj",
+		"step": "Krok",
+		"reset": "Resetuj",
+		"addDevice": "Dodaj urządzenie",
+		"stringToHash": "Napis do Hasha",
+		"slow": "Wolno",
+		"normal": "Normalnie",
+		"fast": "Szybko",
+		"save": "Zapisz",
+		"open": "Otwórz",
+		"load": "Załaduj",
+		"share": "Udostępnij",
+		"toYield": "Wykonuj do przerwy",
+		"convert": "Konwertuj",
+		"saveAs": "Zapisz jako"
+	},
+	"stack": {
+		"stack": "Stos"
+	},
+	"registers": {
+		"registers": "Rejestry"
+	},
+	"constantAndLabels": {
+		"constantAndLabels": "Stałe i Etykiety"
+	},
+	"settings": {
+		"languages": "Języki",
+		"saves": "Zapisy",
+		"noSaves": "Brak zapisów",
+		"confirmDelete": "Czy jesteś pewien, że chcesz usunąć zapis?",
+		"savesNotFound": "Nie znaleziono zapisów"
+	},
+	"addDevice": {
+		"header": "Dodaj Urządzenie",
+		"description": "Dodaj nowe urządzenie do środowiska",
+		"deviceHash": "Hash urządzenia",
+		"deviceName": "Nazwa urządzenia",
+		"deviceId": "Identyfikator urządzenia",
+		"deviceHashHelp": "Podaj lub wybierz PrefabHash lub PrefabName urządzenia.",
+		"deviceIdHelp": "Podaj identyfikator urządzenia lub zostaw puste.",
+		"devicePin": "Pin IC",
+		"deviceNameHelp": "Podaj nazwę urządzenia, tak jak byś to robił z @:labeller",
+		"devicePortHelp": "Wybierz pin do którego będzie przypisane urządzenie lub zostaw puste"
+	},
+	"confirmReset": {
+		"info": {
+			"summary": "Potwierdzone",
+			"detail": "Reset zakończony"
+		},
+		"error": {
+			"summary": "Anulowano",
+			"detail": "Anulowano reset"
+		}
+	},
+	"toastSave": {
+		"success": {
+			"summary": "Zapisano",
+			"detail": "Zapisano do {name}"
+		},
+		"error": {
+			"summary": "Błąd",
+			"detail": "Błąd:  {errMsg}"
+		}
+	},
+	"toastLoad": {
+		"success": {
+			"summary": "Załadowano",
+			"detail": "Załadowano z {store}"
+		},
+		"error": {
+			"summary": "Błąd",
+			"detail": "Błąd:  {errMsg}"
+		}
+	},
+	"add": "Dodaj",
+	"cancel": "Anuluj",
+	"remove": "Usuń",
+	"delete": "Usuń",
+	"code": "Kod idzie tutaj",
+	"errors": "Błędy",
+	"tutorial": {
+		"save": {
+			"title": "Zapisz",
+			"description": "Zapisz kod w pamięci przeglądarki.<br />Dla nowego kodu, użyj następnego przycisku (@:control.saveAs)."
+		},
+		"saveAs": {
+			"title": "@:control.saveAs"
+		},
+		"open": {
+			"title": "@:control.open"
+		},
+		"load": {
+			"title": "@:control.load"
+		},
+		"speedControl": {
+			"title": "Kontrola prędkości",
+			"description": "Dostosuj prędkość symulacji tutaj."
+		},
+		"addDevice": {
+			"title": "@:control.addDevice"
+		},
+		"labeler": {
+			"title": "@:labeller"
+		},
+		"deviceID": {
+			"title": "Identyfikator urządzenia"
+		},
+		"converter": {
+			"title": "Konwerter"
+		},
+		"codeEditor": {
+			"title": "Edytor kodu"
+		},
+		"registersView": {
+			"title": "Podgląd rejestrów"
+		},
+		"constantsView": {
+			"title": "Podgląd stałych"
+		},
+		"errorLog": {
+			"title": "Dziennik błędów"
+		},
+		"slots": {
+			"title": "Sloty"
+		},
+		"remove": {
+			"title": "@:remove"
+		},
+		"delete": {
+			"title": "@:delete"
+		},
+		"step": {
+			"title": "@:control.step"
+		},
+		"goto": {
+			"title": "@:control.toYield"
+		},
+		"share": {
+			"title": "@:control.share"
+		},
+		"simulationEnvironment": {
+			"title": "Środowisko symulacji"
+		},
+		"reset": {
+			"title": "@:control.reset"
+		},
+		"tutorial": {
+			"title": "Samouczek",
+			"description": "Witamy w samouczku Stationeers Code Simulator.<br />Przejdźmy przez sterowanie krok po kroku."
+		},
+		"fileMenu": {
+			"title": "Menu plików",
+			"description": "Zapisz, wyeksportuj, lub załaduj kod IC i powiązane urządzenia z tego menu."
+		},
+		"iCSimulation": {
+			"title": "Symulacja IC"
+		}
+	},
+	"ICON": "flag flag-pl",
+	"browser": "Przeglądarka",
+	"labeller": "Etykieciarka",
+	"url": "Url"
+}
