@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { codeStore } from "../store"
 import { Codemirror } from "vue-codemirror"
-import { hoverOptions, ic10, ic10HoverTooltip, ic10Snippets } from "codemirror-lang-ic10"
+import { hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers } from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
 import { Device, Register } from "ic10/zodTypes"
 import { onBeforeUnmount, onMounted, watch } from "vue"
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { EditorView } from "codemirror"
 
 onMounted(() => {
 	codeStore.code = interpretator.code
@@ -12,14 +14,17 @@ onMounted(() => {
 		codeStore.code = interpretator.code
 	})
 })
-onBeforeUnmount(() => {
-	interpretator.getEnv().off("update")
-})
 
 watch(
 	() => codeStore.code,
 	(newVal) => interpretator.setCode(newVal),
 )
+
+
+onBeforeUnmount(() => {
+	interpretator.getEnv().off("update")
+})
+
 
 watch(
 	() => interpretator.getEnv().line,
@@ -95,7 +100,7 @@ const opt: hoverOptions = {
 	},
 }
 
-const extensions = [ic10(), ic10Snippets(), ic10HoverTooltip(opt)]
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt)]
 </script>
 
 <template>

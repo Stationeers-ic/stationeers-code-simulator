@@ -121,9 +121,6 @@ import router from "./router.ts"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import VueCodemirror from "vue-codemirror"
-import { monokai } from "@uiw/codemirror-theme-monokai"
-import { zeroLineNumbers } from "codemirror-lang-ic10"
-import { EditorView } from "codemirror"
 import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
 import { setLocale, setupI18n } from "./i18n.ts"
@@ -162,7 +159,6 @@ app.use(VueCodemirror, {
 	disabled: false,
 	indentWithTab: true,
 	tabSize: 2,
-	extensions: [monokai, EditorView.lineWrapping, zeroLineNumbers],
 	// ...
 })
 app.directive("tooltip", Tooltip)

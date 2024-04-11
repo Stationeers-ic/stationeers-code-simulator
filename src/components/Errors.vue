@@ -7,6 +7,7 @@ import { useToast } from "primevue/usetoast"
 import { Err } from "ic10"
 
 import { EditorView } from "codemirror"
+import { zeroLineNumbers } from "codemirror-lang-ic10"
 
 const test = ref<string>("")
 const toast = useToast()
@@ -34,7 +35,7 @@ onBeforeUnmount(() => {
 	ic10.getEnv().off("error")
 })
 
-const extensions = [monokai, EditorView.lineWrapping]
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers]
 </script>
 
 <template>
