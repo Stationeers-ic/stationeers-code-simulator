@@ -6,7 +6,7 @@ import "primevue/resources/primevue.min.css" /* Deprecated */
 import "primeicons/primeicons.css"
 import "./style.scss"
 
-import {createApp} from "vue"
+import { createApp } from "vue"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
 import AutoComplete from "primevue/autocomplete"
@@ -123,8 +123,8 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import VueCodemirror from "vue-codemirror"
 import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
-import {setLocale, setupI18n} from "./i18n.ts"
-import type {I18n} from "vue-i18n"
+import { setLocale, setupI18n } from "./i18n.ts"
+import type { I18n } from "vue-i18n"
 
 window.userLang = localStorage.getItem("language") ?? navigator.language
 const app = createApp(App)

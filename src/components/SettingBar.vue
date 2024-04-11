@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref, watch} from "vue"
-import {getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot} from "../core/Save.ts"
-import {off, on} from "../core/Events.ts"
-import {useConfirm} from "primevue/useconfirm"
-import {useI18n} from "vue-i18n"
-import {setLocale} from "../i18n"
+import { onBeforeUnmount, onMounted, ref, watch } from "vue"
+import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
+import { off, on } from "../core/Events.ts"
+import { useConfirm } from "primevue/useconfirm"
+import { useI18n } from "vue-i18n"
+import { setLocale } from "../i18n"
 
 const { t } = useI18n()
 const i18n = useI18n()

@@ -1,8 +1,8 @@
 import ic10 from "./ic10.ts"
 import pako from "pako"
-import {z} from "zod"
-import {getActiveSaveSlot, getDefaultScriptName} from "./Save.ts"
-import {codeStore} from "../store"
+import { z } from "zod"
+import { getActiveSaveSlot, getDefaultScriptName } from "./Save.ts"
+import { codeStore } from "../store"
 
 const dumpShema = z
 	.object({

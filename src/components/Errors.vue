@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import {Codemirror} from "vue-codemirror"
-import {monokai} from "@uiw/codemirror-theme-monokai"
-import {onBeforeUnmount, onMounted, ref} from "vue"
+import { Codemirror } from "vue-codemirror"
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 import ic10 from "../core/ic10.ts"
-import {useToast} from "primevue/usetoast"
-import {Err} from "ic10"
+import { useToast } from "primevue/usetoast"
+import { Err } from "ic10"
 
-import {EditorView} from "codemirror"
-import {zeroLineNumbers} from "codemirror-lang-ic10"
+import { EditorView } from "codemirror"
+import { zeroLineNumbers } from "codemirror-lang-ic10"
 
 const test = ref<string>("")
 const toast = useToast()

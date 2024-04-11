@@ -1,8 +1,8 @@
-import {createRouter, createWebHistory, type RouteRecordRaw} from "vue-router"
+import { createRouter, createWebHistory, type RouteRecordRaw } from "vue-router"
 import Ic10 from "./pages/Ic10.vue"
 import IcX from "./pages/IcX.vue"
-import {loadLocaleMessages, setI18nLanguage, supportedLanguage} from "./i18n"
-import type {I18n} from "vue-i18n"
+import { loadLocaleMessages, setI18nLanguage, supportedLanguage } from "./i18n"
+import type { I18n } from "vue-i18n"
 
 type MyRouteRecordRaw = {
 	icon?: string

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
-import {onBeforeUnmount, onMounted, ref} from "vue"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps(["name", "readonly"])
 const model = defineModel<number>()

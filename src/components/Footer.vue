@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
+import { onMounted, ref } from "vue"
 
 const buildTime = ref("")
 const ic10 = __package__.dependencies?.ic10?.version

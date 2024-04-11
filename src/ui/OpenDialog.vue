@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {ref} from "vue"
-import {useToast} from "primevue/usetoast"
+import { ref } from "vue"
+import { useToast } from "primevue/usetoast"
 import IcUpload from "./IcUpload.vue"
-import {load} from "../core/Share.ts"
-import {loadFromFile, saveToBrowser} from "../core/Save.ts"
+import { load } from "../core/Share.ts"
+import { loadFromFile, saveToBrowser } from "../core/Save.ts"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")

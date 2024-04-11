@@ -1,6 +1,6 @@
-import {downloadFile, dump, load} from "./Share.ts"
-import {z} from "zod"
-import {emit} from "./Events.ts"
+import { downloadFile, dump, load } from "./Share.ts"
+import { z } from "zod"
+import { emit } from "./Events.ts"
 import ic10 from "./ic10.ts"
 
 export async function startupLoad(): Promise<string | false> {
