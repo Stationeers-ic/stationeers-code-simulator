@@ -6,6 +6,7 @@ on:
   push:
     branches: ['main']
     paths:
+      - '**'
       - '!LICENSE'
       - '!README.md'
       - '!.gitattributes'
@@ -14,7 +15,7 @@ on:
       - '!.editorconfig'
       - '!.vscode'
       - '!.idea'
-      - '!*.log'
+      - '!**.log'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
