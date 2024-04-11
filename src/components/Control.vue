@@ -15,7 +15,7 @@ import {useToast} from "primevue/usetoast"
 import {start} from "../core/Tour.ts"
 import {useI18n} from "vue-i18n"
 
-const {t} = useI18n()
+const { t } = useI18n()
 const i18n = useI18n()
 const checked = ref(false)
 const hashText = ref("")
@@ -64,11 +64,11 @@ const step = async () => {
 }
 const copy = () => {
 	clipboard.write(getShareLink())
-	toast.add({severity: "success", summary: t('toast.share.summary'), detail: t('toast.share.detail'), life: 3000})
+	toast.add({ severity: "success", summary: t("toast.share.summary"), detail: t("toast.share.detail"), life: 3000 })
 }
 const goto = () => {
-	if (!ic10.getCode().includes('yield')) {
-		toast.add({severity: "error", summary: t('toast.error.summary'), detail: t('toast.error.detail', {errMsg: t("error.yieldNotFound")}), life: 3000})
+	if (!ic10.getCode().includes("yield")) {
+		toast.add({ severity: "error", summary: t("toast.error.summary"), detail: t("toast.error.detail", { errMsg: t("error.yieldNotFound") }), life: 3000 })
 		return
 	}
 	const timeOut = setTimeout(() => {
@@ -88,9 +88,9 @@ const toggle = (event: any) => {
 	op.value.toggle(event)
 }
 const speerOptions = ref([
-	{key: "slow", name: t("control.slow")},
-	{key: "normal", name: t("control.normal")},
-	{key: "fast", name: t("control.fast")},
+	{ key: "slow", name: t("control.slow") },
+	{ key: "normal", name: t("control.normal") },
+	{ key: "fast", name: t("control.fast") },
 ])
 const FileMenu = ref<MenuItem[]>([
 	{
@@ -145,9 +145,9 @@ const FileMenu = ref<MenuItem[]>([
 ])
 watch(i18n.locale, () => {
 	speerOptions.value = [
-		{key: "slow", name: t("control.slow")},
-		{key: "normal", name: t("control.normal")},
-		{key: "fast", name: t("control.fast")},
+		{ key: "slow", name: t("control.slow") },
+		{ key: "normal", name: t("control.normal") },
+		{ key: "fast", name: t("control.fast") },
 	]
 	FileMenu.value = [
 		{
@@ -210,14 +210,14 @@ function startTour() {
 <template>
 	<header :class="[$style.control, 'control']" id="tour-headers">
 		<InputGroup :class="$style.panel">
-			<Button id="tour-File" icon="pi pi-save" :label="$t('control.file')" @click="toggle" severity="secondary"/>
+			<Button id="tour-File" icon="pi pi-save" :label="$t('control.file')" @click="toggle" severity="secondary" />
 			<OverlayPanel ref="op">
 				<TieredMenu :model="FileMenu" id="FileMenu">
 					<template #item="{ item, props, hasSubmenu }">
 						<a v-ripple class="flex align-items-center" v-bind="props.action" :title="item?.title ?? ''">
-							<span :class="item.icon"/>
+							<span :class="item.icon" />
 							<span class="ml-2">{{ item.label }}</span>
-							<Badge v-if="item.badge" class="ml-auto" :value="item.badge"/>
+							<Badge v-if="item.badge" class="ml-auto" :value="item.badge" />
 							<span v-if="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
 							<i v-if="hasSubmenu" class="pi pi-angle-right ml-auto"></i>
 						</a>
@@ -233,17 +233,17 @@ function startTour() {
 				onIcon="pi pi-stop"
 				offIcon="pi pi-play"
 			/>
-			<Dropdown id="speedControl" v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name"/>
-			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')"/>
-			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')"/>
-			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')"/>
-			<AddDevice id="AddDevice"/>
-			<Button id="tour-help" icon="pi pi-question-circle" severity="secondary" @click="startTour"/>
+			<Dropdown id="speedControl" v-model="settingStore.delay" :options="speerOptions" option-value="key" option-label="name" />
+			<Button id="tour-step" icon="pi pi-step-forward" @click="step" :label="$t('control.step')" />
+			<Button id="tour-goto" icon="pi pi-step-forward" @click="goto" severity="help" :label="$t('control.toYield')" />
+			<Button id="tour-reset" icon="pi pi-refresh" @click="reset" severity="warning" :label="$t('control.reset')" />
+			<AddDevice id="AddDevice" />
+			<Button id="tour-help" icon="pi pi-question-circle" severity="secondary" @click="startTour" />
 		</InputGroup>
 		<div id="hashConverter">
 			<InputGroup style="width: auto; height: 40px">
-				<Button icon="pi pi-hashtag" @click="convert" :label="$t('control.convert')"/>
-				<InputText :placeholder="$t('control.stringToHash')" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px"/>
+				<Button icon="pi pi-hashtag" @click="convert" :label="$t('control.convert')" />
+				<InputText :placeholder="$t('control.stringToHash')" @focus="($event.target as any).select()" id="hashText" v-model="hashText" style="max-width: 200px" />
 			</InputGroup>
 		</div>
 	</header>

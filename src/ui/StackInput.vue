@@ -5,15 +5,13 @@ const model = defineModel<number>()
 
 <template>
 	<InputGroup :class="$style.StackInput">
-		<InputGroupAddon :class="{active:props.active === true}">{{ props.name }}</InputGroupAddon>
+		<InputGroupAddon :class="{ active: props.active === true }">{{ props.name }}</InputGroupAddon>
 		<InputNumber :useGrouping="false" :class="{ [$style.defaultValue]: model == 0 }" v-model="model" width="100%" placeholder="Value" />
 	</InputGroup>
 </template>
 
 <style module lang="scss">
 .StackInput {
-
-
 	.defaultValue {
 		input {
 			color: var(--text-color-secondary) !important;

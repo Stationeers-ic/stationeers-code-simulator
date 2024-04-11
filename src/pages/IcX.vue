@@ -18,7 +18,6 @@ function update() {
 watch(() => codeStore.icx, update)
 
 const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers]
-
 </script>
 
 <template>

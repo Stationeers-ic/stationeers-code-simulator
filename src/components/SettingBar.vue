@@ -92,7 +92,7 @@ const remove = (event: any, name: string) => {
 								style="width: 18px"
 							/>
 							<div>{{ slotProps.option.name }}</div>
-							<span class="lang" v-if=" slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
+							<span class="lang" v-if="slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
 						</div>
 					</template>
 				</Dropdown>
@@ -123,7 +123,7 @@ const remove = (event: any, name: string) => {
 </template>
 
 <style scoped lang="scss">
-.lang{
+.lang {
 	right: 0;
 	position: absolute;
 	color: var(--text-color-secondary) !important;

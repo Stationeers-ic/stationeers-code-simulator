@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {codeStore} from "../store"
 import {Codemirror} from "vue-codemirror"
-import {hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers,createRuler, lineClassController} from "codemirror-lang-ic10"
+import {createRuler, hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, lineClassController, zeroLineNumbers} from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
 import {Device, Register} from "ic10/zodTypes"
 import {onBeforeUnmount, onMounted, watch} from "vue"
@@ -22,16 +22,14 @@ watch(
 	(newVal) => interpretator.setCode(newVal),
 )
 
-
 onBeforeUnmount(() => {
 	interpretator.getEnv().off("update")
 })
 
-
 watch(
 	() => interpretator.getEnv().line,
 	(newVal) => {
-		line.highlightLine(newVal+1)
+		line.highlightLine(newVal + 1)
 	},
 )
 
@@ -91,8 +89,8 @@ const opt: hoverOptions = {
 		return text
 	},
 }
-const [ruler ]= createRuler(52, 'ruler')
-const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt),ruler,line.extension]
+const [ruler] = createRuler(52, "ruler")
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt), ruler, line.extension]
 </script>
 
 <template>
