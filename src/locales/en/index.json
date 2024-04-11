@@ -66,20 +66,12 @@
 		"success": {
 			"summary": "Saved",
 			"detail": "Saved to {name}"
-		},
-		"error": {
-			"summary": "Error",
-			"detail": "Error:  {errMsg}"
 		}
 	},
 	"toastLoad": {
 		"success": {
 			"summary": "Loaded",
 			"detail": "Loaded from {store}"
-		},
-		"error": {
-			"summary": "Error",
-			"detail": "Error:  {errMsg}"
 		}
 	},
 	"add": "Add",
@@ -217,5 +209,18 @@
 			"description": "Clear all registers and reset the execution to the first line, simulating removing and placing back the IC chip."
 		}
 	},
-	"labeller": "Labeller"
+	"labeller": "Labeller",
+	"toast": {
+		"error": {
+			"summary": "Error",
+			"detail": "Error: {errMsg}"
+		},
+		"share": {
+			"summary": "Share",
+			"detail": "Copied to clipboard"
+		}
+	},
+	"error": {
+		"yieldNotFound": "Yield instruction not found"
+	}
 }

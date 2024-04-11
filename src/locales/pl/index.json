@@ -64,20 +64,12 @@
 		"success": {
 			"summary": "Zapisano",
 			"detail": "Zapisano do {name}"
-		},
-		"error": {
-			"summary": "Błąd",
-			"detail": "Błąd:  {errMsg}"
 		}
 	},
 	"toastLoad": {
 		"success": {
 			"summary": "Załadowano",
 			"detail": "Załadowano z {store}"
-		},
-		"error": {
-			"summary": "Błąd",
-			"detail": "Błąd:  {errMsg}"
 		}
 	},
 	"add": "Dodaj",

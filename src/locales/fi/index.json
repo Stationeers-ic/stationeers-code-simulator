@@ -185,20 +185,12 @@
 		"success": {
 			"summary": "Tallennettu",
 			"detail": "Tallennettu \"{name}\" nimellä"
-		},
-		"error": {
-			"summary": "Virhe",
-			"detail": "Virhe: {errMsg}"
 		}
 	},
 	"toastLoad": {
 		"success": {
 			"summary": "Ladattu",
 			"detail": "Ladattu kohteesta {store}"
-		},
-		"error": {
-			"summary": "Virhe",
-			"detail": "Virhe: {errMsg}"
 		}
 	},
 	"add": "Lisää",

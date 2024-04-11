@@ -66,26 +66,12 @@
 		"success": {
 			"summary": "Сохранено",
 			"detail": "Сохранено в '{name}'"
-		},
-		"error": {
-			"summary": "Ошибка",
-			"detail": "Ошибка:  {errMsg}"
 		}
 	},
 	"toastLoad": {
 		"success": {
 			"summary": "Загружено",
 			"detail": "Загружено из '{store}'"
-		},
-		"error": {
-			"summary": "Ошибка",
-			"detail": "Ошибка:  {errMsg}"
-		}
-	},
-	"toast": {
-		"error": {
-			"summary": "Ошибка",
-			"detail": "Ошибка:  {errMsg}"
 		}
 	},
 	"add": "Добавить",
