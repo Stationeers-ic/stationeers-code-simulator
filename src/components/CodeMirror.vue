@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { codeStore } from "../store"
-import { Codemirror } from "vue-codemirror"
-import { hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers } from "codemirror-lang-ic10"
+import {codeStore} from "../store"
+import {Codemirror} from "vue-codemirror"
+import {hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, zeroLineNumbers,createRuler, lineClassController} from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
-import { Device, Register } from "ic10/zodTypes"
-import { onBeforeUnmount, onMounted, watch } from "vue"
-import { monokai } from "@uiw/codemirror-theme-monokai"
-import { EditorView } from "codemirror"
+import {Device, Register} from "ic10/zodTypes"
+import {onBeforeUnmount, onMounted, watch} from "vue"
+import {monokai} from "@uiw/codemirror-theme-monokai"
+import {EditorView} from "codemirror"
+
+const line = new lineClassController("nextRunLine")
 
 onMounted(() => {
 	codeStore.code = interpretator.code
@@ -29,17 +31,7 @@ onBeforeUnmount(() => {
 watch(
 	() => interpretator.getEnv().line,
 	(newVal) => {
-		window.document
-			.querySelector<HTMLDivElement>('div[data-language="ic10"]')
-			?.querySelectorAll<HTMLDivElement>("div.cm-line")
-			.forEach((e, i) => {
-				if (i === newVal) {
-					e.style.backgroundColor = "rgb(0 0 0 / 40%)"
-					// e.scrollIntoView({block: "end", inline: "nearest"});
-				} else {
-					e.style.backgroundColor = "transparent"
-				}
-			})
+		line.highlightLine(newVal+1)
 	},
 )
 
@@ -99,8 +91,8 @@ const opt: hoverOptions = {
 		return text
 	},
 }
-
-const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt)]
+const [ruler ]= createRuler(52, 'ruler')
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt),ruler,line.extension]
 </script>
 
 <template>
@@ -112,7 +104,6 @@ const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), i
 		:indent-with-tab="true"
 		:placeholder="$t('code') + ' ...'"
 		:tab-size="2"
-		:lineNumberFormatter="(line: number) => line - 1"
 		:extensions="extensions"
 	/>
 </template>

@@ -82,6 +82,12 @@
 			"detail": "Ошибка:  {errMsg}"
 		}
 	},
+	"toast": {
+		"error": {
+			"summary": "Ошибка",
+			"detail": "Ошибка:  {errMsg}"
+		}
+	},
 	"add": "Добавить",
 	"cancel": "Отмена",
 	"delete": "Удалить",

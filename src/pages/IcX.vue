@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { Codemirror } from "vue-codemirror"
-import { onMounted, watch } from "vue"
-import { icX } from "icx-compiler/index"
+import {Codemirror} from "vue-codemirror"
+import {onMounted, watch} from "vue"
+import {icX} from "icx-compiler/index"
 import CodeMirror from "../components/CodeMirror.vue"
-import { codeStore } from "../store"
-import { monokai } from "@uiw/codemirror-theme-monokai"
-import { EditorView } from "codemirror"
-import { zeroLineNumbers } from "codemirror-lang-ic10"
+import {codeStore} from "../store"
+import {monokai} from "@uiw/codemirror-theme-monokai"
+import {EditorView} from "codemirror"
+import {zeroLineNumbers} from "codemirror-lang-ic10"
 
 onMounted(update)
 

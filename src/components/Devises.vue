@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
-import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
 import DeviceCard from "../ui/devices/DeviceCard.vue"
 
 const devices = ref<Map<string, any>>(ic10.getEnv().getDevices())

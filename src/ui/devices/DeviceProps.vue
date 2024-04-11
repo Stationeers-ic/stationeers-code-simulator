@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getCurrentInstance, onMounted } from "vue"
+import {getCurrentInstance, onMounted} from "vue"
 import ic10 from "../../core/ic10.ts"
 
 const props = defineProps(["id", "device"]) as Readonly<{ id: string; device: Record<string, number | object> }>

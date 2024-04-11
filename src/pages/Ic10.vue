@@ -5,17 +5,17 @@ import Control from "../components/Control.vue"
 import Register from "../components/Register.vue"
 import Stack from "../components/Stack.vue"
 import Devises from "../components/Devises.vue"
-import { onBeforeUnmount, onMounted, ref } from "vue"
+import {onBeforeUnmount, onMounted, ref} from "vue"
 import isHotkey from "is-hotkey"
-import { useToast } from "primevue/usetoast"
+import {useToast} from "primevue/usetoast"
 
 import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
-import { saveToBrowser } from "../core/Save.ts"
+import {saveToBrowser} from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
-import { off, on } from "../core/Events.ts"
+import {off, on} from "../core/Events.ts"
 import OpenDialog from "../ui/OpenDialog.vue"
-import { useI18n } from "vue-i18n"
+import {useI18n} from "vue-i18n"
 
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
@@ -23,7 +23,7 @@ const isOpenHotkey = isHotkey("mod+o")
 const saveDialogOpen = ref(false)
 const openDialogOpen = ref(false)
 const toast = useToast()
-const { t } = useI18n()
+const {t} = useI18n()
 const showSaveDialog = () => (saveDialogOpen.value = true)
 const showOpenDialog = () => (openDialogOpen.value = true)
 const save = async () => {
@@ -31,9 +31,9 @@ const save = async () => {
 	console.log("save")
 	try {
 		const name = saveToBrowser()
-		toast.add({ severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", { name }), life: 3000 })
+		toast.add({severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", {name}), life: 3000})
 	} catch (e: any) {
-		toast.add({ severity: "error", summary: "Error", detail: e?.message, life: 3000 })
+		toast.add({severity: "error", summary: t("toast.error.summary"), detail: t("toast.error.detail", {errMsg: e?.message}), life: 3000})
 	}
 }
 const HotKeyHandler = async (e: any) => {
@@ -70,9 +70,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<SettingBar />
-	<SaveDialog v-model="saveDialogOpen" />
-	<OpenDialog v-model="openDialogOpen" />
+	<SettingBar/>
+	<SaveDialog v-model="saveDialogOpen"/>
+	<OpenDialog v-model="openDialogOpen"/>
 	<div class="ic10-container">
 		<div class="code" id="tour-code-ic10">
 			<Splitter style="height: 100%">
