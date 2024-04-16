@@ -74,7 +74,7 @@ function add() {
 							</div>
 						</template>
 					</Dropdown>
-					<InputNumber class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
+					<InputNumber :minFractionDigits="0" :maxFractionDigits="20"  class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
 					<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle" />
 				</InputGroup>
 			</div>

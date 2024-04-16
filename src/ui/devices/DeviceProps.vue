@@ -25,13 +25,13 @@ const blackList = new Set(["PrefabHash", "Slots", "Connections"])
 	</InputGroup>
 	<InputGroup class="prop">
 		<InputGroupAddon class="key">PrefabHash</InputGroupAddon>
-		<InputNumber class="val" :disabled="true" :useGrouping="false" v-model="props.device.PrefabHash as number" placeholder="Value" />
+		<InputNumber :minFractionDigits="0" :maxFractionDigits="20"  class="val" :disabled="true" :useGrouping="false" v-model="props.device.PrefabHash as number" placeholder="Value" />
 		<Button class="btn" :disabled="true" size="small" severity="secondary" />
 	</InputGroup>
 	<template v-for="(value, id) in props.device">
 		<InputGroup v-if="!blackList.has(id) && typeof value === 'number'" class="prop">
 			<InputGroupAddon class="key">{{ id }}</InputGroupAddon>
-			<InputNumber class="val" :useGrouping="false" v-model="props.device[id] as number" placeholder="Value" />
+			<InputNumber :minFractionDigits="0" :maxFractionDigits="20"  class="val" :useGrouping="false" v-model="props.device[id] as number" placeholder="Value" />
 			<Button class="btn" @click="() => remove(id)" size="small" severity="danger" icon="pi pi-minus-circle" />
 		</InputGroup>
 	</template>

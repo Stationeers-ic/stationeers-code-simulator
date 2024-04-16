@@ -16,13 +16,15 @@ import StackInput from "../ui/StackInput.vue"
 
 <style module lang="scss">
 .stackContent {
+	$lines: 2;
+
 	justify-content: flex-start;
 	width: calc(100% - 5px);
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	max-height: calc(32px * 2 + 30px);
+	max-height: calc(32px * $lines + 30px);
 	overflow-x: auto;
 	overflow-y: hidden;
 
