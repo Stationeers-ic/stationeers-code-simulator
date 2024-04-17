@@ -65,7 +65,7 @@ function add() {
 			<Divider />
 			<div class="device-new-prop">
 				<InputGroup class="prop">
-					<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics" option-label="name" option-value="name">
+					<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics.filter((e)=> props.device[e.name] === undefined)" option-label="name" option-value="name">
 						<template #option="slotProps">
 							<div class="flex align-items-center gap-1">
 								<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)" class="pi pi-file-edit"></i>

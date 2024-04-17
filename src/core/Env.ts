@@ -1,7 +1,7 @@
-import { DevEnv, Err, hash as Hash, Line } from "ic10"
-import { reactive } from "vue"
-import { settingStore } from "../store"
-import { z } from "zod"
+import {DevEnv, Err, hash as Hash, Line} from "ic10"
+import {reactive} from "vue"
+import {settingStore} from "../store"
+import {z} from "zod"
 
 class HCF extends Err {
 	constructor(
@@ -76,7 +76,8 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		return out
 	}
 
-	async beforeLineRun(_line: Line): Promise<void> {}
+	async beforeLineRun(_line: Line): Promise<void> {
+	}
 
 	async afterLineRun(_line?: Line): Promise<void> {
 		this.emit("update")
@@ -129,6 +130,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 
 	appendDevice(hash: number, name?: number, id?: number): string {
 		const out = super.appendDevice(hash, name, id)
+		this.setDeviceProp(out, "ReferenceId", Number(out))
 		this.emit("update")
 		return out
 	}
