@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ic10 from "../../core/ic10.ts"
-import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
-import data, { Device, Devices } from "../../core/Data.ts"
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
+import data, {Device, Devices} from "../../core/Data.ts"
 import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"
@@ -40,13 +40,15 @@ function add() {
 		d[newKey.value] = newVal.value
 	}
 }
+
+console.log('56658354350',deviceData)
 </script>
 
 <template>
 	<Card :class="[$style.card, 'device-card']" style="">
 		<template #header>
 			<div :class="$style.image">
-				<Image loading="lazy" alt="user header" :src="image" />
+				<Image loading="lazy" alt="user header" :src="image"/>
 			</div>
 		</template>
 		<template #title>
@@ -57,35 +59,56 @@ function add() {
 		</template>
 		<template #content>
 			<div class="device-ports">
-				<DevicePorts :id="props.id" />
+				<DevicePorts :id="props.id"/>
 			</div>
-			<div class="device-props">
-				<DeviceProps :id="props.id" :device="props.device" />
-			</div>
-			<Divider />
-			<div class="device-new-prop">
-				<InputGroup class="prop">
-					<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics.filter((e)=> props.device[e.name] === undefined)" option-label="name" option-value="name">
-						<template #option="slotProps">
-							<div class="flex align-items-center gap-1">
-								<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)" class="pi pi-file-edit"></i>
-								<i v-else class="pi pi-file" style="color: #fb923c"></i>
-								<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
-							</div>
-						</template>
-					</Dropdown>
-					<InputNumber :minFractionDigits="0" :maxFractionDigits="20"  class="val" :useGrouping="false" v-model="newVal" placeholder="Value" />
-					<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle" />
-				</InputGroup>
-			</div>
-			<Divider />
-			<div class="device-slots">
-				<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData" />
-			</div>
+			<TabView  :scrollable="true">
+				<TabPanel :header="$t('props')">
+					<div class="device-props">
+						<DeviceProps :id="props.id" :device="props.device"/>
+					</div>
+					<Divider/>
+					<div class="device-new-prop">
+						<InputGroup class="prop">
+							<Dropdown editable filter class="key" v-model="newKey" placeholder="Key" :options="deviceData?.logics.filter((e)=> props.device[e.name] === undefined)"
+									  option-label="name" option-value="name">
+								<template #option="slotProps">
+									<div class="flex align-items-center gap-1">
+										<i v-if="slotProps.option.permissions.includes('Write')" style="color: var(--primary-color)" class="pi pi-file-edit"></i>
+										<i v-else class="pi pi-file" style="color: #fb923c"></i>
+										<div :title="slotProps.option.name">{{ slotProps.option.name }}</div>
+									</div>
+								</template>
+							</Dropdown>
+							<InputNumber :minFractionDigits="0" :maxFractionDigits="20" class="val" :useGrouping="false" v-model="newVal" placeholder="Value"/>
+							<Button class="btn" @click="add" size="small" icon="pi pi-plus-circle"/>
+						</InputGroup>
+					</div>
+				</TabPanel>
+				<TabPanel :header="$t('slots')" v-if="deviceData?.slots !== undefined">
+					<div class="device-slots">
+						<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
+					</div>
+				</TabPanel>
+				<TabPanel :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
+					<div>
+
+					</div>
+				</TabPanel>
+				<TabPanel :header="$t('networks')" v-if="deviceData?.connections?.length">
+					<div>
+
+					</div>
+				</TabPanel>
+				<TabPanel :header="$t('tags')" v-if="deviceData?.tags?.length">
+					<div>
+						<Chip v-for="tag in deviceData?.tags" :key="tag" :label="tag" class="m-1"/>
+					</div>
+				</TabPanel>
+			</TabView>
 		</template>
 		<template #footer>
 			<div class="flex gap-3 mt-1">
-				<Button :label="$t('remove')" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
+				<Button :label="$t('remove')" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove"/>
 				<!--				<Button label="Save" class="w-full"/>-->
 			</div>
 		</template>
@@ -95,10 +118,8 @@ function add() {
 <style module scoped lang="scss">
 .card {
 	$count: 3;
-	width: auto;
 	overflow: hidden;
-	max-width: calc(100% / $count - (2px * ($count - 1)));
-	min-width: 250px;
+	width: calc(100% / $count - (2px * ($count - 1)));
 }
 
 .break {
