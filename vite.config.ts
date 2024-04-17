@@ -25,7 +25,7 @@ export default defineConfig({
 						if (id.includes("ic10")) {
 							return "ic10"
 						}
-						const pkgName = (id.match(/node_modules\/([^/]+)/) ?? [])[1]
+						const pkgName = (d.match(/node_modules\/([^/]+)/) ?? [])[1]
 						if (pkgName) return `vendor-${pkgName}`
 
 						return "vendor"

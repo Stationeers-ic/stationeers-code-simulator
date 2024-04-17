@@ -209,5 +209,18 @@
 			"title": "@:control.reset"
 		}
 	},
-	"labeller": "Маркировщик"
+	"labeller": "Маркировщик",
+	"toast": {
+		"share": {
+			"summary": "Поделиться",
+			"detail": "Скопировано в буфер обмена"
+		},
+		"error": {
+			"summary": "Ошибка",
+			"detail": "Ошибка: {errMsg}"
+		}
+	},
+	"error": {
+		"yieldNotFound": "Yield инструкция не найдена"
+	}
 }
