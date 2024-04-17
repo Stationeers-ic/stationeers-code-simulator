@@ -51,8 +51,24 @@ export const Items = z.array(Item)
 export type Item = z.infer<typeof Item>
 export type Items = z.infer<typeof Items>
 
+export const Reagent = z
+	.object({
+		name: z.string(),
+		hash: z.number(),
+		image: z.string(),
+		items: z.array(z.object({
+			name: z.string(),
+			image: z.string(),
+			count: z.number(),
+		})),
+	})
+	.passthrough()
+export const Reagents = z.array(Item)
+export type Reagent = z.infer<typeof Reagent>
+export type Reagents = z.infer<typeof Reagents>
 export class Data {
 	private static instance: Data
+	private static reagents?: any
 	private static devices?: any
 	private static images?: any
 	private static items?: any
@@ -89,6 +105,13 @@ export class Data {
 			Data.items = (await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/items.en.json")).json()).data
 		}
 		return Items.parse(Data.items)
+	}
+
+	async getReagents(): Promise<Reagents> {
+		if (Data.reagents === undefined) {
+			Data.reagents = (await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/reagents.en.json")).json()).data
+		}
+		return Reagents.parse(Data.reagents)
 	}
 }
 

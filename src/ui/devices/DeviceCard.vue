@@ -45,7 +45,7 @@ console.log('56658354350',deviceData)
 </script>
 
 <template>
-	<Card :class="[$style.card, 'device-card']" style="">
+	<Card :class="[$style.card, 'device-card']">
 		<template #header>
 			<div :class="$style.image">
 				<Image loading="lazy" alt="user header" :src="image"/>
@@ -90,7 +90,7 @@ console.log('56658354350',deviceData)
 					</div>
 				</TabPanel>
 				<TabPanel :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
-					<div>
+					<div class="device-reagents">
 
 					</div>
 				</TabPanel>
