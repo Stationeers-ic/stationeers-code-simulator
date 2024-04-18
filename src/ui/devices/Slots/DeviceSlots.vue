@@ -22,5 +22,9 @@ const props = defineProps(["id", "device", "deviceData"]) as Readonly<{
 	display: flex;
 	gap: 10px;
 	flex-wrap: wrap;
+	max-height: 300px;
+	padding-right: 5px;
+	padding-left: 5px;
+	overflow-y: auto;
 }
 </style>

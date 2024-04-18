@@ -13,7 +13,7 @@ const Quantity = ref(0)
 const item = ref<Item | null>(null)
 const deviceName = ref("")
 onMounted(async () => {
-	image.value = (await data.getimages())?.["SlotType." + props.data.SlotType]
+	image.value = (await data.getImages())?.["SlotType." + props.data.SlotType]
 	const slotIndex = props.data.SlotIndex.toString()
 	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`) // восстановление предмета
 	item.value = (await data.getItems()).find((e) => e.PrefabHash === itemHash) ?? null

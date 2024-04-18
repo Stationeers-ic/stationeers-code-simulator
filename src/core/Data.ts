@@ -63,7 +63,7 @@ export const Reagent = z
 		})),
 	})
 	.passthrough()
-export const Reagents = z.array(Item)
+export const Reagents = z.array(Reagent)
 export type Reagent = z.infer<typeof Reagent>
 export type Reagents = z.infer<typeof Reagents>
 export class Data {
@@ -91,7 +91,7 @@ export class Data {
 		return Devices.parse(Data.devices)
 	}
 
-	async getimages(): Promise<Images> {
+	async getImages(): Promise<Images> {
 		if (Data.images === undefined) {
 			const response = await (await fetch("https://gist.githubusercontent.com/Traineratwot/79ec885420d814eea07c4a8496e00159/raw/devices.en.json")).json()
 			Data.devices = response.data

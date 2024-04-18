@@ -5,6 +5,7 @@ import data, {Device, Devices} from "../../core/Data.ts"
 import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"
+import DeviceReagents from "./DeviceReagents.vue";
 
 const props = defineProps(["id", "device"])
 const image = ref("")
@@ -41,7 +42,6 @@ function add() {
 	}
 }
 
-console.log('56658354350', deviceData)
 </script>
 
 <template>
@@ -99,6 +99,9 @@ console.log('56658354350', deviceData)
 					<template #header>
 						<div class="device-header-reagents"></div>
 					</template>
+					<div class="device-reagents">
+						<DeviceReagents :id="props.id" :device="props.device"/>
+					</div>
 				</TabPanel>
 				<TabPanel class="device-networks" :header="$t('networks')" v-if="deviceData?.connections?.length">
 					<template #header>
