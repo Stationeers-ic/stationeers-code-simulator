@@ -168,7 +168,13 @@ function init() {
 		},
 		{
 			element: "#tour-devises .device-ports",
-			popover: { title: t("tutorial.pinsAndAliases.title"), description: t("tutorial.pinsAndAliases.description"), side: "left", align: "center" },
+			popover: { title: t("tutorial.pinsAndAliases.title"), description: t("tutorial.pinsAndAliases.description"), side: "left", align: "center",
+				onNextClick: async () => {
+					document.querySelector<HTMLButtonElement>(".device-header-props")?.click()
+					await delay(200)
+					driverObj.moveNext()
+				},
+			},
 		},
 		{
 			element: "#tour-devises .device-props",
@@ -186,6 +192,11 @@ function init() {
 				description: t("tutorial.deviceVariables.description"),
 				side: "left",
 				align: "center",
+				onNextClick: async () => {
+					document.querySelector<HTMLButtonElement>(".device-header-slots")?.click()
+					await delay(300)
+					driverObj.moveNext()
+				},
 			},
 		},
 		{
@@ -198,35 +209,35 @@ function init() {
 		},
 	]
 	const steps: DriveStep[] = [
-		{
-			element: "#tour-headers",
-			popover: { title: t("tutorial.tutorial.title"), description: t("tutorial.tutorial.description"), side: "bottom", align: "center" },
-		},
-		...saveSystem,
-		...controls,
-		...AddDevice,
-		{
-			element: "#hashConverter",
-			popover: { title: t("tutorial.converter.title"), description: t("tutorial.converter.description"), side: "bottom", align: "center" },
-		},
-		...body,
+		// {
+		// 	element: "#tour-headers",
+		// 	popover: { title: t("tutorial.tutorial.title"), description: t("tutorial.tutorial.description"), side: "bottom", align: "center" },
+		// },
+		// ...saveSystem,
+		// ...controls,
+		// ...AddDevice,
+		// {
+		// 	element: "#hashConverter",
+		// 	popover: { title: t("tutorial.converter.title"), description: t("tutorial.converter.description"), side: "bottom", align: "center" },
+		// },
+		// ...body,
 		...device,
-		{
-			element: "#ResetAll",
-			popover: {
-				title: t("tutorial.delete.title"),
-				description: t("tutorial.delete.description"),
-				side: "bottom",
-				align: "center",
-			},
-		},
+		// {
+		// 	element: "#ResetAll",
+		// 	popover: {
+		// 		title: t("tutorial.delete.title"),
+		// 		description: t("tutorial.delete.description"),
+		// 		side: "bottom",
+		// 		align: "center",
+		// 	},
+		// },
 	]
 	return (driverObj = driver({
 		showProgress: true,
 		smoothScroll: true,
 		steps,
 		onDestroyStarted: () => {
-			if (!driverObj.hasNextStep() || confirm("Are you sure you want to end the tutorial?")) {
+			if (!driverObj.hasNextStep() || confirm(t("tutorial.end_confirm"))) {
 				driverObj.destroy()
 			}
 		},

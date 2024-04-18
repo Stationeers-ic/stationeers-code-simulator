@@ -41,7 +41,7 @@ function add() {
 	}
 }
 
-console.log('56658354350',deviceData)
+console.log('56658354350', deviceData)
 </script>
 
 <template>
@@ -61,8 +61,11 @@ console.log('56658354350',deviceData)
 			<div class="device-ports">
 				<DevicePorts :id="props.id"/>
 			</div>
-			<TabView  :scrollable="true">
+			<TabView :scrollable="true">
 				<TabPanel :header="$t('props')">
+					<template #header>
+						<div class="device-header-props"></div>
+					</template>
 					<div class="device-props">
 						<DeviceProps :id="props.id" :device="props.device"/>
 					</div>
@@ -85,21 +88,29 @@ console.log('56658354350',deviceData)
 					</div>
 				</TabPanel>
 				<TabPanel :header="$t('slots')" v-if="deviceData?.slots !== undefined">
+					<template #header>
+						<div class="device-header-slots"></div>
+					</template>
 					<div class="device-slots">
 						<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
 					</div>
 				</TabPanel>
-				<TabPanel :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
-					<div class="device-reagents">
-
-					</div>
+				<TabPanel class="device-reagents" :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
+					<template #header>
+						<div class="device-header-reagents"></div>
+					</template>
 				</TabPanel>
-				<TabPanel :header="$t('networks')" v-if="deviceData?.connections?.length">
-					<div>
-
-					</div>
+				<TabPanel class="device-networks" :header="$t('networks')" v-if="deviceData?.connections?.length">
+					<template #header>
+						<div class="device-header-networks"></div>
+					</template>
+					soon
 				</TabPanel>
-				<TabPanel :header="$t('tags')" v-if="deviceData?.tags?.length">
+				<TabPanel class="device-tags" :header="$t('tags')" v-if="deviceData?.tags?.length">
+					<template #header>
+						<div class="device-header-tags"></div>
+					</template>
+					<p class="mt-1" style="color: var(--text-color-secondary)"><small>{{ $t('tags_description') }}</small></p>
 					<div>
 						<Chip v-for="tag in deviceData?.tags" :key="tag" :label="tag" class="m-1"/>
 					</div>

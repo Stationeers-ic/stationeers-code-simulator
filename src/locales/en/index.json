@@ -207,7 +207,8 @@
 		"reset": {
 			"title": "@:control.reset",
 			"description": "Clear all registers and reset the execution to the first line, simulating removing and placing back the IC chip."
-		}
+		},
+		"end_confirm": "Are you sure you want to end the tutorial?"
 	},
 	"labeller": "Labeller",
 	"toast": {
@@ -222,5 +223,11 @@
 	},
 	"error": {
 		"yieldNotFound": "Yield instruction not found"
-	}
+	},
+	"tags": "Tags",
+	"slots": "Slots",
+	"props": "Props",
+	"reagents": "Reagents",
+	"networks": "Networks",
+	"tags_description": "Tags for classifying an object"
 }
