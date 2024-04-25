@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { MenuItem } from "primevue/menuitem"
-import { routes } from "../router.ts"
-import { onMounted } from "vue"
-import { useConfirm } from "primevue/useconfirm"
-import { useToast } from "primevue/usetoast"
-import { useI18n } from "vue-i18n"
+import {MenuItem} from "primevue/menuitem"
+import {routes} from "../router.ts"
+import {onMounted} from "vue"
+import {useConfirm} from "primevue/useconfirm"
+import {useToast} from "primevue/usetoast"
+import {useI18n} from "vue-i18n"
+import LangSwither from "../ui/LangSwither.vue";
 
-const { t } = useI18n()
+const {t} = useI18n()
 const confirm = useConfirm()
 const toast = useToast()
 
@@ -20,9 +21,9 @@ routes.forEach((item) => {
 })
 
 const is1April = () => {
-	// if (import.meta.env.DEV) {
-	// 	return true
-	// }
+	if (import.meta.env.DEV) {
+		// return true
+	}
 	return window.dayjs().date() === 1 && window.dayjs().month() === 3
 }
 const toggle1April = () => {
@@ -51,11 +52,11 @@ const confirmReset = (event: any) => {
 		acceptLabel: t("delete"),
 		accept: () => {
 			window.localStorage.clear()
-			toast.add({ severity: "info", summary: t("confirmReset.info.summary"), detail: t("confirmReset.info.detail"), life: 3000 })
+			toast.add({severity: "info", summary: t("confirmReset.info.summary"), detail: t("confirmReset.info.detail"), life: 3000})
 			window.location.reload()
 		},
 		reject: () => {
-			toast.add({ severity: "error", summary: t("confirmReset.error.summary"), detail: t("confirmReset.error.detail"), life: 3000 })
+			toast.add({severity: "error", summary: t("confirmReset.error.summary"), detail: t("confirmReset.error.detail"), life: 3000})
 		},
 	})
 }
@@ -64,22 +65,35 @@ const confirmReset = (event: any) => {
 <template>
 	<Menubar :model="items">
 		<template #start>
-			<Avatar image="https://avatars.githubusercontent.com/u/134876386?s=400&u=fa5a08bffb00083e047a4576c24baaa4f36bd58f&v=4" />
+			<Avatar image="https://avatars.githubusercontent.com/u/134876386?s=400&u=fa5a08bffb00083e047a4576c24baaa4f36bd58f&v=4"/>
 		</template>
 		<template #item="{ item, props }">
 			<RouterLink v-ripple v-bind="props.action" :active-class="$style.active" v-if="item.url" :to="item.url">
-				<i :class="item.icon" class="mr-1" />
+				<i :class="item.icon" class="mr-1"/>
 				<span>{{ item.label }}</span>
 			</RouterLink>
 		</template>
 		<template #end>
-			<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
-			<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset" />
+			<div :class="$style.end">
+				<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April"/>
+				<LangSwither :short="true"/>
+				<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset"/>
+			</div>
 		</template>
 	</Menubar>
 </template>
 
 <style module lang="scss">
+.end {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: flex-end;
+	flex-wrap: nowrap;
+	flex-direction: row;
+	gap: 5px;
+}
+
 .active {
 	span {
 		font-weight: bold;

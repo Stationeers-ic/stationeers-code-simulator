@@ -5,15 +5,13 @@ import { off, on } from "../core/Events.ts"
 import { useConfirm } from "primevue/useconfirm"
 import { useI18n } from "vue-i18n"
 import { setLocale } from "../i18n"
+import LangSwither from "../ui/LangSwither.vue";
 
 const { t } = useI18n()
-const i18n = useI18n()
 const confirm = useConfirm()
 const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
 const active = ref<string | null>(null)
-const lang = ref<languages | undefined>()
-const languages = ref(__LanguageSelector__)
 
 const update = () => {
 	saves.value = Array.from(getScriptNames()).map((name) => {
@@ -23,9 +21,6 @@ const update = () => {
 }
 const open = () => (visible.value = true)
 onMounted(() => {
-	lang.value = languages.value.find((i) => {
-		return i.code === i18n.locale.value
-	})
 	update()
 	on("saveUpdate", update)
 	on("openSetting", open)
@@ -34,13 +29,7 @@ onBeforeUnmount(() => {
 	off("saveUpdate", update)
 	off("openSetting", open)
 })
-watch(lang, (newVal) => {
-	if (newVal) {
-		setLocale(window.i18n, newVal.code)
-		// i18n.locale.value = newVal.code
-		window.localStorage.setItem("language", newVal.code)
-	}
-})
+
 const setActive = async () => {
 	if (active.value) {
 		await setActiveSaveSlot(active.value)
@@ -70,32 +59,7 @@ const remove = (event: any, name: string) => {
 		<Sidebar v-model:visible="visible" header=" ">
 			<div>
 				<Divider>{{ $t("settings.languages") }}</Divider>
-				<Dropdown style="width: 100% !important" v-model="lang" :options="languages" optionLabel="code" placeholder="Select a language" class="w-full md:w-14rem">
-					<template #value="slotProps">
-						<div v-if="slotProps.value" class="flex align-items-center">
-							<img
-								:alt="slotProps.value.label"
-								src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								:class="`mr-2 ${slotProps.value.flag}`"
-								style="width: 18px"
-							/>
-							<div>{{ slotProps.value.name }}</div>
-						</div>
-						<span v-else>{{ slotProps.placeholder }}</span>
-					</template>
-					<template #option="slotProps">
-						<div class="flex align-items-center">
-							<img
-								:alt="slotProps.option.label"
-								src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-								:class="`mr-2 ${slotProps.option.flag}`"
-								style="width: 18px"
-							/>
-							<div>{{ slotProps.option.name }}</div>
-							<span class="lang" v-if="slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
-						</div>
-					</template>
-				</Dropdown>
+				<LangSwither/>
 			</div>
 			<div>
 				<Divider>{{ $t("settings.saves") }}</Divider>
