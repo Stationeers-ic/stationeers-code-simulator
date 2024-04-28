@@ -49,19 +49,20 @@ function add() {
 		<template #header>
 			<div :class="$style.image">
 				<Image loading="lazy" alt="user header" :src="image"/>
+				<Button :class="$style.pin" icon="pi pi-arrow-up-right" severity="secondary" style="margin-top:5px" />
 			</div>
 		</template>
 		<template #title>
 			<div :class="$style.break">{{ deviceData?.PrefabName }}</div>
 		</template>
-		<template #subtitle v-if="name">
-			<span :class="$style.break">{{ name }}</span>
+		<template #subtitle >
+			<span :class="$style.break">{{ name || ' '}}</span>
 		</template>
 		<template #content>
 			<div class="device-ports">
 				<DevicePorts :id="props.id"/>
 			</div>
-			<TabView :scrollable="true">
+			<TabView :lazy="true" :scrollable="true">
 				<TabPanel :header="$t('props')">
 					<template #header>
 						<div class="device-header-props"></div>
@@ -95,11 +96,11 @@ function add() {
 						<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
 					</div>
 				</TabPanel>
-				<TabPanel :header="$t('stack.stack')" v-if="ic10.getEnv().devicesAttached.get(props.id) == 'db' || ic10.getEnv()?.devicesStack.has(props.id)">
+				<TabPanel :header="$t('stack.stack')" v-show="ic10.getEnv().devicesAttached.get(props.id) == 'db' || ic10.getEnv()?.devicesStack.has(props.id)" >
 					<template #header>
 						<div class="device-header-stack"></div>
 					</template>
-					<div class="device-slots">
+					<div class="device-stack">
 						<Stack :deviceId="props.id" :lines="20"/>
 					</div>
 				</TabPanel>
@@ -153,10 +154,16 @@ function add() {
 }
 
 .image {
+	position: relative;
 	width: 100%;
 	height: 128px;
 	display: flex;
 	justify-content: center;
+}
+
+.pin{
+	position: absolute;
+	right: 5px;
 }
 </style>
 

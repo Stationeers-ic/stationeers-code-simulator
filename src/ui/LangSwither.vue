@@ -2,7 +2,6 @@
 import {onMounted, ref, watch} from "vue";
 import {setLocale} from "../i18n.ts";
 import {useI18n} from "vue-i18n";
-import delay from "delay";
 
 const props = defineProps<{ short?: boolean }>()
 

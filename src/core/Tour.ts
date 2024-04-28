@@ -1,4 +1,4 @@
-import { driver, DriveStep } from "driver.js"
+import {driver, DriveStep} from "driver.js"
 import delay from "delay"
 
 let driverObj: ReturnType<typeof driver>

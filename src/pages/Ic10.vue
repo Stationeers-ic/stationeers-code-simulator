@@ -3,19 +3,18 @@ import CodeMirror from "../components/CodeMirror.vue"
 import Errors from "../components/Errors.vue"
 import Control from "../components/Control.vue"
 import Register from "../components/Register.vue"
-import Stack from "../components/Stack.vue"
 import Devises from "../components/Devises.vue"
-import { onBeforeUnmount, onMounted, ref } from "vue"
+import {onBeforeUnmount, onMounted, ref} from "vue"
 import isHotkey from "is-hotkey"
-import { useToast } from "primevue/usetoast"
+import {useToast} from "primevue/usetoast"
 
 import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
-import { saveToBrowser } from "../core/Save.ts"
+import {saveToBrowser} from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
-import { off, on } from "../core/Events.ts"
+import {off, on} from "../core/Events.ts"
 import OpenDialog from "../ui/OpenDialog.vue"
-import { useI18n } from "vue-i18n"
+import {useI18n} from "vue-i18n"
 
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
@@ -92,7 +91,7 @@ onBeforeUnmount(() => {
 			</Splitter>
 		</div>
 		<Control></Control>
-		<Stack></Stack>
+<!--		<Stack></Stack>-->
 		<div class="bottom" id="tour-devises">
 			<Devises></Devises>
 		</div>

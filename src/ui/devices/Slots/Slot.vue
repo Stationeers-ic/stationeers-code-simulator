@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import data, { Item, Slot } from "../../../core/Data.ts"
-import { z } from "zod"
-import { onMounted, ref, watch } from "vue"
+import data, {Item, Slot} from "../../../core/Data.ts"
+import {z} from "zod"
+import {onMounted, ref, watch} from "vue"
 import ic10 from "../../../core/ic10.ts"
 import ItemSelect from "./ItemSelect.vue"
 import Button from "primevue/button"
 
-const props = defineProps(["data", "deviceId"]) as Readonly<{ data: z.infer<typeof Slot>; deviceId: string }>
+const props = defineProps<{ data: z.infer<typeof Slot>; deviceId: string }>()
 const image = ref("")
 const itemCount = ref(0)
 const Quantity = ref(0)

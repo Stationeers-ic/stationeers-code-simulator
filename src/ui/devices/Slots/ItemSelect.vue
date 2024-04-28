@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
-import data, { Item, Items } from "../../../core/Data.ts"
+import {onMounted, ref} from "vue"
+import data, {Item, Items} from "../../../core/Data.ts"
 
 const model = defineModel<Item | null>()
 const loading = ref(true)

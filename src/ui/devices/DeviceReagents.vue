@@ -3,7 +3,6 @@
 
 import {onMounted, ref} from "vue";
 import data, {Reagents} from "../../core/Data.ts";
-import ic10 from "../../core/ic10.ts";
 
 const props = defineProps(["id", "device"]) as Readonly<{
 	id: string
