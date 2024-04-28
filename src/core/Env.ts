@@ -24,7 +24,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 	constructor() {
 		super()
 		this.data = reactive({})
-		this.stack = reactive([])
+		this.stack = reactive((new Array(512)).fill(0))
 		this.devices = reactive(new Map())
 		const id = this.appendDevice(-128473777, Hash("Circuit Housing"), 1)
 		this.attachDevice(id, "db")
