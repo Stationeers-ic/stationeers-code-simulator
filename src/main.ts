@@ -59,6 +59,9 @@ import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
 import {setLocale, setupI18n} from "./i18n.ts"
 import type {I18n} from "vue-i18n"
+import DynamicDialog from "primevue/dynamicdialog";
+import Listbox from "primevue/listbox";
+import TieredMenu from "primevue/tieredmenu";
 
 window.userLang = localStorage.getItem("language") ?? navigator.language
 const app = createApp(App)
@@ -135,7 +138,7 @@ app.component("Dialog", Dialog)
 app.component("Divider", Divider)
 // app.component("Dock", Dock)
 app.component("Dropdown", Dropdown)
-// app.component("DynamicDialog", DynamicDialog)
+app.component("DynamicDialog", DynamicDialog)
 // app.component("Fieldset", Fieldset)
 app.component("FileUpload", FileUpload)
 app.component("FloatLabel", FloatLabel)
@@ -153,7 +156,7 @@ app.component("InputNumber", InputNumber)
 // app.component("InputSwitch", InputSwitch)
 app.component("InputText", InputText)
 // app.component("Knob", Knob)
-// app.component("Listbox", Listbox)
+app.component("Listbox", Listbox)
 // app.component("MegaMenu", MegaMenu)
 app.component("Menu", Menu)
 app.component("Menubar", Menubar)
@@ -192,7 +195,7 @@ app.component("TabPanel", TabPanel)
 app.component("Tag", Tag)
 // app.component("Textarea", Textarea)
 // app.component("Terminal", Terminal)
-// app.component("TieredMenu", TieredMenu)
+app.component("TieredMenu", TieredMenu)
 // app.component("Timeline", Timeline)
 app.component("Toast", Toast)
 // app.component("Toolbar", Toolbar)

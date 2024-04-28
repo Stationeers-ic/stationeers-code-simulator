@@ -33,6 +33,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+	<DynamicDialog/>
 	<ConfirmPopup />
 	<Toast />
 	<Header />

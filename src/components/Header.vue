@@ -5,7 +5,7 @@ import {onMounted} from "vue"
 import {useConfirm} from "primevue/useconfirm"
 import {useToast} from "primevue/usetoast"
 import {useI18n} from "vue-i18n"
-import LangSwither from "../ui/LangSwither.vue";
+import LangSwither from "../ui/LangSwitcher.vue";
 
 const {t} = useI18n()
 const confirm = useConfirm()

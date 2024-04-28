@@ -4,7 +4,7 @@ import {getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot}
 import {off, on} from "../core/Events.ts"
 import {useConfirm} from "primevue/useconfirm"
 import {useI18n} from "vue-i18n"
-import LangSwither from "../ui/LangSwither.vue";
+import LangSwither from "../ui/LangSwitcher.vue";
 
 const { t } = useI18n()
 const confirm = useConfirm()

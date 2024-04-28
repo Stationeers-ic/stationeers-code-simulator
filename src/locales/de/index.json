@@ -124,7 +124,8 @@
 		"goto": {
 			"title": "@:control.toYield",
 			"description": "Führt alle Anweisungen von der aktuellen Zeile bis zur nächsten <b>Yield</b>-Anweisung aus."
-		}
+		},
+		"end_confirm": "Sind Sie sicher, dass Sie das Tutorial beenden wollen?"
 	},
 	"toast": {
 		"share": {
@@ -222,5 +223,11 @@
 	"url": "Url",
 	"browser": "Browser",
 	"temp": "Temp",
-	"labeller": "Beschriftungsgerät"
+	"labeller": "Beschriftungsgerät",
+	"slots": "Slots",
+	"tags_description": "Tags zur Klassifizierung eines Objekts",
+	"reagents": "Reagenzien",
+	"networks": "Netzwerke",
+	"tags": "Tags",
+	"props": "Parameter"
 }

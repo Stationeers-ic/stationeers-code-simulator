@@ -2,15 +2,16 @@ import {driver, DriveStep} from "driver.js"
 import delay from "delay"
 
 let driverObj: ReturnType<typeof driver>
+
 function init() {
 	const t = window.i18n.global.t
 	const controls: DriveStep[] = [
-		{ element: "#tour-run", popover: { title: t("tutorial.iCSimulation.title"), description: t("tutorial.iCSimulation.description"), side: "bottom", align: "center" } },
-		{ element: "#speedControl", popover: { title: t("tutorial.speedControl.title"), description: t("tutorial.speedControl.description"), side: "bottom", align: "center" } },
-		{ element: "#tour-step", popover: { title: t("tutorial.step.title"), description: t("tutorial.step.description"), side: "bottom", align: "center" } },
+		{element: "#tour-run", popover: {title: t("tutorial.iCSimulation.title"), description: t("tutorial.iCSimulation.description"), side: "bottom", align: "center"}},
+		{element: "#speedControl", popover: {title: t("tutorial.speedControl.title"), description: t("tutorial.speedControl.description"), side: "bottom", align: "center"}},
+		{element: "#tour-step", popover: {title: t("tutorial.step.title"), description: t("tutorial.step.description"), side: "bottom", align: "center"}},
 		{
 			element: "#tour-goto",
-			popover: { title: t("tutorial.goto.title"), description: t("tutorial.goto.description"), side: "bottom", align: "center" },
+			popover: {title: t("tutorial.goto.title"), description: t("tutorial.goto.description"), side: "bottom", align: "center"},
 		},
 		{
 			element: "#tour-reset",
@@ -39,7 +40,7 @@ function init() {
 		},
 		{
 			element: "#FileMenu_0",
-			popover: { title: t("tutorial.save.title"), description: t("tutorial.save.description"), side: "left", align: "center" },
+			popover: {title: t("tutorial.save.title"), description: t("tutorial.save.description"), side: "left", align: "center"},
 		},
 		{
 			element: "#FileMenu_1",
@@ -52,9 +53,9 @@ function init() {
 		},
 		{
 			element: "#FileMenu_2",
-			popover: { title: t("tutorial.open.title"), description: t("tutorial.open.description"), side: "left", align: "center" },
+			popover: {title: t("tutorial.open.title"), description: t("tutorial.open.description"), side: "left", align: "center"},
 		},
-		{ element: "#FileMenu_3", popover: { title: t("tutorial.load.title"), description: t("tutorial.load.description"), side: "left", align: "center" } },
+		{element: "#FileMenu_3", popover: {title: t("tutorial.load.title"), description: t("tutorial.load.description"), side: "left", align: "center"}},
 		{
 			element: "#FileMenu_5",
 			popover: {
@@ -103,7 +104,7 @@ function init() {
 				align: "center",
 			},
 		},
-		{ element: "#devicePin", popover: { title: t("tutorial.pinD0-D5.title"), description: t("tutorial.pinD0-D5.description"), side: "top", align: "center" } },
+		{element: "#devicePin", popover: {title: t("tutorial.pinD0-D5.title"), description: t("tutorial.pinD0-D5.description"), side: "top", align: "center"}},
 		{
 			element: "#deviceId",
 			popover: {
@@ -131,11 +132,11 @@ function init() {
 	const body: DriveStep[] = [
 		{
 			element: "#tour-code-ic10 .cm-editor",
-			popover: { title: t("tutorial.codeEditor.title"), description: t("tutorial.codeEditor.description"), side: "top", align: "start" },
+			popover: {title: t("tutorial.codeEditor.title"), description: t("tutorial.codeEditor.description"), side: "top", align: "start"},
 		},
 		{
 			element: "#tour-code-ic10 .register >  div:nth-child(2)",
-			popover: { title: t("tutorial.registersView.title"), description: t("tutorial.registersView.description"), side: "right", align: "start" },
+			popover: {title: t("tutorial.registersView.title"), description: t("tutorial.registersView.description"), side: "right", align: "start"},
 		},
 		{
 			element: "#tour-code-ic10 .register >  div:nth-child(4)",
@@ -146,7 +147,7 @@ function init() {
 				align: "start",
 			},
 		},
-		{ element: "#tour-code-ic10 .errors ", popover: { title: t("tutorial.errorLog.title"), description: t("tutorial.errorLog.description"), side: "top", align: "start" } },
+		{element: "#tour-code-ic10 .errors ", popover: {title: t("tutorial.errorLog.title"), description: t("tutorial.errorLog.description"), side: "top", align: "start"}},
 	]
 	const device: DriveStep[] = [
 		{
@@ -160,11 +161,11 @@ function init() {
 		},
 		{
 			element: '#tour-devises div[data-pc-section="title"]',
-			popover: { title: t("tutorial.devicePrefabName.title"), description: t("tutorial.devicePrefabName.description"), side: "left", align: "center" },
+			popover: {title: t("tutorial.devicePrefabName.title"), description: t("tutorial.devicePrefabName.description"), side: "left", align: "center"},
 		},
 		{
 			element: '#tour-devises div[data-pc-section="subtitle"]',
-			popover: { title: t("tutorial.deviceName.title"), description: t("tutorial.deviceName.description"), side: "left", align: "center" },
+			popover: {title: t("tutorial.deviceName.title"), description: t("tutorial.deviceName.description"), side: "left", align: "center"},
 		},
 		{
 			element: "#tour-devises .device-ports",
@@ -194,44 +195,82 @@ function init() {
 				align: "center",
 				onNextClick: async () => {
 					document.querySelector<HTMLButtonElement>(".device-header-slots")?.click()
-					await delay(300)
+					await delay(100)
 					driverObj.moveNext()
 				},
 			},
 		},
 		{
 			element: "#tour-devises .device-slots",
-			popover: { title: t("tutorial.slots.title"), description: t("tutorial.slots.description"), side: "left", align: "center" },
+			popover: {title: t("tutorial.slots.title"), description: t("tutorial.slots.description"), side: "left", align: "center",
+				onNextClick: async () => {
+					document.querySelector<HTMLButtonElement>(".device-header-stack")?.click()
+					await delay(100)
+					driverObj.moveNext()
+				},
+			},
+		},
+		{
+			element: "#tour-devises .device-stack",
+			popover: {title: t("tutorial.stack.title"), description: t("tutorial.stack.description"), side: "left", align: "center",
+				onNextClick: async () => {
+					document.querySelector<HTMLButtonElement>(".device-header-stack")?.click()
+					await delay(100)
+					driverObj.moveNext()
+				},
+			},
+		},
+		{
+			element: "#tour-devises > div > div:nth-child(1) > div > div.p-card-header > div > button",
+			popover: {title: t("tutorial.pin_device.title"), description: t("tutorial.pin_device.description"), side: "left", align: "center"},
 		},
 		{
 			element: "#tour-devises .device-remove",
 			popover: { title: t("tutorial.remove.title"), description: t("tutorial.remove.description"), side: "left", align: "center" },
 		},
 	]
+
 	const steps: DriveStep[] = [
-		// {
-		// 	element: "#tour-headers",
-		// 	popover: { title: t("tutorial.tutorial.title"), description: t("tutorial.tutorial.description"), side: "bottom", align: "center" },
-		// },
-		// ...saveSystem,
-		// ...controls,
-		// ...AddDevice,
-		// {
-		// 	element: "#hashConverter",
-		// 	popover: { title: t("tutorial.converter.title"), description: t("tutorial.converter.description"), side: "bottom", align: "center" },
-		// },
-		// ...body,
+		{
+			element: "#tour-headers",
+			popover: {title: t("tutorial.tutorial.title"), description: t("tutorial.tutorial.description"), side: "bottom", align: "center"},
+		},
+		...saveSystem,
+		...controls,
+		...AddDevice,
+		{
+			element: "#hashConverter",
+			popover: {title: t("tutorial.converter.title"), description: t("tutorial.converter.description"), side: "bottom", align: "center"},
+		},
+		...body,
 		...device,
-		// {
-		// 	element: "#ResetAll",
-		// 	popover: {
-		// 		title: t("tutorial.delete.title"),
-		// 		description: t("tutorial.delete.description"),
-		// 		side: "bottom",
-		// 		align: "center",
-		// 	},
-		// },
+		{
+			element: "#ResetAll",
+			popover: {
+				title: t("tutorial.delete.title"),
+				description: t("tutorial.delete.description"),
+				side: "bottom",
+				align: "center",
+			},
+		},
 	]
+
+	const dev: DriveStep[] = [
+
+		...device,
+	]
+	if (import.meta.env.DEV) {
+		return (driverObj = driver({
+			showProgress: true,
+			smoothScroll: true,
+			steps: dev,
+			onDestroyStarted: () => {
+				if (!driverObj.hasNextStep() || confirm(t("tutorial.end_confirm"))) {
+					driverObj.destroy()
+				}
+			},
+		}))
+	}
 	return (driverObj = driver({
 		showProgress: true,
 		smoothScroll: true,
@@ -243,6 +282,7 @@ function init() {
 		},
 	}))
 }
+
 export function start() {
 	init().drive()
 }

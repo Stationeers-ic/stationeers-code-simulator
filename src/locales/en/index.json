@@ -208,7 +208,15 @@
 			"title": "@:control.reset",
 			"description": "Clear all registers and reset the execution to the first line, simulating removing and placing back the IC chip."
 		},
-		"end_confirm": "Are you sure you want to end the tutorial?"
+		"end_confirm": "Are you sure you want to end the tutorial?",
+		"stack": {
+			"title": "Stack in device",
+			"description": "List of 512 stak items. (read/write)"
+		},
+		"pin_device": {
+			"title": "Pin device",
+			"description": "Attach the device to the screen so that it is always at hand"
+		}
 	},
 	"labeller": "Labeller",
 	"toast": {
