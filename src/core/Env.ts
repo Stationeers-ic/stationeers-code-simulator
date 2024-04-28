@@ -55,6 +55,11 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		this.setDefault()
 		this.errors = []
 		this.lines = []
+		this.devicesStack.clear()
+		const dbId = this.devicesAttached.get('db')
+		if(dbId) {
+			this.devicesStack.set(dbId, this.stack)
+		}
 		for (const dataKey in this.data) {
 			delete this.data[dataKey]
 		}
@@ -152,7 +157,9 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		}
 		this.devicesAttached.set(port, id)
 		this.devicesAttached.set(id, port)
-
+		if (port == "db") {
+			this.devicesStack.set(id, this.stack);
+		}
 		this.emit("update")
 		return this
 	}

@@ -6,14 +6,17 @@ import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"
 import DeviceReagents from "./DeviceReagents.vue";
+import Stack from "../../components/Stack.vue";
 
 const props = defineProps(["id", "device"])
 const image = ref("")
 const name = ref("")
 const devicesData = ref<Devices>([])
 const deviceData = ref<Device | undefined>(undefined)
-
+const newKey = ref("")
+const newVal = ref(0)
 const instance = getCurrentInstance()
+
 onMounted(async () => {
 	devicesData.value = await data.getDevices()
 	deviceData.value = devicesData.value.find((d) => d.PrefabHash === props.device.PrefabHash)
@@ -31,9 +34,6 @@ onBeforeUnmount(() => {
 function remove() {
 	ic10.getEnv().removeDevice(props.id)
 }
-
-const newKey = ref("")
-const newVal = ref(0)
 
 function add() {
 	const d = ic10.getEnv().devices.get(props.id)
@@ -95,7 +95,15 @@ function add() {
 						<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData"/>
 					</div>
 				</TabPanel>
-				<TabPanel class="device-reagents" :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
+				<TabPanel :header="$t('stack.stack')" v-if="ic10.getEnv().devicesAttached.get(props.id) == 'db' || ic10.getEnv()?.devicesStack.has(props.id)">
+					<template #header>
+						<div class="device-header-stack"></div>
+					</template>
+					<div class="device-slots">
+						<Stack :deviceId="props.id" :lines="20"/>
+					</div>
+				</TabPanel>
+				<TabPanel :header="$t('reagents')" v-if="deviceData?.logics.find((e)=>e.name === 'Reagents')">
 					<template #header>
 						<div class="device-header-reagents"></div>
 					</template>
@@ -103,13 +111,13 @@ function add() {
 						<DeviceReagents :id="props.id" :device="props.device"/>
 					</div>
 				</TabPanel>
-				<TabPanel class="device-networks" :header="$t('networks')" v-if="deviceData?.connections?.length">
+				<TabPanel :header="$t('networks')" v-if="deviceData?.connections?.length">
 					<template #header>
 						<div class="device-header-networks"></div>
 					</template>
 					soon
 				</TabPanel>
-				<TabPanel class="device-tags" :header="$t('tags')" v-if="deviceData?.tags?.length">
+				<TabPanel :header="$t('tags')" v-if="deviceData?.tags?.length">
 					<template #header>
 						<div class="device-header-tags"></div>
 					</template>

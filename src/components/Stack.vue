@@ -1,14 +1,31 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
 import StackInput from "../ui/StackInput.vue"
+
+const props = defineProps<{
+	deviceId?: string
+	lines?: number
+}>()
+const lines = props.lines || 2
+
+let stack: number[] = []
+const isDb = props.deviceId == undefined || ic10.getEnv().devicesAttached.get(props.deviceId) === 'db'
+if (!isDb && props.deviceId) {
+	if (ic10.getEnv().devicesStack.has(props.deviceId)) {
+		stack = ic10.getEnv().devicesStack.get(props.deviceId) as number[]
+	}else{
+		stack = []
+	}
+} else {
+	stack = ic10.getEnv().stack
+}
 </script>
 
 <template>
 	<div class="stack">
-		<h3>{{ $t("stack.stack") }}</h3>
 		<div :class="$style.stackContent">
-			<div :class="$style.stackItem" v-for="(_, index) in ic10.getEnv().stack">
-				<StackInput :active="index === ic10.getEnv().get('r16')" :name="index" v-model="ic10.getEnv().stack[index]" />
+			<div :class="$style.stackItem" v-for="(_, index) in stack">
+				<StackInput :active="isDb && index === ic10.getEnv().get('r16')" :name="index" v-model="stack[index]"/>
 			</div>
 		</div>
 	</div>
@@ -16,7 +33,7 @@ import StackInput from "../ui/StackInput.vue"
 
 <style module lang="scss">
 .stackContent {
-	$lines: 2;
+	$lines: v-bind('lines');
 
 	justify-content: flex-start;
 	width: calc(100% - 5px);
