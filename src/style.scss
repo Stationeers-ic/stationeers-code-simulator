@@ -167,9 +167,13 @@
 	}
 
 	*[data-ic10lang="tooltip"] {
-		padding: 0 10px;
+		padding: 10px;
+		margin: 0 !important;
 		white-space: pre-wrap;
 		max-width: 40vw;
+	}
+	.cm-tooltip{
+		z-index: 1000 !important;
 	}
 
 	.ruler {
@@ -191,10 +195,13 @@
 			margin-top: auto;
 		}
 	}
-	.pin-device-dialog{
+
+	.pin-device-dialog {
 		padding: 5px !important;
-		.p-card-body{
+
+		.p-card-body {
 			padding: 5px !important;
 		}
 	}
+
 }

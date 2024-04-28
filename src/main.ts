@@ -63,8 +63,9 @@ import DynamicDialog from "primevue/dynamicdialog";
 import Listbox from "primevue/listbox";
 import TieredMenu from "primevue/tieredmenu";
 
-window.userLang = localStorage.getItem("language") ?? navigator.language
+window.userLang = localStorage.getItem("language") ?? navigator.languages.find((x) => __languages__.includes(x)) ?? "en"
 const app = createApp(App)
+
 const i18n = setupI18n<[typeof en], (typeof __languages__)[number]>({
 	legacy: false,
 	locale: window.userLang, // set locale
