@@ -1,3 +1,3 @@
 User-agent: *
-Sitemap: http:///sitemap.xml
+Sitemap: https://ic10.dev/sitemap.xml
 Disallow:
