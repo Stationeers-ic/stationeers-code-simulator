@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {FileUploadBeforeSendEvent} from "primevue/fileupload"
+import { FileUploadBeforeSendEvent } from "primevue/fileupload"
 
 const content = defineModel()
 const filename = defineModel("filename")

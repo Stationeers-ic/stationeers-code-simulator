@@ -1,7 +1,7 @@
-import {DevEnv, Err, hash as Hash, Line} from "ic10"
-import {reactive} from "vue"
-import {settingStore} from "../store"
-import {z} from "zod"
+import { DevEnv, Err, hash as Hash, Line } from "ic10"
+import { reactive } from "vue"
+import { settingStore } from "../store"
+import { z } from "zod"
 
 class HCF extends Err {
 	constructor(
@@ -24,7 +24,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 	constructor() {
 		super()
 		this.data = reactive({})
-		this.stack = reactive((new Array(512)).fill(0))
+		this.stack = reactive(new Array(512).fill(0))
 		this.devices = reactive(new Map())
 		const id = this.appendDevice(-128473777, Hash("Circuit Housing"), 1)
 		this.attachDevice(id, "db")
@@ -56,8 +56,8 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		this.errors = []
 		this.lines = []
 		this.devicesStack.clear()
-		const dbId = this.devicesAttached.get('db')
-		if(dbId) {
+		const dbId = this.devicesAttached.get("db")
+		if (dbId) {
 			this.devicesStack.set(dbId, this.stack)
 		}
 		for (const dataKey in this.data) {
@@ -81,8 +81,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		return out
 	}
 
-	async beforeLineRun(_line: Line): Promise<void> {
-	}
+	async beforeLineRun(_line: Line): Promise<void> {}
 
 	async afterLineRun(_line?: Line): Promise<void> {
 		this.emit("update")
@@ -158,7 +157,7 @@ class Env extends DevEnv<{ update: () => void; update_code: () => void }> {
 		this.devicesAttached.set(port, id)
 		this.devicesAttached.set(id, port)
 		if (port == "db") {
-			this.devicesStack.set(id, this.stack);
+			this.devicesStack.set(id, this.stack)
 		}
 		this.emit("update")
 		return this

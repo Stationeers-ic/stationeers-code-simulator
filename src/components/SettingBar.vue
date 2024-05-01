@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref} from "vue"
-import {getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot} from "../core/Save.ts"
-import {off, on} from "../core/Events.ts"
-import {useConfirm} from "primevue/useconfirm"
-import {useI18n} from "vue-i18n"
-import LangSwither from "../ui/LangSwitcher.vue";
+import { onBeforeUnmount, onMounted, ref } from "vue"
+import { getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot } from "../core/Save.ts"
+import { off, on } from "../core/Events.ts"
+import { useConfirm } from "primevue/useconfirm"
+import { useI18n } from "vue-i18n"
+import LangSwither from "../ui/LangSwitcher.vue"
 
 const { t } = useI18n()
 const confirm = useConfirm()
@@ -58,7 +58,7 @@ const remove = (event: any, name: string) => {
 		<Sidebar v-model:visible="visible" header=" ">
 			<div>
 				<Divider>{{ $t("settings.languages") }}</Divider>
-				<LangSwither/>
+				<LangSwither />
 			</div>
 			<div>
 				<Divider>{{ $t("settings.saves") }}</Divider>

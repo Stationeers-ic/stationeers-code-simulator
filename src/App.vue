@@ -2,11 +2,11 @@
 import Footer from "./components/Footer.vue"
 import Header from "./components/Header.vue"
 import SocialButtons from "./components/SocialButtons.vue"
-import {startupLoad, tmpSave} from "./core/Save.ts"
-import {useToast} from "primevue/usetoast"
-import {onBeforeUnmount, onMounted} from "vue"
+import { startupLoad, tmpSave } from "./core/Save.ts"
+import { useToast } from "primevue/usetoast"
+import { onBeforeUnmount, onMounted } from "vue"
 import ic10 from "./core/ic10.ts"
-import {useI18n} from "vue-i18n"
+import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
 
@@ -33,7 +33,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<DynamicDialog/>
+	<DynamicDialog />
 	<ConfirmPopup />
 	<Toast />
 	<Header />

@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import {ref, watch} from "vue"
+import { ref, watch } from "vue"
 import ToggleButton from "primevue/togglebutton"
 import InputGroup from "primevue/inputgroup"
 import Button from "primevue/button"
 import ic10 from "../core/ic10.ts"
-import {str as hash} from "crc-32"
-import {settingStore} from "../store"
+import { str as hash } from "crc-32"
+import { settingStore } from "../store"
 import AddDevice from "../ui/AddDevice.vue"
 import clipboard from "web-clipboard"
-import {emit} from "../core/Events.ts"
-import {MenuItem} from "primevue/menuitem"
-import {getShareLink} from "../core/Save.ts"
-import {useToast} from "primevue/usetoast"
-import {start} from "../core/Tour.ts"
-import {useI18n} from "vue-i18n"
+import { emit } from "../core/Events.ts"
+import { MenuItem } from "primevue/menuitem"
+import { getShareLink } from "../core/Save.ts"
+import { useToast } from "primevue/usetoast"
+import { start } from "../core/Tour.ts"
+import { useI18n } from "vue-i18n"
 
 const { t } = useI18n()
 const i18n = useI18n()

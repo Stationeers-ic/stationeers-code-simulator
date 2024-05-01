@@ -6,7 +6,7 @@ import "primevue/resources/primevue.min.css" /* Deprecated */
 import "primeicons/primeicons.css"
 import "./style.scss"
 
-import {createApp} from "vue"
+import { createApp } from "vue"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
 import AnimateOnScroll from "primevue/animateonscroll"
@@ -57,11 +57,11 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import VueCodemirror from "vue-codemirror"
 import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
-import {setLocale, setupI18n} from "./i18n.ts"
-import type {I18n} from "vue-i18n"
-import DynamicDialog from "primevue/dynamicdialog";
-import Listbox from "primevue/listbox";
-import TieredMenu from "primevue/tieredmenu";
+import { setLocale, setupI18n } from "./i18n.ts"
+import type { I18n } from "vue-i18n"
+import DynamicDialog from "primevue/dynamicdialog"
+import Listbox from "primevue/listbox"
+import TieredMenu from "primevue/tieredmenu"
 
 window.userLang = localStorage.getItem("language") ?? navigator.languages.find((x) => __languages__.includes(x)) ?? "en"
 const app = createApp(App)

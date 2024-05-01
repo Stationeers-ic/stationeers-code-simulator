@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue";
-import {setLocale} from "../i18n.ts";
-import {useI18n} from "vue-i18n";
+import { onMounted, ref, watch } from "vue"
+import { setLocale } from "../i18n.ts"
+import { useI18n } from "vue-i18n"
 
 const props = defineProps<{ short?: boolean }>()
 
@@ -34,27 +34,17 @@ onMounted(() => {
 </script>
 
 <template>
-	<Dropdown :class="{'short':!props.short}" v-model="lang" :loading="loading" :options="languages" optionLabel="code" filter placeholder="Select a language">
+	<Dropdown :class="{ short: !props.short }" v-model="lang" :loading="loading" :options="languages" optionLabel="code" filter placeholder="Select a language">
 		<template #value="slotProps">
 			<div v-if="slotProps.value" class="flex align-items-center">
-				<img
-					:alt="slotProps.value.label"
-					src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-					:class="`mr-2 ${slotProps.value.flag}`"
-					style="width: 18px"
-				/>
+				<img :alt="slotProps.value.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="`mr-2 ${slotProps.value.flag}`" style="width: 18px" />
 				<div v-if="!props.short">{{ slotProps.value.name }}</div>
 			</div>
 			<span v-else>{{ slotProps.placeholder }}</span>
 		</template>
 		<template #option="slotProps">
 			<div class="flex align-items-center">
-				<img
-					:alt="slotProps.option.label"
-					src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png"
-					:class="`mr-2 ${slotProps.option.flag}`"
-					style="width: 18px"
-				/>
+				<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="`mr-2 ${slotProps.option.flag}`" style="width: 18px" />
 				<div v-if="!props.short">{{ slotProps.option.name }}</div>
 				<span class="lang" v-if="!props.short && slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
 			</div>
@@ -64,7 +54,7 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .short {
-	width: 100% !important
+	width: 100% !important;
 }
 
 .lang {

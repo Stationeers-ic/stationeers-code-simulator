@@ -1,4 +1,4 @@
-import {z} from "zod"
+import { z } from "zod"
 
 export const Slot = z.object({
 	SlotName: z.string(),
@@ -56,11 +56,13 @@ export const Reagent = z
 		name: z.string(),
 		hash: z.number(),
 		image: z.string(),
-		items: z.array(z.object({
-			name: z.string(),
-			image: z.string(),
-			count: z.number(),
-		})),
+		items: z.array(
+			z.object({
+				name: z.string(),
+				image: z.string(),
+				count: z.number(),
+			}),
+		),
 	})
 	.passthrough()
 export const Reagents = z.array(Reagent)

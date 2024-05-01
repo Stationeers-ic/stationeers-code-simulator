@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
-import {defineAsyncComponent, getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
+import { defineAsyncComponent, getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
 import DeviceCard from "../ui/devices/DeviceCard.vue"
-import {useDialog} from "primevue/usedialog";
-import DeviceCardPin from "../ui/devices/DeviceCardPin.vue";
+import { useDialog } from "primevue/usedialog"
+import DeviceCardPin from "../ui/devices/DeviceCardPin.vue"
 
 const devices = ref<Map<string, any>>(ic10.getEnv().getDevices())
 
@@ -19,30 +19,28 @@ onBeforeUnmount(() => {
 	ic10.getEnv().off("update")
 })
 
-const dialog = useDialog();
+const dialog = useDialog()
 
-function pin(id: string,width: number) {
+function pin(id: string, width: number) {
 	dialog.open(DeviceCardPin, {
 		props: {
-			contentClass: 'pin-device-dialog',
-			header: ' ',
+			contentClass: "pin-device-dialog",
+			header: " ",
 			style: {
-				width: width + 'px',
+				width: width + "px",
 			},
-
 		},
 		data: {
 			id: id,
-			device: devices.value.get(id)
-		}
-	});
+			device: devices.value.get(id),
+		},
+	})
 }
-
 </script>
 
 <template>
 	<div :class="$style.container">
-		<DeviceCard v-for="[id, device] in devices" :key="id" :id="id" :device="device" @pin="pin"/>
+		<DeviceCard v-for="[id, device] in devices" :key="id" :id="id" :device="device" @pin="pin" />
 	</div>
 </template>
 

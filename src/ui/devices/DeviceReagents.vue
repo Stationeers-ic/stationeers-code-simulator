@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // import {ref} from "vue";
 
-import {onMounted, ref} from "vue";
-import data, {Reagents} from "../../core/Data.ts";
+import { onMounted, ref } from "vue"
+import data, { Reagents } from "../../core/Data.ts"
 
 const props = defineProps(["id", "device"]) as Readonly<{
 	id: string
@@ -15,11 +15,11 @@ const reagents = ref<Reagents>([])
 const items = ref<{ name: string; image: string | null; value: number }[]>([])
 
 onMounted(async () => {
-	reagents.value = await data.getReagents();
+	reagents.value = await data.getReagents()
 	reagents.value.forEach((d) => {
-		if (typeof props.device.Reagents === 'undefined') {
+		if (typeof props.device.Reagents === "undefined") {
 			props.device.Reagents = {}
-		}else if (typeof props.device.Reagents[d.hash] === 'undefined') {
+		} else if (typeof props.device.Reagents[d.hash] === "undefined") {
 			props.device.Reagents[d.hash] ?? 0
 		}
 		props.device.Reagents[d.hash] = props.device.Reagents[d.hash] ?? 0
@@ -31,13 +31,11 @@ onMounted(async () => {
 	})
 	loading.value = false
 })
-
-
 </script>
 
 <template>
 	<div class="reagents">
-		<template v-for="(value) in items">
+		<template v-for="value in items">
 			<div class="reagent">
 				<InputGroup class="prop">
 					<InputGroupAddon>
@@ -49,8 +47,14 @@ onMounted(async () => {
 						/>
 					</InputGroupAddon>
 					<InputGroupAddon class="key">{{ value.name }}</InputGroupAddon>
-					<InputNumber :minFractionDigits="0" :maxFractionDigits="20" class="val" :useGrouping="false" v-model="(props.device.Reagents[value.value.toString()])"
-								 placeholder="Value"/>
+					<InputNumber
+						:minFractionDigits="0"
+						:maxFractionDigits="20"
+						class="val"
+						:useGrouping="false"
+						v-model="props.device.Reagents[value.value.toString()]"
+						placeholder="Value"
+					/>
 				</InputGroup>
 			</div>
 		</template>

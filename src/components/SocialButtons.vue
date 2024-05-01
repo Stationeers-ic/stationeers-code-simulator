@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import ButtonFrame from "../ui/ButtonFrame.vue"
 
-import {ref} from "vue"
-import {MenuItem} from "primevue/menuitem"
+import { ref } from "vue"
+import { MenuItem } from "primevue/menuitem"
 
 const social = ref<MenuItem[]>([
 	{

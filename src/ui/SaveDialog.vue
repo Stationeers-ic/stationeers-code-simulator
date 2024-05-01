@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {onBeforeUnmount, onMounted, ref, watch} from "vue"
-import {useToast} from "primevue/usetoast"
-import {getActiveSaveSlot, getShareLink, saveToBrowser, saveToFile} from "../core/Save.ts"
+import { onBeforeUnmount, onMounted, ref, watch } from "vue"
+import { useToast } from "primevue/usetoast"
+import { getActiveSaveSlot, getShareLink, saveToBrowser, saveToFile } from "../core/Save.ts"
 import clipboard from "web-clipboard"
-import {off, on} from "../core/Events.ts"
-import {useI18n} from "vue-i18n"
+import { off, on } from "../core/Events.ts"
+import { useI18n } from "vue-i18n"
 
 const visible = defineModel<boolean>()
 const scripName = ref(localStorage.getItem("currentScriptName") ?? "")

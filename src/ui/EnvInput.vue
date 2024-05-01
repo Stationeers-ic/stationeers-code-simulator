@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
-import {onBeforeUnmount, onMounted, ref} from "vue"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps(["name", "readonly"])
 const model = defineModel<number>()
@@ -23,9 +23,18 @@ onBeforeUnmount(() => {
 <template>
 	<InputGroup>
 		<InputGroupAddon>{{ props.name }}</InputGroupAddon>
-		<InputNumber :useGrouping="false" v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly/>
-		<InputNumber :step="0.5" :minFractionDigits="0" :maxFractionDigits="20" :useGrouping="false" v-else :class="{ [$style.defaultValue]: model == 0 }"
-					 v-model="model" width="100%" placeholder="Value"/>
+		<InputNumber :useGrouping="false" v-if="props.readonly === true" :model-value="model" width="100%" placeholder="Value" readonly />
+		<InputNumber
+			:step="0.5"
+			:minFractionDigits="0"
+			:maxFractionDigits="20"
+			:useGrouping="false"
+			v-else
+			:class="{ [$style.defaultValue]: model == 0 }"
+			v-model="model"
+			width="100%"
+			placeholder="Value"
+		/>
 		<InputGroupAddon v-if="alias">{{ alias }}</InputGroupAddon>
 	</InputGroup>
 </template>
