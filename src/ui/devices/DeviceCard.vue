@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ic10 from "../../core/ic10.ts"
-import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
-import data, { Device, Devices } from "../../core/Data.ts"
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
+import data, {Device, Devices} from "../../core/Data.ts"
 import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"

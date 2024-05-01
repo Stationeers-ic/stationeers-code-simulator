@@ -6,7 +6,7 @@ import "primevue/resources/primevue.min.css" /* Deprecated */
 import "primeicons/primeicons.css"
 import "./style.scss"
 
-import { createApp } from "vue"
+import {createApp} from "vue"
 import App from "./App.vue"
 import PrimeVue from "primevue/config"
 import AnimateOnScroll from "primevue/animateonscroll"
@@ -14,12 +14,8 @@ import Avatar from "primevue/avatar"
 import Badge from "primevue/badge"
 import BadgeDirective from "primevue/badgedirective"
 import Button from "primevue/button"
-import ButtonGroup from "primevue/buttongroup"
 import Card from "primevue/card"
 import Chip from "primevue/chip"
-import Chips from "primevue/chips"
-import Column from "primevue/column"
-import ConfirmDialog from "primevue/confirmdialog"
 import ConfirmPopup from "primevue/confirmpopup"
 import ConfirmationService from "primevue/confirmationservice"
 import Dialog from "primevue/dialog"
@@ -34,7 +30,6 @@ import InputGroup from "primevue/inputgroup"
 import InputGroupAddon from "primevue/inputgroupaddon"
 import InputNumber from "primevue/inputnumber"
 import InputText from "primevue/inputtext"
-import Menu from "primevue/menu"
 import Menubar from "primevue/menubar"
 import OverlayPanel from "primevue/overlaypanel"
 import Ripple from "primevue/ripple"
@@ -46,7 +41,6 @@ import Toast from "primevue/toast"
 import ToastService from "primevue/toastservice"
 import TabView from "primevue/tabview"
 import TabPanel from "primevue/tabpanel"
-import Tag from "primevue/tag"
 import ToggleButton from "primevue/togglebutton"
 import Tooltip from "primevue/tooltip"
 import VirtualScroller from "primevue/virtualscroller"
@@ -57,8 +51,8 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import VueCodemirror from "vue-codemirror"
 import "driver.js/dist/driver.css"
 import en from "./locales/en/index.json"
-import { setLocale, setupI18n } from "./i18n.ts"
-import type { I18n } from "vue-i18n"
+import {setLocale, setupI18n} from "./i18n.ts"
+import type {I18n} from "vue-i18n"
 import DynamicDialog from "primevue/dynamicdialog"
 import Listbox from "primevue/listbox"
 import TieredMenu from "primevue/tieredmenu"
@@ -66,7 +60,6 @@ import MultiSelect from "primevue/multiselect";
 
 window.userLang = localStorage.getItem("language") ?? navigator.languages.find((x) => __languages__.includes(x)) ?? "en"
 const app = createApp(App)
-
 const i18n = setupI18n<[typeof en], (typeof __languages__)[number]>({
 	legacy: false,
 	locale: window.userLang, // set locale
@@ -207,5 +200,4 @@ app.component("ToggleButton", ToggleButton)
 // app.component("TreeTable", TreeTable)
 // app.component("TriStateCheckbox", TriStateCheckbox)
 app.component("VirtualScroller", VirtualScroller)
-
 app.mount("#app")

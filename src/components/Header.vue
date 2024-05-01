@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { MenuItem } from "primevue/menuitem"
-import { routes } from "../router.ts"
-import { onMounted } from "vue"
-import { useConfirm } from "primevue/useconfirm"
-import { useToast } from "primevue/usetoast"
-import { useI18n } from "vue-i18n"
-import LangSwither from "../ui/LangSwitcher.vue"
+import {MenuItem} from "primevue/menuitem"
+import {routes} from "../router.ts"
+import {onMounted} from "vue"
+import {useConfirm} from "primevue/useconfirm"
+import {useToast} from "primevue/usetoast"
+import {useI18n} from "vue-i18n"
+import LangSwitcher from "../ui/LangSwitcher.vue"
 
 const { t } = useI18n()
 const confirm = useConfirm()
@@ -76,7 +76,7 @@ const confirmReset = (event: any) => {
 		<template #end>
 			<div :class="$style.end">
 				<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
-				<LangSwither :short="true" />
+				<LangSwitcher :short="true" />
 				<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset" />
 			</div>
 		</template>

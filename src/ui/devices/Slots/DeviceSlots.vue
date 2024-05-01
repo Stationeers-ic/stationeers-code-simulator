@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Device } from "../../../core/Data.ts"
+import {Device} from "../../../core/Data.ts"
 import Slot from "./Slot.vue"
 // import {ref} from "vue";
 

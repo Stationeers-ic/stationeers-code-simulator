@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ic10 from "../core/ic10.ts"
 import StackInput from "../ui/StackInput.vue"
-import { onMounted, ref } from "vue"
+import {onMounted, ref} from "vue"
 
 const props = defineProps<{
 	deviceId?: string

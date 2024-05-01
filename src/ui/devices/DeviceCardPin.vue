@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject } from "vue"
+import {inject} from "vue"
 import DeviceCard from "./DeviceCard.vue"
 
 const dialogRef = inject<any>("dialogRef")
