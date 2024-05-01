@@ -43,6 +43,7 @@ function attach() {
 </script>
 
 <template>
+<!--	TODO заменить на $t('devices.ports.attach.header')-->
 	<Dialog v-model:visible="visible" header="Connect to ...">
 		<InputGroup>
 			<SelectPorts v-model="addPort" />
