@@ -90,7 +90,8 @@ const opt: hoverOptions = {
 	},
 }
 const [ruler] = createRuler(52, "ruler")
-const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt), ruler, line.extension]
+const [rulerBeta] = createRuler(90, "ruler")
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt), ruler,rulerBeta, line.extension]
 </script>
 
 <template>
