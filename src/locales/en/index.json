@@ -1,6 +1,7 @@
 {
 	"ICON": "flag flag-us",
 	"headers": {
+		"issues": "Open Issues",
 		"ResetAllData": "Reset all data",
 		"confirmAllDelete": "Are you sure you want to clear All app data?"
 	},

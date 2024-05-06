@@ -15,6 +15,9 @@ declare module "vuex" {
 declare const __package__: { dependencies: Record<string, { version: string; overridden: boolean }> }
 declare const __buildTime__: number
 declare const __languages__: string[]
+declare const __bugs__: {
+	url:string
+}
 declare type languages = {
 	name: string
 	code: string

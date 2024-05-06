@@ -4,7 +4,7 @@ import { spawnSync } from "child_process"
 import * as fs from "fs"
 import * as path from "path"
 import lang from "./src/languages.json"
-
+import packageJson from "./package.json"
 // this is a lot more work than it could be
 const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {
 	encoding: "utf8",
@@ -34,6 +34,8 @@ export default defineConfig({
 			},
 		},
 	},
+	//@ts-ignore типы vite устарели
+	exclude: ['cypress/**'],
 	resolve: {
 		preserveSymlinks: true,
 	},
@@ -48,6 +50,7 @@ export default defineConfig({
 			}
 		}),
 		__package__: stdout,
+		__bugs__: packageJson.bugs ?? '',
 		__buildTime__: Date.now(),
 	}
 })

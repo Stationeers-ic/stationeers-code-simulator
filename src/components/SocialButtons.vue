@@ -33,13 +33,13 @@ const social = ref<MenuItem[]>([
 			window.open("https://vk.com/app6471849_-204595079?ref=snippet_im", "_blank")
 		},
 	},
-	{
-		label: "Community translate",
-		icon: "pi pi-weblate",
-		command() {
-			window.open("https://translate.traineratwot.site/projects/ic10/locales/", "_blank")
-		},
-	},
+	// {
+	// 	label: "Community translate",
+	// 	icon: "pi pi-weblate",
+	// 	command() {
+	// 		window.open("https://translate.traineratwot.site/projects/ic10/locales/", "_blank")
+	// 	},
+	// },
 ])
 </script>
 

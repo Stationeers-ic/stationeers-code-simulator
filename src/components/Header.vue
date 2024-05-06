@@ -60,6 +60,10 @@ const confirmReset = (event: any) => {
 		},
 	})
 }
+
+const issues = () => {
+	window.open(__bugs__.url, "_blank")
+}
 </script>
 
 <template>
@@ -75,6 +79,8 @@ const confirmReset = (event: any) => {
 		</template>
 		<template #end>
 			<div :class="$style.end">
+				<Button id="BagReport" severity="secondary" icon="pi pi-github" @click="issues" :label="$t('headers.issues')" />
+
 				<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April" />
 				<LangSwitcher :short="true" />
 				<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset" />
