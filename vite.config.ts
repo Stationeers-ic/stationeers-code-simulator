@@ -49,5 +49,5 @@ export default defineConfig({
 		}),
 		__package__: stdout,
 		__buildTime__: Date.now(),
-	},
+	}
 })
