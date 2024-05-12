@@ -22,6 +22,7 @@ try {
 		}
 	}>("https://api.poeditor.com/v2/languages/list", data)
 	const tasks: lang[] = []
+	//@ts-ignore
 	await Promise.all(
 		languages.data.result.languages.map(async (lang) => {
 			console.time("Downloaded")
@@ -60,7 +61,7 @@ try {
 		}
 		return 0
 	})
-
+	//@ts-ignore
 	await fs.writeFile(path.join(__dirname, "..", "src/languages.json"), JSON.stringify(tasks, null, "\t"))
 } catch (e) {
 	console.error(e.message)
