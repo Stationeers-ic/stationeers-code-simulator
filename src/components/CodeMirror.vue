@@ -65,17 +65,17 @@ const opt: hoverOptions = {
 						break
 					case "sd":
 						label = l.args[0].toString()
-						deviceId = label
+						deviceId = env.getAlias(label, true)
 						prop = l.args[1].toString()
 						break
 					case "ld":
 						label = l.args[1].toString()
-						deviceId = label
+						deviceId = env.getAlias(label, true)
 						prop = l.args[2].toString()
 						break
 				}
 				if (deviceId && prop) {
-					new_text = `${label}[${prop}] = ` + env.getDeviceProp(deviceId, prop)
+					new_text = `${label}[${prop}] = ` + env.getDeviceProp(deviceId.toString(), prop)
 				}
 			}
 		}
