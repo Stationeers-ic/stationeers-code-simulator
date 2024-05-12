@@ -1,29 +1,47 @@
 import * as path from "path"
 import * as fs from "fs/promises"
 import axios from "axios"
+import qs from "qs"
 
 const locales = path.join(__dirname, "..", "src/locales")
 type lang = {
 	code: string
 	name: string
-	translated_percent: number
+	percentage: number
 	ICON: string
 }
 try {
+	let data = qs.stringify({
+		api_token: "9ea7323d0999f2496ea61b643eecc361",
+		id: "700722",
+	})
 	//@ts-ignore
-	const languages = await axios.get<lang[]>("https://translate.traineratwot.site/api/projects/ic10/languages/")
+	const languages = await axios.post<{
+		result: {
+			languages: lang[]
+		}
+	}>("https://api.poeditor.com/v2/languages/list", data)
 	const tasks: lang[] = []
 	await Promise.all(
-		languages.data.map(async (lang) => {
+		languages.data.result.languages.map(async (lang) => {
 			console.time("Downloaded")
 			const dir = path.join(locales, lang.code)
 			const filename = path.join(dir, "index.json")
 			await fs.rm(dir, { recursive: true })
-			if (lang.translated_percent < 20) {
+			if (lang.percentage < 20) {
 				console.info("Skip lang", lang.code)
 				return
 			}
-			const file = (await axios.get(`https://translate.traineratwot.site/api/translations/ic10/locales/${lang.code}/file/`)).data
+
+			let data = qs.stringify({
+				api_token: "9ea7323d0999f2496ea61b643eecc361",
+				id: "700722",
+				language: lang.code,
+				type: "i18next",
+				filters: "translated",
+			})
+			const poExport = (await axios.post<{ result: { url: string } }>(`https://api.poeditor.com/v2/projects/export`, data)).data
+			const file = (await axios.get(poExport.result.url)).data
 			await fs.mkdir(dir, { recursive: true })
 			await fs.writeFile(filename, JSON.stringify(file, null, "\t"))
 			console.timeLog("Downloaded", filename)

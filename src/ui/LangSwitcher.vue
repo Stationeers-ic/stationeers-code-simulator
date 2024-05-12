@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onMounted, ref, watch} from "vue"
-import {setLocale} from "../i18n.ts"
-import {useI18n} from "vue-i18n"
+import { onMounted, ref, watch } from "vue"
+import { setLocale } from "../i18n.ts"
+import { useI18n } from "vue-i18n"
 
 const props = defineProps<{ short?: boolean }>()
 
@@ -46,7 +46,7 @@ onMounted(() => {
 			<div class="flex align-items-center">
 				<img :alt="slotProps.option.label" src="https://primefaces.org/cdn/primevue/images/flag/flag_placeholder.png" :class="`mr-2 ${slotProps.option.flag}`" style="width: 18px" />
 				<div v-if="!props.short">{{ slotProps.option.name }}</div>
-				<span class="lang" v-if="!props.short && slotProps.option.translated_percent < 95">{{ slotProps.option.translated_percent }}%</span>
+				<span class="lang" v-if="!props.short && slotProps.option.percentage < 95">{{ slotProps.option.percentage }}%</span>
 			</div>
 		</template>
 	</Dropdown>

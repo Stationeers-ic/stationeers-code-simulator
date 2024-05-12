@@ -44,9 +44,11 @@
     "@types/bun": "^1.1.1",
     "@types/is-hotkey": "^0.1.10",
     "@types/pako": "^2.0.3",
+    "@types/qs": "^6.9.15",
     "@types/uuid": "^9.0.8",
     "@vitejs/plugin-vue": "^5.0.4",
     "axios": "^1.6.8",
+    "qs": "^6.12.1",
     "typescript": "^5.4.5",
     "vite": "^4.0.0",
     "vue-tsc": "^2.0.16"

@@ -1,26 +1,27 @@
 {
+	"ICON": "flag flag-pl",
 	"headers": {
-		"confirmAllDelete": "Czy jesteś pewien, że chcesz wyczyścić Wszystkie dane aplikacji?",
-		"ResetAllData": "Zresetuj wszystkie dane"
+		"ResetAllData": "Zresetuj wszystkie dane",
+		"confirmAllDelete": "Czy jesteś pewien, że chcesz wyczyścić Wszystkie dane aplikacji?"
 	},
 	"control": {
 		"file": "Plik",
 		"run": "Wykonaj",
 		"stop": "Zatrzymaj",
 		"step": "Krok",
+		"toYield": "Wykonuj do przerwy",
 		"reset": "Resetuj",
 		"addDevice": "Dodaj urządzenie",
+		"convert": "Konwertuj",
 		"stringToHash": "Napis do Hasha",
 		"slow": "Wolno",
 		"normal": "Normalnie",
 		"fast": "Szybko",
 		"save": "Zapisz",
+		"saveAs": "Zapisz jako",
 		"open": "Otwórz",
 		"load": "Załaduj",
-		"share": "Udostępnij",
-		"toYield": "Wykonuj do przerwy",
-		"convert": "Konwertuj",
-		"saveAs": "Zapisz jako"
+		"share": "Udostępnij"
 	},
 	"stack": {
 		"stack": "Stos"
@@ -35,20 +36,20 @@
 		"languages": "Języki",
 		"saves": "Zapisy",
 		"noSaves": "Brak zapisów",
-		"confirmDelete": "Czy jesteś pewien, że chcesz usunąć zapis?",
-		"savesNotFound": "Nie znaleziono zapisów"
+		"savesNotFound": "Nie znaleziono zapisów",
+		"confirmDelete": "Czy jesteś pewien, że chcesz usunąć zapis?"
 	},
 	"addDevice": {
 		"header": "Dodaj Urządzenie",
 		"description": "Dodaj nowe urządzenie do środowiska",
 		"deviceHash": "Hash urządzenia",
 		"deviceName": "Nazwa urządzenia",
+		"devicePin": "Pin IC",
 		"deviceId": "Identyfikator urządzenia",
 		"deviceHashHelp": "Podaj lub wybierz PrefabHash lub PrefabName urządzenia.",
-		"deviceIdHelp": "Podaj identyfikator urządzenia lub zostaw puste.",
-		"devicePin": "Pin IC",
 		"deviceNameHelp": "Podaj nazwę urządzenia, tak jak byś to robił z @:labeller",
-		"devicePortHelp": "Wybierz pin do którego będzie przypisane urządzenie lub zostaw puste"
+		"devicePortHelp": "Wybierz pin do którego będzie przypisane urządzenie lub zostaw puste",
+		"deviceIdHelp": "Podaj identyfikator urządzenia lub zostaw puste."
 	},
 	"confirmReset": {
 		"info": {
@@ -78,7 +79,17 @@
 	"delete": "Usuń",
 	"code": "Kod idzie tutaj",
 	"errors": "Błędy",
+	"url": "Url",
+	"browser": "Przeglądarka",
 	"tutorial": {
+		"tutorial": {
+			"title": "Samouczek",
+			"description": "Witamy w samouczku Stationeers Code Simulator.<br />Przejdźmy przez sterowanie krok po kroku."
+		},
+		"fileMenu": {
+			"title": "Menu plików",
+			"description": "Zapisz, wyeksportuj, lub załaduj kod IC i powiązane urządzenia z tego menu."
+		},
 		"save": {
 			"title": "Zapisz",
 			"description": "Zapisz kod w pamięci przeglądarki.<br />Dla nowego kodu, użyj następnego przycisku (@:control.saveAs)."
@@ -91,6 +102,12 @@
 		},
 		"load": {
 			"title": "@:control.load"
+		},
+		"share": {
+			"title": "@:control.share"
+		},
+		"iCSimulation": {
+			"title": "Symulacja IC"
 		},
 		"speedControl": {
 			"title": "Kontrola prędkości",
@@ -120,6 +137,9 @@
 		"errorLog": {
 			"title": "Dziennik błędów"
 		},
+		"simulationEnvironment": {
+			"title": "Środowisko symulacji"
+		},
 		"slots": {
 			"title": "Sloty"
 		},
@@ -135,29 +155,9 @@
 		"goto": {
 			"title": "@:control.toYield"
 		},
-		"share": {
-			"title": "@:control.share"
-		},
-		"simulationEnvironment": {
-			"title": "Środowisko symulacji"
-		},
 		"reset": {
 			"title": "@:control.reset"
-		},
-		"tutorial": {
-			"title": "Samouczek",
-			"description": "Witamy w samouczku Stationeers Code Simulator.<br />Przejdźmy przez sterowanie krok po kroku."
-		},
-		"fileMenu": {
-			"title": "Menu plików",
-			"description": "Zapisz, wyeksportuj, lub załaduj kod IC i powiązane urządzenia z tego menu."
-		},
-		"iCSimulation": {
-			"title": "Symulacja IC"
 		}
 	},
-	"ICON": "flag flag-pl",
-	"browser": "Przeglądarka",
-	"labeller": "Etykieciarka",
-	"url": "Url"
+	"labeller": "Etykieciarka"
 }

@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 declare module "*.vue" {
-	import type {DefineComponent} from "vue"
+	import type { DefineComponent } from "vue"
 	const component: DefineComponent<{}, {}, any>
 	export default component
 }
@@ -16,12 +16,12 @@ declare const __package__: { dependencies: Record<string, { version: string; ove
 declare const __buildTime__: number
 declare const __languages__: string[]
 declare const __bugs__: {
-	url:string
+	url: string
 }
 declare type languages = {
 	name: string
 	code: string
 	flag: string
-	translated_percent: number
+	percentage: number
 }
 declare const __LanguageSelector__: languages[]

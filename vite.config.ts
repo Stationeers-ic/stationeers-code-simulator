@@ -35,7 +35,7 @@ export default defineConfig({
 		},
 	},
 	//@ts-ignore типы vite устарели
-	exclude: ['cypress/**'],
+	exclude: ["cypress/**"],
 	resolve: {
 		preserveSymlinks: true,
 	},
@@ -46,11 +46,11 @@ export default defineConfig({
 				name: l.name,
 				code: l.code,
 				flag: l.ICON ?? "",
-				translated_percent: l.translated_percent,
+				percentage: l.percentage,
 			}
 		}),
 		__package__: stdout,
-		__bugs__: packageJson.bugs ?? '',
+		__bugs__: packageJson.bugs ?? "",
 		__buildTime__: Date.now(),
-	}
+	},
 })

@@ -1,145 +1,5 @@
 {
 	"ICON": "flag flag-de",
-	"tutorial": {
-		"deviceID": {
-			"description": "Optional, Spezifizieren sie eine ReferenceID um die Befehle <b>ld</b>, <b>sd</b>, <b>putd</b> oder <b>getd</b> zu verwenden.<br/> du kannst die ID im Spiel über die Konfigurations-Karte auf dem Tablet auslesen.",
-			"title": "@:addDevice.deviceId"
-		},
-		"fileMenu": {
-			"description": "In diesem Menü können Sie einen IC-Code und die zugehörigen Geräte speichern, exportieren oder laden.",
-			"title": "Datei Menü"
-		},
-		"saveAs": {
-			"description": "Speichern Sie einen neuen Code im Speicher des Browsers und geben Sie ihm einen Namen.<br />Zusätzlich bietet diese Schaltfläche die Möglichkeit, Ihren Code und Ihre Geräte auf Ihren lokalen Rechner zu exportieren oder einen Link zu generieren, der geteilt werden kann.",
-			"title": "@:control.saveAs"
-		},
-		"constantsView": {
-			"description": "Zugriff auf eine Liste von Standardkonstanten, die vom IC10 definiert wurden,<br/>zusammen mit Bezeichnungen(Zeilennummer) oder Konstanten, die in Ihrem Code angegeben wurden.",
-			"title": "Konstanten und Labels Ansicht"
-		},
-		"devicePrefabName": {
-			"description": "Dies ist der Geräte-Typ der in der Stationpedia definiert ist.",
-			"title": "Geräte PrefabName"
-		},
-		"deviceVariables": {
-			"description": "Überwachen und bearbeiten Sie Variablen und deren Werte, die durch den Code festgelegt wurden,<br/>mit der Möglichkeit, manuell neue Variablen aus einer Liste hinzuzufügen.",
-			"title": "Geräte Variablen"
-		},
-		"tutorial": {
-			"description": "Willkommen zum Stationeers Code Simulator tutorial.<br/>Gehen wir die Bedienelemente Schritt für Schritt durch.",
-			"title": "Tutorial"
-		},
-		"pinsAndAliases": {
-			"description": "Zeigt angebunden Pins sowie im Code definierte aliases des Gerätes.",
-			"title": "Pins und aliases"
-		},
-		"delete": {
-			"description": "Klicken Sie hier, um alles zurückzusetzen und mit einer neuen Simulation zu beginnen.<br/>Beachten Sie, dass dadurch <b>alle Ihre gespeicherten Codes gelöscht werden</b>!",
-			"title": "@:delete"
-		},
-		"reset": {
-			"description": "Löschen Sie alle Register und setzen Sie die Ausführung auf die erste Zeile zurück, um das Entfernen und Wiedereinsetzen des IC-Chips zu simulieren.",
-			"title": "@:control.reset"
-		},
-		"share": {
-			"description": "Generieren und kopieren Sie einen Link, um Ihren IC-Code und die Einstellungen der Simulationsumgebung zu teilen.",
-			"title": "@:control.share"
-		},
-		"speedControl": {
-			"description": "Verändere die Geschwindigkeit der Simulation hier.<br/> Wähle dabei aus einem der Folgenden Elementen:<br/>Langsam<br/>Normal<br/>Schnell",
-			"title": "Kontrolle der Geschwindigkeit"
-		},
-		"labeler": {
-			"description": "Ähnlich wie im Spiel mit dem @:labeller, damit kann dem Gerät ein eindeutiger Name zugewiesen werden.<br />Dies ermöglicht die Simulation von batch befehlen.",
-			"title": "@:addDevice.deviceName"
-		},
-		"save": {
-			"description": "Speichern Sie den aktuellen Code im Speicher des Browsers.<br />Für einen neuen Code, verwenden Sie die nächste Schaltfläche (@:control.saveAs).",
-			"title": "@:controll.save"
-		},
-		"open": {
-			"title": "@:control.open",
-			"description": "Öffnen Sie einen IC-Code aus einer Datei, stellen Sie einen zuvor exportierten Code wieder her, oder öffnen Sie ihn über einen freigegebenen Link."
-		},
-		"load": {
-			"title": "@:control.load",
-			"description": "Auflistung und Zugriff auf alle gespeicherten Codes im Speicher des Browsers."
-		},
-		"iCSimulation": {
-			"title": "@:controll.run",
-			"description": "Hier können Sie den Code in der Simulation abspielen.<br />Der Code wird in der Dauerschleife abgespielt bis Stopp gedrückt wird."
-		},
-		"manualControls": {
-			"title": "Manuelle Bedienungen",
-			"description": "Setzen Sie alle Register und die Ausführung zurück, um das Entfernen und Wiedereinsetzen des IC-Chips zu simulieren."
-		},
-		"addDevice": {
-			"title": "@:addDevice.deviceHash",
-			"description": "Hier kann das Gerät über den PrefabHash oder den PrefabNamen ausgewählt werden."
-		},
-		"pinD0-D5": {
-			"title": "@:addDevice.devicePin",
-			"description": "Bestimmen Sie einfach den Pin, an den das Gerät angeschlossen werden soll."
-		},
-		"converter": {
-			"title": "@:control.convert",
-			"description": "Generieren Sie einen Hash aus einem Namen. (Verwendet wird der CRC32 Algorithmus wie im Spiel.)<br/>Damit können die Batch-Name befehle verwendet werden."
-		},
-		"codeEditor": {
-			"title": "Code Editor",
-			"description": "Hier können Sie ihren IC code Schreiben oder existierenden code Einfügen."
-		},
-		"registersView": {
-			"title": "Register Ansicht",
-			"description": "Hier können Sie währen der Simulation des Codes alle Register überwachen oder ändern."
-		},
-		"errorLog": {
-			"title": "Fehler Log",
-			"description": "Alle Fehler die beim ausführen des Codes entstehen werden hier aufgezeichnet."
-		},
-		"simulationEnvironment": {
-			"title": "Simulations Umgebung",
-			"description": "Jedes Gerät wird als eine Karte repräsentiert, dies veranschaulicht Ihr gesamtes Setup."
-		},
-		"deviceName": {
-			"title": "Geräte Namen",
-			"description": "Zeigt den benutzerdefinierten Namen, der dem Gerät mit dem <b>@:labeller</b> zugewiesen wurde."
-		},
-		"deviceProperties": {
-			"title": "Geräte Eigenschaften",
-			"description": "Zugriff auf die vom konfigurierten Gerät generierten Eigenschaften, einschließlich seiner Referenz-ID, seines PrefabName und seines beschrifteten Namens."
-		},
-		"slots": {
-			"title": "Slots",
-			"description": "Jeder Slot des Geräts wird angezeigt, so dass Sie die Slot-variablen durch Anklicken bearbeiten können."
-		},
-		"remove": {
-			"title": "@:remove",
-			"description": "Verwenden Sie diese Option, um ein Gerät aus der Simulationsumgebung zu entfernen."
-		},
-		"step": {
-			"title": "@:control.step",
-			"description": "Führen Sie einen Schritt des Codes manuell aus."
-		},
-		"goto": {
-			"title": "@:control.toYield",
-			"description": "Führt alle Anweisungen von der aktuellen Zeile bis zur nächsten <b>Yield</b>-Anweisung aus."
-		},
-		"end_confirm": "Sind Sie sicher, dass Sie das Tutorial beenden wollen?"
-	},
-	"toast": {
-		"share": {
-			"summary": "Teilen",
-			"detail": "In die Zwischenablage kopiert"
-		},
-		"error": {
-			"summary": "Fehler",
-			"detail": "Fehler : {errMsg}"
-		}
-	},
-	"error": {
-		"yieldNotFound": "Yield Anweisung nicht gefunden"
-	},
 	"headers": {
 		"ResetAllData": "Alle Daten zurücksetzen",
 		"confirmAllDelete": "Sind Sie sicher, dass Sie alle Daten löschen möchten?"
@@ -223,11 +83,151 @@
 	"url": "Url",
 	"browser": "Browser",
 	"temp": "Temp",
+	"tutorial": {
+		"tutorial": {
+			"title": "Tutorial",
+			"description": "Willkommen zum Stationeers Code Simulator tutorial.<br/>Gehen wir die Bedienelemente Schritt für Schritt durch."
+		},
+		"fileMenu": {
+			"title": "Datei Menü",
+			"description": "In diesem Menü können Sie einen IC-Code und die zugehörigen Geräte speichern, exportieren oder laden."
+		},
+		"save": {
+			"title": "@:controll.save",
+			"description": "Speichern Sie den aktuellen Code im Speicher des Browsers.<br />Für einen neuen Code, verwenden Sie die nächste Schaltfläche (@:control.saveAs)."
+		},
+		"saveAs": {
+			"title": "@:control.saveAs",
+			"description": "Speichern Sie einen neuen Code im Speicher des Browsers und geben Sie ihm einen Namen.<br />Zusätzlich bietet diese Schaltfläche die Möglichkeit, Ihren Code und Ihre Geräte auf Ihren lokalen Rechner zu exportieren oder einen Link zu generieren, der geteilt werden kann."
+		},
+		"open": {
+			"title": "@:control.open",
+			"description": "Öffnen Sie einen IC-Code aus einer Datei, stellen Sie einen zuvor exportierten Code wieder her, oder öffnen Sie ihn über einen freigegebenen Link."
+		},
+		"load": {
+			"title": "@:control.load",
+			"description": "Auflistung und Zugriff auf alle gespeicherten Codes im Speicher des Browsers."
+		},
+		"share": {
+			"title": "@:control.share",
+			"description": "Generieren und kopieren Sie einen Link, um Ihren IC-Code und die Einstellungen der Simulationsumgebung zu teilen."
+		},
+		"iCSimulation": {
+			"title": "@:controll.run",
+			"description": "Hier können Sie den Code in der Simulation abspielen.<br />Der Code wird in der Dauerschleife abgespielt bis Stopp gedrückt wird."
+		},
+		"speedControl": {
+			"title": "Kontrolle der Geschwindigkeit",
+			"description": "Verändere die Geschwindigkeit der Simulation hier.<br/> Wähle dabei aus einem der Folgenden Elementen:<br/>Langsam<br/>Normal<br/>Schnell"
+		},
+		"manualControls": {
+			"title": "Manuelle Bedienungen",
+			"description": "Setzen Sie alle Register und die Ausführung zurück, um das Entfernen und Wiedereinsetzen des IC-Chips zu simulieren."
+		},
+		"addDevice": {
+			"title": "@:addDevice.deviceHash",
+			"description": "Hier kann das Gerät über den PrefabHash oder den PrefabNamen ausgewählt werden."
+		},
+		"labeler": {
+			"title": "@:addDevice.deviceName",
+			"description": "Ähnlich wie im Spiel mit dem @:labeller, damit kann dem Gerät ein eindeutiger Name zugewiesen werden.<br />Dies ermöglicht die Simulation von batch befehlen."
+		},
+		"pinD0-D5": {
+			"title": "@:addDevice.devicePin",
+			"description": "Bestimmen Sie einfach den Pin, an den das Gerät angeschlossen werden soll."
+		},
+		"deviceID": {
+			"title": "@:addDevice.deviceId",
+			"description": "Optional, Spezifizieren sie eine ReferenceID um die Befehle <b>ld</b>, <b>sd</b>, <b>putd</b> oder <b>getd</b> zu verwenden.<br/> du kannst die ID im Spiel über die Konfigurations-Karte auf dem Tablet auslesen."
+		},
+		"converter": {
+			"title": "@:control.convert",
+			"description": "Generieren Sie einen Hash aus einem Namen. (Verwendet wird der CRC32 Algorithmus wie im Spiel.)<br/>Damit können die Batch-Name befehle verwendet werden."
+		},
+		"codeEditor": {
+			"title": "Code Editor",
+			"description": "Hier können Sie ihren IC code Schreiben oder existierenden code Einfügen."
+		},
+		"registersView": {
+			"title": "Register Ansicht",
+			"description": "Hier können Sie währen der Simulation des Codes alle Register überwachen oder ändern."
+		},
+		"constantsView": {
+			"title": "Konstanten und Labels Ansicht",
+			"description": "Zugriff auf eine Liste von Standardkonstanten, die vom IC10 definiert wurden,<br/>zusammen mit Bezeichnungen(Zeilennummer) oder Konstanten, die in Ihrem Code angegeben wurden."
+		},
+		"errorLog": {
+			"title": "Fehler Log",
+			"description": "Alle Fehler die beim ausführen des Codes entstehen werden hier aufgezeichnet."
+		},
+		"simulationEnvironment": {
+			"title": "Simulations Umgebung",
+			"description": "Jedes Gerät wird als eine Karte repräsentiert, dies veranschaulicht Ihr gesamtes Setup."
+		},
+		"devicePrefabName": {
+			"title": "Geräte PrefabName",
+			"description": "Dies ist der Geräte-Typ der in der Stationpedia definiert ist."
+		},
+		"deviceName": {
+			"title": "Geräte Namen",
+			"description": "Zeigt den benutzerdefinierten Namen, der dem Gerät mit dem <b>@:labeller</b> zugewiesen wurde."
+		},
+		"pinsAndAliases": {
+			"title": "Pins und aliases",
+			"description": "Zeigt angebunden Pins sowie im Code definierte aliases des Gerätes."
+		},
+		"deviceProperties": {
+			"title": "Geräte Eigenschaften",
+			"description": "Zugriff auf die vom konfigurierten Gerät generierten Eigenschaften, einschließlich seiner Referenz-ID, seines PrefabName und seines beschrifteten Namens."
+		},
+		"deviceVariables": {
+			"title": "Geräte Variablen",
+			"description": "Überwachen und bearbeiten Sie Variablen und deren Werte, die durch den Code festgelegt wurden,<br/>mit der Möglichkeit, manuell neue Variablen aus einer Liste hinzuzufügen."
+		},
+		"slots": {
+			"title": "Slots",
+			"description": "Jeder Slot des Geräts wird angezeigt, so dass Sie die Slot-variablen durch Anklicken bearbeiten können."
+		},
+		"remove": {
+			"title": "@:remove",
+			"description": "Verwenden Sie diese Option, um ein Gerät aus der Simulationsumgebung zu entfernen."
+		},
+		"delete": {
+			"title": "@:delete",
+			"description": "Klicken Sie hier, um alles zurückzusetzen und mit einer neuen Simulation zu beginnen.<br/>Beachten Sie, dass dadurch <b>alle Ihre gespeicherten Codes gelöscht werden</b>!"
+		},
+		"step": {
+			"title": "@:control.step",
+			"description": "Führen Sie einen Schritt des Codes manuell aus."
+		},
+		"goto": {
+			"title": "@:control.toYield",
+			"description": "Führt alle Anweisungen von der aktuellen Zeile bis zur nächsten <b>Yield</b>-Anweisung aus."
+		},
+		"reset": {
+			"title": "@:control.reset",
+			"description": "Löschen Sie alle Register und setzen Sie die Ausführung auf die erste Zeile zurück, um das Entfernen und Wiedereinsetzen des IC-Chips zu simulieren."
+		},
+		"end_confirm": "Sind Sie sicher, dass Sie das Tutorial beenden wollen?"
+	},
 	"labeller": "Beschriftungsgerät",
+	"toast": {
+		"error": {
+			"summary": "Fehler",
+			"detail": "Fehler : {errMsg}"
+		},
+		"share": {
+			"summary": "Teilen",
+			"detail": "In die Zwischenablage kopiert"
+		}
+	},
+	"error": {
+		"yieldNotFound": "Yield Anweisung nicht gefunden"
+	},
+	"tags": "Tags",
 	"slots": "Slots",
-	"tags_description": "Tags zur Klassifizierung eines Objekts",
+	"props": "Parameter",
 	"reagents": "Reagenzien",
 	"networks": "Netzwerke",
-	"tags": "Tags",
-	"props": "Parameter"
+	"tags_description": "Tags zur Klassifizierung eines Objekts"
 }
