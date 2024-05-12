@@ -133,9 +133,8 @@
 
 		&.pi-weblate {
 			$size: 30px;
-			filter: brightness(0);
 			background-color: transparent;
-			background-image: url("https://poeditor.com/public/images/favicons/favicon.ico");
+			background-image: url("/public/icons/po-editor.png");
 			background-size: contain;
 			background-repeat: no-repeat;
 			display: block;
