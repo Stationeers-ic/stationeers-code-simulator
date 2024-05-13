@@ -1,5 +1,5 @@
 # Stationeers Code Simulator
-
+[![Deploy](https://github.com/Stationeers-ic/stationeers-code-simulator/actions/workflows/main.yml/badge.svg)](https://github.com/Stationeers-ic/stationeers-code-simulator/actions/workflows/main.yml)
 Stationeering provides a simulation of the IC10 chip inside Stationeers. IDE with error checking, full visibility of stack, registers and devices.
 
 # Translation
