@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // import {ref} from "vue";
 
-import {onMounted, ref} from "vue"
-import data, {Reagents} from "../../core/Data.ts"
+import { onMounted, ref } from "vue"
+import data, { Reagents } from "../../core/Data.ts"
 
 const props = defineProps(["id", "device"]) as Readonly<{
 	id: string
@@ -23,11 +23,13 @@ onMounted(async () => {
 			props.device.Reagents[d.hash] ?? 0
 		}
 		props.device.Reagents[d.hash] = props.device.Reagents[d.hash] ?? 0
-		items.value.push({
-			name: d.name,
-			image: d.items[0].image,
-			value: d.hash,
-		})
+		if (d.items.length > 0) {
+			items.value.push({
+				name: d.title,
+				image: d.items[0]?.image,
+				value: d.hash,
+			})
+		}
 	})
 	loading.value = false
 })

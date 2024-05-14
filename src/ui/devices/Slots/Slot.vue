@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import data, {Item, Slot} from "../../../core/Data.ts"
-import {z} from "zod"
-import {onMounted, ref, watch} from "vue"
+import data, { Item, Slot } from "../../../core/Data.ts"
+import { z } from "zod"
+import { onMounted, ref, watch } from "vue"
 import ic10 from "../../../core/ic10.ts"
 import ItemSelect from "./ItemSelect.vue"
 import Button from "primevue/button"
@@ -64,7 +64,16 @@ watch(itemCount, sync)
 		<span class="count">{{ Quantity }}</span>
 	</div>
 
-	<Dialog v-model:visible="visible" :header="`Edit slot #${props.data.SlotIndex} in device '${deviceName}'`" :style="{ width: '25rem' }">
+	<Dialog
+		v-model:visible="visible"
+		:header="
+			$t('device.slot.add.header', {
+				slotIndex: props.data.SlotIndex,
+				deviceName,
+			})
+		"
+		:style="{ width: '25rem' }"
+	>
 		<div class="flex flex-column gap-2">
 			<InputGroup>
 				<ItemSelect v-model="item" />

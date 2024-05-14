@@ -1,5 +1,6 @@
-import {nextTick} from "vue"
-import {createI18n, I18n, I18nOptions} from "vue-i18n"
+import { nextTick } from "vue"
+import { createI18n, I18n, I18nOptions } from "vue-i18n"
+import { Data } from "./core/Data.ts"
 
 export const supportedLanguage = (locale: unknown): locale is (typeof __languages__)[number] => {
 	//@ts-ignore
@@ -46,4 +47,6 @@ export async function setLocale(i18n: I18n, locale?: string) {
 		loadedLocales.push(locale)
 	}
 	setI18nLanguage(i18n, locale)
+	window.userLang = locale
+	Data.reset()
 }

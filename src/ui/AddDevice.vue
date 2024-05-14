@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Button from "primevue/button"
 import SelectDevice from "../ui/SelectDevice.vue"
-import {ref} from "vue"
+import { ref } from "vue"
 import ic10 from "../core/ic10.ts"
-import {str as Hash} from "crc-32"
-import {useToast} from "primevue/usetoast"
+import { str as Hash } from "crc-32"
+import { useToast } from "primevue/usetoast"
 import SelectPorts from "./devices/SelectPorts.vue"
 
 const props = defineProps(["id"])
@@ -67,7 +67,7 @@ function add() {
 			<div class="flex flex-column gap-2">
 				<InputGroup style="width: auto">
 					<InputGroupAddon>
-						<img loading="lazy" src="https://aws.traineratwot.site/icx/wiki_images/main/ItemLabeller.png" style="width: 18px" alt="Labeller" title="Labeller" />
+						<img loading="lazy" src="/public/icons/ItemLabeller.png" style="width: 18px" alt="Labeller" title="Labeller" />
 					</InputGroupAddon>
 					<FloatLabel>
 						<InputText id="deviceName" v-model="deviceName" />

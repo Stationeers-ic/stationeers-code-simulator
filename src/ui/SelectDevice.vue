@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
-import data, {Devices} from "../core/Data.ts"
+import { onMounted, ref } from "vue"
+import data, { Devices } from "../core/Data.ts"
 
 const loading = ref(true)
 const devices = ref<{ name: string; image: string | null; code: number }[]>([])
@@ -10,8 +10,12 @@ onMounted(async () => {
 	data.getDevices()
 		.then((res: Devices) => {
 			res.forEach((d) => {
+				let name = d.Title + " [" + d.PrefabName + "]"
+				if (window.userLang === "en") {
+					name = d.Title
+				}
 				devices.value.push({
-					name: d.PrefabName,
+					name: name,
 					image: d.image,
 					code: d.PrefabHash,
 				})
@@ -33,7 +37,7 @@ onMounted(async () => {
 		:loading="loading"
 		optionLabel="name"
 		optionValue="code"
-		placeholder="Select a device"
+		:placeholder="$t('addDevice.selectDevice')"
 		class="w-full md:w-14rem"
 	>
 		<template #option="slotProps">

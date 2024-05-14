@@ -42,6 +42,7 @@
 		"confirmDelete": "Are you sure you want to delete the save?"
 	},
 	"addDevice": {
+		"selectDevice": "Select device",
 		"header": "Add Device",
 		"description": "Add new device to environment",
 		"deviceHash": "Device hash",
@@ -238,5 +239,16 @@
 	"props": "Props",
 	"reagents": "Reagents",
 	"networks": "Networks",
-	"tags_description": "Tags for classifying an object"
+	"tags_description": "Tags for classifying an object",
+	"device": {
+		"actions": {
+			"pin": "Pin",
+			"rename": "Rename"
+		},
+		"slot": {
+			"add": {
+				"header": "Edit slot #{slotIndex} in device '{deviceName}'"
+			}
+		}
+	}
 }

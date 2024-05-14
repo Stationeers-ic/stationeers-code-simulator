@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import ic10 from "../../core/ic10.ts"
-import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
-import data, {Device, Devices} from "../../core/Data.ts"
+import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
+import data, { Device, Devices } from "../../core/Data.ts"
 import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"
 import DeviceReagents from "./DeviceReagents.vue"
 import Stack from "../../components/Stack.vue"
+import { hash } from "ic10"
 
 const props = defineProps<{
 	id: string
@@ -54,6 +55,22 @@ function add() {
 function pin() {
 	emit("pin", props.id, CARD.value?.offsetWidth ?? 400)
 }
+function rename() {
+	const n = prompt("New name", "")
+	if (n === null) {
+		return
+	}
+
+	if (n.trim() !== "") {
+		name.value = n
+		ic10.getEnv().deviceNames.set(props.id, n)
+		ic10.getEnv().setDeviceProp(props.id, "Name", hash(n))
+	} else {
+		name.value = ""
+		ic10.getEnv().deviceNames.delete(props.id)
+		ic10.getEnv().setDeviceProp(props.id, "Name", 0)
+	}
+}
 </script>
 
 <template>
@@ -62,14 +79,32 @@ function pin() {
 			<template #header>
 				<div :class="$style.image">
 					<Image loading="lazy" alt="user header" :src="image" />
-					<Button v-if="!props.isPin" @click="pin" :class="$style.pin" icon="pi pi-arrow-up-right" severity="secondary" style="margin-top: 5px" />
+					<Button
+						v-if="!props.isPin"
+						v-tooltip="$t('device.actions.pin')"
+						@click="pin"
+						:class="$style.pin"
+						icon="pi pi-arrow-up-right"
+						severity="secondary"
+						style="margin-top: 5px"
+					/>
+					<Button
+						v-if="!props.isPin"
+						@click="rename"
+						v-tooltip="$t('device.actions.rename')"
+						:class="$style.labeler"
+						icon="pi pi-labeler"
+						severity="secondary"
+						style="margin-top: 5px"
+					/>
 				</div>
 			</template>
 			<template #title>
-				<div :class="$style.break">{{ deviceData?.PrefabName }}</div>
+				<div :class="$style.break">{{ deviceData?.Title }}</div>
 			</template>
 			<template #subtitle>
-				<span :class="$style.break">{{ name || " " }}</span>
+				<div :class="$style.break">{{ deviceData?.PrefabName || " " }}</div>
+				<div :class="$style.break">{{ name || " " }}</div>
 			</template>
 			<template #content>
 				<div class="device-ports">
@@ -188,6 +223,10 @@ function pin() {
 .pin {
 	position: absolute;
 	right: 5px;
+}
+.labeler {
+	position: absolute;
+	left: 5px;
 }
 </style>
 

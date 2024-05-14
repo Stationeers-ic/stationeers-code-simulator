@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
-import data, {Item, Items} from "../../../core/Data.ts"
+import { onMounted, ref } from "vue"
+import data, { Item, Items } from "../../../core/Data.ts"
 
 const model = defineModel<Item | null>()
 const loading = ref(true)
@@ -10,8 +10,12 @@ onMounted(async () => {
 	data.getItems()
 		.then((res: Items) => {
 			res.forEach((d) => {
+				let name = d.Title + " [" + d.PrefabName + "]"
+				if (window.userLang === "en") {
+					name = d.Title
+				}
 				items.value.push({
-					name: d.PrefabName,
+					name: name,
 					image: d.image,
 					value: d,
 				})
