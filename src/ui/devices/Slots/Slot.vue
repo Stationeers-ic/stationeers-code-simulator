@@ -18,14 +18,14 @@ onMounted(async () => {
 	const itemHash = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.OccupantHash`) // восстановление предмета
 	item.value = (await data.getItems()).find((e) => e.PrefabHash === itemHash) ?? null
 	itemCount.value = ic10.getEnv().getDeviceProp(props.deviceId, `Slots.${slotIndex}.Quantity`) // восстановление количества
-	deviceName.value = ic10.getEnv().devicesAttached.get(props.deviceId) ?? ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ?? (await getPrefabName())
+	deviceName.value = ic10.getEnv().devicesAttached.get(props.deviceId) ?? ic10.getEnv().deviceNames.get(props.deviceId)?.toString() ?? (await getPrefabName()) + " [" + props.deviceId + "]"
 })
 
 async function getPrefabName() {
 	const devicesData = await data.getDevices()
 	const PrefabHash = ic10.getEnv().devices.get(props.deviceId)?.PrefabHash
 	const deviceData = devicesData.find((d) => d.PrefabHash === PrefabHash) ?? null
-	return deviceData?.PrefabName?.toString() ?? ""
+	return deviceData?.Title?.toString() ?? ""
 }
 
 const visible = ref(false)
