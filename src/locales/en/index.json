@@ -42,7 +42,6 @@
 		"confirmDelete": "Are you sure you want to delete the save?"
 	},
 	"addDevice": {
-		"selectDevice": "Select device",
 		"header": "Add Device",
 		"description": "Add new device to environment",
 		"deviceHash": "Device hash",
@@ -52,7 +51,8 @@
 		"deviceHashHelp": "Enter or select your device PrefabHash or PrefabName.",
 		"deviceNameHelp": "Enter the device name as you would do with @:labeller",
 		"devicePortHelp": "Select the pin to which the device is assigned on the IC or leave empty",
-		"deviceIdHelp": "Enter device id or leave it empty."
+		"deviceIdHelp": "Enter device id or leave it empty.",
+		"selectDevice": "Select device"
 	},
 	"confirmReset": {
 		"info": {
@@ -242,7 +242,7 @@
 	"tags_description": "Tags for classifying an object",
 	"device": {
 		"actions": {
-			"pin": "Pin",
+			"pin": "Pin tab",
 			"rename": "Rename"
 		},
 		"slot": {

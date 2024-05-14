@@ -1,153 +1,5 @@
 {
-	"addDevice": {
-		"devicePortHelp": "Valitse portti, johon laite on liitetty IC:ssä, tai jätä tyhjäksi",
-		"description": "Lisää uusi laite ympäristöön",
-		"header": "Lisää laite",
-		"deviceHash": "Laitteen hash",
-		"deviceName": "Laitteen nimi",
-		"deviceId": "Laitteen tunnus",
-		"deviceHashHelp": "Kirjoita tai valitse laitteesi PrefabHash tai PrefabName.",
-		"deviceNameHelp": "Kirjoita laitteen nimi kuten Labellerin kanssa",
-		"deviceIdHelp": "Anna laitteen tunnus tai jätä se tyhjäksi.",
-		"devicePin": "IC Portti"
-	},
-	"constantAndLabels": {
-		"constantAndLabels": "Vakiot ja Nimiket"
-	},
-	"settings": {
-		"saves": "Tallennukset",
-		"languages": "Kielet",
-		"confirmDelete": "Haluatko varmasti poistaa tallennuksen?",
-		"noSaves": "Ei tallenteita",
-		"savesNotFound": "Tallenteita ei löytynyt",
-		"searchSave": "Hae tallenteita"
-	},
-	"tutorial": {
-		"tutorial": {
-			"description": "Tervetuloa Stationeers Code Simulator -opetusohjelmaan.<br />Käydään ohjaimet läpi vaihe vaiheelta.",
-			"title": "Opetusohjelma"
-		},
-		"fileMenu": {
-			"title": "Tiedosto-valikko",
-			"description": "Tallenna, vie tai lataa IC-koodi ja siihen liittyvät laitteet tästä valikosta."
-		},
-		"share": {
-			"title": "@:control.share",
-			"description": "Luo ja kopioi linkki IC-koodin ja simulointiympäristön asetusten jakamiseksi."
-		},
-		"manualControls": {
-			"description": "Tyhjennä kaikki rekisterit ja palauta suoritus ensimmäiselle riville simuloiden IC-sirun poistamista ja sijoittamista.",
-			"title": "Manuaaliset säätimet"
-		},
-		"save": {
-			"title": "Tallenna",
-			"description": "Tallenna nykyinen koodi selaimen muistiin.<br />Jos haluat uuden koodin, käytä seuraava-painiketta (@:control.saveAs)."
-		},
-		"saveAs": {
-			"title": "@:control.saveAs",
-			"description": "Tallenna uusi koodi selaimen muistiin ja anna sille nimi.<br />Lisäksi tämä painike tarjoaa mahdollisuuden viedä koodisi ja laitteesi paikalliseen koneellesi tai luoda jaettava linkki."
-		},
-		"open": {
-			"title": "@:control.open",
-			"description": "Avaa IC-koodi tiedostosta, palauta aiemmin viety koodi tai avaa se jaetusta linkistä."
-		},
-		"load": {
-			"title": "@:control.load",
-			"description": "Listaa kaikki selaimen muistiin tallennetut koodit ja käytä niitä."
-		},
-		"iCSimulation": {
-			"title": "IC-simulaatio",
-			"description": "Täällä voit lisätä laitteita simulaatioympäristöösi.<br />Katsotaanpa sitä yksityiskohtaisesti."
-		},
-		"speedControl": {
-			"title": "Nopeudensäätö",
-			"description": "Säädä simuloinnin nopeutta tästä."
-		},
-		"addDevice": {
-			"title": "@:control.addDevice",
-			"description": "Kun laite on määritetty, napsauta tätä lisätäksesi sen simulointiympäristöösi."
-		},
-		"remove": {
-			"description": "Käytä tätä vaihtoehtoa laitteen poistamiseen simulointiympäristöstä.",
-			"title": "@:remove"
-		},
-		"delete": {
-			"description": "Napsauta tätä nollataksesi kaiken ja aloittaaksesi uudella simulaatiolla.<br />Huomaa, että tämä toiminto <b>poistaa myös kaikki tallennetut koodit</b>!",
-			"title": "@:delete"
-		},
-		"labeler": {
-			"description": "Kuten pelissä, anna jokaiselle laitteelle erillinen nimi.<br />Tämä mahdollistaa erän nimettyjen komentojen simuloinnin.",
-			"title": "@:labeller"
-		},
-		"deviceName": {
-			"description": "Tarkista laitteelle määritetty mukautettu nimi käyttämällä <b>@:labeller</b>.",
-			"title": "Laitteen nimi"
-		},
-		"pinsAndAliases": {
-			"description": "Tarkista kaikki koodissasi olevat portit ja aliakset, jotka liittyvät laitteeseen.",
-			"title": "Porttit ja aliaksia"
-		},
-		"deviceProperties": {
-			"title": "Laitteen ominaisuudet",
-			"description": "Käytä määritetystä laitteesta luotuja ominaisuuksia, mukaan lukien sen viitetunnus, esivalmistettu nimi ja nimiöity nimi."
-		},
-		"deviceVariables": {
-			"title": "Laitteen muuttujat",
-			"description": "Tarkkaile ja muokkaa koodin asettamia muuttujia ja niiden arvoja, ja voit lisätä manuaalisesti uusia muuttujia luettelosta."
-		},
-		"slots": {
-			"description": "Laitteen jokainen paikka näytetään, jolloin voit muokata paikkamuuttujia napsauttamalla niitä.",
-			"title": "Paikka"
-		},
-		"pinD0-D5": {
-			"title": "Portti d0-d5",
-			"description": "Tai määritä portti, johon laite liitetään."
-		},
-		"deviceID": {
-			"title": "Laitteen ID",
-			"description": "Voit halutessasi määrittää ReferenceID-tunnuksen käytettäväksi <b>ld</b>-, <b>sd</b>-, <b>putd</b>- tai <b>getd</b>-ohjeiden kanssa.<br />Voit etsiä tämän ID:n pelissä tablet-laitteesi \"Configuration card\" avulla."
-		},
-		"converter": {
-			"description": "Luo tiiviste CRC32-funktiolla nimestä, kuten Stationeersissä käytetään.",
-			"title": "Konvertteri"
-		},
-		"codeEditor": {
-			"title": "Koodieditori",
-			"description": "Täällä voit joko kirjoittaa IC-koodisi tai kopioida ja liittää olemassa olevan koodin."
-		},
-		"registersView": {
-			"title": "Rekisterinäkymä",
-			"description": "Tarkkaile ja säädä manuaalisesti kaikkia rekistereitä simulaation aikana."
-		},
-		"constantsView": {
-			"title": "Vakionäkymä",
-			"description": "Käytä IC10:n määrittämien oletusvakioiden luetteloa sekä koodissa määritettyjä tunnisteita (rivin numero) tai vakioita."
-		},
-		"errorLog": {
-			"title": "Virheloki",
-			"description": "Kaikki koodin suoritusvirheet tallennetaan tähän."
-		},
-		"simulationEnvironment": {
-			"title": "Simulaatioympäristö",
-			"description": "Jokaista ympäristöön lisättyä laitetta edustaa kortti, joka tarjoaa visuaalisen yleiskatsauksen asetuksistasi."
-		},
-		"devicePrefabName": {
-			"title": "Laiten PrefabName",
-			"description": "Tämä on Stationpedian määrittämä laitetyyppi."
-		},
-		"step": {
-			"description": "Suorita yksi koodin vaihe manuaalisesti.",
-			"title": "@:control.step"
-		},
-		"goto": {
-			"description": "Suorita kaikki ohjeet nykyiseltä riviltä seuraavaan <b>yield</b>-käskyyn.",
-			"title": "@:control.toYield"
-		},
-		"reset": {
-			"description": "Tyhjennä kaikki rekisterit ja palauta suoritus ensimmäiselle riville simuloiden IC-sirun poistamista ja sijoittamista.",
-			"title": "@:control.reset"
-		}
-	},
+	"ICON": "flag flag-fi",
 	"headers": {
 		"ResetAllData": "Nollaa kaikki tiedot",
 		"confirmAllDelete": "Haluatko varmasti tyhjentää KAIKKI sovellustiedot?"
@@ -155,7 +7,9 @@
 	"control": {
 		"file": "Tiedosto",
 		"run": "Suorita",
+		"stop": "Lopettaa",
 		"step": "Vaihe",
+		"toYield": "To Yield",
 		"reset": "Nollaa",
 		"addDevice": "Lisää laite",
 		"convert": "Muunna",
@@ -166,10 +20,37 @@
 		"save": "Tallenna",
 		"saveAs": "Tallenna nimellä",
 		"open": "Avaa",
-		"share": "Jaa",
-		"stop": "Lopettaa",
 		"load": "Lataa",
-		"toYield": "To Yield"
+		"share": "Jaa"
+	},
+	"stack": {
+		"stack": "Pino"
+	},
+	"registers": {
+		"registers": "Rekisterit"
+	},
+	"constantAndLabels": {
+		"constantAndLabels": "Vakiot ja Nimiket"
+	},
+	"settings": {
+		"languages": "Kielet",
+		"saves": "Tallennukset",
+		"noSaves": "Ei tallenteita",
+		"savesNotFound": "Tallenteita ei löytynyt",
+		"searchSave": "Hae tallenteita",
+		"confirmDelete": "Haluatko varmasti poistaa tallennuksen?"
+	},
+	"addDevice": {
+		"header": "Lisää laite",
+		"description": "Lisää uusi laite ympäristöön",
+		"deviceHash": "Laitteen hash",
+		"deviceName": "Laitteen nimi",
+		"devicePin": "IC Portti",
+		"deviceId": "Laitteen tunnus",
+		"deviceHashHelp": "Kirjoita tai valitse laitteesi PrefabHash tai PrefabName.",
+		"deviceNameHelp": "Kirjoita laitteen nimi kuten Labellerin kanssa",
+		"devicePortHelp": "Valitse portti, johon laite on liitetty IC:ssä, tai jätä tyhjäksi",
+		"deviceIdHelp": "Anna laitteen tunnus tai jätä se tyhjäksi."
 	},
 	"confirmReset": {
 		"info": {
@@ -197,17 +78,136 @@
 	"cancel": "Peruuta",
 	"remove": "Poista",
 	"delete": "Poistaa",
+	"code": "Koodi menee tänne",
 	"errors": "Virheet",
 	"url": "Url",
 	"browser": "Selain",
 	"temp": "Väliaikainen varasto",
-	"ICON": "flag flag-fi",
-	"stack": {
-		"stack": "Pino"
+	"tutorial": {
+		"tutorial": {
+			"title": "Opetusohjelma",
+			"description": "Tervetuloa Stationeers Code Simulator -opetusohjelmaan.<br />Käydään ohjaimet läpi vaihe vaiheelta."
+		},
+		"fileMenu": {
+			"title": "Tiedosto-valikko",
+			"description": "Tallenna, vie tai lataa IC-koodi ja siihen liittyvät laitteet tästä valikosta."
+		},
+		"save": {
+			"title": "Tallenna",
+			"description": "Tallenna nykyinen koodi selaimen muistiin.<br />Jos haluat uuden koodin, käytä seuraava-painiketta (@:control.saveAs)."
+		},
+		"saveAs": {
+			"title": "@:control.saveAs",
+			"description": "Tallenna uusi koodi selaimen muistiin ja anna sille nimi.<br />Lisäksi tämä painike tarjoaa mahdollisuuden viedä koodisi ja laitteesi paikalliseen koneellesi tai luoda jaettava linkki."
+		},
+		"open": {
+			"title": "@:control.open",
+			"description": "Avaa IC-koodi tiedostosta, palauta aiemmin viety koodi tai avaa se jaetusta linkistä."
+		},
+		"load": {
+			"title": "@:control.load",
+			"description": "Listaa kaikki selaimen muistiin tallennetut koodit ja käytä niitä."
+		},
+		"share": {
+			"title": "@:control.share",
+			"description": "Luo ja kopioi linkki IC-koodin ja simulointiympäristön asetusten jakamiseksi."
+		},
+		"iCSimulation": {
+			"title": "IC-simulaatio",
+			"description": "Täällä voit lisätä laitteita simulaatioympäristöösi.<br />Katsotaanpa sitä yksityiskohtaisesti."
+		},
+		"speedControl": {
+			"title": "Nopeudensäätö",
+			"description": "Säädä simuloinnin nopeutta tästä."
+		},
+		"manualControls": {
+			"title": "Manuaaliset säätimet",
+			"description": "Tyhjennä kaikki rekisterit ja palauta suoritus ensimmäiselle riville simuloiden IC-sirun poistamista ja sijoittamista."
+		},
+		"addDevice": {
+			"title": "@:control.addDevice",
+			"description": "Kun laite on määritetty, napsauta tätä lisätäksesi sen simulointiympäristöösi."
+		},
+		"labeler": {
+			"title": "@:labeller",
+			"description": "Kuten pelissä, anna jokaiselle laitteelle erillinen nimi.<br />Tämä mahdollistaa erän nimettyjen komentojen simuloinnin."
+		},
+		"pinD0-D5": {
+			"title": "Portti d0-d5",
+			"description": "Tai määritä portti, johon laite liitetään."
+		},
+		"deviceID": {
+			"title": "Laitteen ID",
+			"description": "Voit halutessasi määrittää ReferenceID-tunnuksen käytettäväksi <b>ld</b>-, <b>sd</b>-, <b>putd</b>- tai <b>getd</b>-ohjeiden kanssa.<br />Voit etsiä tämän ID:n pelissä tablet-laitteesi \"Configuration card\" avulla."
+		},
+		"converter": {
+			"title": "Konvertteri",
+			"description": "Luo tiiviste CRC32-funktiolla nimestä, kuten Stationeersissä käytetään."
+		},
+		"codeEditor": {
+			"title": "Koodieditori",
+			"description": "Täällä voit joko kirjoittaa IC-koodisi tai kopioida ja liittää olemassa olevan koodin."
+		},
+		"registersView": {
+			"title": "Rekisterinäkymä",
+			"description": "Tarkkaile ja säädä manuaalisesti kaikkia rekistereitä simulaation aikana."
+		},
+		"constantsView": {
+			"title": "Vakionäkymä",
+			"description": "Käytä IC10:n määrittämien oletusvakioiden luetteloa sekä koodissa määritettyjä tunnisteita (rivin numero) tai vakioita."
+		},
+		"errorLog": {
+			"title": "Virheloki",
+			"description": "Kaikki koodin suoritusvirheet tallennetaan tähän."
+		},
+		"simulationEnvironment": {
+			"title": "Simulaatioympäristö",
+			"description": "Jokaista ympäristöön lisättyä laitetta edustaa kortti, joka tarjoaa visuaalisen yleiskatsauksen asetuksistasi."
+		},
+		"devicePrefabName": {
+			"title": "Laiten PrefabName",
+			"description": "Tämä on Stationpedian määrittämä laitetyyppi."
+		},
+		"deviceName": {
+			"title": "Laitteen nimi",
+			"description": "Tarkista laitteelle määritetty mukautettu nimi käyttämällä <b>@:labeller</b>."
+		},
+		"pinsAndAliases": {
+			"title": "Porttit ja aliaksia",
+			"description": "Tarkista kaikki koodissasi olevat portit ja aliakset, jotka liittyvät laitteeseen."
+		},
+		"deviceProperties": {
+			"title": "Laitteen ominaisuudet",
+			"description": "Käytä määritetystä laitteesta luotuja ominaisuuksia, mukaan lukien sen viitetunnus, esivalmistettu nimi ja nimiöity nimi."
+		},
+		"deviceVariables": {
+			"title": "Laitteen muuttujat",
+			"description": "Tarkkaile ja muokkaa koodin asettamia muuttujia ja niiden arvoja, ja voit lisätä manuaalisesti uusia muuttujia luettelosta."
+		},
+		"slots": {
+			"title": "Paikka",
+			"description": "Laitteen jokainen paikka näytetään, jolloin voit muokata paikkamuuttujia napsauttamalla niitä."
+		},
+		"remove": {
+			"title": "@:remove",
+			"description": "Käytä tätä vaihtoehtoa laitteen poistamiseen simulointiympäristöstä."
+		},
+		"delete": {
+			"title": "@:delete",
+			"description": "Napsauta tätä nollataksesi kaiken ja aloittaaksesi uudella simulaatiolla.<br />Huomaa, että tämä toiminto <b>poistaa myös kaikki tallennetut koodit</b>!"
+		},
+		"step": {
+			"title": "@:control.step",
+			"description": "Suorita yksi koodin vaihe manuaalisesti."
+		},
+		"goto": {
+			"title": "@:control.toYield",
+			"description": "Suorita kaikki ohjeet nykyiseltä riviltä seuraavaan <b>yield</b>-käskyyn."
+		},
+		"reset": {
+			"title": "@:control.reset",
+			"description": "Tyhjennä kaikki rekisterit ja palauta suoritus ensimmäiselle riville simuloiden IC-sirun poistamista ja sijoittamista."
+		}
 	},
-	"registers": {
-		"registers": "Rekisterit"
-	},
-	"code": "Koodi menee tänne",
 	"labeller": "Labelleri"
 }
