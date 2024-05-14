@@ -1,0 +1,254 @@
+{
+	"ICON": "flag flag-fr",
+	"headers": {
+		"issues": "Questions ouvertes",
+		"ResetAllData": "Réinitialiser toutes les données",
+		"confirmAllDelete": "Êtes-vous sûr de vouloir effacer toutes les données de l'application ?"
+	},
+	"control": {
+		"file": "Déposer",
+		"run": "Courir",
+		"stop": "Arrêt",
+		"step": "Étape",
+		"toYield": "Produire",
+		"reset": "Réinitialiser",
+		"addDevice": "Ajouter un appareil",
+		"convert": "Convertir",
+		"stringToHash": "Chaîne en hachage",
+		"slow": "Lent",
+		"normal": "Normale",
+		"fast": "Rapide",
+		"save": "Sauvegarder",
+		"saveAs": "Enregistrer sous",
+		"open": "Ouvrir",
+		"load": "Charger",
+		"share": "Partager"
+	},
+	"stack": {
+		"stack": "Empiler"
+	},
+	"registers": {
+		"registers": "Registres"
+	},
+	"constantAndLabels": {
+		"constantAndLabels": "Constante et étiquettes"
+	},
+	"settings": {
+		"languages": "Langues",
+		"saves": "Enregistre",
+		"noSaves": "Aucune sauvegarde",
+		"savesNotFound": "Aucune sauvegarde trouvée",
+		"searchSave": "Rechercher enregistrer",
+		"confirmDelete": "Êtes-vous sûr de vouloir supprimer la sauvegarde ?"
+	},
+	"addDevice": {
+		"header": "Ajouter un appareil",
+		"description": "Ajouter un nouvel appareil à l'environnement",
+		"deviceHash": "Hachage de l'appareil",
+		"deviceName": "Nom de l'appareil",
+		"devicePin": "Broche IC",
+		"deviceId": "Reference de l'appareil",
+		"deviceHashHelp": "Entrez ou sélectionnez votre appareil PrefabHash ou PrefabName.",
+		"deviceNameHelp": "Saisissez le nom de l'appareil comme vous le feriez avec @:labeller",
+		"devicePortHelp": "Sélectionnez la broche à laquelle l'appareil est attribué sur le circuit intégré ou laissez vide",
+		"deviceIdHelp": "Entrez l'identifiant de l'appareil ou laissez-le vide.",
+		"selectDevice": "Choisir un appareil"
+	},
+	"confirmReset": {
+		"info": {
+			"summary": "Confirmé",
+			"detail": "Réinitialisation terminée"
+		},
+		"error": {
+			"summary": "Annulé",
+			"detail": "Réinitialisation annulée"
+		}
+	},
+	"toastSave": {
+		"success": {
+			"summary": "Enregistré",
+			"detail": "Enregistré sur {name}"
+		}
+	},
+	"toastLoad": {
+		"success": {
+			"summary": "Chargé",
+			"detail": "Chargé depuis {magasin}"
+		}
+	},
+	"add": "Ajouter",
+	"cancel": "Annuler",
+	"remove": "Retirer",
+	"delete": "Supprimer",
+	"code": "Le code va ici",
+	"errors": "les erreurs",
+	"url": "URL",
+	"browser": "Navigateur",
+	"temp": "Température",
+	"tutorial": {
+		"tutorial": {
+			"title": "Didacticiel",
+			"description": "Bienvenue dans le didacticiel Stationeers Code Simulator.<br />Passons en revue les commandes étape par étape."
+		},
+		"fileMenu": {
+			"title": "Menu Fichier",
+			"description": "Enregistrez, exportez ou chargez un code IC et ses appareils associés à partir de ce menu."
+		},
+		"save": {
+			"title": "Sauvegarder",
+			"description": "Enregistrez le code actuel dans la mémoire du navigateur.<br />Pour un nouveau code, utilisez le bouton suivant (@:control.saveAs)."
+		},
+		"saveAs": {
+			"title": "@:control.saveAs",
+			"description": "Enregistrez un nouveau code dans la mémoire du navigateur et attribuez-lui un nom.<br />De plus, ce bouton offre la possibilité d'exporter votre code et vos appareils vers votre machine locale ou de générer un lien partageable."
+		},
+		"open": {
+			"title": "@:control.open",
+			"description": "Ouvrez un code IC à partir d'un fichier, restaurez un code précédemment exporté ou ouvrez-le à partir d'un lien partagé."
+		},
+		"load": {
+			"title": "@:control.load",
+			"description": "Répertoriez et accédez à tous les codes enregistrés dans la mémoire du navigateur."
+		},
+		"share": {
+			"title": "@:control.share",
+			"description": "Générez et copiez un lien pour partager votre code IC et les paramètres de votre environnement de simulation."
+		},
+		"iCSimulation": {
+			"title": "Simulation de circuits intégrés",
+			"description": "Ici, vous pouvez ajouter des appareils à votre environnement de simulation.<br />Voyons cela en détail."
+		},
+		"speedControl": {
+			"title": "Contrôle de vitesse",
+			"description": "Ajustez la vitesse de simulation ici."
+		},
+		"manualControls": {
+			"title": "Commandes manuelles",
+			"description": "Effacez tous les registres et réinitialisez l'exécution à la première ligne, en simulant le retrait et la remise en place de la puce IC."
+		},
+		"addDevice": {
+			"title": "@:control.addDevice",
+			"description": "Une fois l'appareil configuré, cliquez ici pour l'ajouter à votre environnement de simulation."
+		},
+		"labeler": {
+			"title": "@:étiqueteur",
+			"description": "Semblable au jeu, attribuez un nom distinct à chaque appareil.<br />Cela permet la simulation de commandes nommées par lots."
+		},
+		"pinD0-D5": {
+			"title": "Broche d0-d5",
+			"description": "Ou déterminez simplement la broche à laquelle l'appareil se connectera."
+		},
+		"deviceID": {
+			"title": "Reference de l'appareil",
+			"description": "Vous pouvez éventuellement spécifier un ReferenceID à utiliser avec les instructions <b>ld</b>, <b>sd</b>, <b>putd</b> ou <b>getd</b>.<br /> Vous pouvez localiser cet identifiant dans le jeu à l'aide d'une carte de configuration sur votre tablette."
+		},
+		"converter": {
+			"title": "Convertisseur",
+			"description": "Générez un hachage à l'aide de la fonction CRC32 à partir d'un nom, tel qu'utilisé dans Stationeers."
+		},
+		"codeEditor": {
+			"title": "Éditeur de codes",
+			"description": "Ici, vous pouvez soit écrire votre code IC, soit copier-coller le code existant."
+		},
+		"registersView": {
+			"title": "Vue des registres",
+			"description": "Surveillez et ajustez manuellement tous les registres pendant la simulation."
+		},
+		"constantsView": {
+			"title": "Vue Constantes",
+			"description": "Accédez à une liste de constantes par défaut définies par l'IC10, ainsi que des étiquettes (numéro de ligne) ou des constantes spécifiées dans votre code."
+		},
+		"errorLog": {
+			"title": "Journal des erreurs",
+			"description": "Toutes les erreurs d’exécution de code seront enregistrées ici."
+		},
+		"simulationEnvironment": {
+			"title": "Environnement de simulation",
+			"description": "Chaque appareil ajouté à l'environnement est représenté par une carte, offrant un aperçu visuel de votre configuration."
+		},
+		"devicePrefabName": {
+			"title": "Nom préfabriqué de l'appareil",
+			"description": "Il s'agit du type d'appareil tel que défini par Stationpedia."
+		},
+		"deviceName": {
+			"title": "Nom de l'appareil",
+			"description": "Vérifiez le nom personnalisé attribué à l'appareil à l'aide de <b>@:labeller</b>."
+		},
+		"pinsAndAliases": {
+			"title": "Épingles et alias",
+			"description": "Vérifiez toutes les broches et alias associés à l'appareil dans votre code."
+		},
+		"deviceProperties": {
+			"title": "Propriétés de l'appareil",
+			"description": "Accédez aux propriétés générées à partir du périphérique configuré, y compris son ID de référence, son nom préfabriqué et son nom étiqueté."
+		},
+		"deviceVariables": {
+			"title": "Variables du périphérique",
+			"description": "Surveillez et modifiez les variables et leurs valeurs définies par le code, avec la possibilité d'ajouter manuellement de nouvelles variables à partir d'une liste."
+		},
+		"slots": {
+			"title": "Machines à sous",
+			"description": "Chaque emplacement de l'appareil est affiché, vous permettant d'éditer les variables d'emplacement en cliquant dessus."
+		},
+		"remove": {
+			"title": "@:retirer",
+			"description": "Utilisez cette option pour supprimer un périphérique de l'environnement de simulation."
+		},
+		"delete": {
+			"title": "@:supprimer",
+			"description": "Cliquez ici pour tout réinitialiser et recommencer une nouvelle simulation.<br />Sachez que cette action <b>effacera également tous vos codes enregistrés</b> !"
+		},
+		"step": {
+			"title": "@:contrôle.étape",
+			"description": "Exécutez manuellement une étape du code."
+		},
+		"goto": {
+			"title": "@:control.toYield",
+			"description": "Exécute toutes les instructions de la ligne actuelle jusqu'à l'instruction <b>yield</b> suivante."
+		},
+		"reset": {
+			"title": "@:control.reset",
+			"description": "Effacez tous les registres et réinitialisez l'exécution à la première ligne, en simulant le retrait et la remise en place de la puce IC."
+		},
+		"end_confirm": "Êtes-vous sûr de vouloir terminer le didacticiel ?",
+		"stack": {
+			"title": "Empiler dans l'appareil",
+			"description": "Liste de 512 éléments de mise. (lire écrire)"
+		},
+		"pin_device": {
+			"title": "Appareil à épingler",
+			"description": "Fixez l'appareil à l'écran pour qu'il soit toujours à portée de main"
+		}
+	},
+	"labeller": "Étiqueteuse",
+	"toast": {
+		"error": {
+			"summary": "Erreur",
+			"detail": "Erreur : {errMsg}"
+		},
+		"share": {
+			"summary": "Partager",
+			"detail": "Copié dans le presse-papier"
+		}
+	},
+	"error": {
+		"yieldNotFound": "Instruction de rendement introuvable"
+	},
+	"tags": "Mots clés",
+	"slots": "Machines à sous",
+	"props": "Accessoires",
+	"reagents": "Réactifs",
+	"networks": "Réseaux",
+	"tags_description": "Balises pour classer un objet",
+	"device": {
+		"actions": {
+			"pin": "Onglet broche",
+			"rename": "Renommer"
+		},
+		"slot": {
+			"add": {
+				"header": "Modifier l'emplacement n° {slotIndex} dans l'appareil '{deviceName}'"
+			}
+		}
+	}
+}

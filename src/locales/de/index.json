@@ -1,6 +1,7 @@
 {
 	"ICON": "flag flag-de",
 	"headers": {
+		"issues": "Offene Punkte",
 		"ResetAllData": "Alle Daten zurücksetzen",
 		"confirmAllDelete": "Sind Sie sicher, dass Sie alle Daten löschen möchten?"
 	},
@@ -50,7 +51,8 @@
 		"deviceHashHelp": "Geben Sie Ihr Gerät PrefabHash oder PrefabName ein oder wählen Sie es aus.",
 		"deviceNameHelp": "Geben Sie den Gerätenamen ein wie mit @:labeller",
 		"devicePortHelp": "Wählen Sie den Pin, dem das Gerät auf dem IC zugewiesen ist, oder lassen Sie ihn leer",
-		"deviceIdHelp": "Geben Sie die Geräte-ID ein oder lassen Sie es leer."
+		"deviceIdHelp": "Geben Sie die Geräte-ID ein oder lassen Sie es leer.",
+		"selectDevice": "Gerät auswählen"
 	},
 	"confirmReset": {
 		"info": {
@@ -208,7 +210,15 @@
 			"title": "@:control.reset",
 			"description": "Löschen Sie alle Register und setzen Sie die Ausführung auf die erste Zeile zurück, um das Entfernen und Wiedereinsetzen des IC-Chips zu simulieren."
 		},
-		"end_confirm": "Sind Sie sicher, dass Sie das Tutorial beenden wollen?"
+		"end_confirm": "Sind Sie sicher, dass Sie das Tutorial beenden wollen?",
+		"stack": {
+			"title": "Im Gerät stapeln",
+			"description": "Liste mit 512 Stak-Elementen. (Lesen/Schreiben)"
+		},
+		"pin_device": {
+			"title": "Gerät anpinnen",
+			"description": "Befestigen Sie das Gerät am Bildschirm, sodass Sie es immer zur Hand haben"
+		}
 	},
 	"labeller": "Beschriftungsgerät",
 	"toast": {
@@ -229,5 +239,16 @@
 	"props": "Parameter",
 	"reagents": "Reagenzien",
 	"networks": "Netzwerke",
-	"tags_description": "Tags zur Klassifizierung eines Objekts"
+	"tags_description": "Tags zur Klassifizierung eines Objekts",
+	"device": {
+		"actions": {
+			"pin": "Registerkarte „Anheften“",
+			"rename": "Umbenennen"
+		},
+		"slot": {
+			"add": {
+				"header": "Slot Nr. {slotIndex} im Gerät „{deviceName}“ bearbeiten"
+			}
+		}
+	}
 }

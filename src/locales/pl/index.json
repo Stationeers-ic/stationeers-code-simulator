@@ -1,6 +1,7 @@
 {
 	"ICON": "flag flag-pl",
 	"headers": {
+		"issues": "Otwarte kwestie",
 		"ResetAllData": "Zresetuj wszystkie dane",
 		"confirmAllDelete": "Czy jesteś pewien, że chcesz wyczyścić Wszystkie dane aplikacji?"
 	},
@@ -37,6 +38,7 @@
 		"saves": "Zapisy",
 		"noSaves": "Brak zapisów",
 		"savesNotFound": "Nie znaleziono zapisów",
+		"searchSave": "Wyszukaj zapisz",
 		"confirmDelete": "Czy jesteś pewien, że chcesz usunąć zapis?"
 	},
 	"addDevice": {
@@ -49,7 +51,8 @@
 		"deviceHashHelp": "Podaj lub wybierz PrefabHash lub PrefabName urządzenia.",
 		"deviceNameHelp": "Podaj nazwę urządzenia, tak jak byś to robił z @:labeller",
 		"devicePortHelp": "Wybierz pin do którego będzie przypisane urządzenie lub zostaw puste",
-		"deviceIdHelp": "Podaj identyfikator urządzenia lub zostaw puste."
+		"deviceIdHelp": "Podaj identyfikator urządzenia lub zostaw puste.",
+		"selectDevice": "Wybierz urządzenie"
 	},
 	"confirmReset": {
 		"info": {
@@ -81,6 +84,7 @@
 	"errors": "Błędy",
 	"url": "Url",
 	"browser": "Przeglądarka",
+	"temp": "Temp",
 	"tutorial": {
 		"tutorial": {
 			"title": "Samouczek",
@@ -95,69 +99,156 @@
 			"description": "Zapisz kod w pamięci przeglądarki.<br />Dla nowego kodu, użyj następnego przycisku (@:control.saveAs)."
 		},
 		"saveAs": {
-			"title": "@:control.saveAs"
+			"title": "@:control.saveAs",
+			"description": "Zapisz nowy kod w pamięci przeglądarki i nadaj mu nazwę.<br />Dodatkowo przycisk ten udostępnia opcję eksportu kodu i urządzeń na komputer lokalny lub wygenerowania linku do udostępnienia."
 		},
 		"open": {
-			"title": "@:control.open"
+			"title": "@:control.open",
+			"description": "Otwórz kod IC z pliku, przywróć wcześniej wyeksportowany kod lub otwórz go za pomocą udostępnionego łącza."
 		},
 		"load": {
-			"title": "@:control.load"
+			"title": "@:control.load",
+			"description": "Wyświetl i uzyskaj dostęp do wszystkich zapisanych kodów w pamięci przeglądarki."
 		},
 		"share": {
-			"title": "@:control.share"
+			"title": "@:control.share",
+			"description": "Wygeneruj i skopiuj łącze, aby udostępnić swój kod IC i ustawienia środowiska symulacyjnego."
 		},
 		"iCSimulation": {
-			"title": "Symulacja IC"
+			"title": "Symulacja IC",
+			"description": "Tutaj możesz dodać urządzenia do swojego środowiska symulacyjnego.<br />Przyjrzyjmy się temu szczegółowo."
 		},
 		"speedControl": {
 			"title": "Kontrola prędkości",
 			"description": "Dostosuj prędkość symulacji tutaj."
 		},
+		"manualControls": {
+			"title": "Sterowanie ręczne",
+			"description": "Wyczyść wszystkie rejestry i zresetuj wykonanie do pierwszej linii, symulując wyjmowanie i ponowne umieszczanie układu scalonego."
+		},
 		"addDevice": {
-			"title": "@:control.addDevice"
+			"title": "@:control.addDevice",
+			"description": "Po skonfigurowaniu urządzenia kliknij tutaj, aby dodać je do środowiska symulacyjnego."
 		},
 		"labeler": {
-			"title": "@:labeller"
+			"title": "@:labeller",
+			"description": "Podobnie jak w grze, każdemu urządzeniu przypisz odrębną nazwę.<br />Umożliwia to symulację poleceń zbiorczo nazwanych."
+		},
+		"pinD0-D5": {
+			"title": "Kołek d0-d5",
+			"description": "Lub po prostu określ pin, do którego podłączy się urządzenie."
 		},
 		"deviceID": {
-			"title": "Identyfikator urządzenia"
+			"title": "Identyfikator urządzenia",
+			"description": "Opcjonalnie podaj identyfikator referencyjny do użycia z instrukcjami <b>ld</b>, <b>sd</b>, <b>putd</b> lub <b>getd</b>.<br /> Możesz zlokalizować ten identyfikator w grze, korzystając z karty konfiguracyjnej na tablecie."
 		},
 		"converter": {
-			"title": "Konwerter"
+			"title": "Konwerter",
+			"description": "Wygeneruj Hash za pomocą funkcji CRC32 na podstawie nazwy, tak jak jest to używane w Stationeers."
 		},
 		"codeEditor": {
-			"title": "Edytor kodu"
+			"title": "Edytor kodu",
+			"description": "Tutaj możesz wpisać swój kod IC lub skopiować i wkleić istniejący kod."
 		},
 		"registersView": {
-			"title": "Podgląd rejestrów"
+			"title": "Podgląd rejestrów",
+			"description": "Monitoruj i ręcznie dostosowuj wszystkie rejestry podczas symulacji."
 		},
 		"constantsView": {
-			"title": "Podgląd stałych"
+			"title": "Podgląd stałych",
+			"description": "Uzyskaj dostęp do listy domyślnych stałych zdefiniowanych przez IC10, wraz z etykietami (numer linii) lub stałymi określonymi w kodzie."
 		},
 		"errorLog": {
-			"title": "Dziennik błędów"
+			"title": "Dziennik błędów",
+			"description": "Wszelkie błędy wykonania kodu zostaną zapisane tutaj."
 		},
 		"simulationEnvironment": {
-			"title": "Środowisko symulacji"
+			"title": "Środowisko symulacji",
+			"description": "Każde urządzenie dodane do środowiska jest reprezentowane przez kartę, która zapewnia wizualny przegląd konfiguracji."
+		},
+		"devicePrefabName": {
+			"title": "Nazwa prefabrykatu urządzenia",
+			"description": "Jest to typ urządzenia zdefiniowany w Stationpedia."
+		},
+		"deviceName": {
+			"title": "Nazwa urządzenia",
+			"description": "Przejrzyj niestandardową nazwę przypisaną do urządzenia za pomocą <b>@:laeller</b>."
+		},
+		"pinsAndAliases": {
+			"title": "Piny i aliasy",
+			"description": "Sprawdź w swoim kodzie wszystkie piny i aliasy powiązane z urządzeniem."
+		},
+		"deviceProperties": {
+			"title": "Właściwości urządzenia",
+			"description": "Uzyskaj dostęp do właściwości wygenerowanych na podstawie skonfigurowanego urządzenia, w tym jego identyfikatora referencyjnego, nazwy prefabrykatu i nazwy z etykietą."
+		},
+		"deviceVariables": {
+			"title": "Zmienne urządzenia",
+			"description": "Monitoruj i edytuj zmienne oraz ich wartości ustawione w kodzie, z możliwością ręcznego dodawania nowych zmiennych z listy."
 		},
 		"slots": {
-			"title": "Sloty"
+			"title": "Sloty",
+			"description": "Wyświetlane jest każde gniazdo urządzenia, co umożliwia edycję zmiennych gniazda poprzez kliknięcie na nie."
 		},
 		"remove": {
-			"title": "@:remove"
+			"title": "@:remove",
+			"description": "Użyj tej opcji, aby usunąć urządzenie ze środowiska symulacyjnego."
 		},
 		"delete": {
-			"title": "@:delete"
+			"title": "@:delete",
+			"description": "Kliknij tutaj, aby wszystko zresetować i rozpocząć nową symulację.<br />Pamiętaj, że ta czynność spowoduje również <b>kasowanie wszystkich zapisanych kodów</b>!"
 		},
 		"step": {
-			"title": "@:control.step"
+			"title": "@:control.step",
+			"description": "Wykonaj ręcznie jeden krok kodu."
 		},
 		"goto": {
-			"title": "@:control.toYield"
+			"title": "@:control.toYield",
+			"description": "Wykonaj wszystkie instrukcje od bieżącego wiersza do następnej instrukcji <b>yield</b>."
 		},
 		"reset": {
-			"title": "@:control.reset"
+			"title": "@:control.reset",
+			"description": "Wyczyść wszystkie rejestry i zresetuj wykonanie do pierwszej linii, symulując wyjmowanie i ponowne umieszczanie układu scalonego."
+		},
+		"end_confirm": "Czy na pewno chcesz zakończyć samouczek?",
+		"stack": {
+			"title": "Układaj w urządzeniu",
+			"description": "Lista 512 przedmiotów na staku. (odczyt/zapis)"
+		},
+		"pin_device": {
+			"title": "Przypnij urządzenie",
+			"description": "Przymocuj urządzenie do ekranu, aby było zawsze pod ręką"
 		}
 	},
-	"labeller": "Etykieciarka"
+	"labeller": "Etykieciarka",
+	"toast": {
+		"error": {
+			"summary": "Błąd",
+			"detail": "Błąd: {errMsg}"
+		},
+		"share": {
+			"summary": "Udział",
+			"detail": "Skopiowane do schowka"
+		}
+	},
+	"error": {
+		"yieldNotFound": "Nie znaleziono instrukcji uzysku"
+	},
+	"tags": "Tagi",
+	"slots": "Sloty",
+	"props": "Rekwizyty",
+	"reagents": "Odczynniki",
+	"networks": "Sieci",
+	"tags_description": "Tagi służące do klasyfikacji obiektu",
+	"device": {
+		"actions": {
+			"pin": "Tablica korkowa",
+			"rename": "Przemianować"
+		},
+		"slot": {
+			"add": {
+				"header": "Edytuj miejsce nr {slotIndex} na urządzeniu „{deviceName}”"
+			}
+		}
+	}
 }

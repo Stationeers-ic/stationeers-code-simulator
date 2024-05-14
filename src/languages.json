@@ -2,9 +2,9 @@
 	{
 		"name": "German",
 		"code": "de",
-		"translations": 131,
-		"percentage": 93.57,
-		"updated": "2024-05-12T17:04:26+0000",
+		"translations": 140,
+		"percentage": 100,
+		"updated": "2024-05-14T09:50:21+0000",
 		"ICON": "flag flag-de"
 	},
 	{
@@ -18,17 +18,25 @@
 	{
 		"name": "Finnish",
 		"code": "fi",
-		"translations": 119,
-		"percentage": 85,
-		"updated": "2024-05-12T17:58:35+0000",
+		"translations": 140,
+		"percentage": 100,
+		"updated": "2024-05-14T09:50:25+0000",
 		"ICON": "flag flag-fi"
+	},
+	{
+		"name": "French",
+		"code": "fr",
+		"translations": 140,
+		"percentage": 100,
+		"updated": "2024-05-14T09:50:09+0000",
+		"ICON": "flag flag-fr"
 	},
 	{
 		"name": "Polish",
 		"code": "pl",
-		"translations": 83,
-		"percentage": 59.29,
-		"updated": "2024-05-12T17:04:55+0000",
+		"translations": 140,
+		"percentage": 100,
+		"updated": "2024-05-14T09:50:23+0000",
 		"ICON": "flag flag-pl"
 	},
 	{
