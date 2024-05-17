@@ -1,6 +1,7 @@
-import {InterpreterIc10} from "ic10"
+import { findErrorsInCode, InterpreterIc10, LexerError } from "ic10"
 import Env from "./Env.ts"
-import {reactive, UnwrapNestedRefs} from "vue"
+import { reactive, UnwrapNestedRefs } from "vue"
+import { TokenError } from "./TokenError.ts"
 
 export class Ic10 extends InterpreterIc10<UnwrapNestedRefs<Env>> {
 	private static instance: Ic10
@@ -18,11 +19,18 @@ export class Ic10 extends InterpreterIc10<UnwrapNestedRefs<Env>> {
 	}
 
 	setCode(code: string): this {
+		this.getEnv().errors = []
 		this.getEnv().lines = []
 		super.setCode(code)
 		this.parseCode()
 		this.getEnv().prepare()
 		this.getEnv().emit("update_code")
+
+		const erros: LexerError[] = findErrorsInCode(code)
+		erros.forEach((err) => {
+			this.getEnv().throw(new TokenError(err))
+		})
+
 		return this
 	}
 	getCode() {

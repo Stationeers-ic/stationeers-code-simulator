@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {codeStore} from "../store"
-import {Codemirror} from "vue-codemirror"
-import {createRuler, hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, lineClassController, zeroLineNumbers} from "codemirror-lang-ic10"
+import { codeStore } from "../store"
+import { Codemirror } from "vue-codemirror"
+import { createRuler, hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, lineClassController, zeroLineNumbers } from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
-import {Device, Register} from "ic10/zodTypes"
-import {onBeforeUnmount, onMounted, watch} from "vue"
-import {monokai} from "@uiw/codemirror-theme-monokai"
-import {EditorView} from "codemirror"
+import { Device, Register } from "ic10/zodTypes"
+import { onBeforeUnmount, onMounted, watch } from "vue"
+import { monokai } from "@uiw/codemirror-theme-monokai"
+import { EditorView } from "codemirror"
 
 const line = new lineClassController("nextRunLine")
 
@@ -19,12 +19,10 @@ onMounted(() => {
 
 watch(
 	() => codeStore.code,
-	(newVal) => interpretator.setCode(newVal),
+	(newVal) => {
+		interpretator.setCode(newVal)
+	},
 )
-
-onBeforeUnmount(() => {
-	interpretator.getEnv().off("update")
-})
 
 watch(
 	() => interpretator.getEnv().line,
@@ -32,6 +30,10 @@ watch(
 		line.highlightLine(newVal + 1)
 	},
 )
+
+onBeforeUnmount(() => {
+	interpretator.getEnv().off("update")
+})
 
 const opt: hoverOptions = {
 	startLine: 0,
@@ -91,7 +93,7 @@ const opt: hoverOptions = {
 }
 const [ruler] = createRuler(52, "ruler")
 const [rulerBeta] = createRuler(90, "ruler")
-const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt), ruler,rulerBeta, line.extension]
+const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), ic10Snippets(), ic10HoverTooltip(opt), ruler, rulerBeta, line.extension]
 </script>
 
 <template>
