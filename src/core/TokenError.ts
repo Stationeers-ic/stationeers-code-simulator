@@ -33,9 +33,6 @@ export class TokenError extends Err {
 			case "UNRECOGNIZED_INSTRUCTION":
 				const token = this.error.token?.value
 				this.message = `Unrecognized instruction ${token}`
-				if (this.error.expected) {
-					this.message += `, expected ${this.error.expected.join(", ")}`
-				}
 				break
 		}
 
