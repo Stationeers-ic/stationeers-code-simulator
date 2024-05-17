@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue"
+import { onMounted, ref } from "vue"
 import ic10 from "../../core/ic10.ts"
 import SelectPorts from "./SelectPorts.vue"
+import PortChip from "./PortChip.vue"
 
 const props = defineProps(["id"])
 const ports = ref<string[]>([])
@@ -43,7 +44,7 @@ function attach() {
 </script>
 
 <template>
-<!--	TODO заменить на $t('devices.ports.attach.header')-->
+	<!--	TODO заменить на $t('devices.ports.attach.header')-->
 	<Dialog v-model:visible="visible" header="Connect to ...">
 		<InputGroup>
 			<SelectPorts v-model="addPort" />
@@ -51,10 +52,7 @@ function attach() {
 		</InputGroup>
 	</Dialog>
 	<div :class="$style.ports" class="device-ports">
-		<template v-for="port in ports">
-			<Chip v-if="['db', 'd0', 'd1', 'd2', 'd3', 'd4', 'd5'].includes(port)" :label="port" removable @remove="() => detach(port)" />
-			<Chip v-else :label="port" />
-		</template>
+		<PortChip v-for="port in ports" :key="port" :port="port" @remove="detach" />
 		<Button icon="pi pi-plus" rounded @click="visible = true" />
 	</div>
 </template>
