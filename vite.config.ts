@@ -5,6 +5,8 @@ import * as fs from "fs"
 import * as path from "path"
 import lang from "./src/languages.json"
 import packageJson from "./package.json"
+import Components from "unplugin-vue-components/vite"
+import { PrimeVueResolver } from "unplugin-vue-components/resolvers"
 // this is a lot more work than it could be
 const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {
 	encoding: "utf8",
@@ -13,7 +15,12 @@ const { status, stdout, stderr } = spawnSync("npm", ["list", "--json"], {
 // https://vitejs.dev/config/
 export default defineConfig({
 	base: "/",
-	plugins: [vue()],
+	plugins: [
+		vue(),
+		Components({
+			resolvers: [PrimeVueResolver()],
+		}),
+	],
 	build: {
 		rollupOptions: {
 			output: {
