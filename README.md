@@ -4,7 +4,8 @@ Stationeering provides a simulation of the IC10 chip inside Stationeers. IDE wit
 
 # Translation
 
-[Community](https://translate.traineratwot.site/engage/ic10/)
+[Community](https://poeditor.com/join/project/l1KfxxdM8d)
+
 [![](http://translate.traineratwot.site/widget/ic10/locales/en/multi-auto.svg)](http://translate.traineratwot.site/engage/ic10/)
 
-![image](https://github.com/Stationeers-ic/stationeers-code-simulator/assets/41589091/5a9a9306-3347-4349-9037-ab47d05f0979)
+![image](https://github.com/Stationeers-ic/stationeers-code-simulator/assets/41589091/66e3b382-2fb4-44f1-9e5c-99c3c3ef0970)
