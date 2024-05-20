@@ -34,7 +34,7 @@ export const Device = z
 export const Devices = z.array(Device)
 export type Device = z.infer<typeof Device>
 export type Devices = z.infer<typeof Devices>
-export const Images = z.record(z.string())
+export const Images = z.record(z.string().transform((img) => "https://assets.ic10.dev/" + img))
 export type Images = z.infer<typeof Images>
 
 export const Item = z
