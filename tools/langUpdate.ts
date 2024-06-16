@@ -12,8 +12,8 @@ type lang = {
 }
 try {
 	let data = qs.stringify({
-		api_token: "9ea7323d0999f2496ea61b643eecc361",
-		id: "700722",
+		api_token: "5f1f4bf3b84d0b0e29fa505d7b618669",
+		id: "707082",
 	})
 	//@ts-ignore
 	const languages = await axios.post<{
@@ -35,8 +35,8 @@ try {
 			}
 
 			let data = qs.stringify({
-				api_token: "9ea7323d0999f2496ea61b643eecc361",
-				id: "700722",
+				api_token: "5f1f4bf3b84d0b0e29fa505d7b618669",
+				id: "707082",
 				language: lang.code,
 				type: "i18next",
 				filters: "translated",

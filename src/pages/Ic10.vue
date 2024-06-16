@@ -12,7 +12,7 @@ import delay from "delay"
 import SaveDialog from "../ui/SaveDialog.vue"
 import {saveToBrowser} from "../core/Save.ts"
 import SettingBar from "../components/SettingBar.vue"
-import {off, on} from "../core/Events.ts"
+import {emit, off, on} from "../core/Events.ts"
 import OpenDialog from "../ui/OpenDialog.vue"
 import {useI18n} from "vue-i18n"
 import InstructionsBar from "../components/InstructionsBar.vue"
@@ -20,10 +20,11 @@ import InstructionsBar from "../components/InstructionsBar.vue"
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
 const isOpenHotkey = isHotkey("mod+o")
+const isHelpHotkey = isHotkey("F1")
 const saveDialogOpen = ref(false)
 const openDialogOpen = ref(false)
 const toast = useToast()
-const { t } = useI18n()
+const {t} = useI18n()
 const showSaveDialog = () => (saveDialogOpen.value = true)
 const showOpenDialog = () => (openDialogOpen.value = true)
 const save = async () => {
@@ -31,27 +32,29 @@ const save = async () => {
 	console.log("save")
 	try {
 		const name = saveToBrowser()
-		toast.add({ severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", { name }), life: 3000 })
+		toast.add({severity: "success", summary: t("toastSave.success.summary"), detail: t("toastSave.success.detail", {name}), life: 3000})
 	} catch (e: any) {
-		toast.add({ severity: "error", summary: t("toast.error.summary"), detail: t("toast.error.detail", { errMsg: e?.message }), life: 3000 })
+		toast.add({severity: "error", summary: t("toast.error.summary"), detail: t("toast.error.detail", {errMsg: e?.message}), life: 3000})
 	}
 }
 const HotKeyHandler = async (e: any) => {
 	if (isSaveHotkey(e)) {
 		e.preventDefault()
 		await save()
-	}
-	if (isSaveAsHotkey(e)) {
+	} else if (isSaveAsHotkey(e)) {
 		e.preventDefault()
 		await delay(200)
 		console.log("save as")
 		saveDialogOpen.value = true
-	}
-	if (isOpenHotkey(e)) {
+	} else if (isOpenHotkey(e)) {
 		e.preventDefault()
 		await delay(200)
 		console.log("open")
 		openDialogOpen.value = true
+	} else if (isHelpHotkey(e)) {
+		e.preventDefault()
+		await delay(200)
+		emit("openInstructions")
 	}
 }
 
@@ -70,9 +73,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<SettingBar />
-	<SaveDialog v-model="saveDialogOpen" />
-	<OpenDialog v-model="openDialogOpen" />
+	<SettingBar/>
+	<SaveDialog v-model="saveDialogOpen"/>
+	<OpenDialog v-model="openDialogOpen"/>
 	<div class="ic10-container">
 		<div class="code" id="tour-code-ic10">
 			<Splitter style="height: 100%">
@@ -98,7 +101,7 @@ onBeforeUnmount(() => {
 		</div>
 	</div>
 	<Suspense>
-		<InstructionsBar />
+		<InstructionsBar/>
 	</Suspense>
 </template>
 

@@ -218,6 +218,18 @@
 		"pin_device": {
 			"title": "Kiinnitä laite",
 			"description": "Kiinnitä laite näyttöön niin, että se on aina käsillä"
+		},
+		"instructions": {
+			"title": "Ohjeet",
+			"description": "Luettelo kaikista IC10:ssä saatavilla olevista ohjeista, napsauta tätä painiketta TAI paina <key>F1</key> avataksesi ohjeluettelon.",
+			"row": {
+				"title": "Ohje",
+				"description": "Ohjeen ja esikatselun näet täältä"
+			},
+			"row-opened": {
+				"title": "Laajenna ohjerivi",
+				"description": "Voit napsauttaa riviä vaihtaaksesi yksityiskohtaisen kuvauksen näyttöön."
+			}
 		}
 	},
 	"labeller": "Labelleri",

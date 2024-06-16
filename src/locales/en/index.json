@@ -218,6 +218,18 @@
 		"pin_device": {
 			"title": "Pin device",
 			"description": "Attach the device to the screen so that it is always at hand"
+		},
+		"instructions": {
+			"title": "Instructions",
+			"description": "List of all instructions available in the IC10, click on this button OR press <key>F1</key> to open the instructions list.",
+			"row": {
+				"title": "Instruction",
+				"description": "You can see the instruction and preview here"
+			},
+			"row-opened": {
+				"title": "Instruction row expand",
+				"description": "You can click on the line to toggle the display of the detailed description."
+			}
 		}
 	},
 	"labeller": "Labeller",

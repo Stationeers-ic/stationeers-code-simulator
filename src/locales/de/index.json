@@ -218,6 +218,18 @@
 		"pin_device": {
 			"title": "Gerät anpinnen",
 			"description": "Befestigen Sie das Gerät am Bildschirm, sodass Sie es immer zur Hand haben"
+		},
+		"instructions": {
+			"title": "Anweisungen",
+			"description": "Liste aller im IC10 verfügbaren Anweisungen. Klicken Sie auf diese Schaltfläche ODER drücken Sie <Taste>F1</Taste>, um die Anweisungsliste zu öffnen.",
+			"row": {
+				"title": "Anweisung",
+				"description": "Die Anleitung und Vorschau könnt ihr hier sehen"
+			},
+			"row-opened": {
+				"title": "Anweisungszeile erweitern",
+				"description": "Durch Klicken auf die Zeile können Sie die Anzeige der Detailbeschreibung ein- und ausschalten."
+			}
 		}
 	},
 	"labeller": "Beschriftungsgerät",

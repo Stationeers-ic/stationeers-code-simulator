@@ -1,4 +1,4 @@
-import Footer from './Footer.vue'
+import Footer from '../components/Footer.vue'
 
 describe('<Footer />', () => {
   it('renders', () => {

@@ -1,4 +1,4 @@
-import Header from './Header.vue'
+import Header from '../components/Header.vue'
 
 describe('<Header />', () => {
   it('renders', () => {

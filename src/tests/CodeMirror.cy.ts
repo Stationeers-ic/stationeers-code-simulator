@@ -1,4 +1,4 @@
-import CodeMirror from './CodeMirror.vue'
+import CodeMirror from '../components/CodeMirror.vue'
 
 describe('<CodeMirror />', () => {
   it('renders', () => {

@@ -2,49 +2,49 @@
 	{
 		"name": "German",
 		"code": "de",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:50:21+0000",
+		"updated": "2024-06-16T07:47:31+0000",
 		"ICON": "flag flag-de"
 	},
 	{
 		"name": "English",
 		"code": "en",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:33:20+0000",
+		"updated": "2024-06-16T07:38:45+0000",
 		"ICON": "flag flag-us"
 	},
 	{
 		"name": "Finnish",
 		"code": "fi",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:50:25+0000",
+		"updated": "2024-06-16T07:47:45+0000",
 		"ICON": "flag flag-fi"
 	},
 	{
 		"name": "French",
 		"code": "fr",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:50:09+0000",
+		"updated": "2024-06-16T07:47:43+0000",
 		"ICON": "flag flag-fr"
 	},
 	{
 		"name": "Polish",
 		"code": "pl",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:50:23+0000",
+		"updated": "2024-06-16T07:47:41+0000",
 		"ICON": "flag flag-pl"
 	},
 	{
 		"name": "Russian",
 		"code": "ru",
-		"translations": 140,
+		"translations": 146,
 		"percentage": 100,
-		"updated": "2024-05-14T09:34:22+0000",
+		"updated": "2024-06-16T07:38:24+0000",
 		"ICON": "flag flag-ru"
 	}
 ]

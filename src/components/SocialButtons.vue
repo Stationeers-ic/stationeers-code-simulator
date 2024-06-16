@@ -37,7 +37,7 @@ const social = ref<MenuItem[]>([
 		label: "Community translate",
 		icon: "pi pi-weblate",
 		command() {
-			window.open("https://poeditor.com/join/project/l1KfxxdM8d", "_blank")
+			window.open("https://poeditor.com/join/project/5LiiHyJbsH", "_blank")
 		},
 	},
 ])

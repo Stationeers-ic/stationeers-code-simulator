@@ -218,6 +218,18 @@
 		"pin_device": {
 			"title": "Przypnij urządzenie",
 			"description": "Przymocuj urządzenie do ekranu, aby było zawsze pod ręką"
+		},
+		"instructions": {
+			"title": "Instrukcje",
+			"description": "Lista wszystkich instrukcji dostępnych w IC10, kliknij ten przycisk LUB naciśnij <key>F1</key>, aby otworzyć listę instrukcji.",
+			"row": {
+				"title": "Instrukcja",
+				"description": "Instrukcję i podgląd możesz zobaczyć tutaj"
+			},
+			"row-opened": {
+				"title": "Rozwiń wiersz instrukcji",
+				"description": "Możesz kliknąć linię, aby przełączyć wyświetlanie szczegółowego opisu."
+			}
 		}
 	},
 	"labeller": "Etykieciarka",

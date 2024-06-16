@@ -218,6 +218,18 @@
 		"pin_device": {
 			"title": "Appareil à épingler",
 			"description": "Fixez l'appareil à l'écran pour qu'il soit toujours à portée de main"
+		},
+		"instructions": {
+			"title": "Instructions",
+			"description": "Liste de toutes les instructions disponibles dans l'IC10, cliquez sur ce bouton OU appuyez sur <key>F1</key> pour ouvrir la liste des instructions.",
+			"row": {
+				"title": "Instruction",
+				"description": "Vous pouvez voir les instructions et l'aperçu ici"
+			},
+			"row-opened": {
+				"title": "Agrandissement de la ligne d'instructions",
+				"description": "Vous pouvez cliquer sur la ligne pour basculer l'affichage de la description détaillée."
+			}
 		}
 	},
 	"labeller": "Étiqueteuse",
