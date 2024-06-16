@@ -88,6 +88,7 @@ export class Data {
 	private static devices?: any
 	private static images?: any
 	private static items?: any
+	private static instructions?: any
 
 	private constructor() {}
 
@@ -141,6 +142,12 @@ export class Data {
 			Data.reagents = (await (await fetch(Data.getUrl(`reagents`))).json()).data
 		}
 		return Reagents.parse(Data.reagents)
+	}
+	async getInstructions(): Promise<any> {
+		if(Data.instructions === undefined) {
+			Data.instructions = (await (await fetch(Data.getUrl(`instructions`))).json())
+		}
+		return Data.instructions;
 	}
 }
 

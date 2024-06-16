@@ -15,6 +15,7 @@ import SettingBar from "../components/SettingBar.vue"
 import {off, on} from "../core/Events.ts"
 import OpenDialog from "../ui/OpenDialog.vue"
 import {useI18n} from "vue-i18n"
+import InstructionsBar from "../components/InstructionsBar.vue"
 
 const isSaveHotkey = isHotkey("mod+s")
 const isSaveAsHotkey = isHotkey("mod+shift+s")
@@ -96,6 +97,9 @@ onBeforeUnmount(() => {
 			<Devises></Devises>
 		</div>
 	</div>
+	<Suspense>
+		<InstructionsBar />
+	</Suspense>
 </template>
 
 <style module lang="scss">
