@@ -6,9 +6,10 @@ import ic10 from "../core/ic10.ts"
 import {str as Hash} from "crc-32"
 import {useToast} from "primevue/usetoast"
 import SelectPorts from "./devices/SelectPorts.vue"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps(["id"])
-
 const visible = ref(false)
 const devicePort = ref<string[]>([])
 const deviceHash = ref<string | number>("")
@@ -52,17 +53,17 @@ function add() {
 </script>
 
 <template>
-	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" :label="$t('control.addDevice')" />
+	<Button :id="props.id" icon="pi pi-plus" severity="info" @click="visible = true" :label="t('control.addDevice')" />
 
-	<Dialog v-model:visible="visible" :header="$t('addDevice.header')" style="width: 50vw">
-		<span class="p-text-secondary block mb-5"> {{ $t("addDevice.description") }}</span>
+	<Dialog v-model:visible="visible" :header="t('addDevice.header')" style="width: 50vw">
+		<span class="p-text-secondary block mb-5"> {{ t("addDevice.description") }}</span>
 		<div class="flex align-items-center gap-3 mb-3">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
 					<SelectDevice id="deviceHash" v-model="deviceHash" />
-					<label for="deviceHash">{{ $t("addDevice.deviceHash") }}</label>
+					<label for="deviceHash">{{ t("addDevice.deviceHash") }}</label>
 				</FloatLabel>
-				<small id="deviceHash-help">{{ $t("addDevice.deviceHashHelp") }}</small>
+				<small id="deviceHash-help">{{ t("addDevice.deviceHashHelp") }}</small>
 			</div>
 			<div class="flex flex-column gap-2">
 				<InputGroup style="width: auto">
@@ -71,28 +72,28 @@ function add() {
 					</InputGroupAddon>
 					<FloatLabel>
 						<InputText id="deviceName" v-model="deviceName" />
-						<label for="deviceName">{{ $t("addDevice.deviceName") }}</label>
+						<label for="deviceName">{{ t("addDevice.deviceName") }}</label>
 					</FloatLabel>
 				</InputGroup>
-				<small id="deviceName-help">{{ $t("addDevice.deviceNameHelp") }}</small>
+				<small id="deviceName-help">{{ t("addDevice.deviceNameHelp") }}</small>
 			</div>
 			<div class="flex flex-column gap-2">
 				<SelectPorts v-model="devicePort" />
-				<small id="devicePort-help">{{ $t("addDevice.devicePortHelp") }}</small>
+				<small id="devicePort-help">{{ t("addDevice.devicePortHelp") }}</small>
 			</div>
 		</div>
 		<div class="flex align-items-center gap-3 mt-5">
 			<div class="flex flex-column gap-2">
 				<FloatLabel>
 					<InputNumber :useGrouping="false" id="deviceId" v-model="deviceId" />
-					<label for="deviceId">{{ $t("addDevice.deviceId") }}</label>
+					<label for="deviceId">{{ t("addDevice.deviceId") }}</label>
 				</FloatLabel>
-				<small id="deviceId-help">{{ $t("addDevice.deviceIdHelp") }}</small>
+				<small id="deviceId-help">{{ t("addDevice.deviceIdHelp") }}</small>
 			</div>
 		</div>
 		<div class="flex justify-content-end gap-2">
-			<Button id="tourAddDeviceCancel" type="button" :label="$t('cancel')" severity="secondary" @click="visible = false"></Button>
-			<Button id="tourAddDeviceAdd" type="button" :label="$t('add')" @click="add"></Button>
+			<Button id="tourAddDeviceCancel" type="button" :label="t('cancel')" severity="secondary" @click="visible = false"></Button>
+			<Button id="tourAddDeviceAdd" type="button" :label="t('add')" @click="add"></Button>
 		</div>
 	</Dialog>
 </template>

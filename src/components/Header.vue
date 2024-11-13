@@ -84,11 +84,11 @@ const issues = () => {
 		</template>
 		<template #end>
 			<div :class="$style.end">
-				<Button id="BagReport" severity="secondary" icon="pi pi-github" @click="issues" :label="$t('headers.issues')"/>
+				<Button id="BagReport" severity="secondary" icon="pi pi-github" @click="issues" :label="t('headers.issues')"/>
 
 				<Button v-if="is1April()" severity="secondary" class="pulse" label="🤡" @click="toggle1April"/>
 				<LangSwitcher :short="true"/>
-				<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="$t('headers.ResetAllData')" @click="confirmReset"/>
+				<Button id="ResetAll" severity="danger" icon="pi pi-trash" v-tooltip.down="t('headers.ResetAllData')" @click="confirmReset"/>
 			</div>
 		</template>
 	</Menubar>

@@ -7,7 +7,9 @@ import {Device, Register} from "ic10/zodTypes"
 import {onBeforeUnmount, onMounted, watch} from "vue"
 import {monokai} from "@uiw/codemirror-theme-monokai"
 import {EditorView} from "codemirror"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const line = new lineClassController("nextRunLine")
 
 onMounted(() => {
@@ -103,7 +105,7 @@ const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers, ic10(), i
 		:style="{ height: '100%' }"
 		:autofocus="true"
 		:indent-with-tab="true"
-		:placeholder="$t('code') + ' ...'"
+		:placeholder="t('code') + ' ...'"
 		:tab-size="2"
 		:extensions="extensions"
 	/>

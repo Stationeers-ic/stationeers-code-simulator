@@ -5,7 +5,9 @@ import {onMounted, ref, watch} from "vue"
 import ic10 from "../../../core/ic10.ts"
 import ItemSelect from "./ItemSelect.vue"
 import Button from "primevue/button"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps<{ data: z.infer<typeof Slot>; deviceId: string }>()
 const image = ref("")
 const itemCount = ref(0)
@@ -67,7 +69,7 @@ watch(itemCount, sync)
 	<Dialog
 		v-model:visible="visible"
 		:header="
-			$t('device.slot.add.header', {
+			t('device.slot.add.header', {
 				slotIndex: props.data.SlotIndex,
 				deviceName,
 			})

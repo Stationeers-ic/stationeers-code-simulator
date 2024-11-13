@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue"
 import data, {Devices} from "../core/Data.ts"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const loading = ref(true)
 const devices = ref<{ name: string; image: string | null; code: number }[]>([])
 const model = defineModel()
@@ -37,7 +39,7 @@ onMounted(async () => {
 		:loading="loading"
 		optionLabel="name"
 		optionValue="code"
-		:placeholder="$t('addDevice.selectDevice')"
+		:placeholder="t('addDevice.selectDevice')"
 		class="w-full md:w-14rem"
 	>
 		<template #option="slotProps">

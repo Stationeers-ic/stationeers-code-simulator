@@ -8,7 +8,9 @@ import DeviceSlots from "./Slots/DeviceSlots.vue"
 import DeviceReagents from "./DeviceReagents.vue"
 import Stack from "../../components/Stack.vue"
 import {hash} from "ic10"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const props = defineProps<{
 	id: string
 	device: any
@@ -81,7 +83,7 @@ function rename() {
 					<Image loading="lazy" alt="user header" :src="image" />
 <!--					<Button-->
 <!--						v-if="!props.isPin"-->
-<!--						v-tooltip="$t('device.actions.pin')"-->
+<!--						v-tooltip="t('device.actions.pin')"-->
 <!--						@click="pin"-->
 <!--						:class="$style.pin"-->
 <!--						icon="pi pi-arrow-up-right"-->
@@ -91,7 +93,7 @@ function rename() {
 					<Button
 						v-if="!props.isPin"
 						@click="rename"
-						v-tooltip="$t('device.actions.rename')"
+						v-tooltip="t('device.actions.rename')"
 						:class="$style.labeler"
 						icon="pi pi-labeler"
 						severity="secondary"
@@ -111,7 +113,7 @@ function rename() {
 					<DevicePorts :id="props.id" />
 				</div>
 				<TabView :lazy="true" :scrollable="true">
-					<TabPanel :header="$t('props')">
+					<TabPanel :header="t('props')">
 						<template #header>
 							<div class="device-header-props"></div>
 						</template>
@@ -144,7 +146,7 @@ function rename() {
 							</InputGroup>
 						</div>
 					</TabPanel>
-					<TabPanel :header="$t('slots')" v-if="deviceData?.slots !== undefined">
+					<TabPanel :header="t('slots')" v-if="deviceData?.slots !== undefined">
 						<template #header>
 							<div class="device-header-slots"></div>
 						</template>
@@ -152,7 +154,7 @@ function rename() {
 							<DeviceSlots :id="props.id" :device="props.device" :deviceData="deviceData" />
 						</div>
 					</TabPanel>
-					<TabPanel :header="$t('stack.stack')" v-show="ic10.getEnv().devicesAttached.get(props.id) == 'db' || ic10.getEnv()?.devicesStack.has(props.id)">
+					<TabPanel :header="t('stack.stack')" v-show="ic10.getEnv().devicesAttached.get(props.id) == 'db' || ic10.getEnv()?.devicesStack.has(props.id)">
 						<template #header>
 							<div class="device-header-stack"></div>
 						</template>
@@ -160,7 +162,7 @@ function rename() {
 							<Stack :deviceId="props.id" :lines="20" />
 						</div>
 					</TabPanel>
-					<TabPanel :header="$t('reagents')" v-if="deviceData?.logics.find((e) => e.name === 'Reagents')">
+					<TabPanel :header="t('reagents')" v-if="deviceData?.logics.find((e) => e.name === 'Reagents')">
 						<template #header>
 							<div class="device-header-reagents"></div>
 						</template>
@@ -168,18 +170,18 @@ function rename() {
 							<DeviceReagents :id="props.id" :device="props.device" />
 						</div>
 					</TabPanel>
-					<TabPanel :header="$t('networks')" v-if="deviceData?.connections?.length">
+					<TabPanel :header="t('networks')" v-if="deviceData?.connections?.length">
 						<template #header>
 							<div class="device-header-networks"></div>
 						</template>
 						soon
 					</TabPanel>
-					<TabPanel :header="$t('tags')" v-if="deviceData?.tags?.length">
+					<TabPanel :header="t('tags')" v-if="deviceData?.tags?.length">
 						<template #header>
 							<div class="device-header-tags"></div>
 						</template>
 						<p class="mt-1" style="color: var(--text-color-secondary)">
-							<small>{{ $t("tags_description") }}</small>
+							<small>{{ t("tags_description") }}</small>
 						</p>
 						<div>
 							<Chip v-for="tag in deviceData?.tags" :key="tag" :label="tag" class="m-1" />
@@ -189,7 +191,7 @@ function rename() {
 			</template>
 			<template #footer>
 				<div class="flex gap-3 mt-1">
-					<Button :label="$t('remove')" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
+					<Button :label="t('remove')" icon="pi pi-ban" @click="remove" severity="danger" outlined class="w-full device-remove" />
 					<!--				<Button label="Save" class="w-full"/>-->
 				</div>
 			</template>

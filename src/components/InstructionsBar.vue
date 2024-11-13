@@ -5,6 +5,7 @@ import {useI18n} from "vue-i18n"
 import Data from '../core/Data';
 import {off, on} from "../core/Events.ts";
 
+const { t } = useI18n()
 const visible = defineModel<boolean>();
 const position = "right";
 const items = {};
@@ -47,7 +48,7 @@ function onOptionSelect(instructionProps: { index: number, option: any }) {
 	<div class="card flex justify-content-center"  >
 		<Sidebar v-model:visible="visible" :modal="false" header="" v-model:position="position" id="tour-instructions-body">
 			<div>
-				<Divider>{{ $t("ic10") }}</Divider>
+				<Divider>{{ t("ic10") }}</Divider>
 			</div>
 			<Listbox :options="data" filter :filter-fields="['name', 'description', 'example ']">
 				<template #option="instructionProps">

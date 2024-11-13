@@ -60,11 +60,11 @@ const remove = (event: any, name: string) => {
 	<div class="card flex justify-content-center">
 		<Sidebar v-model:visible="visible" header=" ">
 			<div>
-				<Divider>{{ $t("settings.languages") }}</Divider>
+				<Divider>{{ t("settings.languages") }}</Divider>
 				<LangSwitcher/>
 			</div>
 			<div>
-				<Divider>{{ $t("settings.saves") }}</Divider>
+				<Divider>{{ t("settings.saves") }}</Divider>
 				<Listbox
 					v-model="active"
 					:options="saves"
@@ -72,9 +72,9 @@ const remove = (event: any, name: string) => {
 					filter
 					optionLabel="name"
 					optionValue="name"
-					:empty-message="$t('settings.noSaves')"
-					:empty-filter-message="$t('settings.savesNotFound')"
-					:filter-placeholder="$t('settings.searchSave')"
+					:empty-message="t('settings.noSaves')"
+					:empty-filter-message="t('settings.savesNotFound')"
+					:filter-placeholder="t('settings.searchSave')"
 				>
 					<template #option="slotProps">
 						<div class="saveItem">

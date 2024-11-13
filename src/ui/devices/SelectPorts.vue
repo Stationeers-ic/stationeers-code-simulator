@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import ic10 from "../../core/ic10.ts"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const model = defineModel()
 const ports = [
 	{ name: "DB", code: "db" },
@@ -26,7 +28,7 @@ const ports = [
 				</div>
 			</template>
 		</MultiSelect>
-		<label for="deviceName">{{ $t("addDevice.devicePin") }}</label>
+		<label for="deviceName">{{ t("addDevice.devicePin") }}</label>
 	</FloatLabel>
 </template>
 

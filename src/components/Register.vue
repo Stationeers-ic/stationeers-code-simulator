@@ -3,17 +3,20 @@ import ic10 from "../core/ic10.ts"
 import EnvInput from "../ui/EnvInput.vue"
 import {Register} from "ic10/zodTypes"
 import {z} from "zod"
+import {useI18n} from "vue-i18n";
+
+const { t } = useI18n()
 </script>
 
 <template>
 	<div class="register">
-		<h3>{{ $t("registers.registers") }}</h3>
+		<h3>{{ t("registers.registers") }}</h3>
 		<div :class="$style.registerContent">
 			<template v-for="(_, index) in ic10.getEnv().data">
 				<EnvInput :name="index" v-model="ic10.getEnv().data[index]" v-if="Register.safeParse(index).success" />
 			</template>
 		</div>
-		<h3>{{ $t("constantAndLabels.constantAndLabels") }}</h3>
+		<h3>{{ t("constantAndLabels.constantAndLabels") }}</h3>
 		<div :class="$style.registerContent">
 			<template v-for="[index, value] in ic10.getEnv().aliases.entries()">
 				<EnvInput :readonly="true" :name="index" :model-value="value" v-if="z.number().or(z.nan()).safeParse(value).success" />

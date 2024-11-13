@@ -21,7 +21,6 @@
     "delay": "^6.0.0",
     "driver.js": "^1.3.1",
     "ic10": "^4.3.1",
-    "icx-compiler": "^2.1.7",
     "is-hotkey": "^0.2.0",
     "pako": "^2.1.0",
     "primeflex": "^3.3.1",

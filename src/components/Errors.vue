@@ -8,7 +8,9 @@ import {Err} from "ic10"
 
 import {EditorView} from "codemirror"
 import {zeroLineNumbers} from "codemirror-lang-ic10"
+import {useI18n} from "vue-i18n";
 
+const { t } = useI18n()
 const test = ref<string>("")
 const toast = useToast()
 
@@ -42,7 +44,7 @@ const extensions = [monokai, EditorView.lineWrapping, zeroLineNumbers]
 	<div class="errors">
 		<Codemirror
 			disabled
-			:placeholder="$t('errors') + ' ...'"
+			:placeholder="t('errors') + ' ...'"
 			:style="{ height: '100%' }"
 			:autofocus="true"
 			:indent-with-tab="true"
