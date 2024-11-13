@@ -4,9 +4,9 @@ import {getActiveSaveSlot, getScriptNames, removeFromBrowser, setActiveSaveSlot}
 import {off, on} from "../core/Events.ts"
 import {useConfirm} from "primevue/useconfirm"
 import {useI18n} from "vue-i18n"
-import LangSwither from "../ui/LangSwitcher.vue"
+import LangSwitcher from "../ui/LangSwitcher.vue"
 
-const { t } = useI18n()
+const {t} = useI18n()
 const confirm = useConfirm()
 const visible = defineModel<boolean>()
 const saves = ref<Array<{ name: string }>>([])
@@ -14,7 +14,7 @@ const active = ref<string | null>(null)
 
 const update = () => {
 	saves.value = Array.from(getScriptNames()).map((name) => {
-		return { name: name }
+		return {name: name}
 	})
 	active.value = getActiveSaveSlot()
 }
@@ -36,29 +36,32 @@ const setActive = async () => {
 }
 
 const remove = (event: any, name: string) => {
-	event.preventDefault()
-	confirm.require({
-		target: event.currentTarget,
-		message: t("settings.confirmDelete"),
-		icon: "pi pi-exclamation-triangle",
-		rejectClass: "p-button-secondary p-button-outlined p-button-sm",
-		acceptClass: "p-button-danger p-button-sm",
-		rejectLabel: t("cancel"),
-		acceptLabel: t("delete"),
-		accept: () => {
-			removeFromBrowser(name)
-		},
-	})
+	event.stopPropagation()
+	// confirm.require({
+	// 	target: event.currentTarget,
+	// 	message: t("settings.confirmDelete"),
+	// 	icon: "pi pi-exclamation-triangle",
+	// 	rejectClass: "p-button-secondary p-button-outlined p-button-sm",
+	// 	acceptClass: "p-button-danger p-button-sm",
+	// 	rejectLabel: t("cancel"),
+	// 	acceptLabel: t("delete"),
+	// 	accept: () => {
+	// 		removeFromBrowser(name)
+	// 	},
+	// })
+	if (window.confirm(t("settings.confirmDelete"))) {
+	    removeFromBrowser(name);
+	}
 }
 </script>
 
 <template>
-	<div class="settingButton" @click="visible = true" />
+	<div class="settingButton" @click="visible = true"/>
 	<div class="card flex justify-content-center">
 		<Sidebar v-model:visible="visible" header=" ">
 			<div>
 				<Divider>{{ $t("settings.languages") }}</Divider>
-				<LangSwither />
+				<LangSwitcher/>
 			</div>
 			<div>
 				<Divider>{{ $t("settings.saves") }}</Divider>
@@ -76,7 +79,7 @@ const remove = (event: any, name: string) => {
 					<template #option="slotProps">
 						<div class="saveItem">
 							<div>{{ slotProps.option.name }}</div>
-							<Button icon="pi pi-minus-circle" severity="danger" @click="remove($event, slotProps.option.name)" />
+							<Button class="z-5" icon="pi pi-minus-circle" severity="danger" @click="remove($event, slotProps.option.name)"/>
 						</div>
 					</template>
 				</Listbox>
@@ -91,6 +94,7 @@ const remove = (event: any, name: string) => {
 	position: absolute;
 	color: var(--text-color-secondary) !important;
 }
+
 .settingButton {
 	position: fixed;
 	width: 10px;

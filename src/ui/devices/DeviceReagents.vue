@@ -1,8 +1,8 @@
 <script setup lang="ts">
 // import {ref} from "vue";
 
-import { onMounted, ref } from "vue"
-import data, { Reagents } from "../../core/Data.ts"
+import {onMounted, ref} from "vue"
+import data, {Reagents} from "../../core/Data.ts"
 
 const props = defineProps(["id", "device"]) as Readonly<{
 	id: string

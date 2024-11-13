@@ -150,7 +150,7 @@ export function getActiveSaveSlot(): string {
 }
 
 export function getDefaultScriptName(): string {
-	return "default_script_name"
+	return ""
 }
 
 export function tmpSave() {

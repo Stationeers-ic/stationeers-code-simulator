@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import Button from "primevue/button"
 import SelectDevice from "../ui/SelectDevice.vue"
-import { ref } from "vue"
+import {ref} from "vue"
 import ic10 from "../core/ic10.ts"
-import { str as Hash } from "crc-32"
-import { useToast } from "primevue/usetoast"
+import {str as Hash} from "crc-32"
+import {useToast} from "primevue/usetoast"
 import SelectPorts from "./devices/SelectPorts.vue"
 
 const props = defineProps(["id"])

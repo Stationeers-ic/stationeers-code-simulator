@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue"
+import {onMounted, ref} from "vue"
 import ic10 from "../../core/ic10.ts"
 import SelectPorts from "./SelectPorts.vue"
 import PortChip from "./PortChip.vue"

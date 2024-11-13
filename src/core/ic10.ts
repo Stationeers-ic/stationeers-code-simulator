@@ -1,7 +1,7 @@
-import { findErrorsInCode, InterpreterIc10, LexerError } from "ic10"
+import {findErrorsInCode, InterpreterIc10, LexerError} from "ic10"
 import Env from "./Env.ts"
-import { reactive, UnwrapNestedRefs } from "vue"
-import { TokenError } from "./TokenError.ts"
+import {reactive, UnwrapNestedRefs} from "vue"
+import {TokenError} from "./TokenError.ts"
 
 export class Ic10 extends InterpreterIc10<UnwrapNestedRefs<Env>> {
 	private static instance: Ic10

@@ -1,6 +1,6 @@
-import { nextTick } from "vue"
-import { createI18n, I18n, I18nOptions } from "vue-i18n"
-import { Data } from "./core/Data.ts"
+import {nextTick} from "vue"
+import {createI18n, I18n, I18nOptions} from "vue-i18n"
+import {Data} from "./core/Data.ts"
 
 export const supportedLanguage = (locale: unknown): locale is (typeof __languages__)[number] => {
 	//@ts-ignore

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { codeStore } from "../store"
-import { Codemirror } from "vue-codemirror"
-import { createRuler, hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, lineClassController, zeroLineNumbers } from "codemirror-lang-ic10"
+import {codeStore} from "../store"
+import {Codemirror} from "vue-codemirror"
+import {createRuler, hoverOptions, ic10, ic10HoverTooltip, ic10Snippets, lineClassController, zeroLineNumbers} from "codemirror-lang-ic10"
 import interpretator from "../core/ic10.ts"
-import { Device, Register } from "ic10/zodTypes"
-import { onBeforeUnmount, onMounted, watch } from "vue"
-import { monokai } from "@uiw/codemirror-theme-monokai"
-import { EditorView } from "codemirror"
+import {Device, Register} from "ic10/zodTypes"
+import {onBeforeUnmount, onMounted, watch} from "vue"
+import {monokai} from "@uiw/codemirror-theme-monokai"
+import {EditorView} from "codemirror"
 
 const line = new lineClassController("nextRunLine")
 

@@ -1,4 +1,4 @@
-import { Err, LexerError } from "ic10"
+import {Err, LexerError} from "ic10"
 
 export class TokenError extends Err {
 	constructor(public error: LexerError) {

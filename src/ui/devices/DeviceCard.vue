@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import ic10 from "../../core/ic10.ts"
-import { getCurrentInstance, onBeforeUnmount, onMounted, ref } from "vue"
-import data, { Device, Devices } from "../../core/Data.ts"
+import {getCurrentInstance, onBeforeUnmount, onMounted, ref} from "vue"
+import data, {Device, Devices} from "../../core/Data.ts"
 import DeviceProps from "./DeviceProps.vue"
 import DevicePorts from "./DevicePorts.vue"
 import DeviceSlots from "./Slots/DeviceSlots.vue"
 import DeviceReagents from "./DeviceReagents.vue"
 import Stack from "../../components/Stack.vue"
-import { hash } from "ic10"
+import {hash} from "ic10"
 
 const props = defineProps<{
 	id: string
@@ -79,15 +79,15 @@ function rename() {
 			<template #header>
 				<div :class="$style.image">
 					<Image loading="lazy" alt="user header" :src="image" />
-					<Button
-						v-if="!props.isPin"
-						v-tooltip="$t('device.actions.pin')"
-						@click="pin"
-						:class="$style.pin"
-						icon="pi pi-arrow-up-right"
-						severity="secondary"
-						style="margin-top: 5px"
-					/>
+<!--					<Button-->
+<!--						v-if="!props.isPin"-->
+<!--						v-tooltip="$t('device.actions.pin')"-->
+<!--						@click="pin"-->
+<!--						:class="$style.pin"-->
+<!--						icon="pi pi-arrow-up-right"-->
+<!--						severity="secondary"-->
+<!--						style="margin-top: 5px"-->
+<!--					/>-->
 					<Button
 						v-if="!props.isPin"
 						@click="rename"

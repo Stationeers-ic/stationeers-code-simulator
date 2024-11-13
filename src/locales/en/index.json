@@ -76,6 +76,12 @@
 			"detail": "Loaded from {store}"
 		}
 	},
+	"modal": {
+		"saveAs": {
+			"header": "Save script and environment",
+			"label": "Script Name"
+		}
+	},
 	"add": "Add",
 	"cancel": "Cancel",
 	"remove": "Remove",
